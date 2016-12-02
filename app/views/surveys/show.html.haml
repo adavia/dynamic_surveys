@@ -1,0 +1,25 @@
+%h1.text-center.m-t-0
+  #{@survey.customer.name} Survey Structure
+  %small
+    = @survey.name
+= render "layouts/shared/alert_messages"
+.panel-piled
+  .dropdown.pull-right
+    %a.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true",
+    "data-toggle": "dropdown", href: "#", role: "button"}
+      = fa_icon "chevron-down"
+    %ul.dropdown-menu
+      %li
+        = link_to "Preview this survey", [:new, @survey, :submission]
+      %li
+        = link_to "Edit survey", [:edit, @customer, @survey]
+      %li
+        = link_to "Delete survey", [@customer, @survey], method: :delete
+  %h1
+    = @survey.name
+  %p
+    = @survey.description
+
+  %h2
+    Questions
+  = render @survey.questions

@@ -1,0 +1,5 @@
+= simple_form_for [@customer, @survey] do |f|
+  = f.input :name, label: false, placeholder: "Name"
+  = f.input :description, label: false, placeholder: "Description"
+  = f.button :submit, "Save survey",
+    class: "btn-block btn-primary", data: { disable_with: "Saving survey..." }

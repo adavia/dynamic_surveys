@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.2.4'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -9,6 +10,18 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+# Use bootstrap css framework
+gem 'bootstrap-sass', '~> 3.3.6'
+# Use haml templating
+gem 'haml-rails'
+# Add fontawesome icons
+gem 'font-awesome-rails', '~> 4.3'
+# Use simple form
+gem 'simple_form'
+# Use File Uploading
+gem 'carrierwave', '~> 0.10.0'
+# Image manipulation
+gem 'mini_magick'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -25,7 +38,9 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
+# User serializers for API design
+gem 'active_model_serializers', '~> 0.10.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

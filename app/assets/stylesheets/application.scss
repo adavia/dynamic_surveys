@@ -1,0 +1,131 @@
+@import "_variables";
+@import "_mixins";
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome";
+
+/* DEFAULT LAYOUT */
+
+h1, h2, h3 {
+  font-family: "Amatic SC", cursive;
+}
+
+a:hover, a:focus {
+  text-decoration: none;
+}
+
+.navbar-brand {
+  font-family: "Amatic SC", cursive;
+  font-size: 30px !important;
+  text-transform: uppercase;
+}
+
+.color-line {
+  background: #f7f9fa;
+  height: 6px;
+  background-image: linear-gradient(to right, #34495e, #34495e 25%,
+    #9b59b6 25%, #9b59b6 35%, #3498db 35%, #3498db 45%, #62cb31 45%,
+    #62cb31 55%, #ffb606 55%, #ffb606 65%, #e67e22 65%, #e67e22 75%,
+    #e74c3c 85%, #e74c3c 85%, #c0392b 85%, #c0392b 100%);
+  background-size: 100% 6px;
+  background-position: 50% 100%;
+  background-repeat: no-repeat;
+}
+
+.panel-list {
+  margin-bottom: 20px;
+  padding: 20px;
+  border-left: 6px solid #5bc0de;
+  background-color: #f4f8fa;
+  h2 {
+    margin: 0;
+  }
+  &:last-child {
+    margin-bottom: 0;
+  }
+  p {
+    margin-top: 5px;
+  }
+}
+
+.panel-piled {
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  margin: 15px auto 45px;
+  padding: 24px;
+  position: relative;
+  &:before, &:after {
+    content: "";
+    height: 98%;
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+  }
+  &:before {
+    background: #fafafa;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    left: -5px;
+    top: 4px;
+    transform: rotate(-2.5deg);
+  }
+  &:after {
+    background: #f6f6f6;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    right: -3px;
+    top: 1px;
+    transform: rotate(1.4deg);
+  }
+  &:last-child {
+    margin-bottom: 0;
+  }
+  h1, h2 {
+    margin: 0;
+  }
+  p {
+    margin-top: 5px;
+  }
+}
+
+.input-short {
+  @extend .input-sm;
+  width: 50%;
+}
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+  }
+}
+
+footer {
+  margin-top: 50px;
+}
+
+/* MARGINS */
+
+.m-t-0 {
+  margin-top: 0;
+}
+
+.m-t-2 {
+  margin-top: 20px;
+}
+
+.m-b-1 {
+  margin-bottom: 20px;
+}

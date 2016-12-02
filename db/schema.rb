@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161202044446) do
+ActiveRecord::Schema.define(version: 20161202154306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "choices", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "question_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["question_id"], name: "index_choices_on_question_id", using: :btree
+  end
 
   create_table "customers", force: :cascade do |t|
     t.string   "name"
@@ -22,6 +30,23 @@ ActiveRecord::Schema.define(version: 20161202044446) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["user_id"], name: "index_customers_on_user_id", using: :btree
+  end
+
+  create_table "question_types", force: :cascade do |t|
+    t.string   "name"
+    t.string   "prefix"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "question_type_id"
+    t.integer  "survey_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["question_type_id"], name: "index_questions_on_question_type_id", using: :btree
+    t.index ["survey_id"], name: "index_questions_on_survey_id", using: :btree
   end
 
   create_table "surveys", force: :cascade do |t|
@@ -43,6 +68,9 @@ ActiveRecord::Schema.define(version: 20161202044446) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "choices", "questions"
   add_foreign_key "customers", "users"
+  add_foreign_key "questions", "question_types"
+  add_foreign_key "questions", "surveys"
   add_foreign_key "surveys", "customers"
 end

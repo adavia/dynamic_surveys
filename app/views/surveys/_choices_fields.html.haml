@@ -1,9 +1,0 @@
-.choices-fields
-  = f.hidden_field :_destroy
-  = link_to fa_icon("close"), "#", data: { behavior: "remove_answer_fields" }, class: "pull-right"
-  = f.input :name, label: false, placeholder: "Fill in with an answer",
-    input_html: { class: "input-short"}
-  %span{class: "btn btn-default btn-sm btn-file #{show_upload_button(question.answer_type)}"}
-    = fa_icon("photo", text: "Upload an image to choose!")
-    = f.file_field :image, label: false
-    = f.input :image_cache, as: :hidden

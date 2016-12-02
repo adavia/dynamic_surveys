@@ -86,11 +86,6 @@ a:hover, a:focus {
   }
 }
 
-.input-short {
-  @extend .input-sm;
-  width: 50%;
-}
-
 .btn-file {
   position: relative;
   overflow: hidden;
@@ -127,5 +122,5 @@ footer {
 }
 
 .m-b-1 {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }

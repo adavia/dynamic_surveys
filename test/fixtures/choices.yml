@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  question: one
+  choice_field: one
+  choice_field_type: Choice field
+
+two:
+  title: MyString
+  question: two
+  choice_field: two
+  choice_field_type: Choice field

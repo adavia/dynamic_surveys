@@ -1,6 +1,6 @@
 class SurveysController < ApplicationController
   before_action :authenticate_user
-  before_action :set_customer, only: [:index, :new, :create, :edit, :update, :destroy]
+  before_action :set_customer, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   before_action :set_survey, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -82,6 +82,8 @@ class SurveysController < ApplicationController
   end
 
   def survey_params
-    params.require(:survey).permit(:name, :description)
+    params.require(:survey).permit(:name, :description,
+      questions_attributes: [:id, :title, :question_type_id, :_destroy,
+      choices_attributes: [:id, :title, :_destroy]])
   end
 end

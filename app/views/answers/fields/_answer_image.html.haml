@@ -1,0 +1,2 @@
+= f.collection_radio_buttons(:answer_image, choices, :id, :name) do |b|
+  = b.label { b.radio_button + image_tag(b.object.image.url(:thumb), class: "img-responsive") }

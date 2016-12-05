@@ -12,7 +12,8 @@
         "data-toggle": "dropdown", href: "#", role: "button"}
           %h2
             %strong
-              12 Surveys
+              = customer.surveys.count
+              Surveys
             %span.caret
         %ul.dropdown-menu
           %li

@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :customers, dependent: :destroy
+  has_many :submissions
 
   before_save { self.email = email.downcase }
 

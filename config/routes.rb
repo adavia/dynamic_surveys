@@ -10,4 +10,8 @@ Rails.application.routes.draw do
   resources :customers, only: [] do
     resources :surveys, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   end
+
+  resources :surveys, only: [] do
+    resources :submissions, only: [:new, :create]
+  end
 end

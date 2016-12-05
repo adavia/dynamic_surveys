@@ -1,0 +1,18 @@
+= f.simple_fields_for :option_answers, answer.option_answers.build do |builder|
+  %table.table.table-striped
+    %thead
+      %tr
+        %th #
+        - choices.each do |choice|
+          %th
+            = choice.title
+    %tbody
+      - options.each do |option|
+        %tr
+          %th
+            = option.title
+          - choices.each do |choice|
+            %td
+              = hidden_field_tag "submission[answers_attributes][2][option_answers_attributes][#{f.options[:child_index]}#{option.id}][option_id]", option.id
+              = radio_button_tag "submission[answers_attributes][2][option_answers_attributes][#{f.options[:child_index]}#{option.id}][choice_id]", choice.id
+

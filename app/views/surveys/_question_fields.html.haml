@@ -6,6 +6,11 @@
   = f.input :question_type_id, label: false, input_html: { data: { behavior: "question_type" } },
     collection: QuestionType.all.collect {|q| [ q.name, q.id ] },
     prompt: "--- Select type of answer ---"
+
+  %h3 Possible Choices
+  = f.fields_for :choices do |builder|
+    = render "choice_fields", f: builder
+
   .form-group
     = f.hidden_field :_destroy
     = link_to fa_icon("close", text: "Remove Question"), "#", class: "btn btn-danger btn-xs",
@@ -13,5 +18,9 @@
     = link_to_add_fields fa_icon("plus", text: "Add some choices"), f,
       :choices, "btn btn-success btn-xs"
 
-  = f.fields_for :choices do |builder|
-    = render "choice_fields", f: builder
+  = f.fields_for :options do |builder|
+    = render "option_fields", f: builder
+
+  .form-group
+    = link_to_add_fields fa_icon("plus", text: "Add some options"), f,
+      :options, "btn btn-primary btn-xs"

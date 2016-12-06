@@ -1,4 +1,6 @@
 = simple_form_for [@survey, @submission] do |f|
+  - if @submission.errors.any?
+    = @submission.errors.messages
   - @submission.answers.each do |answer|
     %h3
       = answer.question.title

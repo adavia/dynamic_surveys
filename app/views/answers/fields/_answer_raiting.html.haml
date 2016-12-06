@@ -1,1 +1,2 @@
-= f.input :answer_raiting, label: false
+= f.simple_fields_for :answer_raiting, answer.build_answer_raiting do |builder|
+  = builder.input :response, label: false

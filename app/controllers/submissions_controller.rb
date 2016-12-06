@@ -38,8 +38,11 @@ class SubmissionsController < ApplicationController
   end
 
   def submission_params
-    params.require(:submission).permit(:options, answers_attributes: [:question_id, :answer_open,
-      :answer_date, :answer_image, :answer_single, :answer_raiting, choice_ids:[],
-      option_answers_attributes: [:choice_id, :option_id]])
+    params.require(:submission).permit(:options, answers_attributes: [:question_id,
+      option_answers_attributes: [:choice_id, :option_id],
+      choice_answers_attributes: [:choice_id],
+      answer_date_attributes: :response,
+      answer_raiting_attributes: :response,
+      answer_open_attributes: :response])
   end
 end

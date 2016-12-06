@@ -1,1 +1,2 @@
-= f.input :answer_date, label: false
+= f.simple_fields_for :answer_date, answer.build_answer_date do |builder|
+  = builder.input :response, label: false

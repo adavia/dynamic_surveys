@@ -13,6 +13,6 @@
             = option.title
           - choices.each do |choice|
             %td
-              = hidden_field_tag "submission[answers_attributes][2][option_answers_attributes][#{f.options[:child_index]}#{option.id}][option_id]", option.id
-              = radio_button_tag "submission[answers_attributes][2][option_answers_attributes][#{f.options[:child_index]}#{option.id}][choice_id]", choice.id
+              = hidden_field_tag "submission[answers_attributes][#{f.options[:child_index]}][option_answers_attributes][#{f.options[:child_index]}#{option.id}][option_id]", option.id
+              = radio_button_tag "submission[answers_attributes][#{f.options[:child_index]}][option_answers_attributes][#{f.options[:child_index]}#{option.id}][choice_id]", choice.id
 

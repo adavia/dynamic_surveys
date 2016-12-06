@@ -10,29 +10,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161204213025) do
+ActiveRecord::Schema.define(version: 20161205215413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "answer_dates", force: :cascade do |t|
+    t.date     "response"
+    t.integer  "answer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["answer_id"], name: "index_answer_dates_on_answer_id", using: :btree
+  end
+
+  create_table "answer_opens", force: :cascade do |t|
+    t.text     "response"
+    t.integer  "answer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["answer_id"], name: "index_answer_opens_on_answer_id", using: :btree
+  end
+
+  create_table "answer_raitings", force: :cascade do |t|
+    t.integer  "response"
+    t.integer  "answer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["answer_id"], name: "index_answer_raitings_on_answer_id", using: :btree
+  end
+
   create_table "answers", force: :cascade do |t|
     t.integer  "submission_id"
     t.integer  "question_id"
-    t.text     "answer_open"
-    t.date     "answer_date"
-    t.string   "answer_image"
-    t.integer  "answer_single"
-    t.integer  "answer_raiting"
-    t.string   "type"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.index ["question_id"], name: "index_answers_on_question_id", using: :btree
     t.index ["submission_id"], name: "index_answers_on_submission_id", using: :btree
   end
 
-  create_table "answers_choices", id: false, force: :cascade do |t|
-    t.integer "choice_id", null: false
-    t.integer "answer_id", null: false
+  create_table "choice_answers", force: :cascade do |t|
+    t.integer  "choice_id"
+    t.integer  "answer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["answer_id"], name: "index_choice_answers_on_answer_id", using: :btree
+    t.index ["choice_id"], name: "index_choice_answers_on_choice_id", using: :btree
   end
 
   create_table "choices", force: :cascade do |t|
@@ -116,8 +138,13 @@ ActiveRecord::Schema.define(version: 20161204213025) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "answer_dates", "answers"
+  add_foreign_key "answer_opens", "answers"
+  add_foreign_key "answer_raitings", "answers"
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "submissions"
+  add_foreign_key "choice_answers", "answers"
+  add_foreign_key "choice_answers", "choices"
   add_foreign_key "choices", "questions"
   add_foreign_key "customers", "users"
   add_foreign_key "option_answers", "answers"

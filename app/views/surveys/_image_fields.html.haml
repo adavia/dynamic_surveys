@@ -1,0 +1,10 @@
+.image-fields
+  .row
+    .col-md-3
+      %span{class: "btn btn-default btn-sm btn-file"}
+        = fa_icon("photo", text: "Upload an image to choose!")
+        = f.file_field :file, label: false
+        = f.input :file_cache, as: :hidden
+    .col-md-1
+      = f.hidden_field :_destroy
+      = link_to fa_icon("close"), "#", data: { behavior: "remove_image_fields" }

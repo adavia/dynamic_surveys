@@ -1,2 +1,2 @@
-= f.simple_fields_for :choice_answers, answer.choice_answers.build do |builder|
+= f.simple_fields_for :choice_answer, answer.build_choice_answer do |builder|
   = builder.input :choice_id, label: false, collection: choices, as: :radio_buttons

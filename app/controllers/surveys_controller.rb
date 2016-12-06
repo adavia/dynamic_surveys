@@ -74,7 +74,7 @@ class SurveysController < ApplicationController
   private
 
   def set_survey
-    @survey = Survey.find(params[:id])
+    @survey = Survey.includes(questions: [:options, :choices, :images]).find(params[:id])
   end
 
   def set_customer
@@ -85,6 +85,7 @@ class SurveysController < ApplicationController
     params.require(:survey).permit(:name, :description,
       questions_attributes: [:id, :title, :question_type_id, :_destroy,
       choices_attributes: [:id, :title, :_destroy],
-      options_attributes: [:id, :title, :_destroy]])
+      options_attributes: [:id, :title, :_destroy],
+      images_attributes: [:id, :file, :file_cache, :_destroy]])
   end
 end

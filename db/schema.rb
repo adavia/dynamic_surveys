@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161205215413) do
+ActiveRecord::Schema.define(version: 20161206174449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,22 @@ ActiveRecord::Schema.define(version: 20161205215413) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["answer_id"], name: "index_answer_dates_on_answer_id", using: :btree
+  end
+
+  create_table "answer_images", force: :cascade do |t|
+    t.integer  "image_id"
+    t.integer  "answer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["answer_id"], name: "index_answer_images_on_answer_id", using: :btree
+    t.index ["image_id"], name: "index_answer_images_on_image_id", using: :btree
+  end
+
+  create_table "answer_multiples", force: :cascade do |t|
+    t.integer  "answer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["answer_id"], name: "index_answer_multiples_on_answer_id", using: :btree
   end
 
   create_table "answer_opens", force: :cascade do |t|
@@ -51,9 +67,11 @@ ActiveRecord::Schema.define(version: 20161205215413) do
   create_table "choice_answers", force: :cascade do |t|
     t.integer  "choice_id"
     t.integer  "answer_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "answer_multiple_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.index ["answer_id"], name: "index_choice_answers_on_answer_id", using: :btree
+    t.index ["answer_multiple_id"], name: "index_choice_answers_on_answer_multiple_id", using: :btree
     t.index ["choice_id"], name: "index_choice_answers_on_choice_id", using: :btree
   end
 
@@ -72,6 +90,14 @@ ActiveRecord::Schema.define(version: 20161205215413) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["user_id"], name: "index_customers_on_user_id", using: :btree
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string   "file"
+    t.integer  "question_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["question_id"], name: "index_images_on_question_id", using: :btree
   end
 
   create_table "option_answers", force: :cascade do |t|
@@ -139,14 +165,19 @@ ActiveRecord::Schema.define(version: 20161205215413) do
   end
 
   add_foreign_key "answer_dates", "answers"
+  add_foreign_key "answer_images", "answers"
+  add_foreign_key "answer_images", "images"
+  add_foreign_key "answer_multiples", "answers"
   add_foreign_key "answer_opens", "answers"
   add_foreign_key "answer_raitings", "answers"
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "submissions"
+  add_foreign_key "choice_answers", "answer_multiples"
   add_foreign_key "choice_answers", "answers"
   add_foreign_key "choice_answers", "choices"
   add_foreign_key "choices", "questions"
   add_foreign_key "customers", "users"
+  add_foreign_key "images", "questions"
   add_foreign_key "option_answers", "answers"
   add_foreign_key "option_answers", "choices"
   add_foreign_key "option_answers", "options"

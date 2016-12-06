@@ -7,9 +7,11 @@
     collection: QuestionType.all.collect {|q| [ q.name, q.id ] },
     prompt: "--- Select type of answer ---"
 
-  %h3 Possible Choices
   = f.fields_for :choices do |builder|
     = render "choice_fields", f: builder
+
+  = f.fields_for :images do |builder|
+    = render "image_fields", f: builder
 
   .form-group
     = f.hidden_field :_destroy
@@ -17,6 +19,8 @@
       data: { behavior: "remove_question_fields" }
     = link_to_add_fields fa_icon("plus", text: "Add some choices"), f,
       :choices, "btn btn-success btn-xs"
+    = link_to_add_fields fa_icon("plus", text: "Add some images"), f,
+      :images, "btn btn-default btn-xs"
 
   = f.fields_for :options do |builder|
     = render "option_fields", f: builder

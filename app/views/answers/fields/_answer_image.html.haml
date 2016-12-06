@@ -1,2 +1,3 @@
-= f.collection_radio_buttons(:answer_image, choices, :id, :name) do |b|
-  = b.label { b.radio_button + image_tag(b.object.image.url(:thumb), class: "img-responsive") }
+= f.simple_fields_for :answer_image, answer.build_answer_image do |builder|
+  = builder.collection_radio_buttons(:image_id, images, :id, :file) do |b|
+    = b.label { b.radio_button + image_tag(b.object.file.url(:thumb), class: "img-responsive") }

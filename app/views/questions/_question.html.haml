@@ -2,4 +2,10 @@
   = question_counter + 1
   = question.title
 
-= render(question.choices) || "No possible answers for this question"
+- if question.choices.any?
+  = render(question.choices)
+- else
+  %p No possible answers for this question
+
+.row
+  = render(question.images)

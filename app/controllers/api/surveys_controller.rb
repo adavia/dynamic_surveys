@@ -5,11 +5,13 @@ class API::SurveysController < API::ApplicationController
 
   def index
     @surveys = @customer.surveys
-    render json: @surveys
+    render json: @surveys, include: [:id, :name, :description,
+      :question_counter, :created_at, :customer]
   end
 
   def show
-    render json: @survey
+    render json: @survey, include: [:id, :name, :description,
+      :created_at, :customer, :questions]
   end
 
   private

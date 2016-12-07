@@ -2,10 +2,14 @@
   = question_counter + 1
   = question.title
 
-- if question.choices.any?
-  = render(question.choices)
-- else
-  %p No possible answers for this question
-
+.row
+  .col-md-4
+    - if question.choices.any?
+      %strong Choices
+      = render(question.choices)
+  .col-md-4
+    - if question.options.any?
+      %strong Options
+      = render(question.options)
 .row
   = render(question.images)

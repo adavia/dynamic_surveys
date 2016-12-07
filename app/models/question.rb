@@ -28,9 +28,9 @@ class Question < ApplicationRecord
       errors.add(:question_type_id, "This is not allowed!")
     elsif question_type_id == 7 && !options.reject(&:marked_for_destruction?).any?
       errors.add(:question_type_id, "You must add a possible option!")
-    elsif question_type_id == 7 && (images.reject(&:marked_for_destruction?).any? || choices.reject(&:marked_for_destruction?).any?)
+    elsif question_type_id == 7 && images.reject(&:marked_for_destruction?).any?
       errors.add(:question_type_id, "This is not allowed!")
-    elsif [1, 4, 5, 6].include?(question_type_id) && (choices.reject(&:marked_for_destruction?).any? || options.reject(&:marked_for_destruction?).any? || images.reject(&:marked_for_destruction?).any?)
+    elsif [1, 4, 6].include?(question_type_id) && (choices.reject(&:marked_for_destruction?).any? || options.reject(&:marked_for_destruction?).any? || images.reject(&:marked_for_destruction?).any?)
       errors.add(:question_type_id, "You must select a valid question type!")
     end
   end

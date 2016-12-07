@@ -14,4 +14,12 @@ Rails.application.routes.draw do
   resources :surveys, only: [] do
     resources :submissions, only: [:new, :create]
   end
+
+  namespace :api do
+    resources :sessions, only: :create
+
+    resources :customers, only: :index do
+      resources :surveys, only: [:index, :show]
+    end
+  end
 end

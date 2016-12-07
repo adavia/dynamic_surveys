@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161206174449) do
+ActiveRecord::Schema.define(version: 20161207064040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,9 +67,9 @@ ActiveRecord::Schema.define(version: 20161206174449) do
   create_table "choice_answers", force: :cascade do |t|
     t.integer  "choice_id"
     t.integer  "answer_id"
-    t.integer  "answer_multiple_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.integer  "answer_multiple_id"
     t.index ["answer_id"], name: "index_choice_answers_on_answer_id", using: :btree
     t.index ["answer_multiple_id"], name: "index_choice_answers_on_answer_multiple_id", using: :btree
     t.index ["choice_id"], name: "index_choice_answers_on_choice_id", using: :btree
@@ -128,10 +128,10 @@ ActiveRecord::Schema.define(version: 20161206174449) do
 
   create_table "questions", force: :cascade do |t|
     t.string   "title"
-    t.integer  "question_type_id"
     t.integer  "survey_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.integer  "question_type_id"
     t.index ["question_type_id"], name: "index_questions_on_question_type_id", using: :btree
     t.index ["survey_id"], name: "index_questions_on_survey_id", using: :btree
   end

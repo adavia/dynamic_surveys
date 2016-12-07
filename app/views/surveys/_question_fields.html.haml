@@ -3,7 +3,8 @@
     Question
 
   = f.input :title, label: false, placeholder: "Whats your question?"
-  = f.input :question_type_id, label: false, input_html: { data: { behavior: "question_type" } },
+  = f.input :question_type_id, label: false,
+    input_html: { data: { behavior: "question_type" } },
     collection: QuestionType.all.collect {|q| [ q.name, q.id ] },
     prompt: "--- Select type of answer ---"
 
@@ -11,20 +12,20 @@
     = render "choice_fields", f: builder
 
   = f.fields_for :images do |builder|
-    = render "image_fields", f: builder
+    = render "image_fields", f: builder, parent: f.object
 
   .form-group
     = f.hidden_field :_destroy
     = link_to fa_icon("close", text: "Remove Question"), "#", class: "btn btn-danger btn-xs",
       data: { behavior: "remove_question_fields" }
     = link_to_add_fields fa_icon("plus", text: "Add some choices"), f,
-      :choices, "btn btn-success btn-xs"
+      :choices, "btn btn-success btn-xs #{show_choice_button(f.object.question_type_id)}"
     = link_to_add_fields fa_icon("plus", text: "Add some images"), f,
-      :images, "btn btn-default btn-xs"
+      :images, "btn btn-default btn-xs #{show_image_button(f.object.question_type_id)}"
 
   = f.fields_for :options do |builder|
     = render "option_fields", f: builder
 
   .form-group
     = link_to_add_fields fa_icon("plus", text: "Add some options"), f,
-      :options, "btn btn-primary btn-xs"
+      :options, "btn btn-primary btn-xs #{show_option_button(f.object.question_type_id)}"

@@ -17,6 +17,9 @@
   %p
     = @survey.description
 
+  - if @submission.errors.any?
+    .alert.alert-danger
+      Something went wrong during this submission. Check the errors below.
   %h2
     Questions
   = render "form"

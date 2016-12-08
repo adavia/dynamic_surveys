@@ -5,7 +5,13 @@ class SubmissionsController < ApplicationController
   def new
     @submission = @survey.submissions.build
     @survey.questions.each do |q|
-      @submission.answers.build(question: q)
+      answer = @submission.answers.build(question: q)
+      answer.build_answer_date
+      answer.build_answer_image
+      answer.build_answer_multiple
+      answer.build_answer_open
+      answer.build_answer_raiting
+      answer.build_choice_answer
     end
   end
 
@@ -34,7 +40,7 @@ class SubmissionsController < ApplicationController
   private
 
   def set_survey
-    @survey = Survey.includes(questions: [:options, :choices, :images]).find(params[:survey_id])
+    @survey = Survey.includes(questions: [:choices, :images]).find(params[:survey_id])
   end
 
   def submission_params
@@ -44,7 +50,7 @@ class SubmissionsController < ApplicationController
       answer_date_attributes: :response,
       answer_raiting_attributes: :response,
       answer_open_attributes: :response,
-      answer_image_attributes: :image_id,
-      answer_multiple_attributes: { choice_ids:[] }])
+      #answer_multiple_attributes: { choice_ids:[] }
+      answer_image_attributes: :image_id])
   end
 end

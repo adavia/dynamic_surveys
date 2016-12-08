@@ -23,9 +23,9 @@
     = link_to_add_fields fa_icon("plus", text: "Add some images"), f,
       :images, "btn btn-default btn-xs #{show_image_button(f.object.question_type_id)}"
 
-  = f.fields_for :options do |builder|
-    = render "option_fields", f: builder
+  /= f.fields_for :options do |builder|
+  /= render "option_fields", f: builder
 
-  .form-group
-    = link_to_add_fields fa_icon("plus", text: "Add some options"), f,
-      :options, "btn btn-primary btn-xs #{show_option_button(f.object.question_type_id)}"
+  /.form-group
+  /= link_to_add_fields fa_icon("plus", text: "Add some options"), f,
+  /:options, "btn btn-primary btn-xs #{show_option_button(f.object.question_type_id)}"

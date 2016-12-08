@@ -75,6 +75,6 @@ class CustomersController < ApplicationController
   end
 
   def set_customer
-    @customer = Customer.find(params[:id])
+    @customer = Customer.includes(:surveys, :user).find(params[:id])
   end
 end

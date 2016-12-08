@@ -1,4 +1,3 @@
-= f.simple_fields_for :answer_multiple, answer.build_answer_multiple do |builder|
+= f.simple_fields_for :answer_multiple do |builder|
   = builder.association :choices, label: false, collection: choices, as: :check_boxes
-
 

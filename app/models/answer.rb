@@ -9,7 +9,7 @@ class Answer < ApplicationRecord
   has_one :answer_image, dependent: :destroy
   has_one :choice_answer, dependent: :destroy
 
-  has_many :option_answers, dependent: :destroy
+  #has_many :option_answers, dependent: :destroy
 
   accepts_nested_attributes_for :answer_open
   accepts_nested_attributes_for :answer_date
@@ -17,7 +17,7 @@ class Answer < ApplicationRecord
   accepts_nested_attributes_for :answer_multiple
   accepts_nested_attributes_for :answer_image
   accepts_nested_attributes_for :choice_answer
-  accepts_nested_attributes_for :option_answers
+  #accepts_nested_attributes_for :option_answers
 
   validates :question, presence: true
 end

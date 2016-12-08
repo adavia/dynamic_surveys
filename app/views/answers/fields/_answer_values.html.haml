@@ -1,5 +1,5 @@
 = f.simple_fields_for :option_answers, answer.option_answers.build do |builder|
-  %table.table.table-striped
+  %table.table.table-condensed.table-responsive
     %thead
       %tr
         %th #
@@ -12,7 +12,12 @@
           %th
             = option.title
           - choices.each do |choice|
-            %td
+            %td.col-md-3
               = hidden_field_tag "submission[answers_attributes][#{f.options[:child_index]}][option_answers_attributes][#{f.options[:child_index]}#{option.id}][option_id]", option.id
               = radio_button_tag "submission[answers_attributes][#{f.options[:child_index]}][option_answers_attributes][#{f.options[:child_index]}#{option.id}][choice_id]", choice.id
+
+  - if @submission.errors.any?
+    %span.text-danger
+      = @submission.errors["answers.answer_multiple.choices"][0]
+
 

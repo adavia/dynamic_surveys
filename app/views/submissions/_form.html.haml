@@ -5,8 +5,8 @@
     = f.simple_fields_for :answers, answer do |a|
       = a.hidden_field :question_id
       = render "answers/fields/answer_#{answer.question.question_type.prefix}",
-        f: a, choices: answer.question.choices, options: answer.question.options,
-        images: answer.question.images, answer: answer
+        f: a, choices: answer.question.choices, images: answer.question.images,
+          answer: answer
 
   = f.button :submit, "Submit survey",
       class: "btn-block btn-primary", data: { disable_with: "Submitting survey..." }

@@ -7,9 +7,9 @@
     - if question.choices.any?
       %strong Choices
       = render(question.choices)
-  .col-md-4
-    - if question.options.any?
-      %strong Options
-      = render(question.options)
+  /.col-md-4
+  /- if question.options.any?
+  /%strong Options
+  /= render(question.options)
 .row
   = render(question.images)

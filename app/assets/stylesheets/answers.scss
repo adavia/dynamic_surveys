@@ -1,0 +1,39 @@
+.radio-stars{
+  label > input {
+    /* HIDE RADIO */
+    visibility: hidden;
+    /* Makes input not-clickable */
+    position: absolute;
+    /* Remove input from document flow */
+    + i {
+      /* IMAGE STYLES */
+      cursor: pointer;
+      font-size: 25px;
+      margin-right: 10px;
+    }
+    &:checked + i {
+      /* (RADIO CHECKED) IMAGE STYLES */
+      color: #FD4;
+      transition: all .25s;
+    }
+  }
+}
+
+.radio-images{
+  label > input {
+    /* HIDE RADIO */
+    visibility: hidden;
+    /* Makes input not-clickable */
+    position: absolute;
+    /* Remove input from document flow */
+    + img {
+      /* IMAGE STYLES */
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+    &:checked + img {
+      /* (RADIO CHECKED) IMAGE STYLES */
+      border: 2px solid #f00;
+    }
+  }
+}

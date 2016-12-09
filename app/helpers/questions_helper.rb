@@ -1,6 +1,6 @@
 module QuestionsHelper
   def show_choice_button(question_type)
-    if [1, 4, 6].include?(question_type) || question_type.nil?
+    if [1, 4, 5, 6].include?(question_type) || question_type.nil?
       "hidden"
     end
   end

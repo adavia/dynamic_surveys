@@ -1,6 +1,9 @@
 = f.simple_fields_for :answer_raiting do |builder|
-  = builder.collection_radio_buttons(:response, AnswerRaiting::RAITING, :first, :last,
-    collection_wrapper_tag: :div, collection_wrapper_class: "form-group radio-stars",
-    item_wrapper_tag: false) do |b|
-    = b.radio_button + fa_icon("star-o")
+  .form-group.radio-stars
+    = builder.collection_radio_buttons(:response, AnswerRaiting::RAITING, :first, :last,
+    collection_wrapper_tag: false, item_wrapper_tag: false, boolean_style: :inline) do |b|
+      = b.radio_button + b.label {""}
+
+    = builder.error :response
+
 

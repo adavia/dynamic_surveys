@@ -1,5 +1,9 @@
 = f.simple_fields_for :answer_image do |builder|
-  = builder.collection_radio_buttons(:image_id, images, :id, :file,
-    collection_wrapper_tag: :div, collection_wrapper_class: "form-group radio-images",
-    item_wrapper_tag: false) do |b|
-    = b.radio_button + image_tag(b.object.file.url(:thumb), class: "img-responsive")
+  .form-group.radio-images
+    = builder.collection_radio_buttons(:image_id, images, :id, :file,
+      collection_wrapper_tag: false, item_wrapper_tag: false) do |b|
+      = b.radio_button + image_tag(b.object.file.url(:thumb),
+        class: "img-responsive", size: 120)
+
+    = builder.error :image
+

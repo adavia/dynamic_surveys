@@ -1,20 +1,35 @@
+// Place all the styles related to the sessions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
 .radio-stars{
-  label > input {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  text-align: left;
+  label:before {
+    content: '\f006';
+    font-family: FontAwesome;
+    text-shadow: 0 0 20px #952;
+  }
+  label:hover {
+    transform: rotate(-15deg) scale(1.3);
+  }
+  input[type="radio"] {
     /* HIDE RADIO */
     visibility: hidden;
-    /* Makes input not-clickable */
     position: absolute;
-    /* Remove input from document flow */
-    + i {
-      /* IMAGE STYLES */
+    + label {
       cursor: pointer;
       font-size: 25px;
       margin-right: 10px;
+      margin-bottom: 0;
+      transition: all .2s;
     }
-    &:checked + i {
-      /* (RADIO CHECKED) IMAGE STYLES */
-      color: #FD4;
-      transition: all .25s;
+    &:checked {
+      ~ label {
+        color: #FFB606;
+        transition: all .25s;
+      }
     }
   }
 }

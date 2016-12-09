@@ -1,6 +1,6 @@
 class API::SubmissionsController < API::ApplicationController
   before_action :authenticate_user
-  before_action :set_survey, only: [:show]
+  before_action :set_survey, only: :create
 
   def create
     @submission = @survey.submissions.build(submission_params)

@@ -11,13 +11,14 @@ class API::SurveysController < API::ApplicationController
 
   def show
     render json: @survey, include: [:id, :name, :description,
-      :created_at, :customer, :questions]
+      :created_at, :customer, "questions.question_type",
+      "questions.choices", "questions.images"]
   end
 
   private
 
   def set_survey
-    @survey = Survey.find(params[:id])
+    @survey = Survey.includes(questions: [:choices, :images]).find(params[:id])
   end
 
   def set_customer

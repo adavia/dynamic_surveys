@@ -21,5 +21,9 @@ Rails.application.routes.draw do
     resources :customers, only: :index do
       resources :surveys, only: [:index, :show]
     end
+
+    resources :surveys, only: [] do
+      resources :submissions, only: :create
+    end
   end
 end

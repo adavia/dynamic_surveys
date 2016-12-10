@@ -1,5 +1,5 @@
 class Survey < ApplicationRecord
-  belongs_to :customer
+  belongs_to :customer, counter_cache: true
   has_many :questions, dependent: :destroy
   has_many :submissions
 

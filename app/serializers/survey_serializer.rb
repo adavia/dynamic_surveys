@@ -5,6 +5,6 @@ class SurveySerializer < ActiveModel::Serializer
   has_many :questions
 
   def question_counter
-    object.questions.size
+    object.questions_count
   end
 end

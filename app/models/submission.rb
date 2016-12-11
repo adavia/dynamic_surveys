@@ -6,6 +6,8 @@ class Submission < ApplicationRecord
 
   accepts_nested_attributes_for :answers
 
-  validates :survey, presence: true
-  validates :user, presence: true
+  validates :survey_id, presence: true
+  validates :user_id, presence: true
+
+  validates_associated :answers
 end

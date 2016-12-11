@@ -19,5 +19,5 @@ class Answer < ApplicationRecord
   accepts_nested_attributes_for :choice_answer
   #accepts_nested_attributes_for :option_answers
 
-  validates :question, presence: true
+  validates :question_id, presence: true
 end

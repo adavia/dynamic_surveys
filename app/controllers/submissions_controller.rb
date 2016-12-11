@@ -44,7 +44,7 @@ class SubmissionsController < ApplicationController
   end
 
   def submission_params
-    params.require(:submission).permit(:options, answers_attributes: [:question_id,
+    params.require(:submission).permit(answers_attributes: [:question_id,
       #option_answers_attributes: [:choice_id, :option_id],
       choice_answer_attributes: [:choice_id, :answer_multiple_id],
       answer_date_attributes: :response,

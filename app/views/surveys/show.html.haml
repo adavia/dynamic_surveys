@@ -59,14 +59,14 @@
           = pie_chart @survey.questions.choice_answer
 
     .col-md-4
-      - if @survey.questions.answer_image.any?
-        %h3.text-center
-          Images
-          = pie_chart @survey.questions.answer_image
-
-    .col-md-4
       - if @survey.questions.answer_multiple.any?
         %h3.text-center
           Multiple Choices
           = pie_chart @survey.questions.answer_multiple
+
+    .col-md-4
+      - if @survey.questions.answer_image.any?
+        %h3.text-center
+          Images
+          = pie_chart @survey.questions.answer_image
 

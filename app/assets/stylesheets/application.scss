@@ -25,6 +25,10 @@ a:hover, a:focus {
   text-transform: uppercase;
 }
 
+.ordered-list {
+  padding-left: 1em;
+}
+
 .color-line {
   background: #f7f9fa;
   height: 6px;
@@ -122,10 +126,24 @@ footer {
   margin-top: 0;
 }
 
+.m-t-1 {
+  margin-top: 15px;
+}
+
 .m-t-2 {
   margin-top: 20px;
 }
 
+.m-b-0 {
+  margin-bottom: 0;
+}
+
 .m-b-1 {
   margin-bottom: 15px;
+}
+
+/* PADDINGS */
+
+.p-t-0 {
+  padding-top: 0;
 }

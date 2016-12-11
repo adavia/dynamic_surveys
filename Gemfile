@@ -41,6 +41,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 # User serializers for API design
 gem 'active_model_serializers', '~> 0.10.0'
+# Graphic statistics
+gem 'chartkick'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

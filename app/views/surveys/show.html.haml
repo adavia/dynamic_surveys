@@ -1,7 +1,5 @@
 %h1.text-center.m-t-0
-  #{@survey.customer.name} Survey Structure
-  %small
-    = @survey.name
+  #{@survey.customer.name} Survey - Structure
 = render "layouts/shared/alert_messages"
 .panel-piled
   .dropdown.pull-right
@@ -17,9 +15,58 @@
         = link_to "Delete survey", [@customer, @survey], method: :delete
   %h1
     = @survey.name
+    %small
+      = @survey.created_at.strftime("Created on %m/%d/%Y at %I:%M%p")
   %p
     = @survey.description
 
   %h2
-    Questions
-  = render @survey.questions
+    Statistics
+
+  %ul.list-group.m-t-1.m-b-0
+    %li.list-group-item
+      %span.badge
+        = @survey.questions_count
+      Questions
+    %li.list-group-item
+      %span.badge
+        = @survey.submissions.size
+      Submissions
+
+  .row
+    .col-md-4
+      %h3
+        Type of questions
+
+      %ol.ordered-list
+        = render @survey.questions
+
+    .col-md-8
+      %h3.text-center
+        Results by type
+        = pie_chart @survey.questions.group_types
+
+
+  %h3.text-center
+    Answers per question
+    = column_chart @survey.questions.group_answers, label: "Answers"
+
+  .row
+    .col-md-4
+      - if @survey.questions.choice_answer.any?
+        %h3.text-center
+          Single Choices
+          = pie_chart @survey.questions.choice_answer
+
+    .col-md-4
+      - if @survey.questions.answer_image.any?
+        %h3.text-center
+          Images
+          = pie_chart @survey.questions.answer_image
+
+    .col-md-4
+      - if @survey.questions.answer_multiple.any?
+        %h3.text-center
+          Multiple Choices
+          = pie_chart @survey.questions.answer_multiple
+

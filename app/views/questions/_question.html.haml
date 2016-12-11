@@ -1,15 +1,10 @@
-%h3
-  = question_counter + 1
-  = question.title
-
-.row
-  .col-md-4
-    - if question.choices.any?
-      %strong Choices
-      = render(question.choices)
-  /.col-md-4
-  /- if question.options.any?
-  /%strong Options
-  /= render(question.options)
-.row
-  = render(question.images)
+%li
+  = question.question_type.name
+  - if question.choices.any?
+    %span.badge.pull-right
+      = question.choices.size
+    %ol.ordered-list
+      = render question.choices
+  - if question.images.any?
+    %span.badge.pull-right
+      = question.images.size

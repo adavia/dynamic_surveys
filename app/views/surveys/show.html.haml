@@ -46,10 +46,10 @@
         Results by type
         = pie_chart @survey.questions.group_types
 
-
-  %h3.text-center
-    Answers per question
-    = column_chart @survey.questions.group_answers, label: "Answers"
+  - if @survey.submissions.any?
+    %h3.text-center
+      Answers per question
+      = column_chart @survey.questions.group_answers, label: "Answers"
 
   .row
     .col-md-4

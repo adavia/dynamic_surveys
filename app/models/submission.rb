@@ -9,9 +9,7 @@ class Submission < ApplicationRecord
   validates :survey_id, presence: true
   validates :user_id, presence: true
 
-  validate :must_complete_all_answers
-
-  private
+  #validate :must_complete_all_answers
 
   #def must_complete_all_answers
     #if questions.any? && answers.empty?

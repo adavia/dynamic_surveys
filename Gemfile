@@ -20,6 +20,8 @@ gem 'font-awesome-rails', '~> 4.3'
 gem 'simple_form'
 # Use File Uploading
 gem 'carrierwave', '~> 0.10.0'
+# User fog to manage cloud based storage
+gem 'fog'
 # Image manipulation
 gem 'mini_magick'
 # Use Uglifier as compressor for JavaScript assets

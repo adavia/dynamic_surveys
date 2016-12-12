@@ -1,2 +1,9 @@
 %h1.text-center.m-t-0
   = link_to "#{@customer.name} Information", [:edit, current_user, @customer]
+%p.text-center
+  = @customer.description
+
+- if @customer.surveys.any?
+  %h2.text-center
+    Surveys by date
+    = pie_chart @customer.surveys.date_surveys

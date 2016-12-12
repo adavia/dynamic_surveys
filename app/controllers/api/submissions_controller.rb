@@ -1,5 +1,5 @@
 class API::SubmissionsController < API::ApplicationController
-  before_action :authenticate_user
+  #before_action :authenticate_user
   before_action :set_survey, only: :create
 
   def create

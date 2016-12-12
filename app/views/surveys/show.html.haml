@@ -56,17 +56,17 @@
       - if @survey.questions.choice_answer.any?
         %h3.text-center
           Single Choices
-          = pie_chart @survey.questions.choice_answer
+          = pie_chart @survey.questions.choice_answer, legend: false
 
     .col-md-4
       - if @survey.questions.answer_multiple.any?
         %h3.text-center
           Multiple Choices
-          = pie_chart @survey.questions.answer_multiple
+          = pie_chart @survey.questions.answer_multiple, legend: false
 
     .col-md-4
       - if @survey.questions.answer_image.any?
         %h3.text-center
           Images
-          = pie_chart @survey.questions.answer_image
+          = pie_chart @survey.questions.answer_image, legend: false
 

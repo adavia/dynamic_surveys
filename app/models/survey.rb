@@ -8,4 +8,6 @@ class Survey < ApplicationRecord
   validates_associated :questions
 
   accepts_nested_attributes_for :questions, allow_destroy: true
+
+  scope :date_surveys, -> { group("DATE(created_at)").count }
 end

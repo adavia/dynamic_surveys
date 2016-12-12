@@ -13,9 +13,9 @@ class Submission < ApplicationRecord
 
   private
 
-  def must_complete_all_answers
-    if questions.any? && answers.empty?
-      errors.add(:base, "You must complete all answers before submission!")
-    end
-  end
+  #def must_complete_all_answers
+    #if questions.any? && answers.empty?
+      #errors.add(:base, "You must complete all answers before submission!")
+    #end
+  #end
 end

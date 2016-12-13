@@ -1,8 +1,10 @@
 .choice-fields
   .row
-    .col-md-6
-      = f.input :title, label: false, placeholder: "Fill in with a possible choice",
-        input_html: { class: "input-sm" }
-    .col-md-1
-      = f.hidden_field :_destroy
-      = link_to fa_icon("close"), "#", data: { behavior: "remove_choice_fields" }
+    .col-xs-6
+      = f.input :title, wrapper: :vertical_input_group, label: false do
+        = f.input_field :title, class: "form-control input-sm",
+          placeholder: "Fill in with a possible choice"
+        %span.input-group-btn
+          = f.hidden_field :_destroy
+          %button.btn.btn-danger.btn-sm{data: {behavior: "remove_choice_fields"}}
+            = fa_icon "close"

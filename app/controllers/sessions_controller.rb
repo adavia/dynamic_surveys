@@ -7,8 +7,13 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
-      log_in user
-      redirect_back_or [current_user, :customers]
+      if user.active_for_authentication?
+        log_in user
+        redirect_back_or [current_user, :customers]
+      else
+        flash.now[:danger] = "Your account has been locked."
+        render :new
+      end
     else
       flash.now[:danger] = "Your credentials are not valid. Try that again."
       render :new

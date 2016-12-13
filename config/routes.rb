@@ -16,9 +16,14 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    root "application#index"
     resources :users, only: [] do
       resources :customers, only: [:new, :create, :edit, :update, :destroy]
+    end
+
+    resources :users, only: [:index, :show, :new, :create, :edit, :update] do
+      member do
+        patch :archive
+      end
     end
   end
 

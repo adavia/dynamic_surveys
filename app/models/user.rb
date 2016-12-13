@@ -14,8 +14,20 @@ class User < ApplicationRecord
 
   has_secure_password
 
+  scope :excluding_archived, -> { where(archived_at: nil) }
+
   def to_s
-    "#{name} #{last_name}"
+    "#{admin? ? "Admin" : "User"} - #{name} #{last_name}"
+  end
+
+  # Archived user
+  def archive
+    self.update_attribute :archived_at, Time.now
+  end
+
+  # Check archived user before log in
+  def active_for_authentication?
+    archived_at.nil?
   end
 
   # Assign an API key on create

@@ -1,0 +1,7 @@
+= simple_form_for [:admin, user] do |f|
+  = f.input :name, label: false, placeholder: "Name"
+  = f.input :last_name, label: false, placeholder: "Last Name"
+  = f.input :email, label: false, placeholder: "Email"
+  = f.input :password, label: false, placeholder: "Password"
+  = f.input :admin, label: "Is an admin?"
+  = f.button :submit, "Submit user", class: "btn-block btn-primary"

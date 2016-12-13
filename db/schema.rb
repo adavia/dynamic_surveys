@@ -24,10 +24,10 @@ ActiveRecord::Schema.define(version: 20161210183129) do
   end
 
   create_table "answer_images", force: :cascade do |t|
-    t.integer  "image_id"
     t.integer  "answer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "image_id"
     t.index ["answer_id"], name: "index_answer_images_on_answer_id", using: :btree
     t.index ["image_id"], name: "index_answer_images_on_image_id", using: :btree
   end
@@ -168,7 +168,6 @@ ActiveRecord::Schema.define(version: 20161210183129) do
 
   add_foreign_key "answer_dates", "answers"
   add_foreign_key "answer_images", "answers"
-  add_foreign_key "answer_images", "images"
   add_foreign_key "answer_multiples", "answers"
   add_foreign_key "answer_opens", "answers"
   add_foreign_key "answer_raitings", "answers"

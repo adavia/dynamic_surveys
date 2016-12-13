@@ -1,4 +1,4 @@
-= simple_form_for [current_user, @customer] do |f|
+= simple_form_for [:admin, current_user, @customer] do |f|
   = f.input :name, label: false, placeholder: "Name"
   = f.input :description, label: false, placeholder: "Description"
   = f.button :submit, "Submit customer", class: "btn-block btn-primary"

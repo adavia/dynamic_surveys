@@ -2,11 +2,13 @@
   .row
     .col-md-9
       %h2
-        = link_to customer.name, [current_user, customer]
+        = link_to customer.name, [@user, customer]
       %p
         = customer.description
     .col-md-3
-      = link_to fa_icon("remove"), [current_user, customer], method: :delete, class: "pull-right"
+      - if is_admin?
+        = link_to fa_icon("remove"), [:admin, @user, customer],
+          method: :delete, class: "pull-right"
       .dropdown
         %a.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true",
         "data-toggle": "dropdown", href: "#", role: "button"}

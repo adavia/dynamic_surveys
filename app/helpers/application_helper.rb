@@ -16,4 +16,8 @@ module ApplicationHelper
     link_to(name, "#", class: css, data: { id: id, fields: fields.gsub("\n", ""),
       behavior: "add_#{association.to_s.singularize}_fields" })
   end
+
+  def is_admin?
+    current_user.try(:admin?)
+  end
 end

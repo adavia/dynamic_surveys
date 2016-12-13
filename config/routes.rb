@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
 
   resources :users, only: [:new, :create] do
-    resources :customers, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+    resources :customers, only: [:index, :show]
   end
 
   resources :customers, only: [] do
@@ -13,6 +13,13 @@ Rails.application.routes.draw do
 
   resources :surveys, only: [] do
     resources :submissions, only: [:new, :create]
+  end
+
+  namespace :admin do
+    root "application#index"
+    resources :users, only: [] do
+      resources :customers, only: [:new, :create, :edit, :update, :destroy]
+    end
   end
 
   namespace :api do

@@ -1,5 +1,8 @@
 %h1.text-center.m-t-0
-  = link_to "#{@customer.name} Information", [:edit, current_user, @customer]
+  - if is_admin?
+    = link_to "#{@customer.name} Information", [:edit, :admin, current_user, @customer]
+  - else
+    #{@customer.name} Information
 %p.text-center
   = @customer.description
 

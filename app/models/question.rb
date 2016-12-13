@@ -2,10 +2,10 @@ class Question < ApplicationRecord
   belongs_to :survey, counter_cache: true
   belongs_to :question_type
 
+  has_many :answers, dependent: :destroy
   has_many :choices, dependent: :destroy
   has_many :options, dependent: :destroy
   has_many :images, dependent: :destroy
-  has_many :answers
 
   validates :question_type, presence: true
   validates :title, presence: true, length: { minimum: 4, maximum: 250 }
@@ -14,6 +14,8 @@ class Question < ApplicationRecord
   accepts_nested_attributes_for :choices, allow_destroy: true
   accepts_nested_attributes_for :options, allow_destroy: true
   accepts_nested_attributes_for :images, allow_destroy: true
+
+  scope :avg_raiting,     -> { joins(answers: :answer_raiting).average("answer_raitings.response")}
 
   scope :group_types,     -> { joins(:question_type).group("question_types.name").count }
   scope :group_answers,   -> { joins(answers: :question).group("questions.title").count }

@@ -65,11 +65,11 @@ ActiveRecord::Schema.define(version: 20161210183129) do
   end
 
   create_table "choice_answers", force: :cascade do |t|
-    t.integer  "choice_id"
     t.integer  "answer_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.integer  "answer_multiple_id"
+    t.integer  "choice_id"
     t.index ["answer_id"], name: "index_choice_answers_on_answer_id", using: :btree
     t.index ["answer_multiple_id"], name: "index_choice_answers_on_answer_multiple_id", using: :btree
     t.index ["choice_id"], name: "index_choice_answers_on_choice_id", using: :btree
@@ -176,7 +176,6 @@ ActiveRecord::Schema.define(version: 20161210183129) do
   add_foreign_key "answers", "submissions"
   add_foreign_key "choice_answers", "answer_multiples"
   add_foreign_key "choice_answers", "answers"
-  add_foreign_key "choice_answers", "choices"
   add_foreign_key "choices", "questions"
   add_foreign_key "customers", "users"
   add_foreign_key "images", "questions"

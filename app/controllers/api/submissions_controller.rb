@@ -5,7 +5,7 @@ class API::SubmissionsController < API::ApplicationController
   def create
     @submission = @survey.submissions.build(submission_params)
     if @submission.save
-      render json: @submission
+      render json: @submission, status: 201
     else
       render json: @submission.errors, status: :unprocessable_entity
     end

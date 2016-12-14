@@ -6,11 +6,11 @@ class API::SurveysController < API::ApplicationController
   def index
     @surveys = @customer.surveys
     render json: @surveys, include: [:id, :name, :description,
-      :question_counter, :created_at, :customer]
+      :created_at, :customer]
   end
 
   def show
-    render json: @survey, include: [:id, :name,
+    render json: @survey, include: [:id, :name, :description,
       :created_at, :customer, "questions.question_type",
       "questions.choices", "questions.images"]
   end

@@ -39,34 +39,25 @@
         Type of questions
 
       %ol.ordered-list
-        = render @survey.questions
+        - @survey.questions.each do |question|
+          %li
+            = question.question_type.name
+            - if question.choices.any?
+              %span.badge.pull-right
+                = question.choices.size
+              %ol.ordered-list
+                - question.choices.each do |choice|
+                  %li
+                    = choice.title
+            - if question.images.any?
+              %span.badge.pull-right
+                = question.images.size
 
     .col-md-8
       %h3.text-center
         Results by type
         = pie_chart @survey.questions.group_types
 
-  - if @survey.submissions.any?
-    %h3.text-center
-      Answers per question
-      = column_chart @survey.questions.group_answers, label: "Answers"
+  = render @survey.questions
 
-  .row
-    .col-md-4
-      - if @survey.questions.choice_answer.any?
-        %h3.text-center
-          Single Choices
-          = pie_chart @survey.questions.choice_answer, legend: false
-
-    .col-md-4
-      - if @survey.questions.answer_multiple.any?
-        %h3.text-center
-          Multiple Choices
-          = pie_chart @survey.questions.answer_multiple, legend: false
-
-    .col-md-4
-      - if @survey.questions.answer_image.any?
-        %h3.text-center
-          Images
-          = pie_chart @survey.questions.answer_image, legend: false
 

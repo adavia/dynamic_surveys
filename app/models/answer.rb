@@ -20,4 +20,9 @@ class Answer < ApplicationRecord
   #accepts_nested_attributes_for :option_answers
 
   validates :question_id, presence: true
+
+  scope :raiting_average,         -> { joins(:answer_raiting).average("answer_raitings.response")}
+  scope :image_counter,           -> { joins(:answer_image).group("answer_images.id").count }
+  scope :choice_counter,          -> { joins(choice_answer: :choice).group("choices.title").count }
+  scope :multiple_choice_counter, -> { joins(answer_multiple: [:choices]).group("choices.title").count }
 end

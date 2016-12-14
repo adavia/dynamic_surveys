@@ -1,10 +1,39 @@
-%li
-  = question.question_type.name
-  - if question.choices.any?
-    %span.badge.pull-right
-      = question.choices.size
-    %ol.ordered-list
-      = render question.choices
-  - if question.images.any?
-    %span.badge.pull-right
-      = question.images.size
+%h3
+  = question.title
+
+%ul.list-group
+  %li.list-group-item.list-group-item-warning
+    %span.badge
+      = question.answers.size
+    Answers
+  - if ["single", "select"].include? question.question_type.prefix
+    - @choice = question.answers.choice_counter.each do |answer|
+      %li.list-group-item
+        %span.badge
+          = answer[1]
+        = answer[0]
+  - if question.question_type.prefix == "image"
+    - @image = question.answers.image_counter.each do |answer|
+      %li.list-group-item
+        %span.badge
+          = answer[1]
+        = answer[0]
+  - if question.question_type.prefix == "multiple"
+    - @multiple = question.answers.multiple_choice_counter.each do |answer|
+      %li.list-group-item
+        %span.badge
+          = answer[1]
+        = answer[0]
+  - if question.question_type.prefix == "raiting"
+    %li.list-group-item
+      %span.badge
+        = number_with_precision(question.answers.raiting_average, precision: 2)
+      Average rating
+
+.text-center
+  - if ["single", "select"].include? question.question_type.prefix
+    = pie_chart @choice
+  - if question.question_type.prefix == "multiple"
+    = pie_chart @multiple
+  - if question.question_type.prefix == "image"
+    = pie_chart @image

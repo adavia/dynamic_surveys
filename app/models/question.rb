@@ -15,14 +15,14 @@ class Question < ApplicationRecord
   accepts_nested_attributes_for :options, allow_destroy: true
   accepts_nested_attributes_for :images, allow_destroy: true
 
-  scope :avg_raiting,     -> { joins(answers: :answer_raiting).average("answer_raitings.response")}
+  #scope :avg_raiting,     -> { joins(answers: :answer_raiting).average("answer_raitings.response")}
 
   scope :group_types,     -> { joins(:question_type).group("question_types.name").count }
-  scope :group_answers,   -> { joins(answers: :question).group("questions.title").count }
+  #scope :group_answers,   -> { joins(answers: :question).group("questions.title").count }
 
-  scope :choice_answer,   -> { joins(answers: {choice_answer: :choice}).group("choices.title").count }
-  scope :answer_image,    -> { joins(answers: {answer_image: :image}).group("images.file").count }
-  scope :answer_multiple, -> { joins(answers: {answer_multiple: [:choices]}).group("choices.title").count }
+  #scope :choice_answer,   -> { joins(answers: {choice_answer: :choice}).group("choices.title").count }
+  #scope :answer_image,    -> { joins(answers: {answer_image: :image}).group("images.file").count }
+  #scope :answer_multiple, -> { joins(answers: {answer_multiple: [:choices]}).group("choices.title").count }
 
   private
 

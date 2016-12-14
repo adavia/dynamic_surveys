@@ -20,4 +20,8 @@ module ApplicationHelper
   def is_admin?
     current_user.try(:admin?)
   end
+
+  def file_name(file)
+    file.to_s.split("/").last
+  end
 end

@@ -1,10 +1,14 @@
 .image-fields
   .row
-    .col-md-3
-      %span{class: "btn btn-default btn-sm btn-file"}
-        = fa_icon("photo", text: "Upload an image to choose!")
-        = f.file_field :file, label: false
+    .col-xs-2
+      .file-upload
+        %span Upload an image for this question
+        = f.file_field :file, label: false, class: "upload"
         = f.input :file_cache, as: :hidden
-    .col-md-1
+    .col-xs-1
       = f.hidden_field :_destroy
-      = link_to fa_icon("close"), "#", data: { behavior: "remove_image_fields" }
+      = link_to fa_icon("trash-o"), "#", data: { behavior: "remove_image_fields" },
+        class: "pull-right"
+    .col-xs-3
+      %small.file-name
+        = file_name f.object.file

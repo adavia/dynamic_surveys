@@ -1,6 +1,16 @@
 = simple_form_for [@customer, @survey] do |f|
   = f.input :name, label: false, placeholder: "Name"
   = f.input :description, label: false, placeholder: "Description"
+  .image-fields
+    .row
+      .col-xs-3
+        .file-upload
+          %span Upload an avatar for the survey
+          = f.file_field :avatar, label: false, class: "upload"
+          = f.input :avatar_cache, as: :hidden
+      .col-xs-5
+        %h3.file-name.m-t-0
+          = file_name f.object.avatar
 
   = f.fields_for :questions do |builder|
     = render "question_fields", f: builder

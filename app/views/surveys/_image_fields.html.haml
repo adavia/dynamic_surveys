@@ -9,6 +9,6 @@
       = f.hidden_field :_destroy
       = link_to fa_icon("trash-o"), "#", data: { behavior: "remove_image_fields" },
         class: "pull-right"
-    .col-xs-3
-      %small.file-name
+    .col-xs-5
+      %h3.file-name.m-t-0
         = file_name f.object.file

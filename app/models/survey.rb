@@ -10,4 +10,6 @@ class Survey < ApplicationRecord
   accepts_nested_attributes_for :questions, allow_destroy: true
 
   scope :date_surveys, -> { group("DATE(created_at)").count }
+
+  mount_uploader :avatar, ImageUploader
 end

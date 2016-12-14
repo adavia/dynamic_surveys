@@ -16,6 +16,8 @@ class User < ApplicationRecord
 
   scope :excluding_archived, -> { where(archived_at: nil) }
 
+  mount_uploader :image, ImageUploader
+
   def to_s
     "#{admin? ? "Admin" : "User"} - #{name} #{last_name}"
   end

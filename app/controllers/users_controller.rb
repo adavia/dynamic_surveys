@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
-  before_action :is_logged_in
+  before_action :is_logged_in, only: [:new, :create]
+  before_action :set_user, only: [:edit, :update]
+
+  def show
+  end
 
   def new
     @user = User.new
@@ -25,9 +29,36 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    respond_to do |format|
+      if current_user.update(user_params)
+        format.html { redirect_to current_user,
+          flash: { success: "Your information has been updated successfully."}}
+        format.js   {}
+        format.json {
+          render json: current_user, status: :created, location: current_user
+        }
+      else
+        format.html { render 'edit' }
+        format.js   {}
+        format.json {
+          render json: current_user.errors, status: :unprocessable_entity
+        }
+      end
+    end
+  end
+
   private
 
+  def set_user
+    @user = current_user
+  end
+
   def user_params
-    params.require(:user).permit(:name, :last_name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :last_name, :email,
+      :password, :password_confirmation, :image, :image_cache)
   end
 end

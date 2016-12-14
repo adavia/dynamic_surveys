@@ -40,7 +40,7 @@
       %ul.nav.navbar-nav.navbar-right
         - if logged_in?
           %p.navbar-text
-            Signed in as #{current_user}
+            = link_to  "Signed in as #{current_user}", current_user
           %li
             = link_to "Sign Out", session_path(current_user), method: :delete
         - else

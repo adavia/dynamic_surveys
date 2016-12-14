@@ -4,4 +4,15 @@
   = f.input :email, label: false, placeholder: "Email"
   = f.input :password, label: false, placeholder: "Password"
   = f.input :password_confirmation, label: false, placeholder: "Password Confirmation"
-  = f.button :submit, "Sign Up", class: "btn-block btn-primary"
+  - if @user.persisted?
+    .image-fields
+      .row
+        .col-xs-3
+          .file-upload
+            %span Upload an image for your profile
+            = f.file_field :image, label: false, class: "upload"
+            = f.input :image_cache, as: :hidden
+        .col-xs-3
+          %small.file-name
+            = file_name f.object.image
+  = f.button :submit, "Submit", class: "btn-block btn-primary"

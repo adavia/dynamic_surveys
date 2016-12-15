@@ -3,6 +3,10 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update]
 
   def show
+    respond_to do |format|
+      format.html {}
+      format.json { render json: @user }
+    end
   end
 
   def new

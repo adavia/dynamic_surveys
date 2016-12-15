@@ -3,15 +3,16 @@
   %small
     = @survey.name
 .panel-piled
-  .dropdown.pull-right
-    %a.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true",
-    "data-toggle": "dropdown", href: "#", role: "button"}
-      = fa_icon "chevron-down"
-    %ul.dropdown-menu
-      %li
-        = link_to "Edit survey", [:edit, @survey.customer, @survey]
-      %li
-        = link_to "Delete survey", [@survey.customer, @survey], method: :delete
+  - if is_admin?
+    .dropdown.pull-right
+      %a.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true",
+      "data-toggle": "dropdown", href: "#", role: "button"}
+        = fa_icon "chevron-down"
+      %ul.dropdown-menu
+        %li
+          = link_to "Edit survey", [:edit, :admin, @survey.customer, @survey]
+        %li
+          = link_to "Delete survey", [:admin, @survey.customer, @survey], method: :delete
   %h1
     = @survey.name
   %p

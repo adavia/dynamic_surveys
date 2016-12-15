@@ -27,7 +27,10 @@
   - if question.question_type.prefix == "raiting"
     %li.list-group-item
       %span.badge
-        = number_with_precision(question.answers.raiting_average, precision: 2)
+        - if question.answers.any?
+          = number_with_precision(question.answers.raiting_average, precision: 2)
+        - else
+          0
       Average rating
 
 .text-center

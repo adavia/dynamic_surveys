@@ -4,4 +4,14 @@
   = f.input :email, label: false, placeholder: "Email"
   = f.input :password, label: false, placeholder: "Password"
   = f.input :admin, label: "Is an admin?"
+
+  %h3 Customer Roles
+
+  - customers.each do |customer|
+    .form-group
+      = label_tag dom_id(customer), customer.name
+      = select_tag dom_id(customer), options_for_select(roles,
+        user.role_on(customer)), name: "roles[#{customer.id}]",
+        include_blank: true, class: "form-control"
+
   = f.button :submit, "Submit user", class: "btn-block btn-primary"

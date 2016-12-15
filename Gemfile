@@ -24,6 +24,8 @@ gem 'carrierwave', '~> 0.10.0'
 gem 'fog'
 # Image manipulation
 gem 'mini_magick'
+# User access authorization
+gem 'pundit'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views

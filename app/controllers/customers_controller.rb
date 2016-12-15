@@ -1,10 +1,9 @@
 class CustomersController < ApplicationController
   before_action :authenticate_user
-  before_action :set_user, only: [:index, :show]
   before_action :set_customer, only: :show
 
   def index
-    @customers = @user.customers
+    @customers = Customer.includes(:user).all
     respond_to do |format|
       format.html {}
       format.json { render json: @customers }
@@ -12,16 +11,17 @@ class CustomersController < ApplicationController
   end
 
   def show
+    authorize @customer, :show?
+    respond_to do |format|
+      format.html {}
+      format.json { render json: @customer }
+    end
   end
 
   private
 
   def customer_params
     params.require(:customer).permit(:name, :description)
-  end
-
-  def set_user
-    @user = User.includes(:customers).find(params[:user_id])
   end
 
   def set_customer

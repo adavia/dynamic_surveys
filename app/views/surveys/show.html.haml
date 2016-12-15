@@ -9,10 +9,11 @@
     %ul.dropdown-menu
       %li
         = link_to "Preview this survey", [:new, @survey, :submission]
-      %li
-        = link_to "Edit survey", [:edit, @customer, @survey]
-      %li
-        = link_to "Delete survey", [@customer, @survey], method: :delete
+      - if is_admin?
+        %li
+          = link_to "Edit survey", [:edit, :admin, @customer, @survey]
+        %li
+          = link_to "Delete survey", [:admin, @customer, @survey], method: :delete
   %h1
     = @survey.name
     %small

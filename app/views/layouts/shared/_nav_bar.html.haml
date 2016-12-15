@@ -10,18 +10,18 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      = link_to "Dynamic Surveys", root_path, class: "navbar-brand"
+      = link_to "Dynamic Surveys", customers_path, class: "navbar-brand"
     / Collect the nav links, forms, and other content for toggling
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       %ul.nav.navbar-nav
         - if logged_in?
           %li.dropdown
             %a.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true", "data-toggle": "dropdown", href: "#", role: "button"}
-              Clients
+              Customers
               %span.caret
             %ul.dropdown-menu
               %li
-                = link_to "All Customers", [current_user, :customers]
+                = link_to "All Customers", customers_path
               - if is_admin?
                 %li
                   = link_to "New Customer", [:new, :admin, current_user, :customer]

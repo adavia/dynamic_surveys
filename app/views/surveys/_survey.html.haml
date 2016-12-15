@@ -2,9 +2,14 @@
   .row
     .col-md-9
       %h2
-        = link_to survey.name, [survey.customer, survey]
-        %small
-          = survey.customer.name
+        - if policy(survey).show?
+          = link_to survey.name, [survey.customer, survey]
+          %small
+            = survey.customer.name
+        - else
+          = survey.name
+          %small
+            = survey.customer.name
       %p
         = survey.description
     .col-md-3

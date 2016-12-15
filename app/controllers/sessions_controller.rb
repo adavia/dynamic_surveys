@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       if user.active_for_authentication?
         log_in user
-        redirect_back_or [current_user, :customers]
+        redirect_back_or customers_url
       else
         flash.now[:danger] = "Your account has been locked."
         render :new
@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out
-    redirect_to root_url,
+    redirect_to new_session_url,
       flash: { success: "See you later!" }
   end
 end

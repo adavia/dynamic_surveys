@@ -10,7 +10,7 @@ class Admin::CustomersController < Admin::ApplicationController
 
     respond_to do |format|
       if @customer.save
-        format.html { redirect_to [current_user, :customers],
+        format.html { redirect_to customers_url,
           flash: { success: "The customer has been created successfully."}}
         format.js   {}
         format.json { render json: @customer,
@@ -30,7 +30,7 @@ class Admin::CustomersController < Admin::ApplicationController
   def update
     respond_to do |format|
       if @customer.update(customer_params)
-        format.html { redirect_to [current_user, :customers],
+        format.html { redirect_to customers_url,
           flash: { success: "The customer has been updated successfully."}}
         format.js   {}
         format.json {
@@ -50,7 +50,7 @@ class Admin::CustomersController < Admin::ApplicationController
     @customer.destroy
 
     respond_to do |format|
-      format.html { redirect_to [current_user, :customers],
+      format.html { redirect_to customers_url,
           flash: { success: "The customer has been deleted successfully."}}
       format.js {}
     end

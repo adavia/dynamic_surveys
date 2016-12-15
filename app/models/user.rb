@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :customers, dependent: :destroy
   has_many :submissions
+  has_many :roles
 
   before_save { self.email = email.downcase }
 
@@ -43,5 +44,10 @@ class User < ApplicationRecord
       token = SecureRandom.base64.tr('+/=', 'Qrt')
       break token unless User.exists?(api_key: token)
     end
+  end
+
+  # Check for user role permission
+  def role_on(customer)
+    roles.find_by(customer_id: customer).try(:name)
   end
 end

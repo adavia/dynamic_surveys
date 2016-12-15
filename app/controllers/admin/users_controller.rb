@@ -1,5 +1,6 @@
 class Admin::UsersController < Admin::ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :archive]
+  before_action :set_customers, only: [:new, :create, :edit, :update]
 
   def index
     @users = User.excluding_archived.order(:email)
@@ -16,6 +17,7 @@ class Admin::UsersController < Admin::ApplicationController
     @user = User.new(user_params)
 
     respond_to do |format|
+      build_roles_for(@user)
       if @user.save
         format.html { redirect_to [:admin, :users],
           flash: { success: "The user has been created successfully."}}
@@ -40,19 +42,23 @@ class Admin::UsersController < Admin::ApplicationController
     end
 
     respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to [:admin, :users],
-          flash: { success: "The user has been updated successfully."}}
-        format.js   {}
-        format.json {
-          render json: @user, status: :created, location: @user
-        }
-      else
-        format.html { render 'edit' }
-        format.js   {}
-        format.json {
-          render json: @user.errors, status: :unprocessable_entity
-        }
+      User.transaction do
+        @user.roles.clear
+        build_roles_for(@user)
+        if @user.update(user_params)
+          format.html { redirect_to [:admin, :users],
+            flash: { success: "The user has been updated successfully."}}
+          format.js   {}
+          format.json {
+            render json: @user, status: :created, location: @user
+          }
+        else
+          format.html { render 'edit' }
+          format.js   {}
+          format.json {
+            render json: @user.errors, status: :unprocessable_entity
+          }
+        end
       end
     end
   end
@@ -76,5 +82,18 @@ class Admin::UsersController < Admin::ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :last_name, :email, :admin, :password)
+  end
+
+  def set_customers
+    @customers = Customer.order(:name)
+  end
+
+  def build_roles_for(user)
+    role_data = params.fetch(:roles, [])
+    role_data.each do |customer_id, role_name|
+      if role_name.present?
+        user.roles.build(customer_id: customer_id, role: role_name)
+      end
+    end
   end
 end

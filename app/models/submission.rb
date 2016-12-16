@@ -9,11 +9,11 @@ class Submission < ApplicationRecord
   validates :survey_id, presence: true
   validates :user_id, presence: true
 
-  #validate :must_complete_all_answers
+  validate :must_complete_all_answers
 
-  #def must_complete_all_answers
-    #if questions.any? && answers.empty?
-      #errors.add(:base, "You must complete all answers before submission!")
-    #end
-  #end
+  def must_complete_all_answers
+    if questions.any? && answers.empty?
+      errors.add(:base, "You must complete all answers before submitting the survey!")
+    end
+  end
 end

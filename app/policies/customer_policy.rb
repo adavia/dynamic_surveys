@@ -9,6 +9,6 @@ class CustomerPolicy < ApplicationPolicy
   end
 
   def show?
-    user.try(:admin?) || record.has_member?(user)
+    user.try(:admin?) || record.has_editor?(user)
   end
 end

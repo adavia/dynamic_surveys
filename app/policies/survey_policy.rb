@@ -7,7 +7,7 @@ class SurveyPolicy < ApplicationPolicy
   end
 
   def show?
-    user.try(:admin?) || record.customer.has_member?(user)
+    user.try(:admin?) || record.customer.has_editor?(user)
   end
 
   def create?
@@ -15,7 +15,7 @@ class SurveyPolicy < ApplicationPolicy
   end
 
   def update?
-    user.try(:admin?) || (record.customer.has_editor?(user) && record.customer.user == user)
+    user.try(:admin?) || record.customer.has_editor?(user)
   end
 
   def destroy?

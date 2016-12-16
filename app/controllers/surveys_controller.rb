@@ -20,7 +20,7 @@ class SurveysController < ApplicationController
   end
 
   def new
-    @survey = Survey.new
+    @survey = @customer.surveys.build
     authorize @survey, :create?
   end
 

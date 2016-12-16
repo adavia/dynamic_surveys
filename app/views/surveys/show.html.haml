@@ -33,7 +33,7 @@
     %li.list-group-item
       %span.badge
         = @survey.submissions.size
-      Submissions
+      = link_to "Submissions", [@survey, :submissions], remote: true
 
   .row
     .col-md-4

@@ -1,7 +1,8 @@
 class SubmissionPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope
+      return scope.none if user.nil?
+      return scope
     end
   end
 

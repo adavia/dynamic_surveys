@@ -4,12 +4,13 @@ class API::SurveysController < API::ApplicationController
   before_action :set_survey, only: [:show]
 
   def index
-    @surveys = @customer.surveys
+    @surveys = policy_scope(@customer.surveys)
     render json: @surveys, include: [:id, :name, :description,
       :created_at, :customer]
   end
 
   def show
+    authorize @survey, :show?
     render json: @survey, include: [:id, :name, :description,
       :created_at, :customer, "questions.question_type",
       "questions.choices", "questions.images"]

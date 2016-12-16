@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   resources :surveys, only: [] do
-    resources :submissions, only: [:new, :create]
+    resources :submissions, only: [:index, :new, :create]
   end
 
   namespace :admin do

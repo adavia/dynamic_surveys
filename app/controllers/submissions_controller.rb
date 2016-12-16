@@ -13,11 +13,15 @@ class SubmissionsController < ApplicationController
       answer.build_answer_raiting
       answer.build_choice_answer
     end
+
+    authorize @submission, :new?
   end
 
   def create
     @submission = @survey.submissions.build(submission_params)
     @submission.user = current_user
+
+    authorize @submission, :create?
 
     respond_to do |format|
       if @submission.save

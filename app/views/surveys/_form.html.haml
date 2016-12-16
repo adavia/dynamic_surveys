@@ -1,4 +1,4 @@
-= simple_form_for [:admin, @customer, @survey] do |f|
+= simple_form_for [@customer, @survey] do |f|
   = f.input :name, label: false, placeholder: "Name"
   = f.input :description, label: false, placeholder: "Description"
   .image-fields

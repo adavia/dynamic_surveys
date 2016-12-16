@@ -4,6 +4,11 @@ class ApplicationController < ActionController::Base
   include Pundit
   include SessionsHelper
 
+  after_action :verify_authorized, except: [:index],
+    unless: :sessions_controller?
+  after_action :verify_policy_scoped, only: [:index],
+    unless: :sessions_controller?
+
   rescue_from Pundit::NotAuthorizedError, with: :not_authorized
 
   protected

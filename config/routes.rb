@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :new, :create, :edit, :update]
 
   resources :customers, only: [:index, :show] do
-    resources :surveys, only: [:index, :show]
+    resources :surveys, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   end
 
   resources :surveys, only: [] do
@@ -16,10 +16,6 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users, only: [] do
       resources :customers, only: [:new, :create, :edit, :update, :destroy]
-    end
-
-    resources :customers, only: [] do
-      resources :surveys, only: [:new, :create, :edit, :update, :destroy]
     end
 
     resources :users, only: [:index, :show, :new, :create, :edit, :update] do

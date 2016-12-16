@@ -26,4 +26,9 @@ module SessionsHelper
   def store_location
     session[:forwarding_url] = request.url if request.get?
   end
+
+  # Check if sessions or user controller
+  def sessions_controller?
+    params[:controller] == "sessions" || params[:controller] == "users"
+  end
 end

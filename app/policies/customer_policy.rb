@@ -1,7 +1,10 @@
 class CustomerPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope
+      return scope.none if user.nil?
+      return scope.includes(:user).all if user.admin?
+
+      scope.joins(:roles).where(roles: {user_id: user})
     end
   end
 

@@ -13,8 +13,9 @@
       %p
         = survey.description
     .col-md-3
-      = link_to fa_icon("remove"), [survey.customer, survey],
-        method: :delete, class: "pull-right"
+      - if policy(survey).destroy?
+        = link_to fa_icon("remove"), [survey.customer, survey],
+          method: :delete, class: "pull-right"
       %h2
         %strong
           = survey.questions_count

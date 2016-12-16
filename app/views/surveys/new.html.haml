@@ -1,3 +1,6 @@
 %h1.text-center.m-t-0 Create a new survey for this customer
+- if @survey.errors.any?
+  .alert.alert-danger
+    = @survey.errors[:questions][0]
 .survey-form
   = render "form"

@@ -12,6 +12,6 @@
       = label_tag dom_id(customer), customer.name
       = select_tag dom_id(customer), options_for_select(roles,
         user.role_on(customer)), name: "roles[#{customer.id}]",
-        include_blank: true, class: "form-control"
+        prompt: "--- Select customer role ---", class: "form-control"
 
   = f.button :submit, "Submit user", class: "btn-block btn-primary"

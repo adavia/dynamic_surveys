@@ -46,8 +46,8 @@ class User < ApplicationRecord
     end
   end
 
-  # Check for user role permission
+  # Check for customer permission role
   def role_on(customer)
-    roles.find_by(customer_id: customer).try(:name)
+    roles.find_by(customer_id: customer).try(:role)
   end
 end

@@ -9,15 +9,19 @@
     = link_to "Archive User", [:archive, :admin, @user], method: :patch,
       data: { confirm: "Are you sure you want to archive this user?"}
 
-.text-center
-  %h2
-    Assigned Roles
 
-  - if @user.roles.any?
-    %ul
-      - @user.roles.each do |role|
-        %li
-          #{role.project.name} #{role.role.titleize}
-  - else
-    %p
-      This user has no roles.
+%h2.text-center
+  Assigned Roles
+
+.row
+  .col-md-4.col-md-offset-4
+    - if @user.roles.any?
+      %ul.list-group
+        - @user.roles.each do |role|
+          %li.list-group-item
+            .span.badge
+              #{role.role.titleize}
+            #{role.customer.name}
+    - else
+      %p
+        This user has no roles.

@@ -5,4 +5,8 @@ class AnswerPolicy < ApplicationPolicy
       return scope
     end
   end
+
+  def index?
+    user.try(:admin?) || record.submission.survey.customer.has_editor?(user)
+  end
 end

@@ -6,6 +6,10 @@ class SubmissionPolicy < ApplicationPolicy
     end
   end
 
+  def index?
+    user.try(:admin?) || record.survey.customer.has_editor?(user)
+  end
+
   def show?
     user.try(:admin?) || record.survey.customer.has_editor?(user)
   end

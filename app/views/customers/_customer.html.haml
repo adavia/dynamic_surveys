@@ -10,9 +10,6 @@
       %p
         = customer.description
     .col-md-3
-      - if is_admin?
-        = link_to fa_icon("remove"), [:admin, customer.user, customer],
-          method: :delete, class: "pull-right"
       .dropdown
         %a.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true",
         "data-toggle": "dropdown", href: "#", role: "button"}
@@ -23,7 +20,12 @@
             %span.caret
         %ul.dropdown-menu
           %li
-            = link_to "All Surveys", [customer, :surveys]
+            = link_to "All surveys", [customer, :surveys]
           - if policy(Survey.new(customer: customer)).create?
             %li
               = link_to "Create new", [:new, customer, :survey]
+          - if is_admin?
+            %li
+              = link_to "Archive customer", [:archive, :admin, customer.user, customer],
+                method: :patch,
+                data: { confirm: "Are you sure you want to archive this customer?" }

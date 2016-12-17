@@ -1,10 +1,10 @@
 class SurveysController < ApplicationController
   before_action :authenticate_user
-  before_action :set_customer, only: [:index, :show, :new, :create, :edit, :update, :destroy]
-  before_action :set_survey, only: [:show, :edit, :update, :destroy]
+  before_action :set_customer, only: [:index, :show, :new, :create, :edit, :update, :archive]
+  before_action :set_survey, only: [:show, :edit, :update, :archive]
 
   def index
-    @surveys = policy_scope(@customer.surveys)
+    @surveys = policy_scope(@customer.surveys.excluding_archived.order(:name))
     respond_to do |format|
       format.html {}
       format.json { render json: @surveys }
@@ -71,13 +71,12 @@ class SurveysController < ApplicationController
     end
   end
 
-  def destroy
-    authorize @survey, :destroy?
-    @survey.destroy
-
+  def archive
+    authorize @survey, :archive?
+    @survey.archive
     respond_to do |format|
       format.html { redirect_to [@customer, :surveys],
-          flash: { success: "The survey has been deleted successfully."}}
+          flash: { success: "The survey has been archived successfully."}}
       format.js {}
     end
   end

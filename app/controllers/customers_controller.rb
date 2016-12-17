@@ -3,7 +3,7 @@ class CustomersController < ApplicationController
   before_action :set_customer, only: :show
 
   def index
-    @customers = policy_scope(Customer)
+    @customers = policy_scope(Customer.excluding_archived.order(:name))
     respond_to do |format|
       format.html {}
       format.json { render json: @customers }

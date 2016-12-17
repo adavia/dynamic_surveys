@@ -1,5 +1,5 @@
 class Admin::CustomersController < Admin::ApplicationController
-  before_action :set_customer, only: [:edit, :update, :destroy]
+  before_action :set_customer, only: [:edit, :update, :archive]
 
   def new
     @customer = Customer.new
@@ -46,12 +46,11 @@ class Admin::CustomersController < Admin::ApplicationController
     end
   end
 
-  def destroy
-    @customer.destroy
-
+  def archive
+    @customer.archive
     respond_to do |format|
       format.html { redirect_to customers_url,
-          flash: { success: "The customer has been deleted successfully."}}
+          flash: { success: "The customer has been archived successfully."}}
       format.js {}
     end
   end

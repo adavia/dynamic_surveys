@@ -9,12 +9,16 @@
     %ul.dropdown-menu
       %li
         = link_to "Submit this survey", [:new, @survey, :submission]
+      %li
+        = link_to "Surveys list", [@survey.customer, :surveys]
       - if policy(@survey).update?
         %li
           = link_to "Edit survey", [:edit, @customer, @survey]
-      - if policy(@survey).destroy?
+      - if policy(@survey).archive?
         %li
-          = link_to "Delete survey", [@customer, @survey], method: :delete
+          = link_to "Archive survey", [:archive, @survey.customer, @survey],
+            method: :patch,
+            data: { confirm: "Are you sure you want to archive this survey?" }
   %h1
     = @survey.name
     %small

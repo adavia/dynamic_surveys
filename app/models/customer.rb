@@ -6,6 +6,8 @@ class Customer < ApplicationRecord
 
   validates :name, presence: true, length: { minimum: 2, maximum: 250 }
 
+  scope :excluding_archived, -> { where(archived_at: nil) }
+
   def has_member?(user)
     roles.exists?(user_id: user)
   end
@@ -14,5 +16,10 @@ class Customer < ApplicationRecord
     define_method "has_#{role}?" do |user|
       roles.exists?(user_id: user, role: role)
     end
+  end
+
+  # Archive customer
+  def archive
+    self.update_column :archived_at, Time.now
   end
 end

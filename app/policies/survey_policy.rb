@@ -18,7 +18,7 @@ class SurveyPolicy < ApplicationPolicy
     user.try(:admin?) || record.customer.has_editor?(user)
   end
 
-  def destroy?
+  def archive?
     user.try(:admin?) || record.customer.has_editor?(user)
   end
 end

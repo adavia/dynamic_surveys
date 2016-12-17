@@ -25,7 +25,7 @@ class User < ApplicationRecord
 
   # Archived user
   def archive
-    self.update_attribute :archived_at, Time.now
+    self.update_column :archived_at, Time.now
   end
 
   # Check archived user before log in

@@ -36,7 +36,7 @@
     - if answer.choice_answer.present?
       %p
         Response:
-        = answer.choice_answer.choice.title
+        = answer.choice_answer.choice.try(:title)
     - if answer.answer_multiple.present?
       %p
         Response:

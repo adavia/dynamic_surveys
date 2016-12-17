@@ -1,0 +1,20 @@
+#answers-list.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-label": "Close", "data-dismiss": "modal", type: "button"}
+          %span{"aria-hidden": "true"} ×
+        %h1.text-center.m-t-0
+          = @question.title
+      .modal-body
+        %table.table.table-hover
+          %thead
+            %tr
+              %th
+                Answered on
+              %th
+                User
+              %th
+                Answer response
+          %tbody
+            = render @answers

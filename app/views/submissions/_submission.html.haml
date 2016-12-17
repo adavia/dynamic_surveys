@@ -1,7 +1,7 @@
 %tr
   %th
+    = submission.created_at.strftime("%m/%d/%Y at %I:%M%p")
+  %th
     = submission.survey.name
   %th
     = submission.user.email
-  %th
-    = submission.created_at.strftime("%m/%d/%Y at %I:%M%p")

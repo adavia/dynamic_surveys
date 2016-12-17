@@ -32,6 +32,9 @@
         - else
           0
       Average rating
+  - if ["open", "date"].include? question.question_type.prefix
+    %li.list-group-item
+      = link_to "Show answer responses", [question, :answers], remote: true
 
 .text-center
   - if ["single", "select"].include? question.question_type.prefix

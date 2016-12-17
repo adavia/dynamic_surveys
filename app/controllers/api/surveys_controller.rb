@@ -1,7 +1,7 @@
 class API::SurveysController < API::ApplicationController
   before_action :authenticate_user
-  before_action :set_customer, only: [:index]
-  before_action :set_survey, only: [:show]
+  before_action :set_customer, only: :index
+  before_action :set_survey, only: :show
 
   def index
     @surveys = policy_scope(@customer.surveys)

@@ -13,6 +13,10 @@ Rails.application.routes.draw do
     resources :submissions, only: [:index, :new, :create]
   end
 
+  resources :questions, only: [] do
+    resources :answers, only: :index
+  end
+
   namespace :admin do
     resources :users, only: [] do
       resources :customers, only: [:new, :create, :edit, :update, :destroy]

@@ -1,2 +1,3 @@
 = f.simple_fields_for :answer_date do |builder|
-  = builder.input :response, label: false
+  = builder.input :response, label: false, start_year: Date.today.year - 80,
+    end_year: Date.today.year

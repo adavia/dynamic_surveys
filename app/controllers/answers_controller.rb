@@ -14,6 +14,7 @@ class AnswersController < ApplicationController
   private
 
   def set_question
-    @question = Question.includes(answers: [:answer_open, :answer_date, submission: :user]).find(params[:question_id])
+    @question = Question.includes(answers: [:answer_open, :answer_date,
+      submission: :user]).find(params[:question_id])
   end
 end

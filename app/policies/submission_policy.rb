@@ -6,6 +6,10 @@ class SubmissionPolicy < ApplicationPolicy
     end
   end
 
+  def show?
+    user.try(:admin?) || record.survey.customer.has_editor?(user)
+  end
+
   def new?
     user.try(:admin?) || record.survey.customer.has_member?(user)
   end

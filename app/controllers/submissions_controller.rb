@@ -1,6 +1,7 @@
 class SubmissionsController < ApplicationController
   before_action :authenticate_user
   before_action :set_survey, only: [:index, :new, :create]
+  before_action :set_submission, only: :show
 
   def index
     @submissions = policy_scope(@survey.submissions)
@@ -9,6 +10,10 @@ class SubmissionsController < ApplicationController
       format.js   {}
       format.json { render json: @submissions }
     end
+  end
+
+  def show
+    authorize @submission, :show?
   end
 
   def new
@@ -53,7 +58,14 @@ class SubmissionsController < ApplicationController
   private
 
   def set_survey
-    @survey = Survey.includes(questions: [:choices, :images, :question_type], submissions: :user).find(params[:survey_id])
+    @survey = Survey.includes(questions: [:choices, :images,
+      :question_type], submissions: :user).find(params[:survey_id])
+  end
+
+  def set_submission
+    @submission = Submission.includes(answers: [:answer_open, :answer_date,
+      :answer_raiting, :answer_multiple, :answer_image,
+      :choice_answer, :question]).find(params[:id])
   end
 
   def submission_params

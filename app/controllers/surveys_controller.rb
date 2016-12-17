@@ -85,7 +85,8 @@ class SurveysController < ApplicationController
   private
 
   def set_survey
-    @survey = Survey.includes(questions: [:choices, :images, :question_type, :answers]).find(params[:id])
+    @survey = Survey.includes(questions: [:choices, :images,
+      :question_type, :answers]).find(params[:id])
   end
 
   def set_customer

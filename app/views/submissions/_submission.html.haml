@@ -1,4 +1,5 @@
-%tr
+%tr{ "data-link": survey_submission_path(submission.survey, submission),
+  "data-behavior": "datalink", class: "data-link" }
   %th
     = submission.created_at.strftime("%m/%d/%Y at %I:%M%p")
   %th

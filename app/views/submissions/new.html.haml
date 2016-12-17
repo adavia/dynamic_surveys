@@ -3,14 +3,17 @@
   %small
     = @survey.name
 .panel-piled
-  - if is_admin?
-    .dropdown.pull-right
-      %a.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true",
-      "data-toggle": "dropdown", href: "#", role: "button"}
-        = fa_icon "chevron-down"
-      %ul.dropdown-menu
+  .dropdown.pull-right
+    %a.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true",
+    "data-toggle": "dropdown", href: "#", role: "button"}
+      = fa_icon "chevron-down"
+    %ul.dropdown-menu
+      %li
+        = link_to "Surveys list", [@survey.customer, :surveys]
+      - if policy(@survey).show?
         %li
           = link_to "Preview this survey", [@survey.customer, @survey]
+      - if policy(@survey).update?
         %li
           = link_to "Edit survey", [:edit, @survey.customer, @survey]
   %h1

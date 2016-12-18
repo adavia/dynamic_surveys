@@ -2,8 +2,8 @@
 %p.text-center.text-light Use your credentials to access the app
 = render "layouts/shared/alert_messages"
 = simple_form_for :session, { url: sessions_path } do |f|
-  = f.input :email, label: false, placeholder: "Email"
-  = f.input :password, label: false, placeholder: "Password"
+  = f.input :email, placeholder: "Email"
+  = f.input :password, placeholder: "Password"
   = f.button :submit, "SIGN IN", class: "btn-default btn-block btn-main"
 %p.text-center
   Don't have an account?

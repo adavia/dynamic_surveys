@@ -1,9 +1,9 @@
 = simple_form_for @user do |f|
-  = f.input :name, label: false, placeholder: "Name"
-  = f.input :last_name, label: false, placeholder: "Last Name"
-  = f.input :email, label: false, placeholder: "Email"
-  = f.input :password, label: false, placeholder: "Password"
-  = f.input :password_confirmation, label: false, placeholder: "Password Confirmation"
+  = f.input :name, placeholder: "Name"
+  = f.input :last_name, placeholder: "Last Name"
+  = f.input :email, placeholder: "Email"
+  = f.input :password, placeholder: "Password"
+  = f.input :password_confirmation, placeholder: "Password Confirmation"
   - if @user.persisted?
     .image-fields
       .row

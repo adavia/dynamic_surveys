@@ -4,7 +4,7 @@
 = simple_form_for :session, { url: sessions_path } do |f|
   = f.input :email, placeholder: "Email"
   = f.input :password, placeholder: "Password"
-  = f.button :submit, "SIGN IN", class: "btn-default btn-main center-block"
+  = f.button :submit, "SIGN IN", class: "btn-default btn-block btn-main"
 %p.text-center
   Don't have an account?
   = link_to "Sign Up", [:new, :user], class: "link-default"

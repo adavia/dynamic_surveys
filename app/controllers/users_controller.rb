@@ -2,6 +2,8 @@ class UsersController < ApplicationController
   before_action :is_logged_in, only: [:new, :create]
   before_action :set_user, only: [:edit, :update]
 
+  layout 'account', only: [:new, :create]
+
   def show
     respond_to do |format|
       format.html {}

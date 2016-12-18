@@ -32,4 +32,8 @@ module ApplicationHelper
       image_tag("default_user.png", class: "img-responsive center-block")
     end
   end
+
+  def is_active(controller)
+    "active" if params[:controller] == controller
+  end
 end

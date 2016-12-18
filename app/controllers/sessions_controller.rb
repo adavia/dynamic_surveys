@@ -1,6 +1,8 @@
 class SessionsController < ApplicationController
   before_action :is_logged_in, only: [:new, :create]
 
+  layout 'account'
+
   def new
   end
 

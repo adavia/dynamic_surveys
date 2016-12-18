@@ -9,7 +9,7 @@
       - if content_for?(:title)
         = yield(:title)
       - else
-        Dynamic Surveys
+        Social Surveys
     = csrf_meta_tags
     = stylesheet_link_tag 'application',
       media: 'all', 'data-turbolinks-track': 'reload'
@@ -17,9 +17,9 @@
       'data-turbolinks-track': 'reload'
 
   %body{class: page_class}
-    = render "layouts/shared/nav_bar"
+    = render "layouts/shared/app_nav_bar"
     .container-fluid
       .row
         .col-md-8.col-md-offset-2
           = yield
-    = render "layouts/shared/footer"
+    = render "layouts/shared/app_footer"

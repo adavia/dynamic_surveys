@@ -1,5 +1,14 @@
-@import "_variables";
-@import "_mixins";
+// Body
+
+@import url("https://fonts.googleapis.com/css?family=Amatic+SC|Open+Sans+Condensed:300';");
+$font-family-sans-serif: 'Open Sans Condensed', sans-serif;
+$font-family-base: $font-family-sans-serif !default;
+$font-size-base: 15px !default;
+
+// Navbar
+$navbar-height: 45px !default;
+$navbar-default-bg: #fff !default;
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";

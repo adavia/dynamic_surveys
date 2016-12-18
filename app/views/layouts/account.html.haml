@@ -1,0 +1,35 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8",
+      "http-equiv": "Content-Type"}
+    %meta{name: "viewport",
+      content: "width=device-width, initial-scale=1"}
+    %title
+      - if content_for?(:title)
+        = yield(:title)
+      - else
+        Social Surveys
+    = csrf_meta_tags
+    = stylesheet_link_tag 'account',
+      media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application',
+      'data-turbolinks-track': 'reload'
+
+  %body{class: page_class}
+    = render "layouts/shared/account_nav_bar"
+    %section
+      .container
+        .row
+          .col-md-5
+            .article-text
+              = image_tag "check.png", width: 70, class: "img-responsive"
+              %h1 Personalized your surveys
+              %p
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam molestie erat
+                nisi, quis tincidunt leo faucibus eget.
+                Duis condimentum vel risus nec dapibus.
+          .col-md-5.col-md-offset-2
+            .article-form
+              = yield
+    = render "layouts/shared/account_footer"

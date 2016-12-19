@@ -5,4 +5,5 @@ class AnswerMultiple < ApplicationRecord
   has_many :choice_answers, dependent: :destroy
 
   validates :choices, presence: true
+  validates :answer, presence: true
 end

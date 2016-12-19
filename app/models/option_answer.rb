@@ -5,4 +5,5 @@ class OptionAnswer < ApplicationRecord
 
   #validates :choice, presence: true
   #validates :option, presence: true
+  #validates :answer, presence: true
 end

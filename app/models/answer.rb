@@ -2,12 +2,12 @@ class Answer < ApplicationRecord
   belongs_to :submission
   belongs_to :question
 
-  has_one :answer_date, dependent: :destroy
-  has_one :answer_raiting, dependent: :destroy
-  has_one :answer_open, dependent: :destroy
-  has_one :answer_multiple, dependent: :destroy
-  has_one :answer_image, dependent: :destroy
-  has_one :choice_answer, dependent: :destroy
+  has_one :answer_date, inverse_of: :answer, dependent: :destroy
+  has_one :answer_raiting, inverse_of: :answer, dependent: :destroy
+  has_one :answer_open, inverse_of: :answer, dependent: :destroy
+  has_one :answer_multiple, inverse_of: :answer, dependent: :destroy
+  has_one :answer_image, inverse_of: :answer, dependent: :destroy
+  has_one :choice_answer, inverse_of: :answer, dependent: :destroy
 
   #has_many :option_answers, dependent: :destroy
 
@@ -19,7 +19,8 @@ class Answer < ApplicationRecord
   accepts_nested_attributes_for :choice_answer
   #accepts_nested_attributes_for :option_answers
 
-  validates :question_id, presence: true
+  validates :question, presence: true
+  validates :submission, presence: true
 
   scope :rated_answers,           -> { joins(:answer_raiting) }
   scope :rating_average,          -> { joins(:answer_raiting).average("answer_raitings.response") }

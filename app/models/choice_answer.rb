@@ -3,5 +3,6 @@ class ChoiceAnswer < ApplicationRecord
   belongs_to :answer
   belongs_to :answer_multiple
 
-  validates :choice_id, presence: true
+  validates :choice, presence: true
+  validates :answer, presence: true
 end

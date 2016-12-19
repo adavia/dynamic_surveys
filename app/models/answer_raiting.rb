@@ -3,7 +3,6 @@ class AnswerRaiting < ApplicationRecord
 
   validates :response, presence: { message: "You must select a rate" }
   validates :response, inclusion: { in: 1..5, message: "%{value} is not a valid rate" }
-  validates :answer, presence: true
 
   RAITING = {
     "5": "star_5",

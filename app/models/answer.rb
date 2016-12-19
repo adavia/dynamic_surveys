@@ -2,12 +2,12 @@ class Answer < ApplicationRecord
   belongs_to :submission
   belongs_to :question
 
-  has_one :answer_date, inverse_of: :answer, dependent: :destroy
-  has_one :answer_raiting, inverse_of: :answer, dependent: :destroy
-  has_one :answer_open, inverse_of: :answer, dependent: :destroy
-  has_one :answer_multiple, inverse_of: :answer, dependent: :destroy
-  has_one :answer_image, inverse_of: :answer, dependent: :destroy
-  has_one :choice_answer, inverse_of: :answer, dependent: :destroy
+  has_one :answer_date, dependent: :destroy
+  has_one :answer_raiting, dependent: :destroy
+  has_one :answer_open, dependent: :destroy
+  has_one :answer_multiple, dependent: :destroy
+  has_one :answer_image, dependent: :destroy
+  has_one :choice_answer, dependent: :destroy
 
   #has_many :option_answers, dependent: :destroy
 

@@ -4,7 +4,7 @@ class Submission < ApplicationRecord
   has_many :questions, through: :survey
   has_many :answers, dependent: :destroy
 
-  accepts_nested_attributes_for :answers
+  accepts_nested_attributes_for :answers, reject_if: :all_blank
 
   validates :survey_id, presence: true
   validates :user_id, presence: true

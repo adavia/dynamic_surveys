@@ -1,0 +1,6 @@
+The survey #{@submission.survey.name} has been rated with 2 answers:
+- @submission.answers.each do |answer|
+  = answer.question.title
+  - if answer.answer_raiting.present?
+    Response:
+    = answer.answer_raiting.response

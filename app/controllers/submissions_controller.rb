@@ -39,6 +39,9 @@ class SubmissionsController < ApplicationController
 
     respond_to do |format|
       if @submission.save
+
+        rating_notifier(@submission)
+
         format.html { redirect_to [@survey.customer, :surveys],
           flash: { success: "The survey has been submitted successfully."}}
         format.js   {}
@@ -56,6 +59,12 @@ class SubmissionsController < ApplicationController
   end
 
   private
+
+  def rating_notifier(submission)
+    if submission.answers.rated_answers.any?
+      SubmissionNotifierMailer.rating_notifier(submission).deliver_now
+    end
+  end
 
   def set_survey
     @survey = Survey.includes(questions: [:choices, :images,

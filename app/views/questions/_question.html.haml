@@ -28,7 +28,7 @@
     %li.list-group-item
       %span.badge
         - if question.answers.any?
-          = number_with_precision(question.answers.raiting_average, precision: 2)
+          = number_with_precision(question.answers.rating_average, precision: 2)
         - else
           0
       Average rating

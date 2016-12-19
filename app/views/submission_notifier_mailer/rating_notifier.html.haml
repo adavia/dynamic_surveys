@@ -1,0 +1,14 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv": "Content-Type"}
+  %body
+    %h1
+      The survey #{@submission.survey.name} has been rated with the following answers:
+    - @submission.answers.each do |answer|
+      - if answer.answer_raiting.present?
+        %h2
+          = answer.question.title
+        %p
+          Response:
+          = answer.answer_raiting.response

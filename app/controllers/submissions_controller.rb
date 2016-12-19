@@ -7,6 +7,7 @@ class SubmissionsController < ApplicationController
     @submissions = policy_scope(@survey.submissions)
     respond_to do |format|
       format.html {}
+      format.xls  {}
       format.js   {}
       format.json { render json: @submissions }
     end

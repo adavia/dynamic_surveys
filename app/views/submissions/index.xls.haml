@@ -1,0 +1,20 @@
+%table
+  %tr
+    %th
+      ID
+    %th
+      Submission date
+    %th
+      Survey name
+    %th
+      User
+  - @submissions.each do |submission|
+    %tr
+      %td
+        = submission.id
+      %td
+        = submission.created_at.strftime("%m/%d/%Y at %I:%M%p")
+      %td
+        = submission.survey.name
+      %td
+        = submission.user.email

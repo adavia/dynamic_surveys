@@ -6,6 +6,7 @@ class AnswersController < ApplicationController
     @answers = policy_scope(@question.answers)
     respond_to do |format|
       format.html {}
+      format.xls  {}
       format.js   {}
       format.json { render json: @answers }
     end

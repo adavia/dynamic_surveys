@@ -35,9 +35,9 @@
         = @survey.questions_count
       Questions
     %li.list-group-item
-      %span.badge
-        = @survey.submissions.size
-      = link_to "Submissions", [@survey, :submissions], remote: true
+      = link_to "#{@survey.submissions.size} Submissions", [@survey, :submissions], remote: true
+      = link_to "Export Excel", survey_submissions_path(@survey, format: "xls"),
+        class: "btn btn-xs btn-success pull-right"
 
   .row
     .col-md-4

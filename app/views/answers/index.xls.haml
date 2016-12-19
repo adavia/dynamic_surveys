@@ -1,0 +1,23 @@
+%table
+  %tr
+    %th
+      ID
+    %th
+      Answered on
+    %th
+      User
+    %th
+      Answer response
+  - @answers.each do |answer|
+    %tr
+      %td
+        = answer.id
+      %td
+        = answer.created_at.strftime("%m/%d/%Y at %I:%M%p")
+      %td
+        = answer.submission.user.email
+      %td
+        - if answer.answer_date.present?
+          = answer.answer_date.response.strftime("%m/%d/%Y")
+        - if answer.answer_open.present?
+          = answer.answer_open.response

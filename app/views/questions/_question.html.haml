@@ -35,6 +35,8 @@
   - if ["open", "date"].include? question.question_type.prefix
     %li.list-group-item
       = link_to "Show answer responses", [question, :answers], remote: true
+      = link_to "Export Excel", question_answers_path(question, format: "xls"),
+        class: "btn btn-xs btn-success pull-right"
 
 .text-center
   - if ["single", "select"].include? question.question_type.prefix

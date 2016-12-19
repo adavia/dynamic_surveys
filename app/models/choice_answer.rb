@@ -4,5 +4,4 @@ class ChoiceAnswer < ApplicationRecord
   belongs_to :answer_multiple
 
   validates :choice, presence: true
-  validates :answer, presence: true
 end

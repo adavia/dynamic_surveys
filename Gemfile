@@ -26,6 +26,8 @@ gem 'fog'
 gem 'mini_magick'
 # User access authorization
 gem 'pundit'
+# Use PDF generator
+gem 'prawn'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views

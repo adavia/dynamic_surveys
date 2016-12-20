@@ -14,6 +14,8 @@
       - if policy(@survey).update?
         %li
           = link_to "Edit survey", [:edit, @customer, @survey]
+      %li
+        = link_to "Generate PDF", customer_survey_path(@customer, @survey, format: :pdf)
       - if policy(@survey).archive?
         %li
           = link_to "Archive survey", [:archive, @survey.customer, @survey],

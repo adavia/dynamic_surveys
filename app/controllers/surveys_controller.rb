@@ -15,6 +15,13 @@ class SurveysController < ApplicationController
     authorize @survey, :show?
     respond_to do |format|
       format.html {}
+      format.pdf do
+        pdf = SurveyPdf.new(@survey, view_context)
+        send_data pdf.render,
+          filename: "report_#{@survey.created_at.strftime('%m/%d/%Y')}.pdf",
+          type: "application/pdf",
+          disposition: "inline"
+      end
       format.json { render json: @survey }
     end
   end

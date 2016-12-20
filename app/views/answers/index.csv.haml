@@ -5,4 +5,4 @@
   - answers = answer.answer_date.response.strftime("%m/%d/%Y") if answer.answer_date.present?
   - answers = answer.answer_open.response if answer.answer_open.present?
   = CSV.generate_line([answer.created_at.strftime("%m/%d/%Y at %I:%M%p"),
-    answer.submission.user.email, answers], row_sep: "\n")
+    answer.submission.user.email, answers]).delete_if { |row| row.to_hash.values.all?(&:blank?) }

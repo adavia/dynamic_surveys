@@ -34,9 +34,14 @@
       Average rating
   - if ["open", "date"].include? question.question_type.prefix
     %li.list-group-item
-      = link_to "Show answer responses", [question, :answers], remote: true
-      = link_to "Export Excel", question_answers_path(question, format: "xls"),
-        class: "btn btn-xs btn-success pull-right"
+      .clearfix
+        = link_to "Show answer responses", [question, :answers],
+          remote: true, class: "pull-left"
+        .export-links
+          = link_to "Export CSV", question_answers_path(question, format: "csv"),
+            class: "btn btn-xs btn-primary"
+          = link_to "Export Excel", question_answers_path(question, format: "xls"),
+            class: "btn btn-xs btn-success"
 
 .text-center
   - if ["single", "select"].include? question.question_type.prefix

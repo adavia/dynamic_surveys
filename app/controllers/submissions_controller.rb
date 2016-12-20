@@ -7,6 +7,10 @@ class SubmissionsController < ApplicationController
     @submissions = policy_scope(@survey.submissions)
     respond_to do |format|
       format.html {}
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"submissions-#{Date.today}.csv\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
       format.xls  {}
       format.js   {}
       format.json { render json: @submissions }

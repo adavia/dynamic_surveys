@@ -1,0 +1,5 @@
+- headers = ['Submission date', 'Survey name', 'User']
+= CSV.generate_line headers
+- @submissions.each do |submission|
+  = CSV.generate_line([submission.created_at.strftime("%m/%d/%Y at %I:%M%p"),
+    submission.survey.name, submission.user.email])

@@ -35,9 +35,14 @@
         = @survey.questions_count
       Questions
     %li.list-group-item
-      = link_to "#{@survey.submissions.size} Submissions", [@survey, :submissions], remote: true
-      = link_to "Export Excel", survey_submissions_path(@survey, format: "xls"),
-        class: "btn btn-xs btn-success pull-right"
+      .clearfix
+        = link_to "#{@survey.submissions.size} Submissions",
+          [@survey, :submissions], remote: true, class: "pull-left"
+        .export-links
+          = link_to "Export CSV", survey_submissions_path(@survey, format: "csv"),
+            class: "btn btn-xs btn-primary"
+          = link_to "Export Excel", survey_submissions_path(@survey, format: "xls"),
+            class: "btn btn-xs btn-success"
 
   .row
     .col-md-4

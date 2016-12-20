@@ -6,6 +6,10 @@ class AnswersController < ApplicationController
     @answers = policy_scope(@question.answers)
     respond_to do |format|
       format.html {}
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"answers-#{Date.today}.csv\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
       format.xls  {}
       format.js   {}
       format.json { render json: @answers }

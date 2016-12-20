@@ -1,5 +1,5 @@
 - headers = ['Answered on', 'User', 'Answer response']
-= CSV.generate_line headers
+= CSV.generate_line headers, :row_sep => ?\t, :quote_char => ?\
 - @answers.each do |answer|
 
   - answers = answer.answer_date.response.strftime("%m/%d/%Y") if answer.answer_date.present?

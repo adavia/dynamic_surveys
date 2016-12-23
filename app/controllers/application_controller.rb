@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :not_authorized
 
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+
   protected
 
   # Confirms a logged-in user.
@@ -32,5 +34,10 @@ class ApplicationController < ActionController::Base
   def not_authorized
     redirect_to customers_url
     flash[:info] = "You are not allowed to do that."
+  end
+
+  def record_not_found
+    redirect_to customers_url
+    flash[:info] = "The page you have requested does not exists."
   end
 end

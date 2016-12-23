@@ -1,6 +1,6 @@
 - content_for :sub_nav do
   .col-md-5
-    %h1 Manage the following customers
+    %h1 Survey search results
   .col-md-3
     %ul.list-inline
       %li
@@ -8,12 +8,13 @@
       - if is_admin?
         %li
           = link_to "NEW CUSTOMER", [:new, :admin, current_user, :customer]
+
 .container
-  - @customers.each_slice(2) do |(b1, b2)|
+  - @surveys.each_slice(2) do |(b1, b2)|
     .row
       .col-md-6
         = render b1
       .col-md-6
         = render b2 if b2
     .text-center
-      = will_paginate @customers
+      = will_paginate @surveys

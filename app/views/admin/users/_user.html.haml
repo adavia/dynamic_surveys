@@ -1,3 +1,14 @@
-.panel.panel-default
-  .panel-body
-    = link_to user, [:admin, user]
+.user-panel
+  .media
+    .media-left
+      - if user.image.present?
+        = link_to image_tag(user.image.url(:thumb),
+          class: "img-responsive img-circle", width: 80), user
+      - else
+        = link_to image_tag("default_user",
+          class: "img-responsive img-circle", width: 80), user
+    .media-body
+      %h4.text-light
+        = link_to user, [:admin, user]
+      %small
+        = user.email

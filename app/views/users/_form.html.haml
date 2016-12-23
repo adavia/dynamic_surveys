@@ -1,18 +1,17 @@
 = simple_form_for @user do |f|
-  = f.input :name, placeholder: "Name"
-  = f.input :last_name, placeholder: "Last Name"
-  = f.input :email, placeholder: "Email"
-  = f.input :password, placeholder: "Password"
-  = f.input :password_confirmation, placeholder: "Password Confirmation"
-  - if @user.persisted?
-    .image-fields
-      .row
-        .col-xs-3
-          .file-upload
-            %span Upload an image for your profile
-            = f.file_field :image, label: false, class: "upload"
-            = f.input :image_cache, as: :hidden
-        .col-xs-5
-          %h3.file-name.m-t-0
-            = file_name f.object.image
-  = f.button :submit, "SIGN UP", class: "btn-default btn-block btn-main"
+  = f.input :name, label: false, placeholder: "Name"
+  = f.input :last_name, label: false, placeholder: "Last Name"
+  = f.input :email, label: false, placeholder: "Email"
+  = f.input :password, label: false, placeholder: "Password"
+  = f.input :password_confirmation, label: false, placeholder: "Password Confirmation"
+  .image-fields
+    .row
+      .col-xs-3
+        .file-upload
+          %span Upload an image for your profile
+          = f.file_field :image, label: false, class: "upload"
+          = f.input :image_cache, as: :hidden
+      .col-xs-5
+        %small.file-name.m-t-0
+          = file_name f.object.image
+  = f.button :submit, "Submit user", class: "btn-default btn-block btn-main"

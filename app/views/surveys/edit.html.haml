@@ -1,4 +1,21 @@
-%h1.text-center.m-t-0
-  Edit #{@survey.name} survey
-.survey-form
-  = render "form"
+- content_for :sub_nav do
+  .col-md-5
+    %h1 #{@survey.name} - edition
+  .col-md-3
+    %ul.list-inline
+      - if policy(Survey.new(customer: @customer)).create?
+        %li
+          = link_to "CREATE NEW SURVEY", [:new, @customer, :survey],
+            class: "btn btn-sm btn-default"
+      %li
+        = link_to "#{@customer.surveys_count} surveys total", [@customer, :surveys]
+.container
+  .row
+    .col-md-8.col-md-offset-2
+      .default-panel
+        %h3
+          Complete the following fields to edit this survey
+        - if @survey.errors.any?
+          .alert.alert-danger
+            = @survey.errors[:questions][0]
+        = render "form"

@@ -18,3 +18,11 @@
                 User
           %tbody
             = render @submissions
+      .modal-footer
+        - unless @submissions.next_page.nil?
+          = link_to fa_icon("undo", text: "LOAD MORE SUBMISSIONS"),
+          survey_submissions_path(@survey, page: @submissions.next_page),
+          remote: true, title: "Load more submissions!",
+          data: { "disable-with": "loading.." },
+          class: "btn btn-sm btn-default text-center", id: "show_more"
+        %button.btn.btn-sm.btn-primary{"data-dismiss": "modal", type: "button"} Close

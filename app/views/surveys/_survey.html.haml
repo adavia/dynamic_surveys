@@ -1,29 +1,29 @@
-.panel-piled
+.survey-panel
   .row
-    .col-md-9
-      %h2
-        - if policy(survey).show?
-          = link_to survey.name, [survey.customer, survey]
-          %small
-            = survey.customer.name
-        - else
-          = survey.name
-          %small
-            = survey.customer.name
+    .col-md-8
+      %h3
+        = survey.name
+      %small
+        = survey.created_at.strftime("Created on %b %d, %Y")
       %p
         = survey.description
-    .col-md-3
-      .dropdown
+      - if policy(survey).show?
+        = link_to "SHOW SURVEY INFORMATION", [survey.customer, survey]
+    .col-md-4
+      .dropdown.pull-right
         %a.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true",
         "data-toggle": "dropdown", href: "#", role: "button"}
-          %h2
-            %strong
+          %h4
+            %span.question-number
               = survey.questions_count
-              questions
+            questions
             %span.caret
         %ul.dropdown-menu
           %li
             = link_to "Submit this survey", [:new, survey, :submission]
+          - if policy(survey).update?
+            %li
+              = link_to "Edit survey", [:edit, survey.customer, survey]
           - if policy(survey).archive?
             %li
               = link_to "Archive survey", [:archive, survey.customer, survey],

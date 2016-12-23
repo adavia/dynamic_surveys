@@ -1,30 +1,43 @@
-%h1.text-center.m-t-0
-  #{@survey.customer.name} Survey
-  %small
-    = @survey.name
-.panel-piled
-  .dropdown.pull-right
-    %a.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true",
-    "data-toggle": "dropdown", href: "#", role: "button"}
-      = fa_icon "chevron-down"
-    %ul.dropdown-menu
-      %li
-        = link_to "Surveys list", [@survey.customer, :surveys]
+- content_for :sub_nav do
+  .col-md-5
+    %h1
+      Survey submission
+  .col-md-3
+    %ul.list-inline
       - if policy(@survey).show?
         %li
-          = link_to "Preview this survey", [@survey.customer, @survey]
-      - if policy(@survey).update?
-        %li
-          = link_to "Edit survey", [:edit, @survey.customer, @survey]
-  %h1
-    = @survey.name
-  %p
-    = @survey.description
+          = link_to "PREVIEW THIS SURVEY", [@survey.customer, @survey],
+            class: "btn btn-sm btn-primary"
+      %li
+        = link_to "#{@survey.customer.surveys_count} surveys total",
+          [@survey.customer, :surveys]
 
-  - if @submission.errors.any?
-    .alert.alert-danger
-      Something went wrong during this submission. Check the errors below.
-  %h2
-    Questions
-  = render "form"
+.container
+  .row
+    .col-md-8.col-md-offset-2
+      .panel-piled
+        .dropdown.pull-right
+          .dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true",
+          "data-toggle": "dropdown", href: "#", role: "button"}
+            = fa_icon "chevron-down"
+          %ul.dropdown-menu
+            %li
+              = link_to "Surveys list", [@survey.customer, :surveys]
+            - if policy(@survey).show?
+              %li
+                = link_to "Preview this survey", [@survey.customer, @survey]
+            - if policy(@survey).update?
+              %li
+                = link_to "Edit survey", [:edit, @survey.customer, @survey]
+        %h1
+          = @survey.name
+        %p
+          = @survey.description
+
+        - if @submission.errors.any?
+          .alert.alert-danger
+            Something went wrong during this submission. Check the errors below.
+        %h2
+          Questions
+        = render "form"
 

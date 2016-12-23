@@ -2,31 +2,31 @@
   = question.title
 
 %ul.list-group
-  %li.list-group-item.list-group-item-warning
-    %span.badge
+  %li.list-group-item
+    %span.counter.pull-right
       = question.answers.size
     Answers
   - if ["single", "select"].include? question.question_type.prefix
     - @choice = question.answers.choice_counter.each do |answer|
       %li.list-group-item
-        %span.badge
+        %span.counter.pull-right
           = answer[1]
         = answer[0]
   - if question.question_type.prefix == "image"
     - @image = question.answers.image_counter.each do |answer|
       %li.list-group-item
-        %span.badge
+        %span.counter.pull-right
           = answer[1]
         = answer[0]
   - if question.question_type.prefix == "multiple"
     - @multiple = question.answers.multiple_choice_counter.each do |answer|
       %li.list-group-item
-        %span.badge
+        %span.counter.pull-right
           = answer[1]
         = answer[0]
   - if question.question_type.prefix == "raiting"
     %li.list-group-item
-      %span.badge
+      %span.counter.pull-right
         - if question.answers.any?
           = number_with_precision(question.answers.rating_average, precision: 2)
         - else
@@ -36,7 +36,7 @@
     %li.list-group-item
       .clearfix
         = link_to "Show answer responses", [question, :answers],
-          remote: true, class: "pull-left"
+          remote: true, class: "pull-left light-link"
         .export-links
           = link_to "Export CSV", question_answers_path(question, format: "csv"),
             class: "btn btn-xs btn-primary"

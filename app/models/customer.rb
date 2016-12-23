@@ -6,7 +6,9 @@ class Customer < ApplicationRecord
 
   validates :name, presence: true, length: { minimum: 2, maximum: 250 }
 
-  scope :excluding_archived, -> { where(archived_at: nil) }
+  scope :excluding_archived, -> { where(archived_at: nil).order(created_at: :desc) }
+
+  self.per_page = 12
 
   def has_member?(user)
     roles.exists?(user_id: user)

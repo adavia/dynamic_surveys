@@ -3,7 +3,7 @@ class Admin::UsersController < Admin::ApplicationController
   before_action :set_customers, only: [:new, :create, :edit, :update]
 
   def index
-    @users = User.excluding_archived.order(:email)
+    @users = User.excluding_archived.paginate(page: params[:page])
   end
 
   def show

@@ -15,12 +15,22 @@ class User < ApplicationRecord
 
   has_secure_password
 
-  scope :excluding_archived, -> { where(archived_at: nil) }
+  scope :excluding_archived, -> { where(archived_at: nil).order(created_at: :desc) }
+
+  self.per_page = 12
 
   mount_uploader :image, ImageUploader
 
   def to_s
-    "#{admin? ? "Admin" : "User"} - #{name} #{last_name}"
+    "#{name} #{last_name}"
+  end
+
+  def admin_text
+    if admin?
+      "admin"
+    else
+      "user"
+    end
   end
 
   # Archived user

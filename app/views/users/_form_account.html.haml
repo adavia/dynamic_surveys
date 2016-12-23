@@ -1,0 +1,7 @@
+= simple_form_for @user do |f|
+  = f.input :name, placeholder: "Name"
+  = f.input :last_name, placeholder: "Last Name"
+  = f.input :email, placeholder: "Email"
+  = f.input :password, placeholder: "Password"
+  = f.input :password_confirmation, placeholder: "Password Confirmation"
+  = f.button :submit, "SIGN UP", class: "btn-default btn-block btn-main"

@@ -1,27 +1,42 @@
-%h1.text-center.m-t-0
-  = link_to "#{@user} Profile", [:edit, :admin, @user]
+- content_for :sub_nav do
+  .col-md-6
+    %h1 #{@user} profile details
+  .col-md-2
+    %ul.list-inline
+      %li
+        = link_to "All USERS", [:admin, :users]
+      %li
+        = link_to "NEW USER", [:new, :admin, :user]
 
-%p.text-center
-  = @user.email
+.container
+  .row
+    .col-md-8.col-md-offset-2
+      .panel-piled
+        %h1.text-center
+          = link_to "#{@user} Profile", [:edit, :admin, @user]
 
-- unless @user == current_user
-  %h3.text-center
-    = link_to "Archive User", [:archive, :admin, @user], method: :patch,
-      data: { confirm: "Are you sure you want to archive this user?"}
+        %p.text-center
+          = @user.email
+
+        - unless @user == current_user
+          %h3.text-center
+            = link_to "Archive User", [:archive, :admin, @user], method: :patch,
+              data: { confirm: "Are you sure you want to archive this user?"}
 
 
-%h2.text-center
-  Assigned Roles
+        %h2.text-center.m-b-1
+          Assigned Roles
 
-.row
-  .col-md-4.col-md-offset-4
-    - if @user.roles.any?
-      %ul.list-group
-        - @user.roles.each do |role|
-          %li.list-group-item
-            .span.badge
-              #{role.role.titleize}
-            #{role.customer.name}
-    - else
-      %p.text-center
-        This user has no roles.
+        .row
+          .col-md-4.col-md-offset-4
+            - if @user.roles.any?
+              %ul.list-group
+                - @user.roles.each do |role|
+                  %li.list-group-item
+                    .span.counter.pull-right
+                      #{role.role.titleize}
+                    #{role.customer.name}
+            - else
+              %p.text-center
+                This user has no roles.
+

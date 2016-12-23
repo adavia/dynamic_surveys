@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   end
 
   resources :surveys, only: [] do
+    collection do
+      get :search
+    end
     resources :submissions, only: [:index, :show, :new, :create]
   end
 
@@ -40,7 +43,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :sessions, only: :create
 
-    resources :customers, only: :index do
+    resources :customers, only: [] do
       resources :surveys, only: [:index, :show]
     end
 

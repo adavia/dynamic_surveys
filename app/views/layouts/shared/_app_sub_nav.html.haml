@@ -1,0 +1,19 @@
+%header
+  .header-content
+    .row
+      .col-md-4
+        .media
+          .media-left
+            - if current_user.image.present?
+              = link_to image_tag(current_user.image.url(:thumb),
+                class: "img-responsive img-circle", width: 80), current_user
+            - else
+              = link_to image_tag("default_user",
+                class: "img-responsive img-circle", width: 80), current_user
+          .media-body
+            %h4.text-light
+              Welcome #{current_user}
+            %small
+              Signed in as #{current_user.admin_text}
+      = yield :sub_nav
+

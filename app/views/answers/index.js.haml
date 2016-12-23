@@ -1,1 +1,11 @@
-$("#{  j render "index" }").modal();
+var list = $("#answers-list");
+if (!list.length) { $("#{  j render "index" }").modal(); }
+
+- if params[:page].present?
+  list.find("tbody").append('#{ j render @answers }');
+  - if @answers.total_pages == @answers.current_page
+    list.find("#show_more").hide();
+  - else
+    list.find("#show_more").attr("href", "#{ question_answers_path(@question, page: @answers.current_page + 1)}");
+- else
+  list.find("#show_more").hide();

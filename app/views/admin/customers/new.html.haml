@@ -1,3 +1,17 @@
-%h1.text-center.m-t-0 Create a new customer
-.customer-form
-  = render "form"
+- content_for :sub_nav do
+  .col-md-5
+    %h1 Create a new customer
+  .col-md-3
+    %ul.list-inline
+      %li
+        = link_to "All CUSTOMERS", customers_path
+      - if is_admin?
+        %li
+          = link_to "NEW CUSTOMER", [:new, :admin, current_user, :customer]
+.container
+  .row
+    .col-md-8.col-md-offset-2
+      .default-panel
+        %h3
+          Complete the following fields to add a new customer
+        = render "form"

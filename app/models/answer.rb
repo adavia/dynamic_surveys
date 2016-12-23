@@ -27,4 +27,6 @@ class Answer < ApplicationRecord
   scope :image_counter,           -> { joins(answer_image: :image).group("images.file").count }
   scope :choice_counter,          -> { joins(choice_answer: :choice).group("choices.title").count }
   scope :multiple_choice_counter, -> { joins(answer_multiple: [:choices]).group("choices.title").count }
+
+  self.per_page = 10
 end

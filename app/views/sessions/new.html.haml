@@ -1,6 +1,5 @@
 %h1.text-center Access your account
 %p.text-center.text-light Use your credentials to access the app
-= render "layouts/shared/alert_messages"
 = simple_form_for :session, { url: sessions_path } do |f|
   = f.input :email, placeholder: "Email"
   = f.input :password, placeholder: "Password"

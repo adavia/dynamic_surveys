@@ -1,4 +1,21 @@
-%h1.text-center.m-t-0
-  #{@customer.name} Surveys
-= render "layouts/shared/alert_messages"
-= render @surveys
+- content_for :sub_nav do
+  .col-md-5
+    %h1 #{@customer.name} surveys
+  .col-md-3
+    %ul.list-inline
+      - if policy(Survey.new(customer: @customer)).create?
+        %li
+          = link_to "CREATE NEW SURVEY", [:new, @customer, :survey],
+            class: "btn btn-sm btn-default"
+      %li
+        = link_to "#{@customer.surveys_count} surveys total", [@customer, :surveys]
+
+.container
+  - @surveys.each_slice(2) do |(b1, b2)|
+    .row
+      .col-md-6
+        = render b1
+      .col-md-6
+        = render b2 if b2
+    .text-center
+      = will_paginate @surveys

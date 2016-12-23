@@ -11,6 +11,8 @@ class Submission < ApplicationRecord
 
   validate :must_complete_all_answers
 
+  self.per_page = 10
+
   def must_complete_all_answers
     if questions.any? && answers.empty?
       errors.add(:base, "You must complete all answers before submitting the survey!")

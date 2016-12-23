@@ -3,11 +3,20 @@ class AnswersController < ApplicationController
   before_action :set_question, only: :index
 
   def index
-    @answers = policy_scope(@question.answers)
+    if request.format == "csv" || request.format == "xls"
+      @answers = policy_scope(@question.answers
+      .includes([:answer_open, :answer_date], submission: :user)
+      .order(created_at: :desc))
+    else
+      @answers = policy_scope(@question.answers
+      .includes([:answer_open, :answer_date], submission: :user)
+      .paginate(page: params[:page])
+      .order(created_at: :desc))
+    end
     respond_to do |format|
       format.html {}
       format.csv do
-        headers['Content-Disposition'] = "attachment; filename=\"answers-#{Date.today}.csv\""
+        headers['Content-Disposition'] = "attachment; filename=\"answers-#{@question.id}.csv\""
         headers['Content-Type'] ||= 'text/csv'
       end
       format.xls  {}
@@ -19,7 +28,6 @@ class AnswersController < ApplicationController
   private
 
   def set_question
-    @question = Question.includes(answers: [:answer_open, :answer_date,
-      submission: :user]).find(params[:question_id])
+    @question = Question.find(params[:question_id])
   end
 end

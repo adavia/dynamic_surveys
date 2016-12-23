@@ -1,27 +1,113 @@
-/* Colors */
+// Colors
+
+.text-light {
+  color: #9f9f9f;
+}
+
+// Progress bar
 
 .turbolinks-progress-bar {
   background-color: #f72969;
 }
 
+// Alert notifications
+
 .notify {
-  padding: 15px;
-  margin-bottom: 20px;
-  border-left: 6px solid #ccc;
+  color: #FFF;
+  position: absolute;
+  z-index: 101;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  line-height: 2.5;
+  overflow: hidden;
+  -webkit-box-shadow: 0 0 5px black;
+  -moz-box-shadow:    0 0 5px black;
+  box-shadow:         0 0 5px black;
+}
+
+@-webkit-keyframes slideDown {
+  0%, 100% { -webkit-transform: translateY(-50px); }
+  0%, 90% { -webkit-transform: translateY(0px); }
+}
+@-moz-keyframes slideDown {
+  0%, 100% { -moz-transform: translateY(-50px); }
+  10%, 90% { -moz-transform: translateY(0px); }
+}
+
+.cssanimations.csstransforms .notify {
+  -webkit-transform: translateY(-50px);
+  -webkit-animation: slideDown 3.0s ease forwards;
+  -moz-transform:    translateY(-50px);
+  -moz-animation:    slideDown 3.0s ease forwards;
 }
 
 .notify-danger {
-  border-color: #f72969;
-  color: #f72969;
+  background-color: #f72969;
+}
+
+.alert-danger {
+  color: #FFF;
 }
 
 .notify-success {
-  border-color: #8cc474;
-  color: #8cc474;
+  background-color: #8cc474;
 }
 
 .notify-info {
-  border-color: #11a9cc;
-  color: #11a9cc;
+  background-color: #6d26ff;
+}
+
+// Forms
+
+textarea.form-control:focus,
+select.form-control:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus, {
+  box-shadow: none;
+ -webkit-box-shadow: none;
+ -moz-box-shadow: none;
+ -moz-transition: none;
+ -webkit-transition: none;
+}
+
+form label {
+  font-weight: normal;
+}
+
+// Modals
+
+.modal-dialog{
+  overflow-y: initial !important
+}
+.modal-body{
+  height: 350px;
+  overflow-y: auto;
+}
+
+// General
+
+a {
+  color: #f72969;
+  &:hover {
+    text-decoration: none;
+    color: #C52054;
+  }
+  &:focus {
+    text-decoration: none;
+  }
 }
 

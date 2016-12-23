@@ -1,3 +1,16 @@
-%h1.text-center.m-t-0 Create a new user account!
-.user-admin-form
-  = render "form", user: @user, customers: @customers
+- content_for :sub_nav do
+  .col-md-6
+    %h1 Create a new user account
+  .col-md-2
+    %ul.list-inline
+      %li
+        = link_to "All USERS", [:admin, :users]
+      %li
+        = link_to "NEW USER", [:new, :admin, :user]
+.container
+  .row
+    .col-md-8.col-md-offset-2
+      .default-panel
+        %h3
+          Complete the following fields to add a new user
+        = render "form", user: @user, customers: @customers

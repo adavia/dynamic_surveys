@@ -1,3 +1,20 @@
-%h1.text-center.m-t-0 Manage the following users
-= render "layouts/shared/alert_messages"
-= render @users
+- content_for :sub_nav do
+  .col-md-6
+    %h1 Manage the following users
+  .col-md-2
+    %ul.list-inline
+      - if is_admin?
+        %li
+          = link_to "All USERS", [:admin, :users]
+        %li
+          = link_to "NEW USER", [:new, :admin, :user]
+
+.container
+  - @users.each_slice(2) do |(b1, b2)|
+    .row
+      .col-md-6
+        = render b1
+      .col-md-6
+        = render b2 if b2
+    .text-center
+      = will_paginate @users

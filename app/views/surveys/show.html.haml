@@ -1,76 +1,88 @@
-%h1.text-center.m-t-0
-  #{@survey.customer.name} Survey - Structure
-= render "layouts/shared/alert_messages"
-.panel-piled
-  .dropdown.pull-right
-    %a.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true",
-    "data-toggle": "dropdown", href: "#", role: "button"}
-      = fa_icon "chevron-down"
-    %ul.dropdown-menu
+- content_for :sub_nav do
+  .col-md-5
+    %h1 #{@survey.customer.name} Survey - Structure
+  .col-md-3
+    %ul.list-inline
       %li
-        = link_to "Submit this survey", [:new, @survey, :submission]
+        = link_to "SUBMIT THIS SURVEY", [:new, @survey, :submission],
+          class: "btn btn-sm btn-primary"
       %li
-        = link_to "Surveys list", [@survey.customer, :surveys]
-      - if policy(@survey).update?
-        %li
-          = link_to "Edit survey", [:edit, @customer, @survey]
-      %li
-        = link_to "Generate PDF", customer_survey_path(@customer, @survey, format: :pdf)
-      - if policy(@survey).archive?
-        %li
-          = link_to "Archive survey", [:archive, @survey.customer, @survey],
-            method: :patch,
-            data: { confirm: "Are you sure you want to archive this survey?" }
-  %h1
-    = @survey.name
-    %small
-      = @survey.created_at.strftime("Created on %m/%d/%Y at %I:%M%p")
-  %p
-    = @survey.description
+        = link_to "#{@customer.surveys_count} surveys total", [@customer, :surveys]
 
-  %h2
-    Statistics
-
-  %ul.list-group.m-t-1.m-b-0
-    %li.list-group-item
-      %span.badge
-        = @survey.questions_count
-      Questions
-    %li.list-group-item
-      .clearfix
-        = link_to "#{@survey.submissions.size} Submissions",
-          [@survey, :submissions], remote: true, class: "pull-left"
-        .export-links
-          = link_to "Export CSV", survey_submissions_path(@survey, format: "csv"),
-            class: "btn btn-xs btn-primary"
-          = link_to "Export Excel", survey_submissions_path(@survey, format: "xls"),
-            class: "btn btn-xs btn-success"
-
+.container
   .row
-    .col-md-4
-      %h3
-        Type of questions
+    .col-md-8.col-md-offset-2
+      .panel-piled
+        .dropdown.pull-right
+          .dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true",
+          "data-toggle": "dropdown", href: "#", role: "button"}
+            = fa_icon "chevron-down"
+          %ul.dropdown-menu
+            %li
+              = link_to "Submit this survey", [:new, @survey, :submission]
+            %li
+              = link_to "Surveys list", [@survey.customer, :surveys]
+            - if policy(@survey).update?
+              %li
+                = link_to "Edit survey", [:edit, @customer, @survey]
+            %li
+              = link_to "Generate PDF", customer_survey_path(@customer, @survey, format: :pdf)
+            - if policy(@survey).archive?
+              %li
+                = link_to "Archive survey", [:archive, @survey.customer, @survey],
+                  method: :patch,
+                  data: { confirm: "Are you sure you want to archive this survey?" }
 
-      %ol.ordered-list
-        - @survey.questions.each do |question|
-          %li
-            = question.question_type.name
-            - if question.choices.any?
-              %span.badge.pull-right
-                = question.choices.size
-              %ol.ordered-list
-                - question.choices.each do |choice|
-                  %li
-                    = choice.title
-            - if question.images.any?
-              %span.badge.pull-right
-                = question.images.size
+        %h1
+          = @survey.name
+          %small
+            = @survey.created_at.strftime("Created on %m/%d/%Y at %I:%M%p")
+        %p
+          = @survey.description
 
-    .col-md-8
-      %h3.text-center
-        Results by type
-        = pie_chart @survey.questions.group_types
+        %h2
+          Statistics
 
-  = render @survey.questions
+        %ul.list-group.m-t-1.m-b-0
+          %li.list-group-item
+            %span.counter.pull-right
+              = @survey.questions_count
+            Questions
+          %li.list-group-item
+            .clearfix
+              = link_to "#{@survey.submissions.size} Submissions",
+                [@survey, :submissions], remote: true, class: "pull-left light-link"
+              .export-links
+                = link_to "Export CSV", survey_submissions_path(@survey, format: "csv"),
+                  class: "btn btn-xs btn-primary"
+                = link_to "Export Excel", survey_submissions_path(@survey, format: "xls"),
+                  class: "btn btn-xs btn-success"
+
+        .row
+          .col-md-4
+            %h3
+              Type of questions
+
+            %ol.ordered-list
+              - @survey.questions.each do |question|
+                %li
+                  = question.question_type.name
+                  - if question.choices.any?
+                    %span.badge.pull-right
+                      = question.choices.size
+                    %ol.ordered-list
+                      - question.choices.each do |choice|
+                        %li
+                          = choice.title
+                  - if question.images.any?
+                    %span.badge.pull-right
+                      = question.images.size
+
+          .col-md-8
+            %h3.text-center
+              Results by type
+              = pie_chart @survey.questions.group_types
+
+        = render @survey.questions
 
 

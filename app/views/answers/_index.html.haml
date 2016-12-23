@@ -18,3 +18,11 @@
                 Answer response
           %tbody
             = render @answers
+      .modal-footer
+        - unless @answers.next_page.nil?
+          = link_to fa_icon("undo", text: "LOAD MORE ANSWERS"),
+          question_answers_path(@question, page: @answers.next_page),
+          remote: true, title: "Load more answers!",
+          data: { "disable-with": "loading.." },
+          class: "btn btn-sm btn-default text-center", id: "show_more"
+        %button.btn.btn-sm.btn-primary{"data-dismiss": "modal", type: "button"} Close

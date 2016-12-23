@@ -4,11 +4,18 @@ class SubmissionsController < ApplicationController
   before_action :set_submission, only: :show
 
   def index
-    @submissions = policy_scope(@survey.submissions)
+    if request.format == "csv" || request.format == "xls"
+      @submissions = policy_scope(@survey.submissions.includes(:user)
+        .order(created_at: :desc))
+    else
+      @submissions = policy_scope(@survey.submissions.includes(:user)
+        .paginate(page: params[:page])
+        .order(created_at: :desc))
+    end
     respond_to do |format|
       format.html {}
       format.csv do
-        headers['Content-Disposition'] = "attachment; filename=\"submissions-#{Date.today}.csv\""
+        headers['Content-Disposition'] = "attachment; filename=\"submissions-#{@survey.id}.csv\""
         headers['Content-Type'] ||= 'text/csv'
       end
       format.xls  {}
@@ -73,11 +80,11 @@ class SubmissionsController < ApplicationController
 
   def set_survey
     @survey = Survey.includes(questions: [:choices, :images,
-      :question_type], submissions: :user).find(params[:survey_id])
+      :question_type]).find(params[:survey_id])
   end
 
   def set_submission
-    @submission = Submission.includes(answers: [:answer_open, :answer_date,
+    @submission = Submission.includes(survey: :customer, answers: [:answer_open, :answer_date,
       :answer_raiting, :answer_multiple, :answer_image,
       :choice_answer, :question]).find(params[:id])
   end

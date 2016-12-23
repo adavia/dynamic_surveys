@@ -4,7 +4,8 @@ class SurveysController < ApplicationController
   before_action :set_survey, only: [:show, :edit, :update, :archive]
 
   def index
-    @surveys = policy_scope(@customer.surveys.excluding_archived.order(:name))
+    @surveys = policy_scope(@customer.surveys.excluding_archived
+      .paginate(page: params[:page]))
     respond_to do |format|
       format.html {}
       format.json { render json: @surveys }
@@ -85,6 +86,17 @@ class SurveysController < ApplicationController
       format.html { redirect_to [@customer, :surveys],
           flash: { success: "The survey has been archived successfully."}}
       format.js {}
+    end
+  end
+
+  def search
+    @surveys = policy_scope(Survey
+      .includes(questions: [:choices, :images, :question_type, :answers])
+      .search(params[:search]).excluding_archived
+      .paginate(page: params[:page]))
+    respond_to do |format|
+      format.html {}
+      format.json { render json: @surveys }
     end
   end
 

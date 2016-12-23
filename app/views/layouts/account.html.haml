@@ -10,13 +10,16 @@
         = yield(:title)
       - else
         Social Surveys
+    = favicon_link_tag
     = csrf_meta_tags
     = stylesheet_link_tag 'account',
       media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application',
       'data-turbolinks-track': 'reload'
+    = javascript_include_tag :modernizr
 
   %body{class: page_class}
+    = render "layouts/shared/alert_messages"
     = render "layouts/shared/account_nav_bar"
     %section
       .container

@@ -29,7 +29,7 @@ module ApplicationHelper
     if !image.blank?
       image_tag(image.url(:thumb), class: "img-responsive center-block img-thumbnail")
     else
-      image_tag("default_user.png", class: "img-responsive center-block")
+      image_tag("default_user.png", class: "img-responsive center-block", size: "150x150")
     end
   end
 

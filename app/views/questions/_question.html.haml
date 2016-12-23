@@ -4,7 +4,7 @@
 %ul.list-group
   %li.list-group-item
     %span.counter.pull-right
-      = question.answers.size
+      = question.answers_count
     Answers
   - if ["single", "select"].include? question.question_type.prefix
     - @choice = question.answers.choice_counter.each do |answer|

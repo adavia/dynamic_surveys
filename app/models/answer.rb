@@ -1,6 +1,6 @@
 class Answer < ApplicationRecord
   belongs_to :submission
-  belongs_to :question
+  belongs_to :question, counter_cache: true
 
   has_one :answer_date, dependent: :destroy
   has_one :answer_raiting, dependent: :destroy

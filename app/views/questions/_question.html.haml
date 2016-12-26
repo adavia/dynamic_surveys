@@ -45,8 +45,11 @@
 
 .text-center
   - if ["single", "select"].include? question.question_type.prefix
-    = pie_chart @choice
+    - if @choice.any?
+      = pie_chart @choice
   - if question.question_type.prefix == "multiple"
-    = pie_chart @multiple
+    - if @multiple.any?
+      = pie_chart @multiple
   - if question.question_type.prefix == "image"
-    = pie_chart @image
+    - if @image.any?
+      = pie_chart @image

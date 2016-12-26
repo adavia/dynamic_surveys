@@ -30,6 +30,10 @@ gem 'mini_magick'
 gem 'pundit'
 # Use PDF generator
 gem 'prawn'
+# PDF table generator
+gem 'prawn-table'
+# PDF charts
+gem 'squid'
 # Use pagination
 gem 'will_paginate'
 # Use Uglifier as compressor for JavaScript assets

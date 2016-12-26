@@ -41,3 +41,7 @@
           Questions
         = render "form"
 
+- if @survey.avatar.present?
+  :css
+    body { background: url(#{@survey.avatar.url}); }
+

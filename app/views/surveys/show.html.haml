@@ -70,10 +70,6 @@
                   - if question.choices.any?
                     %span.badge.pull-right
                       = question.choices.size
-                    %ol.ordered-list
-                      - question.choices.each do |choice|
-                        %li
-                          = choice.title
                   - if question.images.any?
                     %span.badge.pull-right
                       = question.images.size

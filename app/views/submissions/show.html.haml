@@ -48,7 +48,8 @@
           - if answer.answer_image.present?
             %p
               Response:
-              = answer.answer_image.image
+            = image_tag answer.answer_image.image.file.url(:thumb),
+              class: "img-responsive", width: 80
           - if answer.choice_answer.present?
             %p
               Response:

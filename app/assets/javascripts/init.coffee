@@ -16,3 +16,6 @@ $(document).on "click", "[data-behavior~=datalink]", (event) ->
   init = new Init @
   init.navigate_to()
   event.preventDefault()
+
+$(document).on "hidden.bs.modal", ".modal", (event) ->
+  $(@).remove()

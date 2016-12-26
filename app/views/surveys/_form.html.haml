@@ -1,4 +1,8 @@
 = simple_form_for [@customer, @survey] do |f|
+  - if @survey.errors.any?
+    .alert.alert-danger
+      = @survey.errors[:questions][0] || @survey.errors[:avatar][0]
+
   = f.input :name, label: false, placeholder: "Name"
   = f.input :description, label: false, input_html: { rows: 4 }, placeholder: "Description"
   .image-fields

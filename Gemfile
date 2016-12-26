@@ -20,6 +20,8 @@ gem 'font-awesome-rails', '~> 4.3'
 gem 'simple_form'
 # Use File Uploading
 gem 'carrierwave', '~> 0.10.0'
+# File validation
+gem 'file_validators'
 # User fog to manage cloud based storage
 gem 'fog'
 # Image manipulation

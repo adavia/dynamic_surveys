@@ -15,7 +15,4 @@
       .default-panel
         %h3
           Complete the following fields to edit this survey
-        - if @survey.errors.any?
-          .alert.alert-danger
-            = @survey.errors[:questions][0]
         = render "form"

@@ -1,4 +1,8 @@
 = simple_form_for @user do |f|
+  - if @user.errors.any?
+    .alert.alert-danger
+      = @user.errors[:image][0]
+
   = f.input :name, label: false, placeholder: "Name"
   = f.input :last_name, label: false, placeholder: "Last Name"
   = f.input :email, label: false, placeholder: "Email"

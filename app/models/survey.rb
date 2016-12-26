@@ -6,6 +6,8 @@ class Survey < ApplicationRecord
   validates :name, presence: true, length: { minimum: 4, maximum: 250 }
   validates :questions,
     presence: { message: "You must add at least one question to the survey." }
+  validates :avatar, file_size: { less_than_or_equal_to: 2.gigabytes },
+                     file_content_type: { allow: ['image/jpeg', 'image/png'] }
   validates_associated :questions
 
   accepts_nested_attributes_for :questions, allow_destroy: true

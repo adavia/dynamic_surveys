@@ -6,7 +6,7 @@
       %p
         = customer.description
       - if policy(customer).show?
-        = link_to "SHOW CUSTOMER INFORMATION", customer
+        = link_to "SHOW ALL CUSTOMER SURVEYS", [customer, :surveys]
     .col-md-3
       .dropdown
         %a.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true",
@@ -16,11 +16,11 @@
             Surveys
             %span.caret
         %ul.dropdown-menu
-          %li
-            = link_to "Display all surveys", [customer, :surveys]
           - if policy(Survey.new(customer: customer)).create?
             %li
               = link_to "Create new survey", [:new, customer, :survey]
+          %li
+            = link_to "Display customer information", customer
           - if is_admin?
             %li
               = link_to "Edit customer information",

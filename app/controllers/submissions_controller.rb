@@ -73,7 +73,7 @@ class SubmissionsController < ApplicationController
 
   def check_type_of_request
     if request.format == "csv" || request.format == "xls"
-      if params[:from].present? || params[:to].present?
+      if params[:from].present? && params[:to].present?
         @submissions = policy_scope(@survey.submissions.includes(:user)
           .search(params[:from], params[:to])
           .order(created_at: :desc))
@@ -82,7 +82,7 @@ class SubmissionsController < ApplicationController
           .order(created_at: :desc))
       end
     else
-      if params[:from].present? || params[:to].present?
+      if params[:from].present? && params[:to].present?
         @submissions = policy_scope(@survey.submissions.includes(:user)
           .search(params[:from], params[:to])
           .paginate(page: params[:page])

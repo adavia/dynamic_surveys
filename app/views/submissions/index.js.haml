@@ -2,6 +2,7 @@ var list = $("#submissions-list");
 if (!list.length) { $("#{  j render "index" }").modal(); }
 
 - if params[:from].present? && params[:to].present?
+  list.find("#show_more").hide();
   - unless @submissions.next_page.nil?
     list.find("#show_more").attr("href", "#{ survey_submissions_path(@survey, from: params[:from], to: params[:to], page: @submissions.next_page) }").show();
   - if params[:page].present?

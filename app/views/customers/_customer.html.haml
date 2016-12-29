@@ -6,7 +6,8 @@
       %p
         = customer.description
       - if policy(customer).show?
-        = link_to "SHOW ALL CUSTOMER SURVEYS", [customer, :surveys]
+        = link_to fa_icon("list", text: "SHOW ALL CUSTOMER SURVEYS"), [customer, :surveys],
+          class: "btn btn-sm btn-default"
     .col-md-3
       .dropdown
         %a.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true",

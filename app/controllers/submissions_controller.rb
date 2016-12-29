@@ -2,16 +2,9 @@ class SubmissionsController < ApplicationController
   before_action :authenticate_user
   before_action :set_survey, only: [:index, :new, :create]
   before_action :set_submission, only: :show
+  before_action :check_type_of_request, only: :index
 
   def index
-    if request.format == "csv" || request.format == "xls"
-      @submissions = policy_scope(@survey.submissions.includes(:user)
-        .order(created_at: :desc))
-    else
-      @submissions = policy_scope(@survey.submissions.includes(:user)
-        .paginate(page: params[:page])
-        .order(created_at: :desc))
-    end
     respond_to do |format|
       format.html {}
       format.csv do
@@ -75,6 +68,30 @@ class SubmissionsController < ApplicationController
   def rating_notifier(submission)
     if submission.answers.rated_answers.any?
       SubmissionNotifierMailer.rating_notifier(submission).deliver_now
+    end
+  end
+
+  def check_type_of_request
+    if request.format == "csv" || request.format == "xls"
+      if params[:from].present? || params[:to].present?
+        @submissions = policy_scope(@survey.submissions.includes(:user)
+          .search(params[:from], params[:to])
+          .order(created_at: :desc))
+      else
+        @submissions = policy_scope(@survey.submissions.includes(:user)
+          .order(created_at: :desc))
+      end
+    else
+      if params[:from].present? || params[:to].present?
+        @submissions = policy_scope(@survey.submissions.includes(:user)
+          .search(params[:from], params[:to])
+          .paginate(page: params[:page])
+          .order(created_at: :desc))
+      else
+        @submissions = policy_scope(@survey.submissions.includes(:user)
+          .paginate(page: params[:page])
+          .order(created_at: :desc))
+      end
     end
   end
 

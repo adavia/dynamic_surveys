@@ -55,17 +55,32 @@ class SurveyPdf < Prawn::Document
       text "Answers #{question.answers.size}", size: 15
       if ["single", "select"].include? question.question_type.prefix
         if question.answers.choice_counter.any?
-          chart choices: question.answers.choice_counter
+          if (y - cursor) + 250 > y
+            start_new_page
+            chart choices: question.answers.choice_counter
+          else
+            chart choices: question.answers.choice_counter
+          end
         end
       end
       if question.question_type.prefix == "image"
         if question.answers.image_counter.any?
-          chart images: question.answers.image_counter
+          if (y - cursor) + 250 > y
+            start_new_page
+            chart images: question.answers.image_counter
+          else
+            chart images: question.answers.image_counter
+          end
         end
       end
       if question.question_type.prefix == "multiple"
         if question.answers.multiple_choice_counter.any?
-          chart choices: question.answers.multiple_choice_counter
+          if (y - cursor) + 250 > y
+            start_new_page
+            chart choices: question.answers.multiple_choice_counter
+          else
+            chart choices: question.answers.multiple_choice_counter
+          end
         end
       end
       if question.question_type.prefix == "raiting"

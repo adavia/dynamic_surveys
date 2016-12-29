@@ -83,6 +83,11 @@
 
 - if @survey.avatar.present?
   :css
-    body { background: url(#{@survey.avatar.url}); }
+    body  { background: url(#{@survey.avatar.url}) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
 
 

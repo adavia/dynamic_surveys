@@ -54,6 +54,7 @@ $state-danger-border: darken(adjust-hue($state-danger-bg, -10), 5%) !default;
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "bootstrap-datetimepicker";
 @import "font-awesome";
 @import "common";
 @import "answers";

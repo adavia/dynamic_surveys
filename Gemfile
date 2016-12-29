@@ -33,7 +33,11 @@ gem 'prawn'
 # PDF table generator
 gem 'prawn-table'
 # PDF charts
-gem 'squid'
+gem 'squid', '~> 1.2'
+# Moment
+gem 'momentjs-rails', '>= 2.9.0'
+# Datepicker
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.43'
 # Use pagination
 gem 'will_paginate'
 # Use Uglifier as compressor for JavaScript assets

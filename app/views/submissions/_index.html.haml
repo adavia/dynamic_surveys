@@ -7,6 +7,20 @@
         %h1.text-center.m-t-0
           #{@survey.customer.name} Survey Submissions
       .modal-body
+        .text-center.m-b-1
+          = form_tag(survey_submissions_path(@survey), method: "get",
+            id: "submission-search-form", class: "form-inline", remote: true) do
+            .form-group
+              %label{for: "date_from"} From
+              = text_field_tag :from, params[:from],
+                placeholder: "Select a beginning date", id: "date_from",
+                class: "form-control", data: { behavior: "date-picker" }
+            .form-group
+              %label{for: "date_to"} To
+              = text_field_tag :to, params[:to],
+                placeholder: "Select an ending date", id: "date_to",
+                class: "form-control", data: { behavior: "date-picker" }
+            = button_tag "SEARCH", class: "btn btn-default"
         %table.table.table-hover
           %thead
             %tr

@@ -6,15 +6,20 @@
   = f.input :name, label: false, placeholder: "Name"
   = f.input :description, label: false, input_html: { rows: 4 }, placeholder: "Description"
   .image-fields
-    .row
-      .col-xs-3
+    .media
+      .media-left
+        - if f.object.avatar.present?
+          = image_tag(f.object.avatar.url(:thumb),
+            class: "img-responsive img-thumbnail", width: 100)
+        - else
+          = image_tag("default_avatar", class: "img-responsive img-thumbnail", width: 100)
+      .media-body
         .file-upload
           %span Upload an avatar for the survey
           = f.file_field :avatar, label: false, class: "upload"
           = f.input :avatar_cache, as: :hidden
-      .col-xs-5
-        %small.file-name.m-t-0
-          = file_name f.object.avatar
+
+        %p Images should be around 1200x500 for a better size
 
   = f.fields_for :questions do |builder|
     = render "question_fields", f: builder

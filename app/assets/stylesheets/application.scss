@@ -98,6 +98,27 @@ footer {
   margin-left: 0px !important;
 }
 
+.image-fields {
+  margin-bottom: 15px;
+  .media-body {
+    width: inherit;
+    .file-upload {
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+  }
+  img {
+    height: 100px;
+    overflow: hidden;
+  }
+}
+
+.img-questions {
+  width: 70px;
+  height: 70px !important;
+  overflow: hidden;
+}
+
 .header-content {
   padding: 5px 110px 5px 110px;
   border-bottom: 1px solid #ACACAC;

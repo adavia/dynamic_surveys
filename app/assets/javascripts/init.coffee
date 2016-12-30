@@ -2,20 +2,30 @@ class Init
   constructor: (el) ->
     @el = $(el)
 
-  add_name: ->
-    @el.closest(".image-fields").find(".file-name").text(@el.val().split('\\').pop())
+  preview_image: ->
+    if typeof FileReader != "undefined"
+      regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/
+      if regex.test(@el[0].files[0].name.toLowerCase())
+        reader = new FileReader
+        reader.onload = (e) =>
+          @el.closest(".image-fields").find("img").attr("src", e.target.result)
+        reader.readAsDataURL @el[0].files[0]
+      else
+        alert "#{@el[0].files[0].name} is not a valid image file"
+    else
+      alert "This browser does not support HTML5 FileReader"
 
   navigate_to: ->
     window.location.replace(@el.data("link"));
-
-$(document).on "change", ":file", (event) ->
-  init = new Init @
-  init.add_name()
 
 $(document).on "click", "[data-behavior~=datalink]", (event) ->
   init = new Init @
   init.navigate_to()
   event.preventDefault()
+
+$(document).on "change", ":file", (event) ->
+  init = new Init @
+  init.preview_image()
 
 $(document).on "hidden.bs.modal", ".modal", (event) ->
   $(@).remove()

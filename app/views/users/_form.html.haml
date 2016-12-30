@@ -9,13 +9,18 @@
   = f.input :password, label: false, placeholder: "Password"
   = f.input :password_confirmation, label: false, placeholder: "Password Confirmation"
   .image-fields
-    .row
-      .col-xs-3
+    .media
+      .media-left
+        - if current_user.image.present?
+          = image_tag(current_user.image.url(:thumb),
+            class: "img-responsive img-thumbnail", width: 100)
+        - else
+          = image_tag("default_user", class: "img-responsive img-thumbnail", width: 100)
+      .media-body
         .file-upload
           %span Upload an image for your profile
           = f.file_field :image, label: false, class: "upload"
           = f.input :image_cache, as: :hidden
-      .col-xs-5
-        %small.file-name.m-t-0
-          = file_name f.object.image
+
+        %p Images should be around 300x300 for a better size
   = f.button :submit, "Submit user", class: "btn-default btn-block btn-main"

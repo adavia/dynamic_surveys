@@ -1,15 +1,21 @@
 .image-fields
-  .row
-    .col-xs-2
-      .file-upload
+  .media
+    .media-left
+      - if f.object.file.present?
+        = image_tag(f.object.file.url(:thumb),
+          class: "img-responsive img-thumbnail img-questions")
+      - else
+        = image_tag("default_avatar", class: "img-responsive img-thumbnail img-questions")
+    .media-body
+      .file-upload.btn.btn-primary.btn-xs
         %span Upload an image for this question
         = f.file_field :file, label: false, class: "upload"
         = f.input :file_cache, as: :hidden
-    .col-xs-2
+
       = f.hidden_field :_destroy
       = link_to fa_icon("trash-o"), "#", data: { behavior: "remove_image_fields" },
-        class: "pull-right"
-    .col-xs-5
-      %small.file-name.m-t-0
-        = file_name f.object.file
-        = f.error :file
+        class: "pull-right", title: "Remove this image"
+
+      %p Images should be around 300x300 for a better size
+      = f.error :file
+

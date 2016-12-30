@@ -22,6 +22,8 @@
             questions
             %span.caret
         %ul.dropdown-menu
+          %li
+            = link_to "Submit survey", [:new, survey, :submission]
           - if policy(survey).update?
             %li
               = link_to "Edit survey", [:edit, survey.customer, survey]

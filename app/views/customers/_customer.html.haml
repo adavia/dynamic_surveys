@@ -5,9 +5,8 @@
         = customer.name
       %p
         = customer.description
-      - if policy(customer).show?
-        = link_to fa_icon("list", text: "SHOW ALL CUSTOMER SURVEYS"), [customer, :surveys],
-          class: "btn btn-sm btn-default"
+      = link_to fa_icon("list", text: "SHOW ALL CUSTOMER SURVEYS"), [customer, :surveys],
+        class: "btn btn-sm btn-default"
     .col-md-3
       .dropdown
         %a.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true",
@@ -20,8 +19,9 @@
           - if policy(Survey.new(customer: customer)).create?
             %li
               = link_to "Create new survey", [:new, customer, :survey]
-          %li
-            = link_to "Display customer information", customer
+          - if policy(customer).show?
+            %li
+              = link_to "Display customer information", customer
           - if is_admin?
             %li
               = link_to "Edit customer information",

@@ -11,7 +11,6 @@ class SubmissionsController < ApplicationController
         headers['Content-Disposition'] = "attachment; filename=\"submissions-#{@survey.id}.csv\""
         headers['Content-Type'] ||= 'text/csv'
       end
-      format.xls  {}
       format.js   {}
       format.json { render json: @submissions }
     end
@@ -72,7 +71,7 @@ class SubmissionsController < ApplicationController
   end
 
   def check_type_of_request
-    if request.format == "csv" || request.format == "xls"
+    if request.format == "csv"
       if params[:from].present? && params[:to].present?
         @submissions = policy_scope(@survey.submissions.includes(:user)
           .search(params[:from], params[:to])

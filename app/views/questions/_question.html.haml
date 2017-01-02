@@ -40,8 +40,6 @@
         .export-links
           = link_to "Export CSV", question_answers_path(question, format: "csv"),
             class: "btn btn-xs btn-primary"
-          = link_to "Export Excel", question_answers_path(question, format: "xls"),
-            class: "btn btn-xs btn-success"
 
 .text-center
   - if ["single", "select"].include? question.question_type.prefix

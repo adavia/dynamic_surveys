@@ -3,7 +3,7 @@ class AnswersController < ApplicationController
   before_action :set_question, only: :index
 
   def index
-    if request.format == "csv" || request.format == "xls"
+    if request.format == "csv"
       @answers = policy_scope(@question.answers
       .includes([:answer_open, :answer_date], submission: :user)
       .order(created_at: :desc))
@@ -19,7 +19,6 @@ class AnswersController < ApplicationController
         headers['Content-Disposition'] = "attachment; filename=\"answers-#{@question.id}.csv\""
         headers['Content-Type'] ||= 'text/csv'
       end
-      format.xls  {}
       format.js   {}
       format.json { render json: @answers }
     end

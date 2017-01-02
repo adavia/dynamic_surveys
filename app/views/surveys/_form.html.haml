@@ -1,7 +1,7 @@
 = simple_form_for [@customer, @survey] do |f|
   - if @survey.errors.any?
     .alert.alert-danger
-      = @survey.errors[:questions][0] || @survey.errors[:avatar][0]
+      = @survey.errors[:questions][0] || @survey.errors[:avatar][0] || "Check the errors below"
 
   = f.input :name, label: false, placeholder: "Name"
   = f.input :description, label: false, input_html: { rows: 4 }, placeholder: "Description"
@@ -10,9 +10,11 @@
       .media-left
         - if f.object.avatar.present?
           = image_tag(f.object.avatar.url(:thumb),
-            class: "img-responsive img-thumbnail", width: 100)
+            class: "img-responsive img-thumbnail",
+            width: 100, style: 'overflow-y: hidden; height: 100px;')
         - else
-          = image_tag("default_avatar", class: "img-responsive img-thumbnail", width: 100)
+          = image_tag("default_avatar", class: "img-responsive img-thumbnail",
+            width: 100, style: 'overflow-y: hidden; height: 100px;')
       .media-body
         .file-upload
           %span Upload an avatar for the survey

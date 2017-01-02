@@ -3,9 +3,11 @@
     .media-left
       - if f.object.file.present?
         = image_tag(f.object.file.url(:thumb),
-          class: "img-responsive img-thumbnail img-questions")
+          class: "img-responsive img-thumbnail",
+            width: 70, style: 'overflow-y: hidden; height: 70px;')
       - else
-        = image_tag("default_avatar", class: "img-responsive img-thumbnail img-questions")
+        = image_tag("default_avatar", class: "img-responsive img-thumbnail",
+          width: 70, style: 'overflow-y: hidden; height: 70px;')
     .media-body
       .file-upload.btn.btn-primary.btn-xs
         %span Upload an image for this question

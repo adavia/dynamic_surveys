@@ -1,7 +1,7 @@
 = simple_form_for @user do |f|
   - if @user.errors.any?
     .alert.alert-danger
-      = @user.errors[:image][0]
+      = @user.errors[:image][0] || "Check the errors below"
 
   = f.input :name, label: false, placeholder: "Name"
   = f.input :last_name, label: false, placeholder: "Last Name"
@@ -13,9 +13,11 @@
       .media-left
         - if current_user.image.present?
           = image_tag(current_user.image.url(:thumb),
-            class: "img-responsive img-thumbnail", width: 100)
+            class: "img-responsive img-thumbnail",
+            width: 100, style: 'overflow-y: hidden; height: 100px;')
         - else
-          = image_tag("default_user", class: "img-responsive img-thumbnail", width: 100)
+          = image_tag("default_user", class: "img-responsive img-thumbnail",
+            width: 100, style: 'overflow-y: hidden; height: 100px;')
       .media-body
         .file-upload
           %span Upload an image for your profile

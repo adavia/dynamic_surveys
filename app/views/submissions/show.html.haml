@@ -8,7 +8,7 @@
     %ul.list-inline
       - if policy(@submission.survey).show?
         %li
-          = link_to "PREVIEW THIS SURVEY",
+          = link_to "SHOW SURVEY REPORT",
             [@submission.survey.customer, @submission.survey],
             class: "btn btn-sm btn-primary"
       %li

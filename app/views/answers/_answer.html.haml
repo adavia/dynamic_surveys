@@ -1,10 +1,12 @@
 %tr
   %th
-    = answer.created_at.strftime("%m/%d/%Y at %I:%M%p")
-  %th
-    = answer.submission.user.email
+    = answer.question.title
   %th
     - if answer.answer_date.present?
       = answer.answer_date.response.strftime("%m/%d/%Y")
     - if answer.answer_open.present?
       = answer.answer_open.response
+  %th
+    = answer.created_at.strftime("%m/%d/%Y at %I:%M%p")
+  %th
+    = answer.submission.user.email

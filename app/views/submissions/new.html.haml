@@ -6,7 +6,7 @@
     %ul.list-inline
       - if policy(@survey).show?
         %li
-          = link_to "PREVIEW THIS SURVEY", [@survey.customer, @survey],
+          = link_to "SHOW SURVEY REPORT", [@survey.customer, @survey],
             class: "btn btn-sm btn-primary"
       %li
         = link_to "#{@survey.customer.surveys_count} surveys total",

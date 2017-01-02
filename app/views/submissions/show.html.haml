@@ -19,8 +19,11 @@
   .row
     .col-md-8.col-md-offset-2
       .panel-piled
-        %h1
-          = @submission.survey.name
+        .clearfix
+          %h1.pull-left
+            = @submission.survey.name
+          = link_to fa_icon("calendar", text: "SHOW SUBMISSIONS"), [@submission.survey, :submissions],
+            remote: true, class: "btn btn-sm btn-default pull-right"
         %p
           Submitted
           = time_ago_in_words(@submission.created_at)

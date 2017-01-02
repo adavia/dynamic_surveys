@@ -24,5 +24,10 @@
           = f.file_field :image, label: false, class: "upload"
           = f.input :image_cache, as: :hidden
 
+        - if f.object.image?
+          = f.hidden_field :remove_image
+          = link_to fa_icon("trash-o"), "#", data: { behavior: "remove_image_fields" },
+            class: "pull-right", title: "Remove this image"
+
         %p Images should be around 300x300 for a better size
   = f.button :submit, "Submit user", class: "btn-default btn-block btn-main"

@@ -39,6 +39,8 @@ class UsersController < ApplicationController
   end
 
   def update
+    params[:user].delete(:password) if params[:user][:password].blank?
+
     respond_to do |format|
       if current_user.update(user_params)
         format.html { redirect_to current_user,
@@ -64,7 +66,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :last_name, :email,
+    params.require(:user).permit(:name, :last_name, :email, :remove_image,
       :password, :password_confirmation, :image, :image_cache)
   end
 end

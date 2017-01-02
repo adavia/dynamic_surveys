@@ -8,10 +8,12 @@
       %p
         = survey.description
       - if policy(survey).show?
-        = link_to "SHOW SURVEY INFORMATION", [survey.customer, survey],
-          class: "btn btn-sm btn-primary"
+        = link_to fa_icon("pie-chart", text: "DISPLAY SURVEY"), [survey.customer, survey],
+          class: "btn btn-xs btn-primary"
+        = link_to "SHOW SUBMISSIONS", [survey, :submissions],
+          remote: true, class: "btn btn-xs btn-primary"
       = link_to fa_icon("pencil", text: "SUBMIT SURVEY"), [:new, survey, :submission],
-        class: "btn btn-sm btn-default"
+        class: "btn btn-xs btn-default"
     .col-md-4
       .dropdown.pull-right
         %a.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true",

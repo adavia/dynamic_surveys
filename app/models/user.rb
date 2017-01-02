@@ -11,7 +11,7 @@ class User < ApplicationRecord
   validates :email, presence: true, length: { maximum: 150 },
             format: { with: VALID_EMAIL_REGEX },
             uniqueness: { case_sensitive: false }
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, if: :password
   validates :image, file_size: { less_than_or_equal_to: 2.gigabytes },
                     file_content_type: { allow: ['image/jpeg', 'image/png'] }
 

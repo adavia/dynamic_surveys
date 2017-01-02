@@ -21,6 +21,11 @@
           = f.file_field :avatar, label: false, class: "upload"
           = f.input :avatar_cache, as: :hidden
 
+        - if f.object.avatar?
+          = f.hidden_field :remove_avatar
+          = link_to fa_icon("trash-o"), "#", data: { behavior: "remove_image_fields" },
+            class: "pull-right", title: "Remove this image"
+
         %p Images should be around 1200x500 for a better size
 
   = f.fields_for :questions do |builder|

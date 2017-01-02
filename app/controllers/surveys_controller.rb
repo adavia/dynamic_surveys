@@ -113,7 +113,7 @@ class SurveysController < ApplicationController
 
   def survey_params
     params.require(:survey).permit(:name, :description, :avatar, :avatar_cache,
-      questions_attributes: [:id, :title, :question_type_id, :_destroy,
+      :remove_avatar, questions_attributes: [:id, :title, :question_type_id, :_destroy,
       choices_attributes: [:id, :title, :_destroy],
       #options_attributes: [:id, :title, :_destroy],
       images_attributes: [:id, :file, :file_cache, :_destroy]])

@@ -22,7 +22,7 @@ gem 'simple_form'
 gem 'carrierwave', '~> 0.10.0'
 # File validation
 gem 'file_validators'
-# User fog to manage cloud based storage
+# Use fog for S3 storage
 gem 'fog'
 # Image manipulation
 gem 'mini_magick'

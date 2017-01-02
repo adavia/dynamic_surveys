@@ -37,9 +37,7 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def update
-    if params[:user][:password].blank?
-      params[:user].delete(:password)
-    end
+    params[:user].delete(:password) if params[:user][:password].blank?
 
     respond_to do |format|
       User.transaction do

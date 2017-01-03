@@ -1,6 +1,8 @@
-The survey #{@submission.survey.name} has been rated with 2 answers:
+Survey #{@submission.survey.name} has been rated with the following stars:
+__________________________________________________________________________
+
 - @submission.answers.each do |answer|
-  = answer.question.title
   - if answer.answer_raiting.present?
+    = answer.question.title
     Response:
     = answer.answer_raiting.response

@@ -66,7 +66,7 @@ class SubmissionsController < ApplicationController
 
   def rating_notifier(submission)
     if submission.answers.rated_answers.any?
-      SubmissionNotifierMailer.rating_notifier(submission).deliver_now
+      SubmissionNotifierMailer.rating_notifier(submission).deliver_later
     end
   end
 

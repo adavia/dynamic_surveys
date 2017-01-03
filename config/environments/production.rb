@@ -90,6 +90,8 @@ Rails.application.configure do
   ActionMailer::Base.delivery_method = :smtp
   host = "https://sleepy-ravine-58079.herokuapp.com"
 
+  config.action_mailer.asset_host = host
+
   ActionMailer::Base.smtp_settings = {
     port:           ENV['MAILGUN_SMTP_PORT'],
     address:        ENV['MAILGUN_SMTP_SERVER'],

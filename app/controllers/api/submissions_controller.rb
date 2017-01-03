@@ -6,6 +6,7 @@ class API::SubmissionsController < API::ApplicationController
     @submission = @survey.submissions.build(submission_params)
     authorize @submission, :create?
     if @submission.save
+      rating_notifier(@submission)
       render json: @submission, status: 201
     else
       render json: @submission.errors, status: :unprocessable_entity
@@ -13,6 +14,12 @@ class API::SubmissionsController < API::ApplicationController
   end
 
   private
+
+  def rating_notifier(submission)
+    if submission.answers.rated_answers.any?
+      SubmissionNotifierMailer.rating_notifier(submission).deliver_later
+    end
+  end
 
   def set_survey
     @survey = Survey.includes(questions: [:choices, :images, :question_type]).find(params[:survey_id])

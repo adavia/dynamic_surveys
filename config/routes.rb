@@ -1,4 +1,8 @@
+require "sidekiq/web"
+
 Rails.application.routes.draw do
+  #mount Sidekiq::Web => "/sidekiq"
+
   root "sessions#new"
 
   resources :sessions, only: [:new, :create, :destroy]

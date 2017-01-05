@@ -7,8 +7,11 @@
         %li
           = link_to "CREATE NEW SURVEY", [:new, @customer, :survey],
             class: "btn btn-sm btn-default"
-      %li
-        = link_to "#{@customer.surveys_count} surveys total", [@customer, :surveys]
+      - if policy(@survey).show?
+        %li
+          = link_to "SURVEY REPORT",
+            [@survey.customer, @survey],
+            class: "btn btn-sm btn-primary"
 .container
   .row
     .col-md-8.col-md-offset-2

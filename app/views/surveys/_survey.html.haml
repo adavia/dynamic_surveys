@@ -6,7 +6,7 @@
       %small
         = survey.created_at.strftime("Created on %b %d, %Y")
       %p
-        = survey.description
+        = truncate(survey.description, length: 90)
       - if policy(survey).show?
         = link_to fa_icon("pie-chart", text: "DISPLAY SURVEY"), [survey.customer, survey],
           class: "btn btn-xs btn-primary"

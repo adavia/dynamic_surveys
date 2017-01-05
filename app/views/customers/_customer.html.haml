@@ -4,7 +4,7 @@
       %h2
         = customer.name
       %p
-        = customer.description
+        = truncate(customer.description, length: 90)
       = link_to fa_icon("list", text: "SHOW ALL CUSTOMER SURVEYS"), [customer, :surveys],
         class: "btn btn-xs btn-default"
     .col-md-3

@@ -15,7 +15,8 @@ class Question < ApplicationRecord
   accepts_nested_attributes_for :options, allow_destroy: true
   accepts_nested_attributes_for :images, allow_destroy: true
 
-  scope :group_types,     -> { joins(:question_type).group("question_types.name").count }
+  default_scope  { order(:position) }
+  scope :group_types, -> { joins(:question_type).group("question_types.name").count }
 
   #scope :answer_multiple, -> { joins(answers: {answer_multiple: [:choices]}).group("choices.title").count }
 

@@ -75,7 +75,7 @@
           .col-md-8
             %h3.text-center
               Results by type
-              = pie_chart @survey.questions.group_types
+              = pie_chart @survey.questions.unscope(:order).group_types
 
         = render @survey.questions
 

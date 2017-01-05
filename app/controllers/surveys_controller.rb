@@ -38,7 +38,7 @@ class SurveysController < ApplicationController
 
     respond_to do |format|
       if @survey.save
-        format.html { redirect_to [@customer, @survey],
+        format.html { redirect_to [:edit, @customer, @survey],
           flash: { success: "The survey has been created successfully."}}
         format.js   {}
         format.json {
@@ -63,7 +63,7 @@ class SurveysController < ApplicationController
 
     respond_to do |format|
       if @survey.update(survey_params)
-        format.html { redirect_to [@customer, @survey],
+        format.html { redirect_to [:edit, @customer, @survey],
           flash: { success: "The survey has been updated successfully."}}
         format.js   {}
         format.json {
@@ -113,7 +113,8 @@ class SurveysController < ApplicationController
 
   def survey_params
     params.require(:survey).permit(:name, :description, :avatar, :avatar_cache,
-      :remove_avatar, questions_attributes: [:id, :title, :question_type_id, :_destroy,
+      :remove_avatar, questions_attributes: [:id, :title, :question_type_id,
+      :position, :_destroy,
       choices_attributes: [:id, :title, :_destroy],
       #options_attributes: [:id, :title, :_destroy],
       images_attributes: [:id, :file, :file_cache, :_destroy]])

@@ -9,7 +9,7 @@ class Question
   add: ->
     time = new Date().getTime()
     regexp = new RegExp(@el.data("id"), "g")
-    @el.parent().before(@el.data("fields").replace(regexp, time))
+    @el.closest("form").find("#question-wrapper").append(@el.data("fields").replace(regexp, time))
 
   remove: ->
     @el.prev("input[type=hidden]").val("1")
@@ -65,3 +65,12 @@ $(document).on "click", "[data-behavior='remove_question_fields']", (event) ->
 $(document).on "change", "[data-behavior='question_type']", (event) ->
   question = new Question @
   question.select_type()
+
+$(document).on "turbolinks:load", ->
+  return unless $(".surveys.edit").length > 0 || $(".surveys.new").length > 0
+  $("#question-wrapper").sortable
+    axis: "y"
+    handle: ".handle"
+    stop: (event, ui) ->
+      $('input.question-position').each (idx) ->
+        $(@).val(idx + 1)

@@ -1,4 +1,6 @@
 .question-fields
+  %small.handle.pull-right
+    [DRAG]
   %h3.pull-left
     Question
 
@@ -7,6 +9,8 @@
     input_html: { data: { behavior: "question_type" } },
     collection: QuestionType.all.collect {|q| [ q.name, q.id ] },
     prompt: "--- Select type of answer ---"
+  = f.hidden_field :position, class: "question-position",
+    value: (f.options[:child_index] + 1).abs
 
   = f.fields_for :choices do |builder|
     = render "choice_fields", f: builder

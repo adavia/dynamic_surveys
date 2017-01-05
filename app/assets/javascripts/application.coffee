@@ -12,6 +12,7 @@
 #
 #= require jquery
 #= require jquery_ujs
+#= require jquery-ui/widgets/sortable
 #= require turbolinks
 #= require bootstrap-sprockets
 #= require Chart.bundle

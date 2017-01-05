@@ -28,8 +28,9 @@
 
         %p Images should be around 1200x500 for a better size
 
-  = f.fields_for :questions do |builder|
-    = render "question_fields", f: builder
+  #question-wrapper
+    = f.fields_for :questions do |builder|
+      = render "question_fields", f: builder
 
   .form-group
     = link_to_add_fields fa_icon("plus", text: "Add some questions"),

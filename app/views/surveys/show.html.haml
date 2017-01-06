@@ -51,7 +51,7 @@
           %li.list-group-item
             .clearfix
               = link_to "#{@survey.submissions.size} Submissions",
-                [@survey, :submissions], remote: true, class: "pull-left light-link"
+                [@survey, :submissions], remote: true, class: "pull-left"
               .export-links
                 = link_to "Export CSV", survey_submissions_path(@survey, format: "csv"),
                   class: "btn btn-xs btn-primary"

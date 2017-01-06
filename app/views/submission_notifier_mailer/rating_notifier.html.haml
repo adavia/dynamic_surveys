@@ -22,7 +22,7 @@
   %body
     = image_tag "logo.png", width: 200
     %h2
-      The survey #{@submission.survey.name} has been rated with the following answers:
+      The survey "#{@submission.survey.name}" has been rated with the following answers:
     - @submission.answers.each do |answer|
       - if answer.answer_raiting.present?
         .wrapper
@@ -31,5 +31,8 @@
             = answer.question.title
           %h4
             Response:
-            %span
-              = answer.answer_raiting.response
+            - 1.upto(answer.answer_raiting.response) do |star|
+              &#x2605;
+
+    %small
+      The survey has been rated by #{@submission.user} on - #{@submission.created_at.strftime("%m/%d/%Y at %I:%M%p")}

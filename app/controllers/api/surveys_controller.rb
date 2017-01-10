@@ -5,15 +5,19 @@ class API::SurveysController < API::ApplicationController
 
   def index
     @surveys = policy_scope(@customer.surveys)
-    render json: @surveys, include: [:id, :name, :description,
-      :created_at, :customer]
+    render json: {
+      avatar: current_user.image,
+      surveys: @surveys.as_json(except: [:questions, :customer_id])
+    }
   end
 
   def show
     authorize @survey, :show?
-    render json: @survey, include: [:id, :name, :description,
-      :created_at, :customer, "questions.question_type",
-      "questions.choices", "questions.images"]
+    render json: {
+      avatar: current_user.image,
+      survey: @survey.as_json(include: { questions: {
+        include: [:question_type, :choices, :images ]}}, except: :customer_id)
+    }
   end
 
   private

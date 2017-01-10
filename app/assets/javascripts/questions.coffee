@@ -10,6 +10,8 @@ class Question
     time = new Date().getTime()
     regexp = new RegExp(@el.data("id"), "g")
     @el.closest("form").find("#question-wrapper").append(@el.data("fields").replace(regexp, time))
+    $('input.question-position').each (idx) ->
+      $(@).val(idx + 1)
 
   remove: ->
     @el.prev("input[type=hidden]").val("1")

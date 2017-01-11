@@ -7,13 +7,14 @@
       = render "answers/fields/answer_#{answer.question.question_type}",
         f: a, choices: answer.question.choices, images: answer.question.images,
           answer: answer
-
-      - if answer.question.info_image.present?
-        = image_tag answer.question.info_image.url(:thumb),
-          class: "img-responsive img-thumbnail"
-      - if answer.question.info_body.present?
-        %p
-          = answer.question.info_body
+      - if answer.question.info_image.present? || answer.question.info_body.present?
+        .form-group
+          - if answer.question.info_image.present?
+            = image_tag answer.question.info_image.url(:thumb),
+              class: "img-responsive img-thumbnail"
+          - if answer.question.info_body.present?
+            %p
+              = answer.question.info_body
 
   = f.button :submit, "Submit survey",
       class: "btn-block btn-primary", data: { disable_with: "Submitting survey..." }

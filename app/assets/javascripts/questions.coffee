@@ -17,6 +17,10 @@ class Question
     @el.prev("input[type=hidden]").val("1")
     @el.closest(".question-fields").hide()
 
+  remove_image: ->
+    @el.prev("input[type=hidden]").val("1")
+    @el.closest(".info-image-fields").hide()
+
   toggle_informative: ->
     @el.next().toggle("slow")
 
@@ -79,6 +83,11 @@ $(document).on "turbolinks:load", ->
     stop: (event, ui) ->
       $('input.question-position').each (idx) ->
         $(@).val(idx + 1)
+
+$(document).on "click", "[data-behavior='remove_info_image_fields']", (event) ->
+  event.preventDefault()
+  question = new Question @
+  question.remove_image()
 
 $(document).on "click", "[data-behavior='btn-informative']", (event) ->
   event.preventDefault()

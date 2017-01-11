@@ -1,5 +1,5 @@
 = f.input :info_body, label: false, placeholder: "Informative text"
-.image-fields
+.info-image-fields
   .media
     .media-left
       - if f.object.info_image.present?
@@ -17,7 +17,7 @@
 
       - if f.object.info_image?
         = f.hidden_field :remove_info_image
-        = link_to fa_icon("trash-o"), "#", data: { behavior: "remove_image_fields" },
+        = link_to fa_icon("trash-o"), "#", data: { behavior: "remove_info_image_fields" },
           class: "pull-right", title: "Remove this image"
 
       %p Images should be around 300x300 for a better size

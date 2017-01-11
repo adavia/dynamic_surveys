@@ -91,7 +91,6 @@ class SurveysController < ApplicationController
 
   def search
     @surveys = policy_scope(Survey
-      .includes(questions: [:choices, :images, :question_type, :answers])
       .search(params[:search]).excluding_archived
       .paginate(page: params[:page]))
     respond_to do |format|
@@ -103,8 +102,7 @@ class SurveysController < ApplicationController
   private
 
   def set_survey
-    @survey = Survey.includes(questions: [:choices, :images,
-      :question_type, :answers]).find(params[:id])
+    @survey = Survey.includes(questions: [:choices, :images, :answers]).find(params[:id])
   end
 
   def set_customer
@@ -113,8 +111,8 @@ class SurveysController < ApplicationController
 
   def survey_params
     params.require(:survey).permit(:name, :description, :avatar, :avatar_cache,
-      :remove_avatar, questions_attributes: [:id, :title, :question_type_id,
-      :position, :_destroy,
+      :remove_avatar, questions_attributes: [:id, :title, :question_type,
+      :position, :info_image, :info_image_cache, :remove_info_image, :info_body, :_destroy,
       choices_attributes: [:id, :title, :_destroy],
       #options_attributes: [:id, :title, :_destroy],
       images_attributes: [:id, :file, :file_cache, :_destroy]])

@@ -64,7 +64,7 @@
             %ol.ordered-list
               - @survey.questions.each do |question|
                 %li
-                  = question.question_type.name
+                  = question.question_type.capitalize
                   - if question.choices.any?
                     %span.badge.pull-right
                       = question.choices.size

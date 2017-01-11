@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170104225958) do
+ActiveRecord::Schema.define(version: 20170111154719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,22 +121,16 @@ ActiveRecord::Schema.define(version: 20170104225958) do
     t.index ["question_id"], name: "index_options_on_question_id", using: :btree
   end
 
-  create_table "question_types", force: :cascade do |t|
-    t.string   "name"
-    t.string   "prefix"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "questions", force: :cascade do |t|
     t.string   "title"
     t.integer  "survey_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.integer  "question_type_id"
-    t.integer  "answers_count",    default: 0
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "question_type"
+    t.integer  "answers_count", default: 0
     t.integer  "position"
-    t.index ["question_type_id"], name: "index_questions_on_question_type_id", using: :btree
+    t.string   "info_image"
+    t.text     "info_body"
     t.index ["survey_id"], name: "index_questions_on_survey_id", using: :btree
   end
 
@@ -200,7 +194,6 @@ ActiveRecord::Schema.define(version: 20170104225958) do
   add_foreign_key "option_answers", "choices"
   add_foreign_key "option_answers", "options"
   add_foreign_key "options", "questions"
-  add_foreign_key "questions", "question_types"
   add_foreign_key "questions", "surveys"
   add_foreign_key "roles", "customers"
   add_foreign_key "roles", "users"

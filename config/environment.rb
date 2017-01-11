@@ -4,3 +4,4 @@ require 'carrierwave/orm/activerecord'
 
 # Initialize the Rails application.
 Rails.application.initialize!
+Haml::Template.options[:ugly] = true

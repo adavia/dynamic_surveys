@@ -4,9 +4,16 @@
       = answer.question.title
     = f.simple_fields_for :answers, answer do |a|
       = a.hidden_field :question_id
-      = render "answers/fields/answer_#{answer.question.question_type.prefix}",
+      = render "answers/fields/answer_#{answer.question.question_type}",
         f: a, choices: answer.question.choices, images: answer.question.images,
           answer: answer
+
+      - if answer.question.info_image.present?
+        = image_tag answer.question.info_image.url(:thumb),
+          class: "img-responsive img-thumbnail"
+      - if answer.question.info_body.present?
+        %p
+          = answer.question.info_body
 
   = f.button :submit, "Submit survey",
       class: "btn-block btn-primary", data: { disable_with: "Submitting survey..." }

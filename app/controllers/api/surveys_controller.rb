@@ -16,14 +16,14 @@ class API::SurveysController < API::ApplicationController
     render json: {
       avatar: current_user.image,
       survey: @survey.as_json(include: { questions: {
-        include: [:question_type, :choices, :images ]}}, except: :customer_id)
+        include: [:choices, :images ]}}, except: :customer_id)
     }
   end
 
   private
 
   def set_survey
-    @survey = Survey.includes(questions: [:choices, :images, :question_type]).find(params[:id])
+    @survey = Survey.includes(questions: [:choices, :images]).find(params[:id])
   end
 
   def set_customer

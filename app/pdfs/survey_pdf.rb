@@ -53,7 +53,7 @@ class SurveyPdf < Prawn::Document
       text "#{question.title}", size: 20
       move_down 5
       text "Answers #{question.answers.size}", size: 15
-      if ["single", "select"].include? question.question_type.prefix
+      if ["single", "list"].include? question.question_type
         if question.answers.choice_counter.any?
           if (y - cursor) + 250 > y
             start_new_page
@@ -63,7 +63,7 @@ class SurveyPdf < Prawn::Document
           end
         end
       end
-      if question.question_type.prefix == "image"
+      if question.question_type == "image"
         if question.answers.image_counter.any?
           if (y - cursor) + 250 > y
             start_new_page
@@ -73,7 +73,7 @@ class SurveyPdf < Prawn::Document
           end
         end
       end
-      if question.question_type.prefix == "multiple"
+      if question.question_type == "multiple"
         if question.answers.multiple_choice_counter.any?
           if (y - cursor) + 250 > y
             start_new_page
@@ -83,7 +83,7 @@ class SurveyPdf < Prawn::Document
           end
         end
       end
-      if question.question_type.prefix == "raiting"
+      if question.question_type == "rating"
         move_down 5
         if question.answers.any?
           text_box "Average rating", size: 12, width: 120, :at => [0,  cursor - 2]

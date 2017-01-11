@@ -17,12 +17,15 @@ class Question
     @el.prev("input[type=hidden]").val("1")
     @el.closest(".question-fields").hide()
 
+  toggle_informative: ->
+    @el.next().toggle("slow")
+
   select_type: ->
     choice_button = $("[data-behavior='add_choice_fields']")
     #option_button = $("[data-behavior='add_option_fields']")
     image_button  = $("[data-behavior='add_image_fields']")
 
-    if @el.val() not in ["1", "4", "6"]
+    if @el.val() not in ["open", "date", "rating"]
       @el.closest(".question-fields").find(choice_button).removeClass("hidden")
       #if @el.val() == "7"
         #@el.closest(".question-fields").find(option_button).removeClass("hidden")
@@ -31,7 +34,7 @@ class Question
         #@el.closest(".question-fields").find(".option-fields").find("input[type=hidden]").val("1")
         #@el.closest(".question-fields").find(".option-fields").hide()
 
-      if @el.val() == "5"
+      if @el.val() == "image"
         @el.closest(".question-fields").find(image_button).removeClass("hidden")
         #@el.closest(".question-fields").find(option_button).addClass("hidden")
         #@el.closest(".question-fields").find(".option-fields").find("input[type=hidden]").val("1")
@@ -76,3 +79,8 @@ $(document).on "turbolinks:load", ->
     stop: (event, ui) ->
       $('input.question-position').each (idx) ->
         $(@).val(idx + 1)
+
+$(document).on "click", "[data-behavior='btn-informative']", (event) ->
+  event.preventDefault()
+  question = new Question @
+  question.toggle_informative()

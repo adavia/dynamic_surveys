@@ -8,12 +8,16 @@
       %p
         = truncate(survey.description, length: 90)
       - if policy(survey).show?
-        = link_to fa_icon("pie-chart", text: "DISPLAY SURVEY"), [survey.customer, survey],
+        = link_to fa_icon("pie-chart", text: "REPORT"), [survey.customer, survey],
           class: "btn btn-xs btn-primary"
-        = link_to "SHOW SUBMISSIONS", [survey, :submissions],
+        = link_to fa_icon("filter", text: "FILTER SUBMISSIONS"), [survey, :submissions],
           remote: true, class: "btn btn-xs btn-primary"
-      = link_to fa_icon("pencil", text: "SUBMIT SURVEY"), [:new, survey, :submission],
+      = link_to fa_icon("pencil", text: "SUBMIT"), [:new, survey, :submission],
         class: "btn btn-xs btn-default"
+      - if policy(survey).update?
+        = link_to fa_icon("edit", text: "EDITION"), [:edit, survey.customer, survey],
+          class: "btn btn-xs btn-default"
+
     .col-md-4
       .dropdown.pull-right
         %a.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true",

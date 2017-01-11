@@ -95,8 +95,7 @@ class SubmissionsController < ApplicationController
   end
 
   def set_survey
-    @survey = Survey.includes(questions: [:choices, :images,
-      :question_type]).find(params[:survey_id])
+    @survey = Survey.includes(questions: [:choices, :images]).find(params[:survey_id])
   end
 
   def set_submission

@@ -1,0 +1,25 @@
+= f.input :info_body, label: false, placeholder: "Informative text"
+.image-fields
+  .media
+    .media-left
+      - if f.object.info_image.present?
+        = image_tag(f.object.info_image.url(:thumb),
+          class: "img-responsive img-thumbnail",
+            width: 80, style: 'overflow-y: hidden; height: 80px;')
+      - else
+        = image_tag("default_avatar", class: "img-responsive img-thumbnail",
+          width: 80, style: 'overflow-y: hidden; height: 80px;')
+    .media-body
+      .file-upload.btn.btn-primary.btn-xs
+        %span Upload an image
+        = f.file_field :info_image, label: false, class: "upload"
+        = f.input :info_image_cache, as: :hidden
+
+      - if f.object.info_image?
+        = f.hidden_field :remove_info_image
+        = link_to fa_icon("trash-o"), "#", data: { behavior: "remove_image_fields" },
+          class: "pull-right", title: "Remove this image"
+
+      %p Images should be around 300x300 for a better size
+      = f.error :info_image
+

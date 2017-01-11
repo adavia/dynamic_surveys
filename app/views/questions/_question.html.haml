@@ -6,25 +6,25 @@
     %span.counter.pull-right
       = question.answers_count
     Answers
-  - if ["single", "select"].include? question.question_type.prefix
+  - if ["single", "list"].include? question.question_type
     - @choice = question.answers.choice_counter.each do |answer|
       %li.list-group-item
         %span.counter.pull-right
           = answer[1]
         = answer[0]
-  - if question.question_type.prefix == "image"
+  - if question.question_type == "image"
     - @image = question.answers.image_counter.each do |answer|
       %li.list-group-item
         %span.counter.pull-right
           = answer[1]
         = answer[0]
-  - if question.question_type.prefix == "multiple"
+  - if question.question_type == "multiple"
     - @multiple = question.answers.multiple_choice_counter.each do |answer|
       %li.list-group-item
         %span.counter.pull-right
           = answer[1]
         = answer[0]
-  - if question.question_type.prefix == "raiting"
+  - if question.question_type == "rating"
     %li.list-group-item
       %span.counter.pull-right
         - if question.answers.any?
@@ -32,7 +32,7 @@
         - else
           0
       Average rating
-  - if ["open", "date"].include? question.question_type.prefix
+  - if ["open", "date"].include? question.question_type
     %li.list-group-item
       .clearfix
         = link_to "Show answer responses", [question, :answers],
@@ -42,12 +42,12 @@
             class: "btn btn-xs btn-primary"
 
 .text-center
-  - if ["single", "select"].include? question.question_type.prefix
+  - if ["single", "list"].include? question.question_type
     - if @choice.any?
       = pie_chart @choice
-  - if question.question_type.prefix == "multiple"
+  - if question.question_type == "multiple"
     - if @multiple.any?
       = pie_chart @multiple
-  - if question.question_type.prefix == "image"
+  - if question.question_type == "image"
     - if @image.any?
       = pie_chart @image

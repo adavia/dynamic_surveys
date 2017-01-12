@@ -1,10 +1,10 @@
 var list = $("#submissions-list");
 if (!list.length) { $("#{  j render "index" }").modal(); }
 
-- if params[:from].present? && params[:to].present?
+- if params[:created_before].present? || params[:created_after].present? || params[:question_title].present? || params[:question_type].present?
   list.find("#show_more").hide();
   - unless @submissions.next_page.nil?
-    list.find("#show_more").attr("href", "#{ survey_submissions_path(@survey, from: params[:from], to: params[:to], page: @submissions.next_page) }").show();
+    list.find("#show_more").attr("href", "#{ survey_submissions_path(@survey, created_before: params[:created_before], created_after: params[:created_after], question_title: params[:question_title], question_type: params[:question_type], page: @submissions.next_page) }").show();
   - if params[:page].present?
     list.find("tbody").append('#{ j render @submissions }');
     - if @submissions.total_pages == @submissions.current_page
@@ -17,5 +17,12 @@ if (!list.length) { $("#{  j render "index" }").modal(); }
   - if @submissions.total_pages == @submissions.current_page
     list.find("#show_more").hide();
   - else
-    list.find("#show_more").attr("href", "#{ survey_submissions_path(@survey, page: @submissions.current_page + 1)}");
+    list.find("#show_more").attr("href", "#{ survey_submissions_path(@survey, page: @submissions.current_page + 1)}").show();
+
+- else
+  list.find("tbody").html('#{ j render @submissions }');
+  - if @submissions.total_pages == @submissions.current_page
+    list.find("#show_more").hide();
+  - else
+    list.find("#show_more").attr("href", "#{ survey_submissions_path(@survey, page: @submissions.current_page + 1)}").show();
 

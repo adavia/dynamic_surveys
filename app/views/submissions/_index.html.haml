@@ -1,5 +1,5 @@
 #submissions-list.modal.fade
-  .modal-dialog
+  .modal-dialog.modal-lg
     .modal-content
       .modal-header
         %button.close{"aria-label": "Close", "data-dismiss": "modal", type: "button"}
@@ -7,20 +7,32 @@
         %h1.text-center.m-t-0
           #{@survey.customer.name} Survey Submissions
       .modal-body
-        .text-center.m-b-1
+        .m-b-1
           = form_tag(survey_submissions_path(@survey), method: "get",
             id: "submission-search-form", class: "form-inline", remote: true) do
             .form-group
-              %label{for: "date_from"} From
-              = text_field_tag :from, params[:from],
+              %label{for: "created_after"} From
+              = text_field_tag :created_after, params[:created_after],
                 placeholder: "Select a beginning date", id: "date_from",
-                class: "form-control", data: { behavior: "date-picker" }
+                class: "form-control input-sm", data: { behavior: "date-picker" }
             .form-group
-              %label{for: "date_to"} To
-              = text_field_tag :to, params[:to],
-                placeholder: "Select an ending date", id: "date_to",
-                class: "form-control", data: { behavior: "date-picker" }
-            = button_tag "SEARCH", class: "btn btn-default"
+              %label{for: "created_before"} To
+              = text_field_tag :created_before, params[:created_before],
+                placeholder: "Select an ending date", id: "created_before",
+                class: "form-control input-sm", data: { behavior: "date-picker" }
+            .form-group
+              %label{for: "question_title"} Question
+              = text_field_tag :question_title, params[:question_title],
+                placeholder: "Question name", id: "question_title",
+                class: "form-control input-sm"
+            .form-group
+              %label{for: "question_type"} Type
+              = select_tag :question_type,
+                options_for_select(Question::QUESTION_TYPES),
+                prompt: "--- Type of question ---",
+                placeholder: "Question Type", id: "question_type",
+                class: "form-control input-sm"
+            = button_tag "SEARCH", class: "btn btn-default btn-sm"
         %table.table.table-hover
           %thead
             %tr

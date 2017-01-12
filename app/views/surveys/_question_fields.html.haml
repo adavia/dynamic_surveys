@@ -8,7 +8,7 @@
   = f.input :question_type, label: false,
     input_html: { data: { behavior: "question_type" } },
     collection: Question::QUESTION_TYPES,
-    prompt: "--- Select type of answer ---"
+    prompt: "--- Select type of question ---"
   = f.hidden_field :position, class: "question-position",
     value: (f.options[:child_index] + 1).abs
 

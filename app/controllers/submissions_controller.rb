@@ -72,26 +72,21 @@ class SubmissionsController < ApplicationController
 
   def check_type_of_request
     if request.format == "csv"
-      if params[:from].present? && params[:to].present?
-        @submissions = policy_scope(@survey.submissions.includes(:user)
-          .search(params[:from], params[:to])
-          .order(created_at: :desc))
-      else
-        @submissions = policy_scope(@survey.submissions.includes(:user)
-          .order(created_at: :desc))
-      end
+      @submissions = policy_scope(@survey.submissions.includes(:user)
+        .order(created_at: :desc))
     else
-      if params[:from].present? && params[:to].present?
-        @submissions = policy_scope(@survey.submissions.includes(:user)
-          .search(params[:from], params[:to])
-          .paginate(page: params[:page])
-          .order(created_at: :desc))
-      else
-        @submissions = policy_scope(@survey.submissions.includes(:user)
-          .paginate(page: params[:page])
-          .order(created_at: :desc))
+      @submissions = policy_scope(@survey.submissions.includes(:user)
+        .paginate(page: params[:page])
+        .order(created_at: :desc))
+
+      filtering_params(params).each do |key, value|
+        @submissions = @submissions.public_send(key, value) if value.present?
       end
     end
+  end
+
+  def filtering_params(params)
+    params.slice(:created_before, :created_after, :question_title, :question_type)
   end
 
   def set_survey

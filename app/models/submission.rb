@@ -11,7 +11,7 @@ class Submission < ApplicationRecord
 
   validate :must_complete_all_answers
 
-  self.per_page = 15
+  self.per_page = 2
 
   def must_complete_all_answers
     if questions.any? && answers.empty?
@@ -20,7 +20,23 @@ class Submission < ApplicationRecord
   end
 
   # Search submissions
-  def self.search(from, to)
-    where(created_at: from..to)
+  # def self.date_filter(from, to)
+    # where(created_at: from..to)
+  # end
+
+  def self.created_before(date)
+    where("submissions.created_at < ?", date)
+  end
+
+  def self.created_after(date)
+    where("submissions.created_at > ?", date)
+  end
+
+  def self.question_title(title)
+    joins(:questions).where("questions.title ILIKE ?", "%#{title}%").distinct
+  end
+
+  def self.question_type(type)
+    joins(:questions).where("questions.question_type": type)
   end
 end

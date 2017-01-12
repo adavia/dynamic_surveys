@@ -21,9 +21,11 @@
                 placeholder: "Select an ending date", id: "created_before",
                 class: "form-control input-sm", data: { behavior: "date-picker" }
             .form-group
-              %label{for: "question_title"} Question
-              = text_field_tag :question_title, params[:question_title],
-                placeholder: "Question name", id: "question_title",
+              %label{for: "question_id"} Question
+              = select_tag :question_id,
+                options_for_select(@survey.questions.collect {|q| [q.title, q.id]}),
+                prompt: "--- Question ---",
+                placeholder: "Question Type", id: "question_id",
                 class: "form-control input-sm"
             .form-group
               %label{for: "question_type"} Type

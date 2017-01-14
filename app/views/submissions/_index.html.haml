@@ -7,29 +7,26 @@
         %h1.text-center.m-t-0
           #{@survey.customer.name} Survey Submissions
       .modal-body
-        .m-b-1.text-center
+        .submission-search.center-block
           = form_tag(survey_submissions_path(@survey), method: "get",
-            id: "submission-search-form", class: "form-inline", remote: true) do
+            id: "submission-search-form", remote: true) do
             .form-group
-              %label{for: "created_after"} From
               = text_field_tag :created_after, params[:created_after],
-                placeholder: "Select a beginning date", id: "date_from",
+                placeholder: "Select a beginning date",
                 class: "form-control input-sm", data: { behavior: "date-picker" }
             .form-group
-              %label{for: "created_before"} To
               = text_field_tag :created_before, params[:created_before],
-                placeholder: "Select an ending date", id: "created_before",
+                placeholder: "Select an ending date",
                 class: "form-control input-sm", data: { behavior: "date-picker" }
             .form-group
-              %label{for: "question_id"} Question
               = select_tag :question_id,
                 options_for_select(@survey.questions.collect {|q| [q.title, q.id, {"data-type": q.question_type}]}),
                 prompt: "--- Question ---",
-                id: "question_id", data: { behavior: "questions_select" },
+                data: { behavior: "questions_select" },
                 class: "form-control input-sm"
 
             .form-group#select-content
-            = button_tag "SEARCH", class: "btn btn-default btn-sm"
+            = button_tag "SEARCH", class: "btn btn-default btn-block btn-sm"
 
         .submission-items
           = render @submissions

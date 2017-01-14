@@ -1,10 +1,10 @@
 var list = $("#submissions-list");
 if (!list.length) { $("#{  j render "index" }").modal(); }
 
-- if params[:created_before].present? || params[:created_after].present? || params[:question_id].present? || params[:choice_id].present? || params[:image_id].present?
+- if params[:created_before].present? || params[:created_after].present? || params[:question_id].present? || params[:choice_id].present? || params[:image_id].present? || params[:choice_multiple_ids].present?
   list.find("#show_more").hide();
   - unless @submissions.next_page.nil?
-    list.find("#show_more").attr("href", "#{ survey_submissions_path(@survey, created_before: params[:created_before], created_after: params[:created_after], question_id: params[:question_id], choice_id: params[:choice_id], image_id: params[:image_id], page: @submissions.next_page) }").show();
+    list.find("#show_more").attr("href", "#{ survey_submissions_path(@survey, created_before: params[:created_before], created_after: params[:created_after], question_id: params[:question_id], choice_id: params[:choice_id], image_id: params[:image_id], choice_multiple_ids: params[:choice_multiple_ids], page: @submissions.next_page) }").show();
   - if params[:page].present?
     list.find(".submission-items").append('#{ j render @submissions }');
     - if @submissions.total_pages == @submissions.current_page

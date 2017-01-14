@@ -104,7 +104,7 @@ class SubmissionsController < ApplicationController
 
   def filtering_params(params)
     params.slice(:created_before, :created_after, :question_id,
-      :choice_id, :image_id, :choice_multiple_id)
+      :choice_id, :image_id, :choice_multiple_ids)
   end
 
   def set_survey

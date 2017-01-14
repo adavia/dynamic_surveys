@@ -1,6 +1,5 @@
-%label{for: "choice_multiple_id"} Answer
-= select_tag :choice_multiple_id,
-  options_for_select(choices.collect {|c| [c.title, c.id]}),
-  prompt: "--- Choice ---",
-  id: "choice_multiple_id", data: { behavior: "choices_select" },
-  class: "form-control input-sm"
+- choices.all.each do |choice|
+  .checkbox
+    %label
+      = check_box_tag "choice_multiple_ids[]", choice.id
+      = choice.title

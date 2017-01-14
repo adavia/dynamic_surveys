@@ -11,7 +11,7 @@ class Submission < ApplicationRecord
 
   validate :must_complete_all_answers
 
-  self.per_page = 15
+  self.per_page = 2
 
   def must_complete_all_answers
     if questions.any? && answers.empty?
@@ -40,8 +40,8 @@ class Submission < ApplicationRecord
     joins(answers: :choice_answer).where("choice_answers.choice_id": id)
   end
 
-  def self.choice_multiple_id(id)
-    joins(answers: {answer_multiple: :choice_answers}).where("choice_answers.choice_id": id)
+  def self.choice_multiple_ids(ids)
+    joins(answers: {answer_multiple: :choice_answers}).where("choice_answers.choice_id": ids).distinct
   end
 
   def self.image_id(id)

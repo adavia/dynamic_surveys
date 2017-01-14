@@ -20,9 +20,11 @@ if (!list.length) { $("#{  j render "index" }").modal(); }
     list.find("#show_more").attr("href", "#{ survey_submissions_path(@survey, page: @submissions.current_page + 1)}").show();
 
 - else
-  list.find(".submission-items").html('#{ j render @submissions }');
+  list.find(".submission-items").html("#{ j render @submissions }");
   - if @submissions.total_pages == @submissions.current_page
     list.find("#show_more").hide();
   - else
     list.find("#show_more").attr("href", "#{ survey_submissions_path(@survey, page: @submissions.current_page + 1)}").show();
+
+$("#submissions-count span").html("#{ @submissions.size }");
 

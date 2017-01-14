@@ -26,12 +26,17 @@
                 class: "form-control input-sm"
 
             .form-group#select-content
-            = button_tag "SEARCH", class: "btn btn-default btn-block btn-sm"
+            = submit_tag "SEARCH", class: "btn btn-default btn-block btn-sm",
+              data: { disable_with: "loading results.."}
 
         .submission-items
           = render @submissions
 
       .modal-footer
+        #submissions-count.pull-left
+          %span
+            = @submissions.size
+          Submissions
         - unless @submissions.next_page.nil?
           = link_to fa_icon("undo", text: "LOAD MORE SUBMISSIONS"),
           survey_submissions_path(@survey, page: @submissions.next_page),

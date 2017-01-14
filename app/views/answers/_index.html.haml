@@ -7,19 +7,8 @@
         %h1.text-center.m-t-0
           = @question.title
       .modal-body
-        %table.table.table-hover
-          %thead
-            %tr
-              %th
-                Question
-              %th
-                Answer response
-              %th
-                Answer date
-              %th
-                Answered by
-          %tbody
-            = render @answers
+        .answer-items
+          = render @answers
       .modal-footer
         - unless @answers.next_page.nil?
           = link_to fa_icon("undo", text: "LOAD MORE ANSWERS"),

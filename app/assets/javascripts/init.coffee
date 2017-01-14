@@ -18,14 +18,6 @@ class Init
     else
       alert "This browser does not support HTML5 FileReader"
 
-  navigate_to: ->
-    window.location.replace(@el.data("link"));
-
-$(document).on "click", "[data-behavior~=datalink]", (event) ->
-  init = new Init @
-  init.navigate_to()
-  event.preventDefault()
-
 $(document).on "change", ":file", (event) ->
   init = new Init @
   init.preview_image()

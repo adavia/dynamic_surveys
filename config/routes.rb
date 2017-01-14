@@ -24,6 +24,12 @@ Rails.application.routes.draw do
     resources :submissions, only: [:index, :show, :new, :create]
   end
 
+  resources :submissions, only: [] do
+    collection do
+      get :update_choices
+    end
+  end
+
   resources :questions, only: [] do
     resources :answers, only: :index
   end

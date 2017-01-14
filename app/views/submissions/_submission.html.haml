@@ -1,8 +1,15 @@
-%tr{ "data-link": survey_submission_path(submission.survey, submission),
-  "data-behavior": "datalink", class: "data-link" }
-  %th
-    = submission.created_at.strftime("%m/%d/%Y at %I:%M%p")
-  %th
-    = submission.survey.name
-  %th
-    = submission.user.email
+.modal-item
+  .row
+    .col-md-3
+      Submitted on:
+      = submission.created_at.strftime("%m/%d/%Y at %I:%M%p")
+    .col-md-4
+      Survey:
+      = submission.survey.name
+    .col-md-3
+      Submitted by:
+      = submission.user.email
+    .col-md-2
+      = link_to fa_icon("eye", text: "Show answers"), [submission.survey, submission],
+        "data-behavior": "submission-show", class: "btn btn-xs btn-default pull-right"
+.submission-content

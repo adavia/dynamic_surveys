@@ -1,3 +1,16 @@
 // Place all the styles related to the submissions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.submitted-answers {
+  .answer-item {
+    padding: 10px;
+    background-color: #F9F9F9;
+    margin: 10px 0px 10px 0px;
+    border-left: 6px solid #f72969;
+    width: 80%;
+    h3 {
+      margin-top: 0;
+    }
+  }
+}

@@ -58,6 +58,7 @@ $state-danger-border: darken(adjust-hue($state-danger-bg, -10), 5%) !default;
 @import "font-awesome";
 @import "common";
 @import "answers";
+@import "submissions";
 
 /* DEFAULT LAYOUT */
 
@@ -79,10 +80,6 @@ footer {
 
 .export-links {
   text-align: right;
-}
-
-.data-link {
-  cursor: pointer;
 }
 
 .ordered-list {
@@ -252,6 +249,13 @@ small.handle {
   cursor: pointer;
   opacity: 0;
   filter: alpha(opacity=0);
+}
+
+.modal-item {
+  padding: 15px;
+  margin-bottom: 10px;
+  border-left: 6px solid #6d26ff;
+  background-color: #F1F1F1;
 }
 
 /* MARGINS */

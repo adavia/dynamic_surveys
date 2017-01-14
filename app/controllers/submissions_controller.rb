@@ -18,6 +18,7 @@ class SubmissionsController < ApplicationController
 
   def show
     authorize @submission, :show?
+    render layout: !request.xhr?
   end
 
   def new
@@ -62,6 +63,22 @@ class SubmissionsController < ApplicationController
     end
   end
 
+  def update_choices
+    if params[:question_id].present?
+      if params[:question_type] == "image"
+        @images = Image.where("question_id = ?", params[:question_id])
+      elsif ["single", "list"].include? params[:question_type]
+        @choices = Choice.where("question_id = ?", params[:question_id])
+      elsif params[:question_type] == "multiple"
+        @multiple = Choice.where("question_id = ?", params[:question_id])
+      end
+    end
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def rating_notifier(submission)
@@ -86,7 +103,8 @@ class SubmissionsController < ApplicationController
   end
 
   def filtering_params(params)
-    params.slice(:created_before, :created_after, :question_id, :question_type)
+    params.slice(:created_before, :created_after, :question_id,
+      :choice_id, :image_id, :choice_multiple_id)
   end
 
   def set_survey

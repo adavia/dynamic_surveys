@@ -19,48 +19,47 @@
   .row
     .col-md-8.col-md-offset-2
       .panel-piled
-        .clearfix
-          %h1.pull-left
-            = @submission.survey.name
-          = link_to fa_icon("calendar", text: "SHOW SUBMISSIONS"), [@submission.survey, :submissions],
-            remote: true, class: "btn btn-sm btn-default pull-right"
+        %h1
+          = @submission.survey.name
         %p
           Submitted
           = time_ago_in_words(@submission.created_at)
           ago -
           = @submission.created_at.strftime("%m/%d/%Y at %I:%M%p")
 
-        %h2
-          Questions
+          %h2
+            Questions
 
-        - @submission.answers.each do |answer|
-          %h3
-            = answer.question.title
-          - if answer.answer_open.present?
-            %p
-              Response:
-              = answer.answer_open.response
-          - if answer.answer_date.present?
-            %p
-              Response:
-              = answer.answer_date.response
-          - if answer.answer_raiting.present?
-            %p
-              Response:
-              = answer.answer_raiting.response
-          - if answer.answer_image.present?
-            %p
-              Response:
-            = image_tag answer.answer_image.image.file.url(:thumb),
-              class: "img-responsive", width: 80
-          - if answer.choice_answer.present?
-            %p
-              Response:
-              = answer.choice_answer.choice.try(:title)
-          - if answer.answer_multiple.present?
-            %p
-              Response:
-              = answer.answer_multiple.choices.map(&:title).join(', ')
+          .submitted-answers
+            - @submission.answers.each do |answer|
+              .answer-item
+                %h4
+                  = answer.question.title
+                - if answer.answer_open.present?
+                  %p
+                    Answer:
+                    = answer.answer_open.response
+                - if answer.answer_date.present?
+                  %p
+                    Answer:
+                    = answer.answer_date.response
+                - if answer.answer_raiting.present?
+                  %p
+                    Answer:
+                    = answer.answer_raiting.response
+                - if answer.answer_image.present?
+                  %p
+                    Answer:
+                  = image_tag answer.answer_image.image.file.url(:thumb),
+                    class: "img-responsive", width: 80
+                - if answer.choice_answer.present?
+                  %p
+                    Answer:
+                    = answer.choice_answer.choice.try(:title)
+                - if answer.answer_multiple.present?
+                  %p
+                    Answer:
+                    = answer.answer_multiple.choices.map(&:title).join(', ')
 
 
 

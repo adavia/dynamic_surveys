@@ -1,0 +1,6 @@
+%label{for: "image_id"} Answer
+= select_tag :image_id,
+  options_for_select(images.collect {|i| [i.file_identifier, i.id]}),
+  prompt: "--- Image ---",
+  id: "image_id", data: { behavior: "images_select" },
+  class: "form-control input-sm"

@@ -7,7 +7,7 @@
         %h1.text-center.m-t-0
           #{@survey.customer.name} Survey Submissions
       .modal-body
-        .m-b-1
+        .m-b-1.text-center
           = form_tag(survey_submissions_path(@survey), method: "get",
             id: "submission-search-form", class: "form-inline", remote: true) do
             .form-group
@@ -23,29 +23,17 @@
             .form-group
               %label{for: "question_id"} Question
               = select_tag :question_id,
-                options_for_select(@survey.questions.collect {|q| [q.title, q.id]}),
+                options_for_select(@survey.questions.collect {|q| [q.title, q.id, {"data-type": q.question_type}]}),
                 prompt: "--- Question ---",
-                placeholder: "Question Type", id: "question_id",
+                id: "question_id", data: { behavior: "questions_select" },
                 class: "form-control input-sm"
-            .form-group
-              %label{for: "question_type"} Type
-              = select_tag :question_type,
-                options_for_select(Question::QUESTION_TYPES),
-                prompt: "--- Type of question ---",
-                placeholder: "Question Type", id: "question_type",
-                class: "form-control input-sm"
+
+            .form-group#select-content
             = button_tag "SEARCH", class: "btn btn-default btn-sm"
-        %table.table.table-hover
-          %thead
-            %tr
-              %th
-                Submission date
-              %th
-                Survey name
-              %th
-                User
-          %tbody
-            = render @submissions
+
+        .submission-items
+          = render @submissions
+
       .modal-footer
         - unless @submissions.next_page.nil?
           = link_to fa_icon("undo", text: "LOAD MORE SUBMISSIONS"),

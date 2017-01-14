@@ -1,0 +1,9 @@
+- if @choices.present? && @choices.any?
+  $("#select-content").html("#{  j render("choice_select", choices: @choices) }");
+- elsif @images.present? && @images.any?
+  $("#select-content").html("#{  j render("image_select", images: @images) }");
+- elsif @multiple.present? && @multiple.any?
+  $("#select-content").html("#{  j render("choice_multiple_select", choices: @multiple) }");
+- else
+  $("#select-content").empty();
+

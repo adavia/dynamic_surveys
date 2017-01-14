@@ -1,12 +1,17 @@
-%tr
-  %th
-    = answer.question.title
-  %th
-    - if answer.answer_date.present?
-      = answer.answer_date.response.strftime("%m/%d/%Y")
-    - if answer.answer_open.present?
-      = answer.answer_open.response
-  %th
-    = answer.created_at.strftime("%m/%d/%Y at %I:%M%p")
-  %th
-    = answer.submission.user.email
+.modal-item
+  .row
+    .col-md-3
+      Question:
+      = answer.question.title
+    .col-md-3
+      Answer:
+      - if answer.answer_date.present?
+        = answer.answer_date.response.strftime("%m/%d/%Y")
+      - if answer.answer_open.present?
+        = answer.answer_open.response
+    .col-md-3
+      Answered on:
+      = answer.created_at.strftime("%m/%d/%Y at %I:%M%p")
+    .col-md-3
+      Answered by:
+      = answer.submission.user.email

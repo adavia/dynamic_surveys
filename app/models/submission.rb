@@ -36,7 +36,15 @@ class Submission < ApplicationRecord
     joins(:questions).where("questions.id": id)
   end
 
-  def self.question_type(type)
-    joins(:questions).where("questions.question_type": type)
+  def self.choice_id(id)
+    joins(answers: :choice_answer).where("choice_answers.choice_id": id)
+  end
+
+  def self.choice_multiple_id(id)
+    joins(answers: {answer_multiple: :choice_answers}).where("choice_answers.choice_id": id)
+  end
+
+  def self.image_id(id)
+    joins(answers: :answer_image).where("answer_images.image_id": id)
   end
 end

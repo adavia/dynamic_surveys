@@ -36,7 +36,7 @@
     %li.list-group-item
       .clearfix
         = link_to "Show answer responses", [question, :answers],
-          remote: true, class: "pull-left light-link"
+          remote: true, class: "pull-left"
         .export-links
           = link_to "Export CSV", question_answers_path(question, format: "csv"),
             class: "btn btn-xs btn-primary"

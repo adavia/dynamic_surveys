@@ -35,7 +35,7 @@
       .modal-footer
         #submissions-count.pull-left
           %span
-            = @submissions.size
+            = @submissions.total_entries
           Submissions
         - unless @submissions.next_page.nil?
           = link_to fa_icon("undo", text: "LOAD MORE SUBMISSIONS"),

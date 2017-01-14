@@ -36,7 +36,7 @@
         #submissions-count.pull-left
           %span
             = @submissions.total_entries
-          Submissions
+          entries
         - unless @submissions.next_page.nil?
           = link_to fa_icon("undo", text: "LOAD MORE SUBMISSIONS"),
           survey_submissions_path(@survey, page: @submissions.next_page),

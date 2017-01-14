@@ -11,7 +11,7 @@ class Submission < ApplicationRecord
 
   validate :must_complete_all_answers
 
-  self.per_page = 2
+  self.per_page = 15
 
   def must_complete_all_answers
     if questions.any? && answers.empty?

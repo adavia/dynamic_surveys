@@ -12,7 +12,7 @@
           class: "btn btn-xs btn-primary"
         = link_to fa_icon("filter", text: "FILTER SUBMISSIONS"), [survey, :submissions],
           remote: true, class: "btn btn-xs btn-primary"
-      = link_to fa_icon("pencil", text: "SUBMIT"), [:new, survey, :submission],
+      = link_to fa_icon("check", text: "SUBMIT"), [:new, survey, :submission],
         class: "btn btn-xs btn-default"
       - if policy(survey).update?
         = link_to fa_icon("edit", text: "EDITION"), [:edit, survey.customer, survey],

@@ -29,7 +29,7 @@ class Question
     #option_button = $("[data-behavior='add_option_fields']")
     image_button  = $("[data-behavior='add_image_fields']")
 
-    if @el.val() not in ["open", "date", "rating"]
+    if @el.val() not in ["open", "date", "rating", "description", "phone", "email"]
       @el.closest(".question-fields").find(choice_button).removeClass("hidden")
       #if @el.val() == "7"
         #@el.closest(".question-fields").find(option_button).removeClass("hidden")

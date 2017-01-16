@@ -1,6 +1,6 @@
 module QuestionsHelper
   def show_choice_button(question_type)
-    if ["open", "date", "image", "rating"].include?(question_type) || question_type.nil?
+    if ["open", "date", "description", "phone", "email", "image", "rating"].include?(question_type) || question_type.nil?
       "hidden"
     end
   end

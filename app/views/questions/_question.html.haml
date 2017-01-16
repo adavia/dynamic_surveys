@@ -32,14 +32,15 @@
         - else
           0
       Average rating
-  - if ["open", "date"].include? question.question_type
-    %li.list-group-item
-      .clearfix
-        = link_to "Show answer responses", [question, :answers],
-          remote: true, class: "pull-left"
-        .export-links
-          = link_to "Export CSV", question_answers_path(question, format: "csv"),
-            class: "btn btn-xs btn-primary"
+  - if ["open", "date", "description", "phone", "email"].include? question.question_type
+    - if question.answers.any?
+      %li.list-group-item
+        .clearfix
+          = link_to "Show answer responses", [question, :answers],
+            remote: true, class: "pull-left"
+          .export-links
+            = link_to "Export CSV", question_answers_path(question, format: "csv"),
+              class: "btn btn-xs btn-primary"
 
 .text-center
   - if ["single", "list"].include? question.question_type

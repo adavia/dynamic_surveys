@@ -1,6 +1,9 @@
 class Question < ApplicationRecord
   QUESTION_TYPES = {
     "Open":               "open",
+    "Open Description":   "description",
+    "Phone Number":       "phone",
+    "Email Address":      "email",
     "Single Choice":      "single",
     "Single Choice List": "list",
     "Multiple Choice":    "multiple",
@@ -56,7 +59,7 @@ class Question < ApplicationRecord
       #errors.add(:question_type, "You must add a possible option!")
     #elsif question_type == 7 && images.reject(&:marked_for_destruction?).any?
       #errors.add(:question_type, "This is not allowed!")
-    elsif ["open", "date", "rating"].include?(question_type) && (choices.reject(&:marked_for_destruction?).any? || images.reject(&:marked_for_destruction?).any?)
+    elsif ["open", "date", "rating", "description", "phone", "email"].include?(question_type) && (choices.reject(&:marked_for_destruction?).any? || images.reject(&:marked_for_destruction?).any?)
       errors.add(:question_type, "You must select a valid question type!")
     end
   end

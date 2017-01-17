@@ -12,12 +12,9 @@
     .media
       .media-left
         - if current_user.image.present?
-          = image_tag(current_user.image.url(:thumb),
-            class: "img-responsive img-thumbnail",
-            width: 100, style: 'overflow-y: hidden; height: 100px;')
+          .img-preview{style: "background-image: url(#{current_user.image.url(:thumb)})"}
         - else
-          = image_tag("default_user", class: "img-responsive img-thumbnail",
-            width: 100, style: 'overflow-y: hidden; height: 100px;')
+          .img-preview{style: "background-image: url(#{asset_path('default_user.png')})"}
       .media-body
         .file-upload
           %span Upload an image for your profile

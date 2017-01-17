@@ -9,12 +9,9 @@
     .media
       .media-left
         - if f.object.avatar.present?
-          = image_tag(f.object.avatar.url(:thumb),
-            class: "img-responsive img-thumbnail",
-            width: 100, style: 'overflow-y: hidden; height: 100px;')
+          .img-preview{style: "background-image: url(#{f.object.avatar.url(:thumb)})"}
         - else
-          = image_tag("default_avatar", class: "img-responsive img-thumbnail",
-            width: 100, style: 'overflow-y: hidden; height: 100px;')
+          .img-preview{style: "background-image: url(#{asset_path('default_avatar.png')})"}
       .media-body
         .file-upload
           %span Upload an avatar for the survey

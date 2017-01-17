@@ -100,12 +100,12 @@ small.handle {
   cursor: move;
 }
 
-.image-fields, .info-image-fields {
+.image-fields {
   margin-bottom: 15px;
   .media-body {
     width: inherit;
     .file-upload {
-      margin-top: 15px;
+      margin-top: 10px;
       margin-bottom: 5px;
     }
   }
@@ -232,11 +232,10 @@ small.handle {
 .file-upload {
   @extend .btn;
   @extend .btn-primary;
-  @extend .btn-sm;
+  @extend .btn-xs;
 
   position: relative;
   overflow: hidden;
-  margin-bottom: 15px;
 }
 
 .file-upload input.upload {
@@ -256,6 +255,14 @@ small.handle {
   margin-bottom: 10px;
   border-left: 6px solid #6d26ff;
   background-color: #F1F1F1;
+}
+
+.img-preview {
+  height: 60px;
+  width: 60px;
+  background-size: cover;
+  background-position: center;
+  background-color: #FFF;
 }
 
 /* MARGINS */

@@ -1,14 +1,11 @@
 = f.input :info_body, label: false, placeholder: "Informative text"
-.info-image-fields
+.image-fields#info-img
   .media
     .media-left
       - if f.object.info_image.present?
-        = image_tag(f.object.info_image.url(:thumb),
-          class: "img-responsive img-thumbnail",
-            width: 80, style: 'overflow-y: hidden; height: 80px;')
+        .img-preview{style: "background-image: url(#{f.object.info_image.url(:thumb)})"}
       - else
-        = image_tag("default_avatar", class: "img-responsive img-thumbnail",
-          width: 80, style: 'overflow-y: hidden; height: 80px;')
+        .img-preview{style: "background-image: url(#{asset_path('default_avatar.png')})"}
     .media-body
       .file-upload.btn.btn-primary.btn-xs
         %span Upload an image
@@ -17,7 +14,7 @@
 
       - if f.object.info_image?
         = f.hidden_field :remove_info_image
-        = link_to fa_icon("trash-o"), "#", data: { behavior: "remove_info_image_fields" },
+        = link_to fa_icon("trash-o"), "#", data: { behavior: "remove_image_fields" },
           class: "pull-right", title: "Remove this image"
 
       %p Images should be around 300x300 for a better size

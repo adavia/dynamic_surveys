@@ -1,8 +1,8 @@
-Survey #{@submission.survey.name} has been rated with the following stars:
+= t("app.survey.email.text_primary", name: @submission.survey.name)
 __________________________________________________________________________
 
 - @submission.answers.each do |answer|
   - if answer.answer_raiting.present?
     = answer.question.title
-    Response:
+    = t("app.answer.title")
     = answer.answer_raiting.response

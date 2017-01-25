@@ -1,7 +1,8 @@
 = simple_form_for @user do |f|
-  = f.input :name, placeholder: "Name"
-  = f.input :last_name, placeholder: "Last Name"
-  = f.input :email, placeholder: "Email"
-  = f.input :password, placeholder: "Password"
-  = f.input :password_confirmation, placeholder: "Password Confirmation"
-  = f.button :submit, "SIGN UP", class: "btn-default btn-block btn-main"
+  = f.input :name, label: false, placeholder: User.human_attribute_name(:name)
+  = f.input :last_name, label: false, placeholder: User.human_attribute_name(:last_name)
+  = f.input :email, label: false, placeholder: User.human_attribute_name(:email)
+  = f.input :password, label: false, placeholder: User.human_attribute_name(:password)
+  = f.input :password_confirmation, label: false,
+    placeholder: User.human_attribute_name(:password_confirmation)
+  = f.button :submit, t("account.links.signup"), class: "btn-default btn-block btn-main"

@@ -1,13 +1,14 @@
 = simple_form_for @user do |f|
   - if @user.errors.any?
     .alert.alert-danger
-      = @user.errors[:image][0] || "Check the errors below"
+      = @user.errors[:image][0] || t("app.errors_default")
 
-  = f.input :name, label: false, placeholder: "Name"
-  = f.input :last_name, label: false, placeholder: "Last Name"
-  = f.input :email, label: false, placeholder: "Email"
-  = f.input :password, label: false, placeholder: "Password"
-  = f.input :password_confirmation, label: false, placeholder: "Password Confirmation"
+  = f.input :name, label: false, placeholder: User.human_attribute_name(:name)
+  = f.input :last_name, label: false, placeholder: User.human_attribute_name(:last_name)
+  = f.input :email, label: false, placeholder: User.human_attribute_name(:email)
+  = f.input :password, label: false, placeholder: User.human_attribute_name(:password)
+  = f.input :password_confirmation, label: false,
+    placeholder: User.human_attribute_name(:password_confirmation)
   .image-fields
     .media
       .media-left
@@ -17,14 +18,15 @@
           .img-preview{style: "background-image: url(#{asset_path('default_user.png')})"}
       .media-body
         .file-upload
-          %span Upload an image for your profile
+          %span= t "app.user.edit.image_upload"
           = f.file_field :image, label: false, class: "upload"
           = f.input :image_cache, as: :hidden
 
         - if f.object.image?
           = f.hidden_field :remove_image
           = link_to fa_icon("trash-o"), "#", data: { behavior: "remove_image_fields" },
-            class: "pull-right", title: "Remove this image"
+            class: "pull-right", title: t("app.user.edit.image_remove")
 
-        %p Images should be around 300x300 for a better size
-  = f.button :submit, "Submit user", class: "btn-default btn-block btn-main"
+        %p= t "app.user.edit.image_text"
+  = f.button :submit, t("app.user.index.links.form_button"),
+    class: "btn-default btn-block btn-main"

@@ -1,15 +1,15 @@
 - content_for :sub_nav do
   .col-md-5
     %h1
-      Survey submission
+      = t "app.submission.links.subnav"
   .col-md-3
     %ul.list-inline
       - if policy(@survey).show?
         %li
-          = link_to "SHOW SURVEY REPORT", [@survey.customer, @survey],
+          = link_to t("app.submission.links.survey_report"), [@survey.customer, @survey],
             class: "btn btn-sm btn-primary"
       %li
-        = link_to "#{@survey.customer.surveys_count} surveys total",
+        = link_to "#{@survey.customer.surveys_count} #{Survey.human_attribute_name(:class_name).downcase} total",
           [@survey.customer, :surveys]
 
 .container
@@ -22,13 +22,15 @@
             = fa_icon "chevron-down"
           %ul.dropdown-menu
             %li
-              = link_to "Surveys list", [@survey.customer, :surveys]
+              = link_to t("app.survey.show.links.survey_list"), [@survey.customer, :surveys]
             - if policy(@survey).show?
               %li
-                = link_to "Survey report", [@survey.customer, @survey]
+                = link_to t("app.submission.links.survey_report_dropdown"),
+                  [@survey.customer, @survey]
             - if policy(@survey).update?
               %li
-                = link_to "Edit survey", [:edit, @survey.customer, @survey]
+                = link_to t("app.survey.show.links.survey_edit"),
+                  [:edit, @survey.customer, @survey]
         %h1
           = @survey.name
         %p
@@ -36,9 +38,9 @@
 
         - if @submission.errors.any?
           .alert.alert-danger
-            Something went wrong during this submission. Check the errors below.
+            = t "app.submission.create.error"
         %h2
-          Questions
+          = t "app.submission.links.survey_question_title"
         = render "form"
 
 - if @survey.avatar.present?

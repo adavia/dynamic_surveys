@@ -11,9 +11,10 @@
           = render @answers
       .modal-footer
         - unless @answers.next_page.nil?
-          = link_to fa_icon("undo", text: "LOAD MORE ANSWERS"),
+          = link_to fa_icon("undo", text: t("app.answer.answer_results_button")),
           question_answers_path(@question, page: @answers.next_page),
-          remote: true, title: "Load more answers!",
-          data: { "disable-with": "loading.." },
+          remote: true, title: t("app.answer.answer_results_button"),
+          data: { "disable-with": t("app.loading") },
           class: "btn btn-sm btn-default text-center", id: "show_more"
-        %button.btn.btn-sm.btn-primary{"data-dismiss": "modal", type: "button"} Close
+        %button.btn.btn-sm.btn-primary{"data-dismiss": "modal", type: "button"}
+          = t("app.answer.answer_close_button")

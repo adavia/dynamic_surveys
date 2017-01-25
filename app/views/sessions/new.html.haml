@@ -1,9 +1,9 @@
-%h1.text-center Access your account
-%p.text-center.text-light Use your credentials to access the app
+%h1.text-center= t "app.session.new.text_primary"
+%p.text-center.text-light= t "app.session.new.text_secondary"
 = simple_form_for :session, { url: sessions_path } do |f|
-  = f.input :email, placeholder: "Email"
-  = f.input :password, placeholder: "Password"
-  = f.button :submit, "SIGN IN", class: "btn-default btn-block btn-main"
+  = f.input :email, label: false, placeholder: User.human_attribute_name(:email)
+  = f.input :password, label: false, placeholder: User.human_attribute_name(:password)
+  = f.button :submit, t("account.links.signin"), class: "btn-default btn-block btn-main"
 %p.text-center
-  Don't have an account?
-  = link_to "Sign Up", [:new, :user], class: "link-default"
+  = t "app.session.new.text_footer"
+  = link_to t("account.links.signup").capitalize, [:new, :user], class: "link-default"

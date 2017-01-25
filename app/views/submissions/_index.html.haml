@@ -5,29 +5,32 @@
         %button.close{"aria-label": "Close", "data-dismiss": "modal", type: "button"}
           %span{"aria-hidden": "true"} ×
         %h1.text-center.m-t-0
-          #{@survey.customer.name} Survey Submissions
+          = t "app.submission.index.subnav"
+          %small
+            = @survey.name
       .modal-body
         .submission-search.center-block
           = form_tag(survey_submissions_path(@survey), method: "get",
             id: "submission-search-form", remote: true) do
             .form-group
               = text_field_tag :created_after, params[:created_after],
-                placeholder: "Select a beginning date",
+                placeholder: t("app.submission.index.search_start_date"),
                 class: "form-control input-sm", data: { behavior: "date-picker" }
             .form-group
               = text_field_tag :created_before, params[:created_before],
-                placeholder: "Select an ending date",
+                placeholder: t("app.submission.index.search_end_date"),
                 class: "form-control input-sm", data: { behavior: "date-picker" }
             .form-group
               = select_tag :question_id,
                 options_for_select(@survey.questions.collect {|q| [q.title, q.id, {"data-type": q.question_type}]}),
-                prompt: "--- Question ---",
+                prompt: t("app.submission.index.search_question"),
                 data: { behavior: "questions_select" },
                 class: "form-control input-sm"
 
             .form-group#select-content
-            = submit_tag "SEARCH", class: "btn btn-default btn-block btn-sm",
-              data: { disable_with: "loading results.."}
+            = submit_tag t("app.submission.index.search_button"),
+              class: "btn btn-default btn-block btn-sm",
+              data: { disable_with: t("app.submission.index.search_button_load")}
 
         .submission-items
           = render @submissions
@@ -36,11 +39,12 @@
         #submissions-count.pull-left
           %span
             = @submissions.total_entries
-          entries
+          = t("app.submission.index.entries")
         - unless @submissions.next_page.nil?
-          = link_to fa_icon("undo", text: "LOAD MORE SUBMISSIONS"),
+          = link_to fa_icon("undo", text: t("app.submission.index.submission_results_button")),
           survey_submissions_path(@survey, page: @submissions.next_page),
-          remote: true, title: "Load more submissions!",
-          data: { "disable-with": "loading.." },
+          remote: true, title: t("app.submission.index.submission_results_button"),
+          data: { "disable-with": t("app.loading") },
           class: "btn btn-sm btn-default text-center", id: "show_more"
-        %button.btn.btn-sm.btn-primary{"data-dismiss": "modal", type: "button"} Close
+        %button.btn.btn-sm.btn-primary{"data-dismiss": "modal", type: "button"}
+          = t "app.submission.index.submission_close_button"

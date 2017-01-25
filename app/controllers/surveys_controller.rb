@@ -39,7 +39,7 @@ class SurveysController < ApplicationController
     respond_to do |format|
       if @survey.save
         format.html { redirect_to [:edit, @customer, @survey],
-          flash: { success: "The survey has been created successfully."}}
+          flash: { success: t("app.survey.create.alert")}}
         format.js   {}
         format.json {
           render json: @survey, status: :created, location: @survey
@@ -64,7 +64,7 @@ class SurveysController < ApplicationController
     respond_to do |format|
       if @survey.update(survey_params)
         format.html { redirect_to [:edit, @customer, @survey],
-          flash: { success: "The survey has been updated successfully."}}
+          flash: { success: t("app.survey.update.alert")}}
         format.js   {}
         format.json {
           render json: @survey, status: :created, location: @survey
@@ -84,7 +84,7 @@ class SurveysController < ApplicationController
     @survey.archive
     respond_to do |format|
       format.html { redirect_to [@customer, :surveys],
-          flash: { success: "The survey has been archived successfully."}}
+          flash: { success: t("app.survey.archive.alert")}}
       format.js {}
     end
   end

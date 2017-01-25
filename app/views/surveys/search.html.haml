@@ -4,10 +4,11 @@
   .col-md-3
     %ul.list-inline
       %li
-        = link_to "All CUSTOMERS", customers_path
+        = link_to t("app.customer.index.links.customer_all"), customers_path
       - if is_admin?
         %li
-          = link_to "NEW CUSTOMER", [:new, :admin, current_user, :customer]
+          = link_to t("app.customer.index.links.customer_new"),
+            [:new, :admin, current_user, :customer]
 
 .container
   - @surveys.each_slice(2) do |(b1, b2)|

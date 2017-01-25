@@ -7,7 +7,7 @@ class Admin::ApplicationController < ApplicationController
   def authorize_admin!
     authenticate_user
     unless current_user.admin?
-      redirect_to customers_url, flash: { info: "You must be an admin to do that."}
+      redirect_to customers_url, flash: { info: t("app.alert_admin") }
     end
   end
 end

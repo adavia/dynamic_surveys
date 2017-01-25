@@ -20,7 +20,7 @@ class Admin::UsersController < Admin::ApplicationController
       build_roles_for(@user)
       if @user.save
         format.html { redirect_to [:admin, :users],
-          flash: { success: "The user has been created successfully."}}
+          flash: { success: t("app.user.admin_new.alert")}}
         format.js   {}
         format.json { render json: @user,
           status: :created, location: @user }
@@ -45,7 +45,7 @@ class Admin::UsersController < Admin::ApplicationController
         build_roles_for(@user)
         if @user.update(user_params)
           format.html { redirect_to [:admin, :users],
-            flash: { success: "The user has been updated successfully."}}
+            flash: { success: t("app.user.admin_edit.alert")}}
           format.js   {}
           format.json {
             render json: @user, status: :created, location: @user
@@ -63,10 +63,10 @@ class Admin::UsersController < Admin::ApplicationController
 
   def archive
     if @user == current_user
-      flash[:danger] = "You cannot archive yourself!"
+      flash[:danger] = t("app.user.archive.fail")
     else
       @user.archive
-      flash[:success] = "User has been archived."
+      flash[:success] = t("app.user.archive.success")
     end
 
     redirect_to [:admin, :users]

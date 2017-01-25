@@ -1,0 +1,483 @@
+es:
+  account:
+    header_title: "Personaliza tus encuestas"
+    links:
+      signup: "REGÍSTRATE"
+      signin: "INGRESA AL SITIO"
+    footer:
+      subscription_text: "Suscríbete a nuestro blog"
+      button: "SUSCRÍBETE"
+      placeholder: "Correo electrónico"
+      rights: "Social Surveys todos los derechos reservados 2016"
+  app:
+    loading: "cargando.."
+    errors_default: "Revisa los siguientes errores"
+    alert_auth: "Tienes que estar autenticado para realizar esta acción."
+    alert_permission: "No estás autorizado para realizar esta acción."
+    alert_404: "La página que has solicitado no existe."
+    alert_admin: "Debes ser un administrador para realizar esta acción."
+    links:
+      customer_all: "Listar todos los clientes"
+      customer_new: "Crear nuevo cliente"
+      user_all: "Listar todos los usuarios"
+      user_new: "Crear nuevo usuario"
+      sign_out: "CERRAR SESIÓN"
+    search_form:
+      button: "BUSCAR"
+      placeholder: "Buscar encuestas"
+    subnav:
+      welcome: "Bienvenido"
+      signed_in_as: "Registrado como"
+    customer:
+      form_button: "Guardar cliente"
+      index:
+        links:
+          subnav: "Administra los siguientes clientes"
+          show_surveys: "LISTAR ENCUESTAS DE CLIENTE"
+          customer_all: "LISTAR CLIENTES"
+          customer_new: "NUEVO CLIENTE"
+          customer_show: "Mostrar información del cliente"
+          customer_edit: "Editar información del cliente"
+          customer_archive: "Archivar cliente"
+          survey_new: "Crear nueva encuesta"
+      show:
+        subnav: "Detalles del cliente"
+        text_chart: "Encuestas creadas por fecha"
+      new:
+        text_primary: "Crea un nuevo cliente"
+        text_secondary: "Completa los siguientes campos"
+        alert: "El cliente ha sido creado exitosamente."
+      edit:
+        text_primary: "Actualiza la información del cliente"
+        text_secondary: "Edita los siguientes campos"
+        alert: "El cliente ha sido editado exitosamente."
+      archive:
+        alert: "El cliente ha sido archivado exitosamente"
+    user:
+      roles:
+        editor: "Editor"
+        viewer: "Visualizador"
+      index:
+        links:
+          subnav: "Administra los siguientes usuarios"
+          user_all: "LISTAR USUARIOS"
+          user_new: "NUEVO USUARIO"
+          user_edit: "Editar información del usuario"
+          user_archive: "Archivar usuario"
+          archive_alert: "Está seguro que desea archivar este usuario?"
+          form_button: "Guardar usuario"
+      show:
+        subnav: "Detalles del perfil de usuario"
+        roles: "Roles asignados"
+        no_roles: "Este usuario no tiene roles asignados."
+        details: "detalles de cuenta"
+        text_primary: "Edita los datos de tu cuenta"
+      new:
+        text_primary: "Crea una nueva cuenta"
+        text_secondary: "Completa los siguientes campos y comienza a crear encuestas!"
+        alert: "Tu cuenta ha sido creada exitosamente!"
+      edit:
+        image_upload: "Sube una imágen de perfil"
+        image_text: "La imágen debe tener un tamaño máximo de 300x300"
+        image_remove: "Elimina esta imágen"
+        alert: "Tu información ha sido actualizada exitosamente."
+      admin_new:
+        subnav: "Crea una nueva cuenta de usuario"
+        text_primary: "Completa los siguientes campos para crear una nueva cuenta"
+        customer_roles: "Roles de clientes"
+        customer_roles_prompt: "--- Seleccione rol de cliente ---"
+        alert: "El usuario ha sido creado exitosamente."
+      admin_edit:
+        subnav: "Actualiza los siguientes datos"
+        text_primary: "Edita los siguientes campos para actualizar la información"
+        alert: "El usuario ha sido actualizado exitosamente."
+      archive:
+        success: "El usuario ha sido archivado."
+        fail: "No puedes archivarte a tí mismo!"
+    session:
+      new:
+        text_primary: "Accede a tu cuenta"
+        text_secondary: "Utiliza tus credenciales para acceder al sitio"
+        text_footer: "No tienes ninguna cuenta creada?"
+      create:
+        alert_locked: "Tu cuenta ha sido bloqueada."
+        alert_valid: "Tus credenciales no son válidas. Inténtalo de nuevo."
+      destroy:
+        alert: "Hasta luego!"
+    survey:
+      form_button: "Guardar encuesta"
+      form_button_load: "Guardando encuesta.."
+      index:
+        links:
+          subnav: "Encuestas del cliente"
+          survey_all: "LISTAR ENCUESTAS"
+          survey_new: "CREAR NUEVA ENCUESTA"
+          survey_edit: "EDICION"
+          survey_archive: "Archivar encuesta"
+          archive_alert: "Está seguro que desea archivar esta encuesta?"
+          survey_report: "REPORTE"
+          survey_submissions: "FILTRO DE ENVÍOS"
+          survey_submission: "ENVIAR"
+          avatar_upload: "Sube una imágen para esta encuesta"
+          avatar_text: "La imágen debe tener un tamaño máximo de 1200x600"
+          avatar_remove: "Elimina esta imágen"
+          question_add: "Agrega algunas preguntas"
+      show:
+        links:
+          survey_submit: "Completa esta encuesta"
+          survey_list: "Listado de encuestas"
+          survey_edit: "Edita la encuesta"
+          survey_pdf: "Genera reporte en PDF"
+          survey_questions: "Preguntas de la encuesta"
+        subnav: "Reporte de encuesta y estadísticas"
+        survey_submit: "ENVÍA ESTA ENCUESTA"
+        text_primary: "Estadísticas"
+        survey_submissions: "envíos de encuesta"
+        survey_export: "Exportar CSV"
+        type_of_questions: "Tipo de preguntas"
+        results_by_type: "Resultados por tipo de pregunta"
+        answers: "Respuestas"
+        answer_show: "Mostrar respuestas"
+        average_rating: "Calificación promedio"
+      new:
+        subnav: "Crear nueva encuesta"
+        text_primary: "Completa los siguientes campos para crear una nueva encuesta"
+      edit:
+        subnav: "Actualiza la encuesta"
+        text_primary: "Completa los siguientes campos para editar esta encuesta"
+        survey_report: "REPORTE DE ENCUESTA"
+      create:
+        alert: "La encuesta ha sido creada exitosamente."
+      update:
+        alert: "La encuesta ha sido editada exitosamente."
+      archive:
+        alert: "La encuesta ha sido archivada exitosamente."
+      email:
+        subject: "Notificación de calificación de encuesta"
+        text_primary: "La encuesta %{name} ha sido calificada con las siguientes estrellas:"
+        footer: "La encuesta ha sido calificada por %{user} en - %{date}"
+    question:
+      question_title: "Pregunta"
+      links:
+        question_remove: "Eliminar pregunta"
+        question_drag: "ARRASTRAR"
+      info:
+        button: "Desplegar contenido informativo"
+        text_primary: "Agrega contenido informativo"
+        image_upload: "Agrega una imágen"
+        image_text: "La imágen debe tener un tamaño máximo de 300x300"
+        image_remove: "Elimina esta imágen"
+      question_types:
+        open: "Abierta"
+        description: "Descripción"
+        phone: "Telefónica"
+        email: "Correo electrónico"
+        single: "Única respuesta"
+        list: "Única respuesta en lista"
+        multiple: "Múltiples respuestas"
+        date: "Fecha"
+        image: "Imágenes"
+        rating: "Calificación"
+    choice:
+      links:
+        choice_add: "Agrega alguna opción"
+    image:
+      links:
+        image_add: "Agrega alguna imágen"
+        file_upload: "Sube una imágen para esta pregunta"
+        file_text: "La imágen debe tener un tamaño máximo de 300x300"
+        file_remove: "Elimina esta imágen"
+    submission:
+      links:
+        subnav: "Envía esta encuesta"
+        survey_report: "REPORTE DE ENCUESTA"
+        survey_report_dropdown: "Reporte de encuesta"
+        survey_question_title: "Preguntas"
+        form_button: "Generar envío"
+        form_button_load: "Guardando envío de encuesta.."
+      show:
+        subnav: "Enviado por"
+        submission_sent: "Enviado hace"
+      index:
+        subnav: "Listado de envíos"
+        search_start_date: "Seleccione fecha de inicio"
+        search_end_date: "Seleccione fecha de finalización"
+        search_question: "-- Pregunta --"
+        search_choice: "-- Opción --"
+        search_image: "-- Imágen --"
+        search_button: "BUSCAR"
+        search_button_load: "cargando resultados.."
+        submission_date: "Enviado el"
+        submission_survey: "Encuesta"
+        submission_by: "Enviado por"
+        submission_answers_button: "Mostrar respuestas"
+        submission_results_button: "Mostrar más envíos"
+        submission_close_button: "Cerrar"
+        entries: "resultados"
+      create:
+        alert: "La encuesta ha sido enviada exitosamente!"
+        error: "Revisa los siguientes errores."
+    answer:
+      title: "Respuesta"
+      question: "Pregunta"
+      phone: "Teléfono"
+      email: "Correo electrónico"
+      answer_results_button: "Mostrar más respuestas"
+      answer_close_button: "Cerrar"
+      answered_on: "Contestado en"
+      answered_by: "Contestado por"
+  activerecord:
+    attributes:
+      user:
+        class_name: "Usuario"
+        name: "Nombre"
+        last_name: "Apellido"
+        email: "Correo electrónico"
+        password: "Contraseña"
+        password_confirmation: "Confirmación de contraseña"
+        admin: "Es un administrador?"
+      customer:
+        class_name: "Cliente"
+        name: "Nombre"
+        description: "Descripción"
+      survey:
+        class_name: "Encuestas"
+        name: "Nombre"
+        description: "Descripción"
+      question:
+        class_name: "Preguntas"
+        title: "Cual es tu pregunta?"
+        info_body: "Texto informativo"
+        question_type: "-- Selecciona el tipo de pregunta --"
+      image:
+        class_name: "Images"
+      choice:
+        class_name: "Opción"
+        title: "Agrega una posible respuesta"
+      answer_open:
+        response: "Ingresa tu respuesta"
+    errors:
+      messages:
+        add_question: "Debe agregar al menos una pregunta a la encuesta."
+        completed_answers: "Debe completar todas las preguntas antes de enviar la encuesta!"
+        select_rate: "Debe seleccionar una calificación"
+        select_image: "Debe seleccionar una imágen de la lista"
+        image_upload: "Debes seleccionar una imágen!"
+        add_choice: "Debes seleccionar una opción!"
+        valid_question_type: "Debes seleccionar un tipo de pregunta válido!"
+        not_allowed: "Esto no está permitido"
+        record_invalid: "La validación falló: %{errors}"
+        restrict_dependent_destroy:
+          has_one: No se puede eliminar el registro porque existe un %{record} dependiente
+          has_many: No se puede eliminar el registro porque existen %{record} dependientes
+  date:
+    created_at: "Creado en "
+    abbr_day_names:
+    - dom
+    - lun
+    - mar
+    - mié
+    - jue
+    - vie
+    - sáb
+    abbr_month_names:
+    -
+    - ene
+    - feb
+    - mar
+    - abr
+    - may
+    - jun
+    - jul
+    - ago
+    - sep
+    - oct
+    - nov
+    - dic
+    day_names:
+    - domingo
+    - lunes
+    - martes
+    - miércoles
+    - jueves
+    - viernes
+    - sábado
+    formats:
+      custom: "%b %d, %Y"
+      default: "%d/%m/%Y"
+      long: "%d de %B de %Y"
+      short: "%d de %b"
+    month_names:
+    -
+    - enero
+    - febrero
+    - marzo
+    - abril
+    - mayo
+    - junio
+    - julio
+    - agosto
+    - septiembre
+    - octubre
+    - noviembre
+    - diciembre
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: alrededor de 1 hora
+        other: alrededor de %{count} horas
+      about_x_months:
+        one: alrededor de 1 mes
+        other: alrededor de %{count} meses
+      about_x_years:
+        one: alrededor de 1 año
+        other: alrededor de %{count} años
+      almost_x_years:
+        one: casi 1 año
+        other: casi %{count} años
+      half_a_minute: medio minuto
+      less_than_x_minutes:
+        one: menos de 1 minuto
+        other: menos de %{count} minutos
+      less_than_x_seconds:
+        one: menos de 1 segundo
+        other: menos de %{count} segundos
+      over_x_years:
+        one: más de 1 año
+        other: más de %{count} años
+      x_days:
+        one: 1 día
+        other: "%{count} días"
+      x_minutes:
+        one: 1 minuto
+        other: "%{count} minutos"
+      x_months:
+        one: 1 mes
+        other: "%{count} meses"
+      x_years:
+        one: 1 año
+        other: "%{count} años"
+      x_seconds:
+        one: 1 segundo
+        other: "%{count} segundos"
+    prompts:
+      day: Día
+      hour: Hora
+      minute: Minutos
+      month: Mes
+      second: Segundos
+      year: Año
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: debe ser aceptado
+      blank: no puede estar en blanco
+      present: debe estar en blanco
+      confirmation: no coincide
+      empty: no puede estar vacío
+      equal_to: debe ser igual a %{count}
+      even: debe ser par
+      exclusion: está reservado
+      greater_than: debe ser mayor que %{count}
+      greater_than_or_equal_to: debe ser mayor que o igual a %{count}
+      inclusion: no está incluido en la lista
+      invalid: no es válido
+      less_than: debe ser menor que %{count}
+      less_than_or_equal_to: debe ser menor que o igual a %{count}
+      model_invalid: "La validación falló: %{errors}"
+      not_a_number: no es un número
+      not_an_integer: debe ser un entero
+      odd: debe ser impar
+      required: debe existir
+      taken: ya está en uso
+      too_long:
+        one: "es demasiado largo (1 carácter máximo)"
+        other: "es demasiado largo (%{count} caracteres máximo)"
+      too_short:
+        one: "es demasiado corto (1 carácter mínimo)"
+        other: "es demasiado corto (%{count} caracteres mínimo)"
+      wrong_length:
+        one: "no tiene la longitud correcta (1 carácter exactos)"
+        other: "no tiene la longitud correcta (%{count} caracteres exactos)"
+      other_than: debe ser distinto de %{count}
+    template:
+      body: 'Se encontraron problemas con los siguientes campos:'
+      header:
+        one: No se pudo guardar este/a %{model} porque se encontró 1 error
+        other: No se pudo guardar este/a %{model} porque se encontraron %{count} errores
+  helpers:
+    select:
+      prompt: Por favor seleccione
+    submit:
+      create: Crear %{model}
+      submit: Guardar %{model}
+      update: Actualizar %{model}
+  number:
+    currency:
+      format:
+        delimiter: "."
+        format: "%n %u"
+        precision: 2
+        separator: ","
+        significant: false
+        strip_insignificant_zeros: false
+        unit: "€"
+    format:
+      delimiter: "."
+      precision: 3
+      separator: ","
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion: mil millones
+          million:
+            one: millón
+            other: millones
+          quadrillion: mil billones
+          thousand: mil
+          trillion:
+            one: billón
+            other: billones
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 1
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ''
+        format: "%n %"
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: " y "
+      two_words_connector: " y "
+      words_connector: ", "
+  time:
+    am: am
+    formats:
+      default: "%A, %d de %B de %Y %H:%M:%S %z"
+      long: "%d de %B de %Y %H:%M"
+      short: "%d de %b %H:%M"
+      custom: "%b %d, %Y"
+    pm: pm

@@ -1,31 +1,35 @@
 - content_for :sub_nav do
-  .col-md-6
-    %h1 #{@user} profile details
-  .col-md-2
+  .col-md-5
+    %h1= t "app.user.show.subnav"
+  .col-md-3
     %ul.list-inline
       %li
-        = link_to "All USERS", [:admin, :users]
+        = link_to t("app.user.index.links.user_all"), [:admin, :users]
       %li
-        = link_to "NEW USER", [:new, :admin, :user]
+        = link_to t("app.user.index.links.user_new"), [:new, :admin, :user]
 
 .container
   .row
     .col-md-8.col-md-offset-2
       .panel-piled
         %h1.text-center
-          = link_to "#{@user} Profile", [:edit, :admin, @user]
+          = @user
+          %span
+            = link_to t("app.user.index.links.user_edit"), [:edit, :admin, @user],
+              class: "btn btn-xs btn-primary"
 
         %p.text-center
           = @user.email
 
         - unless @user == current_user
           %h3.text-center
-            = link_to "Archive User", [:archive, :admin, @user], method: :patch,
-              data: { confirm: "Are you sure you want to archive this user?"}
+            = link_to t("app.user.index.links.user_archive"),
+              [:archive, :admin, @user], method: :patch,
+              data: { confirm: t("app.user.index.links.archive_alert")}
 
 
         %h2.text-center.m-b-1
-          Assigned Roles
+          = t "app.user.show.roles"
 
         .row
           .col-md-4.col-md-offset-4
@@ -38,5 +42,5 @@
                     #{role.customer.name}
             - else
               %p.text-center
-                This user has no roles.
+                = t "app.user.show.no_roles"
 

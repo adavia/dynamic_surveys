@@ -18,9 +18,12 @@ class SurveyPdf < Prawn::Document
     image "#{Rails.root}/app/assets/images/logo.png", width: 200, position: :center
   end
 
+  def date
+    "#{I18n.l(@survey.created_at, format: :long)}"
+  end
+
   def header
-    text_box "Survey created on #{@survey.created_at.strftime('%m/%d/%Y at %I:%M%p')}",
-    at: [175, cursor - 5]
+    text_box date, at: [210, cursor - 5]
     # The cursor for inserting content starts on the top left of the page.
     # Here we move it down a little to create more space between the text
     # and the image inserted above
@@ -34,7 +37,8 @@ class SurveyPdf < Prawn::Document
 
   def statistics
     move_down 15
-    table [['Questions', "#{@survey.questions_count}"], ['Submissions', "#{@survey.submissions.size}"]] do
+    table [[Question.human_attribute_name(:class_name).pluralize, "#{@survey.questions_count}"],
+      [@view.t("app.survey.show.survey_submissions").capitalize, "#{@survey.submissions.size}"]] do
       self.header = true
       self.row_colors = ['DDDDDD', 'DDDDDD']
       self.column_widths = [150, 300]
@@ -47,12 +51,12 @@ class SurveyPdf < Prawn::Document
 
   def questions
     move_down 20
-    text "Survey questions", size: 25
+    text @view.t("app.survey.show.links.survey_questions"), size: 25
     @survey.questions.each do |question|
       move_down 10
       text "#{question.title}", size: 20
       move_down 5
-      text "Answers #{question.answers.size}", size: 15
+      text "#{@view.t("app.survey.show.answers")}: #{question.answers.size}", size: 15
       if ["single", "list"].include? question.question_type
         if question.answers.choice_counter.any?
           if (y - cursor) + 250 > y
@@ -86,10 +90,10 @@ class SurveyPdf < Prawn::Document
       if question.question_type == "rating"
         move_down 5
         if question.answers.any?
-          text_box "Average rating", size: 12, width: 120, :at => [0,  cursor - 2]
+          text_box "#{@view.t("app.survey.show.average_rating")}:", size: 12, width: 120, :at => [0,  cursor - 2]
           text_box "#{average_rating(question.answers.rating_average)}", size: 12, width: 120, :at => [4 * 30,  cursor - 2]
         else
-          text_box "Average rating", size: 12, width: 120, :at => [0,  cursor - 2]
+          text_box "#{@view.t("app.survey.show.average_rating")}:", size: 12, width: 120, :at => [0,  cursor - 2]
           text_box "0", size: 12, width: 120, :at => [4 * 30,  cursor - 2]
         end
         move_down 15

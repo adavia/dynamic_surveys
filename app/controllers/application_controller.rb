@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  before_action :set_locale
 
   include Pundit
   include SessionsHelper
@@ -20,7 +21,7 @@ class ApplicationController < ActionController::Base
     unless logged_in?
       store_location
       redirect_to new_session_url
-      flash[:info] = "You must be logged in to perform this action."
+      flash[:info] = t("app.alert_auth")
     end
   end
 
@@ -33,11 +34,19 @@ class ApplicationController < ActionController::Base
 
   def not_authorized
     redirect_to customers_url
-    flash[:info] = "You are not allowed to do that."
+    flash[:info] = t("app.alert_permission")
   end
 
   def record_not_found
     redirect_to customers_url
-    flash[:info] = "The page you have requested does not exists."
+    flash[:info] = t("app.alert_404")
+  end
+
+  def set_locale
+    I18n.locale = params[:locale] if params[:locale].present?
+  end
+
+  def default_url_options(options = {})
+    { locale: I18n.locale }
   end
 end

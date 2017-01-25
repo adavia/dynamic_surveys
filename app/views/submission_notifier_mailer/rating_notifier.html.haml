@@ -22,17 +22,19 @@
   %body
     = image_tag "logo.png", width: 200
     %h2
-      The survey "#{@submission.survey.name}" has been rated with the following answers:
+      = t("app.survey.email.text_primary", name: @submission.survey.name)
     - @submission.answers.each do |answer|
       - if answer.answer_raiting.present?
         .wrapper
           %h3
-            Question -
+            #{t "app.answer.question"}:
+            -
             = answer.question.title
           %h4
-            Response:
+            #{t "app.answer.title" }:
             - 1.upto(answer.answer_raiting.response) do |star|
               &#x2605;
 
     %small
-      The survey has been rated by #{@submission.user} on - #{@submission.created_at.strftime("%m/%d/%Y at %I:%M%p")}
+      = t("app.survey.email.footer", user: @submission.user,
+        date: I18n.l(@submission.created_at, format: :custom))

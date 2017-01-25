@@ -146,7 +146,13 @@ small.handle {
   margin-bottom: 20px;
   h2, h3 {
     margin-top: 0;
-    margin-bottom: 5px;
+    margin-bottom: 1px;
+  }
+  small {
+    color: #767676;
+  }
+  p {
+    margin-top: 6px;
   }
 }
 
@@ -167,7 +173,7 @@ small.handle {
     color: #767676;
   }
   p {
-    margin-top: 8px;
+    margin-top: 6px;
   }
   .question-number {
     padding: 3px 10px 3px 10px;

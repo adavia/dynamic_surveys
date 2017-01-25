@@ -12,8 +12,10 @@
                 class: "img-responsive img-circle", width: 80), current_user
           .media-body
             %h4.text-light
-              Welcome #{current_user}
+              = t("app.subnav.welcome")
+              = current_user
             %small
-              Signed in as #{current_user.admin_text}
+              = t("app.subnav.signed_in_as")
+              = current_user.admin_text
       = yield :sub_nav
 

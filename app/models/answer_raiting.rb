@@ -1,8 +1,8 @@
 class AnswerRaiting < ApplicationRecord
   belongs_to :answer
 
-  validates :response, presence: { message: "You must select a rate" }
-  validates :response, inclusion: { in: 1..5, message: "%{value} is not a valid rate" }
+  validates :response, presence: { message: :select_rate }
+  validates :response, inclusion: { in: 1..5 }
 
   RAITING = {
     "5": "star_5",

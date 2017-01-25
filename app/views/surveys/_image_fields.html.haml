@@ -7,14 +7,14 @@
         .img-preview{style: "background-image: url(#{asset_path('default_avatar.png')})"}
     .media-body
       .file-upload.btn.btn-primary.btn-xs
-        %span Upload an image for this question
+        %span= t "app.image.links.file_upload"
         = f.file_field :file, label: false, class: "upload"
         = f.input :file_cache, as: :hidden
 
       = f.hidden_field :_destroy
       = link_to fa_icon("trash-o"), "#", data: { behavior: "remove_image_fields" },
-        class: "pull-right", title: "Remove this image"
+        class: "pull-right", title: t("app.image.links.file_remove")
 
-      %p Images should be around 300x300 for a better size
+      %p= t "app.image.links.file_text"
       = f.error :file
 

@@ -1,10 +1,11 @@
 = simple_form_for [@customer, @survey] do |f|
   - if @survey.errors.any?
     .alert.alert-danger
-      = @survey.errors[:questions][0] || @survey.errors[:avatar][0] || "Check the errors below"
+      = @survey.errors[:questions][0] || @survey.errors[:avatar][0] || t("app.errors_default")
 
-  = f.input :name, label: false, placeholder: "Name"
-  = f.input :description, label: false, input_html: { rows: 4 }, placeholder: "Description"
+  = f.input :name, label: false, placeholder: Survey.human_attribute_name(:name)
+  = f.input :description, label: false, input_html: { rows: 4 },
+    placeholder: Survey.human_attribute_name(:description)
   .image-fields
     .media
       .media-left
@@ -14,24 +15,24 @@
           .img-preview{style: "background-image: url(#{asset_path('default_avatar.png')})"}
       .media-body
         .file-upload
-          %span Upload an avatar for the survey
+          %span= t "app.survey.index.links.avatar_upload"
           = f.file_field :avatar, label: false, class: "upload"
           = f.input :avatar_cache, as: :hidden
 
         - if f.object.avatar?
           = f.hidden_field :remove_avatar
           = link_to fa_icon("trash-o"), "#", data: { behavior: "remove_image_fields" },
-            class: "pull-right", title: "Remove this image"
+            class: "pull-right", title: t("app.survey.index.links.avatar_remove")
 
-        %p Images should be around 1200x500 for a better size
+        %p= t "app.survey.index.links.avatar_text"
 
   #question-wrapper
     = f.fields_for :questions do |builder|
       = render "question_fields", f: builder
 
   .form-group
-    = link_to_add_fields fa_icon("plus", text: "Add some questions"),
+    = link_to_add_fields fa_icon("plus", text: t("app.survey.index.links.question_add")),
       f, :questions, "btn btn-default btn-sm"
 
-  = f.button :submit, "Save survey",
-    class: "btn-block btn-primary", data: { disable_with: "Saving survey..." }
+  = f.button :submit, t("app.survey.form_button"),
+    class: "btn-block btn-primary", data: { disable_with: t("app.survey.form_button_load") }

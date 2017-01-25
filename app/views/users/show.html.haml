@@ -1,14 +1,16 @@
 - content_for :sub_nav do
   .col-md-6
-    %h1 #{current_user} profile details
+    %h1= t "app.user.show.subnav"
 
 .container
   .row
     .col-md-8.col-md-offset-2
       .panel-piled
         %h1.text-center.m-b-1
-          = link_to "#{current_user.name} #{current_user.last_name} Profile",
-            [:edit, current_user]
+          = current_user
+          %span
+            = link_to t("app.user.index.links.user_edit"),
+              [:edit, current_user], class: "btn btn-xs btn-primary"
 
         = display_image(current_user.image)
 

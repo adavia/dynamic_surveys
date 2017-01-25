@@ -11,7 +11,7 @@ class Admin::CustomersController < Admin::ApplicationController
     respond_to do |format|
       if @customer.save
         format.html { redirect_to customers_url,
-          flash: { success: "The customer has been created successfully."}}
+          flash: { success: t("app.customer.new.alert")}}
         format.js   {}
         format.json { render json: @customer,
           status: :created, location: @customer }
@@ -31,7 +31,7 @@ class Admin::CustomersController < Admin::ApplicationController
     respond_to do |format|
       if @customer.update(customer_params)
         format.html { redirect_to customers_url,
-          flash: { success: "The customer has been updated successfully."}}
+          flash: { success: t("app.customer.edit.alert")}}
         format.js   {}
         format.json {
           render json: @customer, status: :created, location: @customer
@@ -50,7 +50,7 @@ class Admin::CustomersController < Admin::ApplicationController
     @customer.archive
     respond_to do |format|
       format.html { redirect_to customers_url,
-          flash: { success: "The customer has been archived successfully."}}
+          flash: { success: t("app.customer.archive.alert")}}
       format.js {}
     end
   end

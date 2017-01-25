@@ -16,5 +16,6 @@
             %p
               = answer.question.info_body
 
-  = f.button :submit, "Submit survey",
-      class: "btn-block btn-primary", data: { disable_with: "Submitting survey..." }
+  = f.button :submit, t("app.submission.links.form_button"),
+      class: "btn-block btn-primary",
+      data: { disable_with: t("app.submission.links.form_button_load") }

@@ -3,11 +3,13 @@
     .row
       .col-md-7
         .article-subscription
-          %h4 Subscribe to our blog
+          %h4= t "account.footer.subscription_text"
           %form.form-inline
             .form-group
-              %input.form-control{placeholder: "Subscription", type: "subscription"}
-            %button.btn.btn-default{type: "submit"} SUBSCRIBE
+              %input.form-control{placeholder: t("account.footer.placeholder"),
+                type: "subscription"}
+            %button.btn.btn-default{type: "submit"}
+              = t "account.footer.button"
       .col-md-5
         .article-footer
         %p
@@ -16,20 +18,5 @@
       .row
         .col-md-7
           %p
-            Social Surveys All rights reserved 2016
-        .col-md-5
-          .article-nav
-            %ul.list-inline
-              %li
-                %a{href:"#"}
-                  HOME
-              %li
-                %a{href:"#"}
-                  PRIVACY
-              %li
-                %a{href:"#"}
-                  FAQ
-              %li
-                %a{href:"#"}
-                  CONTACT
+            = t "account.footer.rights"
 

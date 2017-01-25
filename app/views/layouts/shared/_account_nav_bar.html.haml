@@ -13,13 +13,14 @@
     / Collect the nav links, forms, and other content for toggling
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       %ul.nav.navbar-nav.navbar-right
-        %li
-          %a{href:"#"}
-            HOME
-        %li
-          %a{href:"#"}
-            ABOUT US
+        %p.navbar-text
+          LANGUAGE:
+          = image_tag "usa_flag.png", width: 15
+          = link_to_unless_current "ENGLISH", locale: "en"
+          |
+          = image_tag "spain_flag.png", width: 15
+          = link_to_unless_current "SPANISH", locale: "es"
         %li{class: is_active("users")}
-          = link_to "SIGN UP", [:new, :user]
+          = link_to t("account.links.signup"), [:new, :user]
         %li{class: is_active("sessions")}
-          = link_to "SIGN IN", [:new, :session]
+          = link_to t("account.links.signin"), [:new, :session]

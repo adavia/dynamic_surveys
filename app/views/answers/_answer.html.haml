@@ -1,17 +1,17 @@
 .modal-item
   .row
     .col-md-3
-      Question:
+      = t "app.answer.question"
       = answer.question.title
     .col-md-3
-      Answer:
+      = t "app.answer.title"
       - if answer.answer_date.present?
-        = answer.answer_date.response.strftime("%m/%d/%Y")
+        = I18n.l answer.answer_date.response, format: :custom
       - if answer.answer_open.present?
         = answer.answer_open.response
     .col-md-3
-      Answered on:
-      = answer.created_at.strftime("%m/%d/%Y at %I:%M%p")
+      = t "app.answer.answered_on"
+      = I18n.l answer.created_at, format: :long
     .col-md-3
-      Answered by:
+      = t "app.answer.answered_by"
       = answer.submission.user.email

@@ -45,6 +45,13 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
+  # I18n config
+  config.i18n.default_locale = :es
+  # if a locale isn't found fall back to this default locale
+  config.i18n.fallbacks = true
+  # set the possible locales to English and Brazilian-Portuguese
+  config.i18n.available_locales = [:en, :es]
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 

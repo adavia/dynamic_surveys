@@ -1,32 +1,39 @@
 .customer-panel
   .row
-    .col-md-9
+    .col-md-8
       %h2
         = customer.name
+      %small
+        = t "date.created_at"
+        = I18n.l customer.created_at, format: :custom
       %p
         = truncate(customer.description, length: 90)
-      = link_to fa_icon("list", text: "SHOW ALL CUSTOMER SURVEYS"), [customer, :surveys],
-        class: "btn btn-xs btn-default"
-    .col-md-3
+      = link_to fa_icon("list", text: t("app.customer.index.links.show_surveys")),
+        [customer, :surveys], class: "btn btn-xs btn-default"
+      - if policy(Survey.new(customer: customer)).create?
+        = link_to t("app.customer.index.links.survey_new").upcase, [:new, customer, :survey],
+          class: "btn btn-xs btn-primary"
+    .col-md-4
       .dropdown
         %a.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true",
         "data-toggle": "dropdown", href: "#", role: "button"}
           %h3
             = customer.surveys_count
-            Surveys
+            = Survey.human_attribute_name(:class_name).pluralize
             %span.caret
         %ul.dropdown-menu
           - if policy(Survey.new(customer: customer)).create?
             %li
-              = link_to "Create new survey", [:new, customer, :survey]
+              = link_to t("app.customer.index.links.survey_new"), [:new, customer, :survey]
           - if policy(customer).show?
             %li
-              = link_to "Display customer information", customer
+              = link_to t("app.customer.index.links.customer_show"), customer
           - if is_admin?
             %li
-              = link_to "Edit customer information",
+              = link_to t("app.customer.index.links.customer_edit"),
                 [:edit, :admin, customer.user, customer]
             %li
-              = link_to "Archive customer", [:archive, :admin, customer.user, customer],
+              = link_to t("app.customer.index.links.customer_archive"),
+                [:archive, :admin, customer.user, customer],
                 method: :patch,
                 data: { confirm: "Are you sure you want to archive this customer?" }

@@ -1,23 +1,266 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  account:
+    header_title: "Personalize your surveys"
+    links:
+      signup: "SIGN UP"
+      signin: "SIGN IN"
+    footer:
+      subscription_text: "Subscribe to our blog"
+      button: "SUBSCRIBE"
+      placeholder: "Email address"
+      rights: "Social Surveys All rights reserved 2016"
+  app:
+    loading: "loading.."
+    errors_default: "Check the errors below"
+    alert_auth: "You must be logged in to perform this action."
+    alert_permission: "You are not authorized to do that."
+    alert_404: "The page you have requested does not exists."
+    alert_admin: "You must be an admin to do that."
+    links:
+      customer_all: "Display all customers"
+      customer_new: "Create new customer"
+      user_all: "Display all users"
+      user_new: "Create new user"
+      sign_out: "SIGN OUT"
+    search_form:
+      button: "SEARCH"
+      placeholder: "Search surveys"
+    subnav:
+      welcome: "Welcome"
+      signed_in_as: "Signed in as"
+    customer:
+      form_button: "Save customer"
+      index:
+        links:
+          subnav: "Manage the following customers"
+          show_surveys: "SHOW ALL CUSTOMER SURVEYS"
+          customer_all: "ALL CUSTOMERS"
+          customer_new: "NEW CUSTOMER"
+          customer_show: "Display customer information"
+          customer_edit: "Edit customer information"
+          customer_archive: "Archive customer"
+          survey_new: "Create new survey"
+      show:
+        subnav: "Customer details"
+        text_chart: "Surveys by date"
+      new:
+        text_primary: "Create a new customer"
+        text_secondary: "Complete the following fields"
+        alert: "The customer has been created successfully."
+      edit:
+        text_primary: "Update customer information"
+        text_secondary: "Edit the following fields"
+        alert: "The customer has been updated successfully."
+      archive:
+        alert: "The customer has been archived successfully."
+    user:
+      roles:
+        editor: "Editor"
+        viewer: "Viewer"
+      index:
+        links:
+          subnav: "Manage the following users"
+          user_all: "ALL USERS"
+          user_new: "NEW USER"
+          user_edit: "Edit user information"
+          user_archive: "Archive customer"
+          archive_alert: "Are you sure you want to archive this user?"
+          form_button: "Save user"
+      show:
+        subnav: "User profile details"
+        roles: "Assigned Roles"
+        no_roles: "This user has no assigned roles."
+        details: "personal details"
+        text_primary: "Edit your account information"
+      new:
+        text_primary: "Create a new account!"
+        text_secondary: "Complete the following fields and start managing surveys!"
+        alert: "Your account has been created successfully!"
+      edit:
+        image_upload: "Upload an image to your account"
+        image_text: "Images should be around 300x300 for a better size"
+        image_remove: "Remove this image"
+        alert: "Your information has been updated successfully."
+      admin_new:
+        subnav: "Create a new user account"
+        text_primary: "Complete the following fields to add a new user"
+        customer_roles: "Customer roles"
+        customer_roles_prompt: "--- Select customer role ---"
+        alert: "The user has been created successfully."
+      admin_edit:
+        subnav: "Update de following information"
+        text_primary: "Edit the following fields to update the user information"
+        alert: "The user has been updated successfully."
+      archive:
+        success: "The user has been archived."
+        fail: "You cannot archive yourself!"
+    session:
+      new:
+        text_primary: "Access your account"
+        text_secondary: "Use your credentials to access the app"
+        text_footer: "Don't have an account?"
+      create:
+        alert_locked: "Your account has been locked."
+        alert_valid: "Your credentials are not valid. Try that again."
+      destroy:
+        alert: "See you later!"
+    survey:
+      form_button: "Save survey"
+      form_button_load: "Saving survey.."
+      index:
+        links:
+          subnav: "Customer surveys"
+          survey_all: "ALL SURVEYS"
+          survey_new: "CREATE NEW SURVEY"
+          survey_edit: "EDITION"
+          survey_archive: "Archive survey"
+          archive_alert: "Are you sure you want to archive this survey?"
+          survey_report: "REPORT"
+          survey_submissions: "FILTER SUBMISSIONS"
+          survey_submission: "SUBMIT"
+          avatar_upload: "Upload an avatar for the survey"
+          avatar_text: "Images should be around 1200x600 for a better size"
+          avatar_remove: "Remove this image"
+          question_add: "Add some questions"
+      show:
+        links:
+          survey_submit: "Submit this survey"
+          survey_list: "Surveys list"
+          survey_edit: "Edit survey"
+          survey_pdf: "Generate PDF report"
+          survey_questions: "Survey questions"
+        subnav: "Survey report and statistics"
+        survey_submit: "SUBMIT THIS SURVEY"
+        text_primary: "Statistics"
+        survey_submissions: "submissions"
+        survey_export: "Export CSV"
+        type_of_questions: "Type of questions"
+        results_by_type: "Results by type"
+        answers: "Answers"
+        answer_show: "Show answers"
+        average_rating: "Average rating"
+      new:
+        subnav: "Create new survey"
+        text_primary: "Complete the following fields to add a new survey"
+      edit:
+        subnav: "Update existing survey"
+        text_primary: "Complete the following fields to edit this survey"
+        survey_report: "SURVEY REPORT"
+      create:
+        alert: "The survey has been created successfully."
+      update:
+        alert: "The survey has been updated successfully."
+      archive:
+        alert: "The survey has been archived successfully."
+      email:
+        subject: "Survey rating notification"
+        text_primary: "The survey %{name} has been rated with the following stars:"
+        footer: "The survey has been rated by %{user} on %{date}"
+    question:
+      question_title: "Question"
+      links:
+        question_remove: "Remove question"
+        question_drag: "DRAG"
+      info:
+        button: "Show informative content"
+        text_primary: "Add informative content"
+        image_upload: "Upload an image"
+        image_text: "Images should be around 300x300 for a better size"
+        image_remove: "Remove this image"
+      question_types:
+        open: "Open"
+        description: "Open Description"
+        phone: "Phone Number"
+        email: "Email Address"
+        single: "Single Choice"
+        list: "Single Choice List"
+        multiple: "Multiple Choice"
+        date: "Date"
+        image: "Images"
+        rating: "Rating"
+    choice:
+      links:
+        choice_add: "Add some choices"
+    image:
+      links:
+        image_add: "Add some images"
+        file_upload: "Upload an image for this question"
+        file_text: "Images should be around 300x300 for a better size"
+        file_remove: "Remove this image"
+    submission:
+      links:
+        subnav: "Submit this survey"
+        survey_report: "SHOW SURVEY REPORT"
+        survey_report_dropdown: "Survey report"
+        survey_question_title: "Questions"
+        form_button: "Save submission"
+        form_button_load: "Sending submission.."
+      show:
+        subnav: "Submitted by"
+        submission_sent: "Submitted"
+      index:
+        subnav: "Survey submissions"
+        search_start_date: "Select a beginning date"
+        search_end_date: "Select an ending date"
+        search_question: "-- Question --"
+        search_choice: "-- Choice --"
+        search_image: "-- Image --"
+        search_button: "SEARCH"
+        search_button_load: "loading results.."
+        submission_date: "Submitted on"
+        submission_survey: "Survey"
+        submission_by: "Submitted by"
+        submission_answers_button: "Show answers"
+        submission_results_button: "Load more submissions"
+        submission_close_button: "Close"
+        entries: "entries"
+      create:
+        alert: "The survey has been submitted successfully!"
+        error: "Something went wrong during this submission. Check the errors below."
+    answer:
+      title: "Answer"
+      question: "Question"
+      phone: "Phone number"
+      email: "Email address"
+      answer_results_button: "Load more submissions"
+      answer_close_button: "Close"
+      answered_on: "Answered on"
+      answered_by: "Answered by"
+  activerecord:
+    attributes:
+      user:
+        class_name: "User"
+        admin: "Is an admin?"
+      customer:
+        class_name: "Customer"
+      survey:
+        class_name: "Survey"
+      question:
+        class_name: "Question"
+        title: "What is your question?"
+        info_body: "Informative text"
+        question_type: "-- Select the type of question --"
+      image:
+        class_name: "Image"
+      choice:
+        class_name: "Choice"
+        title: "Fill in with a possible choice"
+      answer_open:
+        response: "Fill in with your answer"
+  date:
+    created_at: "Created on "
+    formats:
+      custom: "%b %d, %Y"
+  time:
+    formats:
+      custom: "%b %d, %Y"
+  errors:
+    messages:
+      add_question: "You must add at least one question to the survey."
+      completed_answers: "You must complete all answers before submitting the survey!"
+      select_rate: "You must select a rate"
+      select_image: "You must select an image from the list"
+      image_upload: "You must upload an image!"
+      add_choice: "You must add a possible choice!"
+      valid_question_type: "You must select a valid question_type!"
+      not_allowed: "This is not allowed!"

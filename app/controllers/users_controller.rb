@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         format.html { redirect_to root_url,
-          flash: { success: "Your account has been created successfully!"}}
+          flash: { success: t("app.user.new.alert")}}
         format.js   {}
         format.json { render json: @user,
           status: :created, location: @user }
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if current_user.update(user_params)
         format.html { redirect_to current_user,
-          flash: { success: "Your information has been updated successfully."}}
+          flash: { success: t("app.user.edit.alert")}}
         format.js   {}
         format.json {
           render json: current_user, status: :created, location: current_user

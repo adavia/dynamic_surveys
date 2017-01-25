@@ -13,11 +13,11 @@ class SessionsController < ApplicationController
         log_in user
         redirect_back_or customers_url
       else
-        flash.now[:danger] = "Your account has been locked."
+        flash.now[:danger] = t("app.session.create.alert_locked")
         render :new
       end
     else
-      flash.now[:danger] = "Your credentials are not valid. Try that again."
+      flash.now[:danger] = t("app.session.create.alert_valid")
       render :new
     end
   end
@@ -25,6 +25,6 @@ class SessionsController < ApplicationController
   def destroy
     log_out
     redirect_to new_session_url,
-      flash: { success: "See you later!" }
+      flash: { success: t("app.session.destroy.alert") }
   end
 end

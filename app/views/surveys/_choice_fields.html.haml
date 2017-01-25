@@ -3,7 +3,7 @@
     .col-xs-6
       = f.input :title, wrapper: :vertical_input_group, label: false do
         = f.input_field :title, class: "form-control input-sm",
-          placeholder: "Fill in with a possible choice"
+          placeholder: Choice.human_attribute_name(:title)
         %span.input-group-btn
           = f.hidden_field :_destroy
           %button.btn.btn-danger.btn-sm{data: {behavior: "remove_choice_fields"}}

@@ -1,28 +1,29 @@
 - content_for :sub_nav do
   .col-md-5
-    %h1 #{@customer.name} details
+    %h1= t "app.customer.show.subnav"
   .col-md-3
     %ul.list-inline
       %li
-        = link_to "ALL SURVEYS", [@customer, :surveys]
+        = link_to t("app.survey.index.links.survey_all"), [@customer, :surveys]
       - if is_admin?
         %li
-          = link_to "NEW CUSTOMER", [:new, :admin, current_user, :customer]
+          = link_to t("app.customer.index.links.customer_new"),
+            [:new, :admin, current_user, :customer]
 
 .container
   .row
     .col-md-8.col-md-offset-2
       .panel-piled
         %h1.text-center
+          #{@customer.name}
           - if is_admin?
-            = link_to "#{@customer.name} Information",
-              [:edit, :admin, @customer.user, @customer]
-          - else
-            #{@customer.name} Information
+            %span
+              = link_to t("app.customer.index.links.customer_edit"),
+                [:edit, :admin, @customer.user, @customer], class: "btn btn-xs btn-primary"
         %p.text-center
           = @customer.description
 
         - if @customer.surveys.any?
           %h2.text-center
-            Surveys by date
+            = t "app.customer.show.text_chart"
             = pie_chart @customer.surveys.date_surveys

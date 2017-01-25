@@ -1,18 +1,18 @@
 - content_for :sub_nav do
   .col-md-5
-    %h1 #{@customer.name} - creation
+    %h1= t "app.survey.new.subnav"
   .col-md-3
     %ul.list-inline
       - if policy(Survey.new(customer: @customer)).create?
         %li
-          = link_to "CREATE NEW SURVEY", [:new, @customer, :survey],
+          = link_to t("app.survey.index.links.survey_new"), [:new, @customer, :survey],
             class: "btn btn-sm btn-default"
       %li
-        = link_to "#{@customer.surveys_count} surveys total", [@customer, :surveys]
+        = link_to "#{@customer.surveys_count} #{Survey.human_attribute_name(:class_name).downcase} total", [@customer, :surveys]
 .container
   .row
     .col-md-8.col-md-offset-2
       .default-panel
         %h3
-          Complete the following fields to add a new survey
+          = t "app.survey.new.text_primary"
         = render "form"

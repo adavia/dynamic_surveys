@@ -1,22 +1,22 @@
 .question-fields
   %small.handle.pull-right
-    [DRAG]
+    = fa_icon "hand-rock-o", text: t("app.question.links.question_drag")
   %h3.pull-left
-    Question
+    = t "app.question.question_title"
 
-  = f.input :title, label: false, placeholder: "Whats your question?"
+  = f.input :title, label: false, placeholder: Question.human_attribute_name(:title)
   = f.input :question_type, label: false,
     input_html: { data: { behavior: "question_type" } },
-    collection: Question::QUESTION_TYPES,
-    prompt: "--- Select type of question ---"
+    collection: t("app.question.question_types").invert,
+    prompt: Question.human_attribute_name(:question_type)
   = f.hidden_field :position, class: "question-position",
     value: (f.options[:child_index] + 1).abs
 
   .form-group
     %button.btn.btn-sm.btn-primary{"data-behavior": "btn-informative"}
-      Show informative content
+      = t "app.question.info.button"
     .informative_fields
-      %h4 Add informative content
+      %h4= t "app.question.info.text_primary"
       = render "informative_fields", f: f
 
   = f.fields_for :choices do |builder|
@@ -27,11 +27,11 @@
 
   .form-group
     = f.hidden_field :_destroy
-    = link_to fa_icon("close", text: "Remove Question"), "#", class: "btn btn-danger btn-xs",
+    = link_to fa_icon("close", text: t("app.question.links.question_remove")), "#", class: "btn btn-danger btn-xs",
       data: { behavior: "remove_question_fields" }
-    = link_to_add_fields fa_icon("plus", text: "Add some choices"), f,
+    = link_to_add_fields fa_icon("plus", text: t("app.choice.links.choice_add")), f,
       :choices, "btn btn-success btn-xs #{show_choice_button(f.object.question_type)}"
-    = link_to_add_fields fa_icon("plus", text: "Add some images"), f,
+    = link_to_add_fields fa_icon("plus", text: t("app.image.links.image_add")), f,
       :images, "btn btn-default btn-xs #{show_image_button(f.object.question_type)}"
 
   /= f.fields_for :options do |builder|

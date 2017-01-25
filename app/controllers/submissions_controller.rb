@@ -48,7 +48,7 @@ class SubmissionsController < ApplicationController
         rating_notifier(@submission)
 
         format.html { redirect_to [@survey.customer, :surveys],
-          flash: { success: "The survey has been submitted successfully."}}
+          flash: { success: t("app.submission.create.alert")}}
         format.js   {}
         format.json {
           render json: @submission, status: :created, location: @submission

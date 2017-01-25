@@ -1,15 +1,16 @@
 .modal-item
   .row
     .col-md-3
-      Submitted on:
-      = submission.created_at.strftime("%m/%d/%Y at %I:%M%p")
+      #{t "app.submission.index.submission_date"}:
+      = I18n.l submission.created_at, format: :long
     .col-md-4
-      Survey:
+      #{t "app.submission.index.submission_survey"}:
       = submission.survey.name
     .col-md-3
-      Submitted by:
+      #{t "app.submission.index.submission_by"}:
       = submission.user.email
     .col-md-2
-      = link_to fa_icon("eye", text: "Show answers"), [submission.survey, submission],
+      = link_to fa_icon("eye", text: t("app.submission.index.submission_answers_button")),
+        [submission.survey, submission],
         "data-behavior": "submission-show", class: "btn btn-xs btn-default pull-right"
 .submission-content

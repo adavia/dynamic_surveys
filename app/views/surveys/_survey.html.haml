@@ -4,19 +4,23 @@
       %h3
         = survey.name
       %small
-        = survey.created_at.strftime("Created on %b %d, %Y")
+        = t "date.created_at"
+        = I18n.l survey.created_at, format: :custom
       %p
         = truncate(survey.description, length: 90)
       - if policy(survey).show?
-        = link_to fa_icon("pie-chart", text: "REPORT"), [survey.customer, survey],
+        = link_to fa_icon("pie-chart", text: t("app.survey.index.links.survey_report")),
+          [survey.customer, survey],
           class: "btn btn-xs btn-primary"
-        = link_to fa_icon("filter", text: "FILTER SUBMISSIONS"), [survey, :submissions],
+        = link_to fa_icon("filter", text: t("app.survey.index.links.survey_submissions")),
+          [survey, :submissions],
           remote: true, class: "btn btn-xs btn-primary"
-      = link_to fa_icon("check", text: "SUBMIT"), [:new, survey, :submission],
+      = link_to fa_icon("check", text: t("app.survey.index.links.survey_submission")),
+        [:new, survey, :submission],
         class: "btn btn-xs btn-default"
       - if policy(survey).update?
-        = link_to fa_icon("edit", text: "EDITION"), [:edit, survey.customer, survey],
-          class: "btn btn-xs btn-default"
+        = link_to fa_icon("edit", text: t("app.survey.index.links.survey_edit")),
+          [:edit, survey.customer, survey], class: "btn btn-xs btn-default"
 
     .col-md-4
       .dropdown.pull-right
@@ -25,16 +29,18 @@
           %h4
             %span.question-number
               = survey.questions_count
-            questions
+            = Question.human_attribute_name(:class_name).pluralize
             %span.caret
         %ul.dropdown-menu
           %li
-            = link_to "Submit survey", [:new, survey, :submission]
+            = link_to t("app.survey.index.links.survey_submission").downcase.capitalize,
+              [:new, survey, :submission]
           - if policy(survey).update?
             %li
-              = link_to "Edit survey", [:edit, survey.customer, survey]
+              = link_to t("app.survey.index.links.survey_edit").downcase.capitalize,
+                [:edit, survey.customer, survey]
           - if policy(survey).archive?
             %li
-              = link_to "Archive survey", [:archive, survey.customer, survey],
-                method: :patch,
-                data: { confirm: "Are you sure you want to archive this survey?" }
+              = link_to t("app.survey.index.links.survey_archive"),
+                [:archive, survey.customer, survey], method: :patch,
+                data: { confirm: t("app.survey.index.links.archive_alert") }

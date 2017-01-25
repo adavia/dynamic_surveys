@@ -1,17 +1,17 @@
 = simple_form_for [:admin, user] do |f|
-  = f.input :name, label: false, placeholder: "Name"
-  = f.input :last_name, label: false, placeholder: "Last Name"
-  = f.input :email, label: false, placeholder: "Email"
-  = f.input :password, label: false, placeholder: "Password"
-  = f.input :admin, label: "Is an admin?"
+  = f.input :name, label: false, placeholder: User.human_attribute_name(:name)
+  = f.input :last_name, label: false, placeholder: User.human_attribute_name(:last_name)
+  = f.input :email, label: false, placeholder: User.human_attribute_name(:email)
+  = f.input :password, label: false, placeholder: User.human_attribute_name(:password)
+  = f.input :admin, label: User.human_attribute_name(:admin)
 
-  %h3 Customer Roles
+  %h3= t "app.user.admin_new.customer_roles"
 
   - customers.each do |customer|
     .form-group
       = label_tag dom_id(customer), customer.name
-      = select_tag dom_id(customer), options_for_select(roles,
+      = select_tag dom_id(customer), options_for_select(t("app.user.roles").invert,
         user.role_on(customer)), name: "roles[#{customer.id}]",
-        prompt: "--- Select customer role ---", class: "form-control"
+        prompt: t("app.user.admin_new.customer_roles_prompt"), class: "form-control"
 
-  = f.button :submit, "Submit user", class: "btn-block btn-primary"
+  = f.button :submit, t("app.user.index.links.form_button"), class: "btn-block btn-primary"

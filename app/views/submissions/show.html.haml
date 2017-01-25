@@ -1,18 +1,18 @@
 - content_for :sub_nav do
   .col-md-5
     %h1
-      Submitted by
+      = t "app.submission.show.subnav"
       %small
         #{@submission.user}
   .col-md-3
     %ul.list-inline
       - if policy(@submission.survey).show?
         %li
-          = link_to "SHOW SURVEY REPORT",
+          = link_to t("app.submission.links.survey_report"),
             [@submission.survey.customer, @submission.survey],
             class: "btn btn-sm btn-primary"
       %li
-        = link_to "#{@submission.survey.customer.surveys_count} surveys total",
+        = link_to "#{@submission.survey.customer.surveys_count} #{Survey.human_attribute_name(:class_name).downcase} total",
           [@submission.survey.customer, :surveys]
 
 .container
@@ -22,13 +22,13 @@
         %h1
           = @submission.survey.name
         %p
-          Submitted
+          = t "app.submission.show.submission_sent"
           = time_ago_in_words(@submission.created_at)
-          ago -
-          = @submission.created_at.strftime("%m/%d/%Y at %I:%M%p")
+          ,
+          = I18n.l @submission.created_at, format: :long
 
           %h2
-            Questions
+            = Question.human_attribute_name(:class_name).pluralize
 
           .submitted-answers
             - @submission.answers.each do |answer|
@@ -37,28 +37,28 @@
                   = answer.question.title
                 - if answer.answer_open.present?
                   %p
-                    Answer:
+                    #{t "app.answer.title"}:
                     = answer.answer_open.response
                 - if answer.answer_date.present?
                   %p
-                    Answer:
+                    #{t "app.answer.title"}:
                     = answer.answer_date.response
                 - if answer.answer_raiting.present?
                   %p
-                    Answer:
+                    #{t "app.answer.title"}:
                     = answer.answer_raiting.response
                 - if answer.answer_image.present?
                   %p
-                    Answer:
+                    #{t "app.answer.title"}:
                   = image_tag answer.answer_image.image.file.url(:thumb),
                     class: "img-responsive", width: 80
                 - if answer.choice_answer.present?
                   %p
-                    Answer:
+                    #{t "app.answer.title"}:
                     = answer.choice_answer.choice.try(:title)
                 - if answer.answer_multiple.present?
                   %p
-                    Answer:
+                    #{t "app.answer.title"}:
                     = answer.answer_multiple.choices.map(&:title).join(', ')
 
 

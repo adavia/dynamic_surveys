@@ -3,52 +3,57 @@ require "sidekiq/web"
 Rails.application.routes.draw do
   #mount Sidekiq::Web => "/sidekiq"
 
-  root "sessions#new"
+  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
+    root "sessions#new"
 
-  resources :sessions, only: [:new, :create, :destroy]
+    resources :sessions, only: [:new, :create, :destroy]
 
-  resources :users, only: [:show, :new, :create, :edit, :update]
+    resources :users, only: [:show, :new, :create, :edit, :update]
 
-  resources :customers, only: [:index, :show] do
-    resources :surveys, only: [:index, :show, :new, :create, :edit, :update] do
-      member do
-        patch :archive
-      end
-    end
-  end
-
-  resources :surveys, only: [] do
-    collection do
-      get :search
-    end
-    resources :submissions, only: [:index, :show, :new, :create]
-  end
-
-  resources :submissions, only: [] do
-    collection do
-      get :update_choices
-    end
-  end
-
-  resources :questions, only: [] do
-    resources :answers, only: :index
-  end
-
-  namespace :admin do
-    resources :users, only: [] do
-      resources :customers, only: [:new, :create, :edit, :update] do
+    resources :customers, only: [:index, :show] do
+      resources :surveys, only: [:index, :show, :new, :create, :edit, :update] do
         member do
           patch :archive
         end
       end
     end
 
-    resources :users, only: [:index, :show, :new, :create, :edit, :update] do
-      member do
-        patch :archive
+    resources :surveys, only: [] do
+      collection do
+        get :search
+      end
+      resources :submissions, only: [:index, :show, :new, :create]
+    end
+
+    resources :submissions, only: [] do
+      collection do
+        get :update_choices
+      end
+    end
+
+    resources :questions, only: [] do
+      resources :answers, only: :index
+    end
+
+    namespace :admin do
+      resources :users, only: [] do
+        resources :customers, only: [:new, :create, :edit, :update] do
+          member do
+            patch :archive
+          end
+        end
+      end
+
+      resources :users, only: [:index, :show, :new, :create, :edit, :update] do
+        member do
+          patch :archive
+        end
       end
     end
   end
+
+  #match '*path', to: redirect("/#{I18n.default_locale}/%{path}"), via: :get
+  #match '', to: redirect("/#{I18n.default_locale}"), via: :get
 
   namespace :api do
     resources :sessions, only: :create

@@ -5,7 +5,7 @@
   %li.list-group-item
     %span.counter.pull-right
       = question.answers_count
-    Answers
+    = t "app.survey.show.answers"
   - if ["single", "list"].include? question.question_type
     - @choice = question.answers.choice_counter.each do |answer|
       %li.list-group-item
@@ -31,15 +31,16 @@
           = number_with_precision(question.answers.rating_average, precision: 2)
         - else
           0
-      Average rating
+      = t "app.survey.show.average_rating"
   - if ["open", "date", "description", "phone", "email"].include? question.question_type
     - if question.answers.any?
       %li.list-group-item
         .clearfix
-          = link_to "Show answer responses", [question, :answers],
+          = link_to t("app.survey.show.answer_show"), [question, :answers],
             remote: true, class: "pull-left"
           .export-links
-            = link_to "Export CSV", question_answers_path(question, format: "csv"),
+            = link_to t("app.survey.show.survey_export"),
+              question_answers_path(question, format: "csv"),
               class: "btn btn-xs btn-primary"
 
 .text-center

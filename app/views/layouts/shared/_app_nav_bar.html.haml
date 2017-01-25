@@ -16,36 +16,37 @@
         - if logged_in?
           %li.dropdown
             %a.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true", "data-toggle": "dropdown", href: "#", role: "button"}
-              CUSTOMERS
+              = Customer.human_attribute_name(:class_name).pluralize.upcase
               %span.caret
             %ul.dropdown-menu
               %li
-                = link_to "Display all customers", customers_path
+                = link_to t("app.links.customer_all"), customers_path
               - if is_admin?
                 %li
-                  = link_to "Create new customer", [:new, :admin, current_user, :customer]
+                  = link_to t("app.links.customer_new"), [:new, :admin, current_user, :customer]
           - if is_admin?
             %li.dropdown
               %a.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true",
                 "data-toggle": "dropdown", href: "#", role: "button"}
-                USERS
+                = User.human_attribute_name(:class_name).pluralize.upcase
                 %span.caret
               %ul.dropdown-menu
                 %li
-                  = link_to "Display all users", [:admin, :users]
+                  = link_to t("app.links.user_all"), [:admin, :users]
                 %li
-                  = link_to "Create new user", [:new, :admin, :user]
+                  = link_to t("app.links.user_new"), [:new, :admin, :user]
       %ul.nav.navbar-nav.navbar-right
         - if logged_in?
           %li
             = link_to fa_icon("cogs", text: current_user.to_s.upcase),
               current_user
           %li
-            = link_to "SIGN OUT", session_path(current_user), method: :delete
+            = link_to t("app.links.sign_out"), session_path(current_user), method: :delete
 
       = form_tag(search_surveys_path, method: "get", id: "survey-search-form",
         class: "navbar-form navbar-right") do
         .form-group
-          = text_field_tag :search, params[:search], placeholder: "Search Surveys",
+          = text_field_tag :search, params[:search],
+            placeholder: t("app.search_form.placeholder"),
             class: "form-control"
-        = button_tag "SEARCH", class: "btn btn-default"
+        = button_tag t("app.search_form.button"), class: "btn btn-default"

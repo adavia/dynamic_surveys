@@ -38,7 +38,7 @@
                 - @user.roles.each do |role|
                   %li.list-group-item
                     .span.counter.pull-right
-                      #{role.role.titleize}
+                      = t "app.user.roles.#{role.role}"
                     #{role.customer.name}
             - else
               %p.text-center

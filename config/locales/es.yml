@@ -129,7 +129,7 @@ es:
           survey_edit: "Edita la encuesta"
           survey_pdf: "Genera reporte en PDF"
           survey_questions: "Preguntas de la encuesta"
-        subnav: "Reporte de encuesta y estadísticas"
+        subnav: "Reporte y datos de la encuesta"
         survey_submit: "ENVÍA ESTA ENCUESTA"
         text_primary: "Estadísticas"
         survey_submissions: "envíos de encuesta"

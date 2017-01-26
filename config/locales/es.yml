@@ -33,7 +33,7 @@ es:
       index:
         links:
           subnav: "Administra los siguientes clientes"
-          show_surveys: "LISTAR ENCUESTAS DE CLIENTE"
+          show_surveys: "VER LISTADO DE ENCUESTAS"
           customer_all: "LISTAR CLIENTES"
           customer_new: "NUEVO CLIENTE"
           customer_show: "Mostrar información del cliente"

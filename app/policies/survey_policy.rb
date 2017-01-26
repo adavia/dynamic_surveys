@@ -7,7 +7,7 @@ class SurveyPolicy < ApplicationPolicy
   end
 
   def show?
-    user.try(:admin?) || record.customer.has_editor?(user)
+    user.try(:admin?) || record.customer.has_editor?(user) || record.customer.has_member?(user)
   end
 
   def create?

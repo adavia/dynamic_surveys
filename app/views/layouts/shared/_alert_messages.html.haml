@@ -1,4 +1,4 @@
 - if flash.any?
   - flash.each do |message_type, message|
     = content_tag :div, message,
-      class:"notify notify-#{message_type}"
+      class:"notify notify-#{message_type}", data: {"turbolinks-permanent": ""}

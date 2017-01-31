@@ -222,6 +222,8 @@ en:
       question: "Question"
       phone: "Phone number"
       email: "Email address"
+      date: "Fill in with a date"
+      list: "-- Select your answer --"
       answer_results_button: "Load more submissions"
       answer_close_button: "Close"
       answered_on: "Answered on"

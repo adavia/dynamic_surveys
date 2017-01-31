@@ -222,6 +222,8 @@ es:
       question: "Pregunta"
       phone: "Teléfono"
       email: "Correo electrónico"
+      date: "Ingrese una fecha"
+      list: "-- Selecciona tu respuesta --"
       answer_results_button: "Mostrar más respuestas"
       answer_close_button: "Cerrar"
       answered_on: "Contestado en"

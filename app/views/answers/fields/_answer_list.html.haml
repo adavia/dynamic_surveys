@@ -1,4 +1,4 @@
 = f.simple_fields_for :choice_answer do |builder|
   = builder.input :choice_id, label: false,
     collection: choices,
-    prompt: "--- Select your answer ---"
+    prompt: t("app.answer.list")

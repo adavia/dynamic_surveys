@@ -4,7 +4,7 @@
       = t "app.answer.question"
       = answer.question.title
     .col-md-3
-      = t "app.answer.title"
+      #{t "app.answer.title"}:
       - if answer.answer_date.present?
         = I18n.l answer.answer_date.response, format: :custom
       - if answer.answer_open.present?

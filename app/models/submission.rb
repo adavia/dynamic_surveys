@@ -4,25 +4,17 @@ class Submission < ApplicationRecord
   has_many :questions, through: :survey
   has_many :answers, inverse_of: :submission, dependent: :destroy
 
-  accepts_nested_attributes_for :answers, reject_if: :all_blank
+  # Rails.logger.debug attributes.inspect
 
+  accepts_nested_attributes_for :answers, reject_if: :reject_answer_type
   validates :survey, presence: true
   validates :user, presence: true
 
-  validate :must_complete_all_answers
-
   self.per_page = 15
 
-  def must_complete_all_answers
-    if questions.any? && answers.empty?
-      errors.add(:base, :completed_answers)
-    end
+  def reject_answer_type(attributes)
+    (attributes[:answer_open_attributes] && attributes[:answer_open_attributes][:response].blank?) || (attributes[:answer_date_attributes] && attributes[:answer_date_attributes][:response].blank?) || (attributes[:answer_raiting_attributes] && attributes[:answer_raiting_attributes][:response].blank?) || (attributes[:answer_image_attributes] && attributes[:answer_image_attributes][:image_id].blank?) || (attributes[:choice_answer_attributes] && attributes[:choice_answer_attributes][:choice_id].blank?) || (attributes[:answer_multiple_attributes] && attributes[:answer_multiple_attributes][:choice_ids] == [""])
   end
-
-  # Search submissions
-  # def self.date_filter(from, to)
-    # where(created_at: from..to)
-  # end
 
   def self.created_before(date)
     where("submissions.created_at < ?", date)

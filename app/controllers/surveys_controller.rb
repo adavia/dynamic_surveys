@@ -1,7 +1,7 @@
 class SurveysController < ApplicationController
-  before_action :authenticate_user
+  before_action :authenticate_user, except: :preview
   before_action :set_customer, only: [:index, :show, :new, :create, :edit, :update, :archive]
-  before_action :set_survey, only: [:show, :edit, :update, :archive]
+  before_action :set_survey, only: [:show, :edit, :update, :archive, :preview]
 
   def index
     @surveys = policy_scope(@customer.surveys.excluding_archived
@@ -97,6 +97,10 @@ class SurveysController < ApplicationController
       format.html {}
       format.json { render json: @surveys }
     end
+  end
+
+  def preview
+    render layout: "report"
   end
 
   private

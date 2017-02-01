@@ -2,6 +2,7 @@ class Survey < ApplicationRecord
   belongs_to :customer, counter_cache: true
   has_many :questions, dependent: :destroy
   has_many :submissions, dependent: :destroy
+  has_many :submission_views
 
   validates :name, presence: true, length: { minimum: 4, maximum: 250 }
   validates :questions,

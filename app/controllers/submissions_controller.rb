@@ -3,6 +3,7 @@ class SubmissionsController < ApplicationController
   before_action :set_survey, only: [:index, :new, :create]
   before_action :set_submission, only: :show
   before_action :check_type_of_request, only: :index
+  before_action :log_view, only: :new
 
   def index
     respond_to do |format|
@@ -80,6 +81,10 @@ class SubmissionsController < ApplicationController
   end
 
   private
+
+  def log_view
+    @survey.submission_views.where(ip_address: request.remote_ip, user_id: current_user.id).first_or_create
+  end
 
   def rating_notifier(submission)
     if submission.answers.rated_answers.any?

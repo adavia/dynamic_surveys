@@ -1,42 +1,7 @@
-- content_for :sub_nav do
-  .col-md-5
-    %h1= t "app.survey.show.subnav"
-  .col-md-3
-    %ul.list-inline
-      %li
-        = link_to t("app.survey.show.survey_submit"), [:new, @survey, :submission],
-          class: "btn btn-sm btn-primary"
-      %li
-        = link_to "#{@customer.surveys_count} #{Survey.human_attribute_name(:class_name).downcase} total", [@customer, :surveys]
-
 .container
-  .row
+  .row.m-t-2.m-b-1
     .col-md-8.col-md-offset-2
       .panel-piled
-        .dropdown.pull-right
-          .dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true",
-          "data-toggle": "dropdown", href: "#", role: "button"}
-            = fa_icon "chevron-down"
-          %ul.dropdown-menu
-            %li
-              = link_to t("app.survey.show.links.survey_preview"),
-                [:preview, @customer, @survey], target: "_blank"
-            %li
-              = link_to t("app.survey.show.links.survey_submit"), [:new, @survey, :submission]
-            %li
-              = link_to t("app.survey.show.links.survey_list"), [@customer, :surveys]
-            - if policy(@survey).update?
-              %li
-                = link_to t("app.survey.show.links.survey_edit"), [:edit, @customer, @survey]
-            %li
-              = link_to t("app.survey.show.links.survey_pdf"),
-                customer_survey_path(@customer, @survey, format: :pdf)
-            - if policy(@survey).archive?
-              %li
-                = link_to t("app.survey.index.links.survey_archive"),
-                  [:archive, @customer, @survey], method: :patch,
-                  data: { confirm: t("app.survey.index.links.archive_alert") }
-
         %h1
           = @survey.name
           %small
@@ -67,14 +32,6 @@
               %strong
                 #{fa_icon("circle-o", text: @survey.submissions.incomplete)}
               = t "app.submission.show.incomplete"
-          %li.list-group-item
-            .clearfix
-              = link_to "#{t("app.survey.show.survey_submissions")}",
-                [@survey, :submissions], remote: true, class: "pull-left"
-              .export-links
-                = link_to t("app.survey.show.survey_export"),
-                  survey_submissions_path(@survey, format: "csv"),
-                  class: "btn btn-xs btn-primary"
 
         .row
           .col-md-4

@@ -128,11 +128,12 @@ es:
           survey_list: "Listado de encuestas"
           survey_edit: "Edita la encuesta"
           survey_pdf: "Genera reporte en PDF"
+          survey_preview: "Visualiza este reporte"
           survey_questions: "Preguntas de la encuesta"
         subnav: "Reporte y datos de la encuesta"
         survey_submit: "ENVÍA ESTA ENCUESTA"
         text_primary: "Estadísticas"
-        survey_submissions: "envíos de encuesta"
+        survey_submissions: "Envíos de encuesta"
         survey_export: "Exportar CSV"
         type_of_questions: "Tipo de preguntas"
         results_by_type: "Resultados por tipo de pregunta"
@@ -198,6 +199,9 @@ es:
       show:
         subnav: "Enviado por"
         submission_sent: "Enviado hace"
+        views: "envíos vistos"
+        complete: "envíos completos"
+        incomplete: "envíos incompletos"
       index:
         subnav: "Listado de envíos"
         search_start_date: "Seleccione fecha de inicio"

@@ -128,11 +128,12 @@ en:
           survey_list: "Surveys list"
           survey_edit: "Edit survey"
           survey_pdf: "Generate PDF report"
+          survey_preview: "Preview this survey"
           survey_questions: "Survey questions"
         subnav: "Survey report and statistics"
         survey_submit: "SUBMIT THIS SURVEY"
         text_primary: "Statistics"
-        survey_submissions: "submissions"
+        survey_submissions: "Submissions"
         survey_export: "Export CSV"
         type_of_questions: "Type of questions"
         results_by_type: "Results by type"
@@ -198,6 +199,9 @@ en:
       show:
         subnav: "Submitted by"
         submission_sent: "Submitted"
+        views: "submission views"
+        complete: "complete submissions"
+        incomplete: "incomplete submissions"
       index:
         subnav: "Survey submissions"
         search_start_date: "Select a beginning date"

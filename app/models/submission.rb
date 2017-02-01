@@ -12,6 +12,13 @@ class Submission < ApplicationRecord
 
   self.per_page = 15
 
+  after_create :mark_as_completed
+
+  # Statistics
+
+  scope :complete,   -> { where(complete: true).size }
+  scope :incomplete, -> { where(complete: false).size }
+
   def reject_answer_type(attributes)
     (attributes[:answer_open_attributes] && attributes[:answer_open_attributes][:response].blank?) || (attributes[:answer_date_attributes] && attributes[:answer_date_attributes][:response].blank?) || (attributes[:answer_raiting_attributes] && attributes[:answer_raiting_attributes][:response].blank?) || (attributes[:answer_image_attributes] && attributes[:answer_image_attributes][:image_id].blank?) || (attributes[:choice_answer_attributes] && attributes[:choice_answer_attributes][:choice_id].blank?) || (attributes[:answer_multiple_attributes] && attributes[:answer_multiple_attributes][:choice_ids] == [""])
   end
@@ -38,5 +45,13 @@ class Submission < ApplicationRecord
 
   def self.image_id(id)
     joins(answers: :answer_image).where("answer_images.image_id": id)
+  end
+
+  private
+
+  def mark_as_completed
+    if answers.size == questions.size
+      update! complete: true
+    end
   end
 end

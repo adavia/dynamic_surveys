@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170111154719) do
+ActiveRecord::Schema.define(version: 20170201171558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -144,11 +144,22 @@ ActiveRecord::Schema.define(version: 20170111154719) do
     t.index ["user_id"], name: "index_roles_on_user_id", using: :btree
   end
 
+  create_table "submission_views", force: :cascade do |t|
+    t.integer  "survey_id"
+    t.integer  "user_id"
+    t.string   "ip_address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["survey_id"], name: "index_submission_views_on_survey_id", using: :btree
+    t.index ["user_id"], name: "index_submission_views_on_user_id", using: :btree
+  end
+
   create_table "submissions", force: :cascade do |t|
     t.integer  "survey_id"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "complete",   default: false
     t.index ["survey_id"], name: "index_submissions_on_survey_id", using: :btree
     t.index ["user_id"], name: "index_submissions_on_user_id", using: :btree
   end
@@ -197,6 +208,8 @@ ActiveRecord::Schema.define(version: 20170111154719) do
   add_foreign_key "questions", "surveys"
   add_foreign_key "roles", "customers"
   add_foreign_key "roles", "users"
+  add_foreign_key "submission_views", "surveys"
+  add_foreign_key "submission_views", "users"
   add_foreign_key "submissions", "surveys"
   add_foreign_key "submissions", "users"
   add_foreign_key "surveys", "customers"

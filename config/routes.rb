@@ -15,6 +15,9 @@ Rails.application.routes.draw do
         member do
           patch :archive
         end
+        member do
+          get :preview
+        end
       end
     end
 

@@ -62,7 +62,7 @@
               %strong
                 #{fa_icon("circle", text: @survey.submissions.complete)}
               = t "app.submission.show.complete"
-              (#{(Float(@survey.submissions.complete) / @survey.submissions.size * 100).ceil}%)
+              = survey_completion_percentage(@survey)
             %span.counter
               %strong
                 #{fa_icon("circle-o", text: @survey.submissions.incomplete)}
@@ -75,7 +75,6 @@
                 = link_to t("app.survey.show.survey_export"),
                   survey_submissions_path(@survey, format: "csv"),
                   class: "btn btn-xs btn-primary"
-
         .row
           .col-md-4
             %h3

@@ -10,6 +10,7 @@ en:
       placeholder: "Email address"
       rights: "Social Surveys All rights reserved 2016"
   app:
+    welcome: "Hi"
     loading: "loading.."
     errors_default: "Check the errors below"
     alert_auth: "You must be logged in to perform this action."
@@ -21,14 +22,18 @@ en:
       customer_new: "Create new customer"
       user_all: "Display all users"
       user_new: "Create new user"
-      sign_out: "SIGN OUT"
+      sign_out: "Sign Out"
     search_form:
-      button: "SEARCH"
+      button: "Search"
       placeholder: "Search surveys"
     subnav:
       welcome: "Welcome"
       signed_in_as: "Signed in as"
     customer:
+      breadcrumbs:
+        list: "Customers"
+        new: "New"
+        update: "Update"
       form_button: "Save customer"
       index:
         links:
@@ -54,6 +59,10 @@ en:
       archive:
         alert: "The customer has been archived successfully."
     user:
+      breadcrumbs:
+        list: "Users"
+        new: "New"
+        update: "Update"
       roles:
         editor: "Editor"
         viewer: "Viewer"
@@ -105,6 +114,11 @@ en:
       destroy:
         alert: "See you later!"
     survey:
+      breadcrumbs:
+        list: "Surveys"
+        new: "New"
+        update: "Update"
+        report: "Report"
       form_button: "Save survey"
       form_button_load: "Saving survey.."
       index:
@@ -189,6 +203,8 @@ en:
         file_text: "Images should be around 300x300 for a better size"
         file_remove: "Remove this image"
     submission:
+      breadcrumbs:
+        new: "Submit survey"
       links:
         subnav: "Submit this survey"
         survey_report: "SHOW SURVEY REPORT"

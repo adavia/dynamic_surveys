@@ -10,6 +10,7 @@ es:
       placeholder: "Correo electrónico"
       rights: "Social Surveys todos los derechos reservados 2016"
   app:
+    welcome: "Hola"
     loading: "cargando.."
     errors_default: "Revisa los siguientes errores"
     alert_auth: "Tienes que estar autenticado para realizar esta acción."
@@ -21,14 +22,18 @@ es:
       customer_new: "Crear nuevo cliente"
       user_all: "Listar todos los usuarios"
       user_new: "Crear nuevo usuario"
-      sign_out: "CERRAR SESIÓN"
+      sign_out: "Salir"
     search_form:
-      button: "BUSCAR"
+      button: "Buscar"
       placeholder: "Buscar encuestas"
     subnav:
       welcome: "Bienvenido"
       signed_in_as: "Registrado como"
     customer:
+      breadcrumbs:
+        list: "Clientes"
+        new: "Nuevo"
+        update: "Actualizar"
       form_button: "Guardar cliente"
       index:
         links:
@@ -54,6 +59,10 @@ es:
       archive:
         alert: "El cliente ha sido archivado exitosamente"
     user:
+      breadcrumbs:
+        list: "Usuarios"
+        new: "Nuevo"
+        update: "Actualizar"
       roles:
         editor: "Editor"
         viewer: "Visualizador"
@@ -105,6 +114,11 @@ es:
       destroy:
         alert: "Hasta luego!"
     survey:
+      breadcrumbs:
+        list: "Encuestas"
+        new: "Nuevo"
+        update: "Actualizar"
+        report: "Reporte"
       form_button: "Guardar encuesta"
       form_button_load: "Guardando encuesta.."
       index:
@@ -189,6 +203,8 @@ es:
         file_text: "La imágen debe tener un tamaño máximo de 300x300"
         file_remove: "Elimina esta imágen"
     submission:
+      breadcrumbs:
+        new: "Envío de encuesta"
       links:
         subnav: "Envía esta encuesta"
         survey_report: "REPORTE DE ENCUESTA"

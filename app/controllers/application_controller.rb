@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
     #unless: :sessions_controller?
 
   rescue_from Pundit::NotAuthorizedError, with: :not_authorized
-
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   protected

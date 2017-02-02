@@ -3,6 +3,8 @@ class Admin::CustomersController < Admin::ApplicationController
 
   def new
     @customer = Customer.new
+    add_breadcrumb t("app.customer.breadcrumbs.list"), :customers_path
+    add_breadcrumb t("app.customer.breadcrumbs.new"), new_admin_user_customer_path
   end
 
   def create
@@ -25,6 +27,9 @@ class Admin::CustomersController < Admin::ApplicationController
   end
 
   def edit
+    add_breadcrumb t("app.customer.breadcrumbs.list"), :customers_path
+    add_breadcrumb "#{@customer.name}", customer_path(@customer)
+    add_breadcrumb t("app.customer.breadcrumbs.update"), edit_admin_user_customer_path(current_user, @customer)
   end
 
   def update

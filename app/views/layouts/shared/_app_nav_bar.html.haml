@@ -35,18 +35,22 @@
                   = link_to t("app.links.user_all"), [:admin, :users]
                 %li
                   = link_to t("app.links.user_new"), [:new, :admin, :user]
+        - if breadcrumbs.any?
+          %ul.breadcrumb.list-inline.hidden-xs.hidden-sm
+            = render_breadcrumbs tag: :li, separator: ""
       %ul.nav.navbar-nav.navbar-right
         - if logged_in?
           %li
-            = link_to fa_icon("cogs", text: current_user.to_s.upcase),
+            = link_to fa_icon("cogs",
+              text: "#{t("app.welcome").upcase}, #{current_user.to_s.upcase}"),
               current_user
           %li
-            = link_to t("app.links.sign_out"), session_path(current_user), method: :delete
-
+            = link_to t("app.links.sign_out").upcase,
+              session_path(current_user), method: :delete
       = form_tag(search_surveys_path, method: "get", id: "survey-search-form",
         class: "navbar-form navbar-right") do
         .form-group
           = text_field_tag :search, params[:search],
-            placeholder: t("app.search_form.placeholder"),
+            placeholder: t("app.search_form.placeholder").upcase,
             class: "form-control"
-        = button_tag t("app.search_form.button"), class: "btn btn-default"
+        = button_tag fa_icon("search"), class: "btn btn-default"

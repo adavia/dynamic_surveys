@@ -16,6 +16,9 @@ class CustomersController < ApplicationController
       format.html {}
       format.json { render json: @customer }
     end
+
+    add_breadcrumb t("app.customer.breadcrumbs.list"), :customers_path
+    add_breadcrumb "#{@customer.name}", customer_path(@customer)
   end
 
   private

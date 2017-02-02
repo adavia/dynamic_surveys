@@ -7,10 +7,14 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def show
+    add_breadcrumb t("app.user.breadcrumbs.list"), :admin_users_path
+    add_breadcrumb "#{@user.to_s}", admin_user_path(@user)
   end
 
   def new
     @user = User.new
+    add_breadcrumb t("app.user.breadcrumbs.list"), :admin_users_path
+    add_breadcrumb t("app.user.breadcrumbs.new"), new_admin_user_path
   end
 
   def create
@@ -34,6 +38,9 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def edit
+    add_breadcrumb t("app.user.breadcrumbs.list"), :admin_users_path
+    add_breadcrumb "#{@user.to_s}", admin_user_path(@user)
+    add_breadcrumb t("app.user.breadcrumbs.update"), edit_admin_user_path(@user)
   end
 
   def update

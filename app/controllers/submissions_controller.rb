@@ -35,6 +35,9 @@ class SubmissionsController < ApplicationController
     end
 
     authorize @submission, :new?
+    add_breadcrumb t("app.customer.breadcrumbs.list"), :customers_path
+    add_breadcrumb "#{@survey.customer.name} - surveys", customer_surveys_path(@survey.customer)
+    add_breadcrumb t("app.submission.breadcrumbs.new"), new_survey_submission_path(@survey)
   end
 
   def create

@@ -36,6 +36,8 @@ class UsersController < ApplicationController
   end
 
   def edit
+    add_breadcrumb "#{@user.to_s}", user_path(@user)
+    add_breadcrumb t("app.user.breadcrumbs.update"), edit_user_path(@user)
   end
 
   def update

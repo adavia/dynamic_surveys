@@ -10,6 +10,9 @@ class SurveysController < ApplicationController
       format.html {}
       format.json { render json: @surveys }
     end
+
+    add_breadcrumb t("app.customer.breadcrumbs.list"), :customers_path
+    add_breadcrumb "#{@customer.name} - #{t("app.survey.breadcrumbs.list").downcase}", customer_surveys_path(@customer)
   end
 
   def show
@@ -25,11 +28,19 @@ class SurveysController < ApplicationController
       end
       format.json { render json: @survey }
     end
+
+    add_breadcrumb t("app.customer.breadcrumbs.list"), :customers_path
+    add_breadcrumb "#{@customer.name} - #{t("app.survey.breadcrumbs.list").downcase}", customer_surveys_path(@customer)
+    add_breadcrumb t("app.survey.breadcrumbs.report"), customer_survey_path(@customer)
   end
 
   def new
     @survey = @customer.surveys.build
     authorize @survey, :create?
+
+    add_breadcrumb t("app.customer.breadcrumbs.list"), :customers_path
+    add_breadcrumb "#{@customer.name} - #{t("app.survey.breadcrumbs.list").downcase}", customer_surveys_path(@customer)
+    add_breadcrumb t("app.survey.breadcrumbs.new"), new_customer_survey_path(@customer)
   end
 
   def create
@@ -56,6 +67,10 @@ class SurveysController < ApplicationController
 
   def edit
     authorize @survey, :update?
+
+    add_breadcrumb t("app.customer.breadcrumbs.list"), :customers_path
+    add_breadcrumb "#{@customer.name} - #{t("app.survey.breadcrumbs.list").downcase}", customer_surveys_path(@customer)
+    add_breadcrumb t("app.survey.breadcrumbs.update"), edit_customer_survey_path(@customer, @survey)
   end
 
   def update

@@ -119,6 +119,9 @@ es:
         new: "Nuevo"
         update: "Actualizar"
         report: "Reporte"
+      report:
+        bar: "Detalle de respuestas expresado en cantidad"
+        pie: "Porcentaje y cantidad de respuestas"
       form_button: "Guardar encuesta"
       form_button_load: "Guardando encuesta.."
       index:

@@ -280,6 +280,24 @@ small.handle {
   margin: 15px 10px !important;
 }
 
+.question-report {
+  h3 {
+    margin-top: 0;
+  }
+  .list-group {
+    margin-bottom: 0;
+  }
+  hr {
+    margin-top: 35px;
+    margin-bottom: 30px;
+    border: 0;
+    border-top: 3px solid #f72969;
+  }
+  &:last-child hr {
+    display: none;
+  }
+}
+
 /* MARGINS */
 
 .m-t-0 {

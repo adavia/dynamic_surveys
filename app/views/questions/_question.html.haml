@@ -1,55 +1,66 @@
-%h3
-  = question.title
+.question-report
+  %h3
+    = question.title
 
-%ul.list-group
-  %li.list-group-item
-    %span.counter.pull-right
-      = question.answers_count
-    = t "app.survey.show.answers"
-  - if ["single", "list"].include? question.question_type
-    - @choice = question.answers.choice_counter.each do |answer|
-      %li.list-group-item
-        %span.counter.pull-right
-          = answer[1]
-        = answer[0]
-  - if question.question_type == "image"
-    - @image = question.answers.image_counter.each do |answer|
-      %li.list-group-item
-        %span.counter.pull-right
-          = answer[1]
-        = answer[0]
-  - if question.question_type == "multiple"
-    - @multiple = question.answers.multiple_choice_counter.each do |answer|
-      %li.list-group-item
-        %span.counter.pull-right
-          = answer[1]
-        = answer[0]
-  - if question.question_type == "rating"
+  %ul.list-group
     %li.list-group-item
       %span.counter.pull-right
-        - if question.answers.any?
-          = number_with_precision(question.answers.rating_average, precision: 2)
-        - else
-          0
-      = t "app.survey.show.average_rating"
-  - if ["open", "date", "description", "phone", "email"].include? question.question_type
-    - if current_page?(action: :show) && question.answers.any?
+        = question.answers_count
+      = t "app.survey.show.answers"
+    - if ["single", "list"].include? question.question_type
+      - @choice = question.answers.choice_counter.each do |answer|
+        %li.list-group-item
+          %span.counter.pull-right
+            = answer[1]
+          = answer[0]
+    - if question.question_type == "image"
+      - @image = question.answers.image_counter.each do |answer|
+        %li.list-group-item
+          %span.counter.pull-right
+            = answer[1]
+          = answer[0]
+    - if question.question_type == "multiple"
+      - @multiple = question.answers.multiple_choice_counter.each do |answer|
+        %li.list-group-item
+          %span.counter.pull-right
+            = answer[1]
+          = answer[0]
+    - if question.question_type == "rating"
       %li.list-group-item
-        .clearfix
-          = link_to t("app.survey.show.answer_show"), [question, :answers],
-            remote: true, class: "pull-left"
-          .export-links
-            = link_to t("app.survey.show.survey_export"),
-              question_answers_path(question, format: "csv"),
-              class: "btn btn-xs btn-primary"
+        %span.counter.pull-right
+          - if question.answers.any?
+            = number_with_precision(question.answers.rating_average, precision: 2)
+          - else
+            0
+        = t "app.survey.show.average_rating"
+    - if ["open", "date", "description", "phone", "email"].include? question.question_type
+      - if current_page?(action: :show) && question.answers.any?
+        %li.list-group-item
+          .clearfix
+            = link_to t("app.survey.show.answer_show"), [question, :answers],
+              remote: true, class: "pull-left"
+            .export-links
+              = link_to t("app.survey.show.survey_export"),
+                question_answers_path(question, format: "csv"),
+                class: "btn btn-xs btn-primary"
 
-.text-center
-  - if ["single", "list"].include? question.question_type
-    - if @choice.any?
-      = pie_chart @choice
-  - if question.question_type == "multiple"
-    - if @multiple.any?
-      = pie_chart @multiple
-  - if question.question_type == "image"
-    - if @image.any?
-      = pie_chart @image
+  .question-charts
+    - if ["single", "list"].include? question.question_type
+      - if @choice.any?
+        = bar_chart @choice, library: { bar: { groupWidth: "15%" }, tooltip: "asd",
+          title: t("app.survey.report.bar") }
+        = pie_chart @choice, library: { pieSliceText: "value-and-percentage",
+          legend: { "position": "bottom" }, title: t("app.survey.report.pie") }
+    - if question.question_type == "multiple"
+      - if @multiple.any?
+        = bar_chart @multiple, library: { bar: { groupWidth: "15%" },
+          title: t("app.survey.report.bar") }
+        = pie_chart @multiple, library: { pieSliceText: "value-and-percentage",
+          legend: { "position": "bottom" }, title: t("app.survey.report.pie") }
+    - if question.question_type == "image"
+      - if @image.any?
+        = bar_chart @image, library: { bar: { groupWidth: "15%" },
+          title: t("app.survey.report.bar") }
+        = pie_chart @image, library: { pieSliceText: "value-and-percentage",
+          legend: { "position": "bottom" }, title: t("app.survey.report.pie") }
+  %hr

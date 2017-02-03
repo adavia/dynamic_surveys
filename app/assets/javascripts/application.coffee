@@ -15,7 +15,6 @@
 #= require jquery-ui/widgets/sortable
 #= require turbolinks
 #= require bootstrap-sprockets
-#= require Chart.bundle
 #= require chartkick
 #= require moment
 #= require bootstrap-datetimepicker

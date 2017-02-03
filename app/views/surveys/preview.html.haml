@@ -54,7 +54,7 @@
               = t "app.survey.show.results_by_type"
               - @trans_keys = @survey.questions.unscope(:order).group_types.transform_keys do |key|
                 - t("app.question.question_types.#{key}").capitalize
-              = pie_chart @trans_keys
+              = pie_chart @trans_keys, library: { legend: "none" }
 
         = render @survey.questions
 

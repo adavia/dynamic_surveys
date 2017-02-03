@@ -119,6 +119,9 @@ en:
         new: "New"
         update: "Update"
         report: "Report"
+      report:
+        bar: "Quantity of answers"
+        pie: "Percentage and quantity of answers"
       form_button: "Save survey"
       form_button_load: "Saving survey.."
       index:

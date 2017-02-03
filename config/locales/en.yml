@@ -12,6 +12,7 @@ en:
   app:
     welcome: "Hi"
     loading: "loading.."
+    no_results: "No results found"
     errors_default: "Check the errors below"
     alert_auth: "You must be logged in to perform this action."
     alert_permission: "You are not authorized to do that."
@@ -37,6 +38,7 @@ en:
       form_button: "Save customer"
       index:
         links:
+          view: "View all"
           subnav: "Manage the following customers"
           show_surveys: "SHOW ALL CUSTOMER SURVEYS"
           customer_all: "ALL CUSTOMERS"

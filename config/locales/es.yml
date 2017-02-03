@@ -12,6 +12,7 @@ es:
   app:
     welcome: "Hola"
     loading: "cargando.."
+    no_results: "No se encontraron resultados"
     errors_default: "Revisa los siguientes errores"
     alert_auth: "Tienes que estar autenticado para realizar esta acción."
     alert_permission: "No estás autorizado para realizar esta acción."
@@ -37,6 +38,7 @@ es:
       form_button: "Guardar cliente"
       index:
         links:
+          view: "Ver todos"
           subnav: "Administra los siguientes clientes"
           show_surveys: "VER LISTADO DE ENCUESTAS"
           customer_all: "LISTAR CLIENTES"

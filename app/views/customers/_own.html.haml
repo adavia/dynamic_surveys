@@ -1,0 +1,13 @@
+- if customers.each do |customer|
+  %li
+    = link_to customer do
+      %span.item
+        %p= customer.name
+        %small
+          = truncate(customer.description, length: 80)
+- end.empty?
+  %li
+    %p= t("app.no_results")
+%li.divider
+  %li
+    = link_to t("app.customer.index.links.view"), customers_path, class: "text-center"

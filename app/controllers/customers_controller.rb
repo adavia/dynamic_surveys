@@ -21,6 +21,11 @@ class CustomersController < ApplicationController
     add_breadcrumb "#{@customer.name}", customer_path(@customer)
   end
 
+  def own
+    @customers = current_user.customers
+    render layout: !request.xhr?
+  end
+
   private
 
   def customer_params

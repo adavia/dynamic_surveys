@@ -57,6 +57,7 @@ $state-danger-border: darken(adjust-hue($state-danger-bg, -10), 5%) !default;
 @import "bootstrap-datetimepicker";
 @import "font-awesome";
 @import "common";
+@import "customers";
 @import "answers";
 @import "submissions";
 
@@ -284,12 +285,9 @@ small.handle {
   h3 {
     margin-top: 0;
   }
-  .list-group {
-    margin-bottom: 0;
-  }
   hr {
-    margin-top: 35px;
-    margin-bottom: 30px;
+    margin-top: 10px;
+    margin-bottom: 25px;
     border: 0;
     border-top: 3px solid #f72969;
   }

@@ -11,6 +11,9 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :new, :create, :edit, :update]
 
     resources :customers, only: [:index, :show] do
+      collection do
+        get :own
+      end
       resources :surveys, only: [:index, :show, :new, :create, :edit, :update] do
         member do
           patch :archive

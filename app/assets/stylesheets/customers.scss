@@ -1,3 +1,19 @@
 // Place all the styles related to the customers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+ul.dropdown-customers {
+  min-width: 250px;
+  li {
+    a {
+      display: block;
+      padding: 3px 10px;
+      margin: 3px 0;
+      white-space: normal;
+      p {
+        color: #f72969;
+        margin-bottom: 3px;
+      }
+    }
+  }
+}

@@ -15,15 +15,14 @@
       %ul.nav.navbar-nav
         - if logged_in?
           %li.dropdown
-            %a.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true", "data-toggle": "dropdown", href: "#", role: "button"}
+            %a.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true",
+              "data-toggle": "dropdown", href: own_customers_path, role: "button",
+              "data-behavior": "load-customer-dropdown"}
               = Customer.human_attribute_name(:class_name).pluralize.upcase
               %span.caret
-            %ul.dropdown-menu
-              %li
-                = link_to t("app.links.customer_all"), customers_path
-              - if is_admin?
-                %li
-                  = link_to t("app.links.customer_new"), [:new, :admin, current_user, :customer]
+            %ul.dropdown-menu.dropdown-customers
+              .text-center#customer-loader{style: "display:none"}
+                %p= t "app.loading"
           - if is_admin?
             %li.dropdown
               %a.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true",

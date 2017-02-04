@@ -55,7 +55,7 @@ es:
         text_secondary: "Completa los siguientes campos"
         alert: "El cliente ha sido creado exitosamente."
       edit:
-        text_primary: "Actualiza la información del cliente"
+        text_primary: "Actualiza la siguiente información"
         text_secondary: "Edita los siguientes campos"
         alert: "El cliente ha sido editado exitosamente."
       archive:

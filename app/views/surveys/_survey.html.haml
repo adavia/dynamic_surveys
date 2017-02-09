@@ -35,6 +35,8 @@
           %li
             = link_to t("app.survey.index.links.survey_submission").downcase.capitalize,
               [:new, survey, :submission]
+          %li
+            = link_to t("app.survey.index.links.survey_images"), [:images, survey]
           - if policy(survey).update?
             %li
               = link_to t("app.survey.index.links.survey_edit").downcase.capitalize,

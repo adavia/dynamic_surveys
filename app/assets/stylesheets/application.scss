@@ -1,3 +1,9 @@
+// External fonts
+
+/*
+*= require dropzone/dropzone
+*/
+
 // Body
 
 @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
@@ -60,6 +66,7 @@ $state-danger-border: darken(adjust-hue($state-danger-bg, -10), 5%) !default;
 @import "customers";
 @import "answers";
 @import "submissions";
+@import "surveys";
 
 /* DEFAULT LAYOUT */
 

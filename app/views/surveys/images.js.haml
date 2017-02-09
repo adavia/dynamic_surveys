@@ -1,0 +1,6 @@
+$(".survey-images").append("#{ j render partial: "image", collection: @images, as: :image }");
+- if @images.next_page
+  $("#scrolling-content").html("#{ j link_to t("app.view_more"), images_survey_path(@survey, page: @images.current_page + 1), class: 'btn btn-sm btn-primary', remote: true }");
+- else
+  $(window).off("scroll");
+  $("#scrolling-content").remove();

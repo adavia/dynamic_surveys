@@ -1,0 +1,8 @@
+= content_tag :div, id: "image_#{image.id}" do
+  .col-xs-3.col-sm-3.col-md-3
+    .thumbnail
+      .caption
+        - if policy(image).destroy?
+          = link_to t("app.delete"), image, method: :delete,
+            class: "btn btn-xs btn-danger", remote: true
+      = image_tag(image.file.url(:thumb), class: "img-responsive")

@@ -12,12 +12,14 @@ es:
   app:
     welcome: "Hola"
     loading: "cargando.."
+    view_more: "Ver más"
     no_results: "No se encontraron resultados"
     errors_default: "Revisa los siguientes errores"
     alert_auth: "Tienes que estar autenticado para realizar esta acción."
     alert_permission: "No estás autorizado para realizar esta acción."
     alert_404: "La página que has solicitado no existe."
     alert_admin: "Debes ser un administrador para realizar esta acción."
+    delete: "Eliminar"
     links:
       customer_all: "Listar todos los clientes"
       customer_new: "Crear nuevo cliente"
@@ -137,6 +139,7 @@ es:
           survey_report: "REPORTE"
           survey_submissions: "FILTRO DE ENVÍOS"
           survey_submission: "ENVIAR"
+          survey_images: "Ver imágenes"
           avatar_upload: "Sube una imágen para esta encuesta"
           avatar_text: "La imágen debe tener un tamaño máximo de 1200x600"
           avatar_remove: "Elimina esta imágen"
@@ -159,6 +162,12 @@ es:
         answers: "Respuestas"
         answer_show: "Mostrar respuestas"
         average_rating: "Calificación promedio"
+      search:
+        subnav: "Resultados de búsqueda"
+      images:
+        title: "Imágenes"
+        subnav: "Imágenes de la encuesta"
+        upload_text: "Selecciona las imágenes a subir"
       new:
         subnav: "Crear nueva encuesta"
         text_primary: "Completa los siguientes campos para crear una nueva encuesta"

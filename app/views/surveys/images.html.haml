@@ -1,0 +1,37 @@
+- content_for :sub_nav do
+  .col-md-5
+    %h1= t("app.survey.images.subnav")
+  .col-md-3
+    %ul.list-inline
+      - if policy(@survey).show?
+        %li
+          = link_to t("app.survey.edit.survey_report"), [@survey.customer, @survey],
+            class: "btn btn-sm btn-primary"
+      %li
+        = link_to "#{@survey.customer.surveys_count} #{Survey.human_attribute_name(:class_name).downcase} total", [@survey.customer, :surveys]
+
+.container
+  .row
+    .col-md-8.col-md-offset-2
+      .panel-piled
+        %h1
+          = @survey.name
+
+        - if policy(@survey).upload?
+          .survey-form-upload
+            = form_tag [:upload, @survey], method: :post, class: "dropzone",
+              data: { behavior: "survey-dropzone" } do
+              .dz-message{"data-dz-message": ""}
+                %span= t("app.survey.images.upload_text")
+              .fallback
+                = file_field_tag :file, multiple: true
+
+        .row.survey-images
+          = render partial: "image", collection: @images, as: :image
+
+        - unless @images.current_page == @images.total_pages
+          #scrolling-content.text-center
+            = link_to t("app.view_more"),
+              images_survey_path(@survey, page: @images.current_page + 1),
+              remote: true, class: "btn btn-sm btn-primary"
+

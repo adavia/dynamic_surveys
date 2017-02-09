@@ -24,3 +24,5 @@ $(document).on "hidden.bs.modal", ".modal", (event) ->
 
 $(document).on "click", "[data-behavior~=date-picker]", (event) ->
   $(@).datetimepicker({format: 'DD/MM/YYYY'}).datetimepicker("show");
+
+Dropzone.autoDiscover = false

@@ -38,6 +38,8 @@ gem 'squid', '~> 1.2'
 gem 'momentjs-rails', '>= 2.9.0'
 # Datepicker
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.43'
+# Dropzone rails
+gem 'dropzonejs-rails'
 # Breadcrumbs
 gem 'breadcrumbs_on_rails'
 # Use pagination

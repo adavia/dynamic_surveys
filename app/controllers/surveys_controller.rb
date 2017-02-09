@@ -1,7 +1,9 @@
 class SurveysController < ApplicationController
   before_action :authenticate_user, except: :preview
-  before_action :set_customer, only: [:index, :show, :new, :create, :edit, :update, :archive]
-  before_action :set_survey, only: [:show, :edit, :update, :archive, :preview]
+  before_action :set_customer, only: [:index, :show, :new, :create, :edit,
+    :update, :archive]
+  before_action :set_survey, only: [:show, :edit, :update, :archive, :preview,
+    :images, :upload]
 
   def index
     @surveys = policy_scope(@customer.surveys.excluding_archived
@@ -116,6 +118,25 @@ class SurveysController < ApplicationController
 
   def preview
     render layout: "report"
+  end
+
+  def images
+    @images = @survey.images.paginate(page: params[:page])
+    add_breadcrumb t("app.customer.breadcrumbs.list"), :customers_path
+    add_breadcrumb "#{@survey.customer.name} - #{t("app.survey.breadcrumbs.list").downcase}", customer_surveys_path(@survey.customer)
+    add_breadcrumb t("app.survey.images.title"), images_survey_path(@survey)
+  end
+
+  def upload
+    authorize @survey, :upload?
+
+    @image = @survey.images.build(file: params[:file])
+    if @image.save!
+      respond_to do |format|
+        format.json{ render json: { imagePartial: render_to_string("_image",
+          layout: false, locals: { image: @image }) } }
+      end
+    end
   end
 
   private

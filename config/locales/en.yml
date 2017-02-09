@@ -12,12 +12,14 @@ en:
   app:
     welcome: "Hi"
     loading: "loading.."
+    view_more: "View more"
     no_results: "No results found"
     errors_default: "Check the errors below"
     alert_auth: "You must be logged in to perform this action."
     alert_permission: "You are not authorized to do that."
     alert_404: "The page you have requested does not exists."
     alert_admin: "You must be an admin to do that."
+    delete: "Delete"
     links:
       customer_all: "Display all customers"
       customer_new: "Create new customer"
@@ -136,11 +138,18 @@ en:
           archive_alert: "Are you sure you want to archive this survey?"
           survey_report: "REPORT"
           survey_submissions: "FILTER SUBMISSIONS"
+          survey_images: "Display images"
           survey_submission: "SUBMIT"
           avatar_upload: "Upload an avatar for the survey"
           avatar_text: "Images should be around 1200x600 for a better size"
           avatar_remove: "Remove this image"
           question_add: "Add some questions"
+      search:
+        subnav: "Survey search results"
+      images:
+        title: "Images"
+        subnav: "Survey images"
+        upload_text: "Drop files here to upload"
       show:
         links:
           survey_submit: "Submit this survey"

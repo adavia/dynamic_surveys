@@ -21,4 +21,8 @@ class SurveyPolicy < ApplicationPolicy
   def archive?
     user.try(:admin?) || record.customer.has_editor?(user)
   end
+
+  def upload?
+    user.try(:admin?) || record.customer.has_editor?(user)
+  end
 end

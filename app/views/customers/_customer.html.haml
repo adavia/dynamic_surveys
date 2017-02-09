@@ -37,3 +37,6 @@
                 [:archive, :admin, customer.user, customer],
                 method: :patch,
                 data: { confirm: "Are you sure you want to archive this customer?" }
+          %li
+            = link_to t("app.customer.index.links.show_surveys").downcase.capitalize,
+              [customer, :surveys]

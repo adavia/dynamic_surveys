@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170201171558) do
+ActiveRecord::Schema.define(version: 20170207220853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,10 +96,11 @@ ActiveRecord::Schema.define(version: 20170201171558) do
 
   create_table "images", force: :cascade do |t|
     t.string   "file"
-    t.integer  "question_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["question_id"], name: "index_images_on_question_id", using: :btree
+    t.integer  "imageable_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "imageable_type"
+    t.index ["imageable_id"], name: "index_images_on_imageable_id", using: :btree
   end
 
   create_table "option_answers", force: :cascade do |t|
@@ -200,7 +201,7 @@ ActiveRecord::Schema.define(version: 20170201171558) do
   add_foreign_key "choice_answers", "answers"
   add_foreign_key "choices", "questions"
   add_foreign_key "customers", "users"
-  add_foreign_key "images", "questions"
+  add_foreign_key "images", "questions", column: "imageable_id"
   add_foreign_key "option_answers", "answers"
   add_foreign_key "option_answers", "choices"
   add_foreign_key "option_answers", "options"

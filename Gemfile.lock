@@ -71,6 +71,8 @@ GEM
     concurrent-ruby (1.0.4)
     connection_pool (2.2.1)
     debug_inspector (0.0.2)
+    dropzonejs-rails (0.7.3)
+      rails (> 3.1)
     erubis (2.7.0)
     excon (0.54.0)
     execjs (2.7.0)
@@ -376,6 +378,7 @@ DEPENDENCIES
   carrierwave (~> 0.10.0)
   chartkick
   coffee-rails (~> 4.2)
+  dropzonejs-rails
   file_validators
   fog
   font-awesome-rails (~> 4.3)

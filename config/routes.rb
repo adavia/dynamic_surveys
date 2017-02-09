@@ -28,6 +28,12 @@ Rails.application.routes.draw do
       collection do
         get :search
       end
+      member do
+        get :images
+      end
+      member do
+        post :upload
+      end
       resources :submissions, only: [:index, :show, :new, :create]
     end
 
@@ -36,6 +42,8 @@ Rails.application.routes.draw do
         get :update_choices
       end
     end
+
+    resources :images, only: :destroy
 
     resources :questions, only: [] do
       resources :answers, only: :index

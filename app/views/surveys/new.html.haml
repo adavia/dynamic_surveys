@@ -11,7 +11,7 @@
         = link_to "#{@customer.surveys_count} #{Survey.human_attribute_name(:class_name).downcase} total", [@customer, :surveys]
 .container
   .row
-    .col-md-8.col-md-offset-2
+    .col-md-10.col-md-offset-1
       .default-panel
         %h3
           = t "app.survey.new.text_primary"

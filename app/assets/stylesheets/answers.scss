@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.radio-stars{
+.radio-stars {
   unicode-bidi: bidi-override;
   direction: rtl;
   text-align: left;
@@ -34,7 +34,7 @@
   }
 }
 
-.radio-images{
+.radio-images {
   label > input {
     /* HIDE RADIO */
     visibility: hidden;

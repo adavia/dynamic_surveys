@@ -303,6 +303,20 @@ small.handle {
   }
 }
 
+
+.question-fields {
+  hr {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    border: 0;
+    border-top: 3px solid #6d26ff;
+  }
+  &:last-of-type hr {
+    display: none;
+  }
+}
+
+
 /* MARGINS */
 
 .m-t-0 {

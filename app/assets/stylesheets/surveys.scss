@@ -19,3 +19,23 @@
     z-index:2;
   }
 }
+
+.survey_questions_question_type {
+  label {
+    @extend .btn;
+    @extend .btn-success;
+    @extend .btn-sm;
+    margin-right: 5px;
+  }
+  input {
+    /* HIDE RADIO */
+    visibility: hidden;
+    /* Makes input not-clickable */
+    position: absolute;
+    &:checked + label {
+      /* (RADIO CHECKED) IMAGE STYLES */
+      background-color: #e4094d;
+      border-color: #db084a;
+    }
+  }
+}

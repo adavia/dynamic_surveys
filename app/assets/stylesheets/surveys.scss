@@ -21,11 +21,12 @@
 }
 
 .survey_questions_question_type {
+  margin-bottom: 10px;
   label {
     @extend .btn;
     @extend .btn-success;
     @extend .btn-sm;
-    margin-right: 5px;
+    margin: 0px 5px 5px 0px;
   }
   input {
     /* HIDE RADIO */

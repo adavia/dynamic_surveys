@@ -24,11 +24,11 @@ class Submission < ApplicationRecord
   end
 
   def self.created_before(date)
-    where("submissions.created_at < ?", date)
+    where("submissions.created_at < ?", Date.parse(date))
   end
 
   def self.created_after(date)
-    where("submissions.created_at > ?", date)
+    where("submissions.created_at > ?", Date.parse(date))
   end
 
   def self.question_id(id)

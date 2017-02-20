@@ -2,6 +2,6 @@
   .form-group.radio-images
     = builder.collection_radio_buttons(:image_id, images, :id, :file,
       collection_wrapper_tag: false, item_wrapper_tag: false) do |b|
-      = b.radio_button + image_tag(b.object.file.url(:thumb),
+      = b.radio_button + image_tag((b.object.file.url(:thumb) || b.object.reference_path),
         class: "img-responsive", size: 80)
 

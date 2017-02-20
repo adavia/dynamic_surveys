@@ -20,6 +20,9 @@ en:
     alert_404: "The page you have requested does not exists."
     alert_admin: "You must be an admin to do that."
     delete: "Delete"
+    close_button: "Close"
+    search: "SEARCH"
+    entries: "entries"
     links:
       customer_all: "Display all customers"
       customer_new: "Create new customer"
@@ -125,14 +128,14 @@ en:
         report: "Report"
       report:
         bar: "Quantity of answers"
-        pie: "Percentage and quantity of answers"
+        pie: "Percentage and quantity of answers by option selected"
       form_button: "Save survey"
       form_button_load: "Saving survey.."
       index:
         links:
           subnav: "Customer surveys"
           survey_all: "ALL SURVEYS"
-          survey_new: "CREATE NEW SURVEY"
+          survey_new: " CREATE NEW SURVEY"
           survey_edit: "EDITION"
           survey_archive: "Archive survey"
           archive_alert: "Are you sure you want to archive this survey?"
@@ -150,6 +153,8 @@ en:
         title: "Images"
         subnav: "Survey images"
         upload_text: "Drop files here to upload"
+        gallery_btn: "Gallery"
+        form_button: "Upload images"
       show:
         links:
           survey_submit: "Submit this survey"
@@ -164,7 +169,7 @@ en:
         survey_submissions: "Submissions"
         survey_export: "Export CSV"
         type_of_questions: "Type of questions"
-        results_by_type: "Results by type"
+        results_by_type: "Quantity of questions by type"
         answers: "Answers"
         answer_show: "Show answers"
         average_rating: "Average rating"
@@ -213,7 +218,7 @@ en:
     image:
       links:
         image_add: "Add some images"
-        file_upload: "Upload an image for this question"
+        file_upload: "Upload an image"
         file_text: "Images should be around 300x300 for a better size"
         file_remove: "Remove this image"
     submission:
@@ -246,8 +251,6 @@ en:
         submission_by: "Submitted by"
         submission_answers_button: "Show answers"
         submission_results_button: "Load more submissions"
-        submission_close_button: "Close"
-        entries: "entries"
       create:
         alert: "The survey has been submitted successfully!"
         error: "Something went wrong during this submission. Check the errors below."
@@ -259,7 +262,6 @@ en:
       date: "Fill in with a date"
       list: "-- Select your answer --"
       answer_results_button: "Load more submissions"
-      answer_close_button: "Close"
       answered_on: "Answered on"
       answered_by: "Answered by"
   activerecord:
@@ -278,6 +280,7 @@ en:
         question_type: "-- Select the type of question --"
       image:
         class_name: "Image"
+        name: "Image name"
       choice:
         class_name: "Choice"
         title: "Fill in with a possible choice"

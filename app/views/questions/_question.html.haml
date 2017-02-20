@@ -47,20 +47,29 @@
   .question-charts
     - if ["single", "list"].include? question.question_type
       - if @choice.any?
-        = pie_chart @choice, library: { pieSliceText: "value-and-percentage",
-          title: t("app.survey.report.pie") }
-        = bar_chart @choice, library: { bar: { groupWidth: "15%" }, tooltip: "asd",
-          title: t("app.survey.report.bar") }
+        %h4.m-b-0= t("app.survey.report.pie")
+        .row
+          .col-md-6
+            = pie_chart @choice, library: { pieSliceText: "value-and-percentage",
+              legend: "none" }
+          .col-md-6
+            = bar_chart @choice
     - if question.question_type == "multiple"
       - if @multiple.any?
-        = pie_chart @multiple, library: { pieSliceText: "value-and-percentage",
-          title: t("app.survey.report.pie") }
-        = bar_chart @multiple, library: { bar: { groupWidth: "15%" },
-          title: t("app.survey.report.bar") }
+        %h4.m-b-0= t("app.survey.report.pie")
+        .row
+          .col-md-6
+            = pie_chart @multiple, library: { pieSliceText: "value-and-percentage",
+              legend: "none" }
+          .col-md-6
+            = bar_chart @multiple
     - if question.question_type == "image"
       - if @image.any?
-        = pie_chart @image, library: { pieSliceText: "value-and-percentage",
-          title: t("app.survey.report.pie") }
-        = bar_chart @image, library: { bar: { groupWidth: "15%" },
-          title: t("app.survey.report.bar") }
+        %h4.m-b-0= t("app.survey.report.pie")
+        .row
+          .col-md-6
+            = pie_chart @image, library: { pieSliceText: "value-and-percentage",
+              legend: "none" }
+          .col-md-6
+            = bar_chart @image
   %hr

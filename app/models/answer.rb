@@ -24,9 +24,17 @@ class Answer < ApplicationRecord
 
   scope :rated_answers,           -> { joins(:answer_raiting) }
   scope :rating_average,          -> { joins(:answer_raiting).average("answer_raitings.response") }
-  scope :image_counter,           -> { joins(answer_image: :image).group("images.file").count }
+  scope :image_counter,           -> { joins(answer_image: :image).group("images.name").count }
   scope :choice_counter,          -> { joins(choice_answer: :choice).group("choices.title").count }
   scope :multiple_choice_counter, -> { joins(answer_multiple: [:choices]).group("choices.title").count }
 
   self.per_page = 15
+
+  def self.created_before(date)
+    where("answers.created_at < ?", Date.parse(date))
+  end
+
+  def self.created_after(date)
+    where("answers.created_at > ?", Date.parse(date))
+  end
 end

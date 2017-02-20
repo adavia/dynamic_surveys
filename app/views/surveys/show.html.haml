@@ -75,29 +75,12 @@
                 = link_to t("app.survey.show.survey_export"),
                   survey_submissions_path(@survey, format: "csv"),
                   class: "btn btn-xs btn-primary"
-        .row
-          .col-md-4
-            %h3
-              = t "app.survey.show.type_of_questions"
 
-            %ol.ordered-list
-              - @survey.questions.each do |question|
-                %li
-                  = t("app.question.question_types.#{question.question_type}").capitalize
-                  - if question.choices.any?
-                    %span.badge.pull-right
-                      = question.choices.size
-                  - if question.images.any?
-                    %span.badge.pull-right
-                      = question.images.size
-
-          .col-md-8
-            %h3.text-center
-              = t "app.survey.show.results_by_type"
-              - @trans_keys = @survey.questions.unscope(:order).group_types.transform_keys do |key|
-                - t("app.question.question_types.#{key}").capitalize
-              = pie_chart @trans_keys, library: { pieSliceText: "value-and-percentage",
-                legend: "none" }
+        %h3
+          = t "app.survey.show.results_by_type"
+          - @trans_keys = @survey.questions.unscope(:order).group_types.transform_keys do |key|
+            - t("app.question.question_types.#{key}").capitalize
+          = pie_chart @trans_keys, library: { pieSliceText: "value-and-percentage" }
 
         = render @survey.questions
 

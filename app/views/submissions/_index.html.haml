@@ -28,18 +28,17 @@
                 class: "form-control input-sm"
 
             .form-group#select-content
-            = submit_tag t("app.submission.index.search_button"),
-              class: "btn btn-default btn-block btn-sm",
+            = submit_tag t("app.search"), class: "btn btn-default btn-block btn-sm",
               data: { disable_with: t("app.submission.index.search_button_load")}
 
         .submission-items
           = render @submissions
 
       .modal-footer
-        #submissions-count.pull-left
+        #results-count.pull-left
           %span
             = @submissions.total_entries
-          = t("app.submission.index.entries")
+          = t("app.entries")
         - unless @submissions.next_page.nil?
           = link_to fa_icon("undo", text: t("app.submission.index.submission_results_button")),
           survey_submissions_path(@survey, page: @submissions.next_page),
@@ -47,4 +46,4 @@
           data: { "disable-with": t("app.loading") },
           class: "btn btn-sm btn-default text-center", id: "show_more"
         %button.btn.btn-sm.btn-primary{"data-dismiss": "modal", type: "button"}
-          = t "app.submission.index.submission_close_button"
+          = t "app.close_button"

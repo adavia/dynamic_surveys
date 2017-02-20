@@ -20,6 +20,9 @@ es:
     alert_404: "La página que has solicitado no existe."
     alert_admin: "Debes ser un administrador para realizar esta acción."
     delete: "Eliminar"
+    close_button: "Cerrar"
+    search: "BUSCAR"
+    entries: "resultados"
     links:
       customer_all: "Listar todos los clientes"
       customer_new: "Crear nuevo cliente"
@@ -125,7 +128,7 @@ es:
         report: "Reporte"
       report:
         bar: "Detalle de respuestas expresado en cantidad"
-        pie: "Porcentaje y cantidad de respuestas"
+        pie: "Porcentaje y cantidad de respuestas por opción seleccionada"
       form_button: "Guardar encuesta"
       form_button_load: "Guardando encuesta.."
       index:
@@ -158,7 +161,7 @@ es:
         survey_submissions: "Envíos de encuesta"
         survey_export: "Exportar CSV"
         type_of_questions: "Tipo de preguntas"
-        results_by_type: "Resultados por tipo de pregunta"
+        results_by_type: "Cantidad de preguntas por tipo"
         answers: "Respuestas"
         answer_show: "Mostrar respuestas"
         average_rating: "Calificación promedio"
@@ -168,6 +171,8 @@ es:
         title: "Imágenes"
         subnav: "Imágenes de la encuesta"
         upload_text: "Selecciona las imágenes a subir"
+        gallery_btn: "Galería"
+        form_button: "Cargar imágenes"
       new:
         subnav: "Crear nueva encuesta"
         text_primary: "Completa los siguientes campos para crear una nueva encuesta"
@@ -213,7 +218,7 @@ es:
     image:
       links:
         image_add: "Agrega alguna imágen"
-        file_upload: "Sube una imágen para esta pregunta"
+        file_upload: "Agrega una imágen"
         file_text: "La imágen debe tener un tamaño máximo de 300x300"
         file_remove: "Elimina esta imágen"
     submission:
@@ -246,8 +251,6 @@ es:
         submission_by: "Enviado por"
         submission_answers_button: "Mostrar respuestas"
         submission_results_button: "Mostrar más envíos"
-        submission_close_button: "Cerrar"
-        entries: "resultados"
       create:
         alert: "La encuesta ha sido enviada exitosamente!"
         error: "Revisa los siguientes errores."
@@ -259,8 +262,7 @@ es:
       date: "Ingrese una fecha"
       list: "-- Selecciona tu respuesta --"
       answer_results_button: "Mostrar más respuestas"
-      answer_close_button: "Cerrar"
-      answered_on: "Contestado en"
+      answered_on: "Contestado el"
       answered_by: "Contestado por"
   activerecord:
     attributes:
@@ -287,6 +289,7 @@ es:
         question_type: "-- Selecciona el tipo de pregunta --"
       image:
         class_name: "Images"
+        name: "Nombre"
       choice:
         class_name: "Opción"
         title: "Agrega una posible respuesta"

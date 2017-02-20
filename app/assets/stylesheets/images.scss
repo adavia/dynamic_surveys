@@ -1,0 +1,20 @@
+.survey_questions_images_name {
+  margin-bottom: 0;
+  input {
+    @extend .input-sm;
+    margin-top: 5px;
+  }
+}
+
+.img-drop-input {
+  margin-top: 10px;
+  width: 120px;
+}
+
+.dz-error-mark {
+  top: 40% !important;
+}
+
+.dz-success-mark {
+  top: 40% !important;
+}

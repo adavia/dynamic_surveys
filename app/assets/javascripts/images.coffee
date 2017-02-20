@@ -15,6 +15,28 @@ class Image
     @el.prev("input[type=hidden]").val("1")
     @el.closest(".image-fields").hide()
 
+  show_gallery: ->
+    $.ajax
+      url: @el.attr("href")
+      method: "GET"
+      dataType: "html"
+      success: (data, textStatus, jqXHR) =>
+        @el.closest(".image-fields").find(".images-list").html($(data)).slideDown('slow')
+      error: (jqXHR, textStatus, errorThrown) ->
+        console.log("AJAX Error: #{textStatus}")
+
+  remove_gallery: ->
+    @el.closest(".image-fields").find(".images-list").slideUp "slow", ->
+      $(@).empty()
+
+  select_from_gallery: ->
+    @el.closest(".image-fields").find(".img-preview").css("background-image", "url(#{@el.attr("src")})")
+    @el.closest(".image-fields").find(".gallery-path").prop("disabled", false)
+    @el.closest(".image-fields").find(".gallery-path").val(@el.attr("src"))
+    @el.closest(".image-fields").find("#survey-img-name").val(@el.data("name"))
+    @el.closest(".image-fields").find(".upload").prop("disabled", true)
+    @remove_gallery()
+
 $(document).on "click", "[data-behavior='add_image_fields']", (event) ->
   event.preventDefault()
   image = new Image @
@@ -24,3 +46,18 @@ $(document).on "click", "[data-behavior='remove_image_fields']", (event) ->
   event.preventDefault()
   image = new Image @
   image.remove()
+
+$(document).on "click", "[data-behavior='show_gallery']", (event) ->
+  event.preventDefault()
+  image = new Image @
+  image.show_gallery()
+
+$(document).on "click", "[data-behavior='remove_gallery']", (event) ->
+  event.preventDefault()
+  image = new Image @
+  image.remove_gallery()
+
+$(document).on "click", "[data-behavior='image_select']", (event) ->
+  event.preventDefault()
+  image = new Image @
+  image.select_from_gallery()

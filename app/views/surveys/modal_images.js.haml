@@ -1,0 +1,11 @@
+var list = $(".images-list");
+console.log($(this));
+
+- if params[:page].present?
+  list.find(".survey-images").append('#{ j render partial: "image", collection: @images, as: :image }');
+  - if @images.total_pages == @images.current_page
+    list.find("#show_more").hide();
+  - else
+    list.find("#show_more").attr("href", "#{ modal_images_survey_path(@survey, page: @images.current_page + 1)}");
+- else
+  list.find("#show_more").hide();

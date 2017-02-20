@@ -1,0 +1,11 @@
+.row.survey-images
+  = render partial: "image", collection: @images, as: :image
+.text-center
+  - unless @images.next_page.nil?
+    = link_to fa_icon("undo", text: t("app.view_more")),
+    modal_images_survey_path(@survey, page: @images.current_page + 1),
+    remote: true, title: t("app.view_more"),
+    data: { "disable-with": t("app.loading") },
+    class: "btn btn-sm btn-default", id: "show_more"
+  %button.btn.btn-sm.btn-primary{"data-behavior": "remove_gallery"}
+    = t("app.close_button")

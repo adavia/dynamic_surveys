@@ -1,6 +1,6 @@
 = f.simple_fields_for :answer_raiting do |builder|
   .form-group.radio-stars
-    = builder.collection_radio_buttons(:response, AnswerRaiting::RAITING, :first, :last,
+    = builder.collection_radio_buttons(:response, AnswerRaiting::RATING, :first, :last,
     collection_wrapper_tag: false, item_wrapper_tag: false, boolean_style: :inline) do |b|
       = b.radio_button + b.label {""}
 

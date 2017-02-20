@@ -25,6 +25,9 @@
                 %span= t("app.survey.images.upload_text")
               .fallback
                 = file_field_tag :file, multiple: true
+              .text-center
+                %button.btn.btn-primary#submit-images{style: "display:none"}
+                  = t("app.survey.images.form_button")
 
         .row.survey-images
           = render partial: "image", collection: @images, as: :image

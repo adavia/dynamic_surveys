@@ -32,6 +32,9 @@ Rails.application.routes.draw do
         get :images
       end
       member do
+        get :modal_images
+      end
+      member do
         post :upload
       end
       resources :submissions, only: [:index, :show, :new, :create]

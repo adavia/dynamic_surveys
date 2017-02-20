@@ -66,6 +66,7 @@ $state-danger-border: darken(adjust-hue($state-danger-bg, -10), 5%) !default;
 @import "customers";
 @import "answers";
 @import "submissions";
+@import "images";
 @import "surveys";
 
 /* DEFAULT LAYOUT */
@@ -112,9 +113,8 @@ small.handle {
   margin-bottom: 15px;
   .media-body {
     width: inherit;
-    .file-upload {
-      margin-top: 10px;
-      margin-bottom: 5px;
+    a {
+      margin-right: 5px
     }
   }
 }
@@ -316,6 +316,18 @@ small.handle {
   }
 }
 
+#results-count {
+  font-size: 14px;
+  span {
+    padding: 3px 8px 3px 8px;
+    background-color: #f72969;
+    color: #FFF;
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 5px;
+  }
+}
+
 
 /* MARGINS */
 
@@ -337,6 +349,10 @@ small.handle {
 
 .m-b-1 {
   margin-bottom: 15px !important;
+}
+
+.m-r-1 {
+  margin-right: 5px;
 }
 
 /* PADDINGS */

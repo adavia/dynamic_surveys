@@ -5,4 +5,5 @@
         - if policy(image).destroy?
           = link_to t("app.delete"), image, method: :delete,
             class: "btn btn-xs btn-danger", remote: true
-      = image_tag(image.file.url(:thumb), class: "img-responsive")
+      = image_tag(image.file.url(:thumb), class: "img-responsive",
+        data: { behavior: "image_select", name: image.name})

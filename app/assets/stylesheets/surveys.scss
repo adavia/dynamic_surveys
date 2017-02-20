@@ -11,6 +11,9 @@
 
 .survey-images {
   margin-top: 20px;
+  .thumbnail {
+    cursor: pointer;
+  }
   .caption {
     position:absolute;
     padding:2%;

@@ -1,11 +1,31 @@
 var list = $("#answers-list");
 if (!list.length) { $("#{  j render "index" }").modal(); }
 
-- if params[:page].present?
+- if params[:created_before].present? || params[:created_after].present?
+  list.find("#export_results").attr("href", "#{ question_answers_path(@question, created_before: params[:created_before], created_after: params[:created_after], format: "csv")}");
+  list.find("#show_more").hide();
+  - unless @answers.next_page.nil?
+    list.find("#show_more").attr("href", "#{ question_answers_path(@question, created_before: params[:created_before], created_after: params[:created_after], page: @answers.next_page) }").show();
+  - if params[:page].present?
+    list.find(".answer-items").append('#{ j render @answers }');
+    - if @answers.total_pages == @answers.current_page
+      list.find("#show_more").hide();
+  - else
+    list.find(".answer-items").html('#{ j render @answers }');
+
+- elsif params[:page].present?
   list.find(".answer-items").append('#{ j render @answers }');
   - if @answers.total_pages == @answers.current_page
     list.find("#show_more").hide();
   - else
-    list.find("#show_more").attr("href", "#{ question_answers_path(@question, page: @answers.current_page + 1)}");
+    list.find("#show_more").attr("href", "#{ question_answers_path(@question, page: @answers.current_page + 1)}").show();
+
 - else
-  list.find("#show_more").hide();
+  list.find("#export_results").attr("href", "#{ question_answers_path(@question, format: "csv")}");
+  list.find(".answer-items").html("#{ j render @answers }");
+  - if @answers.total_pages == @answers.current_page
+    list.find("#show_more").hide();
+  - else
+    list.find("#show_more").attr("href", "#{ question_answers_path(@question, page: @answers.current_page + 1)}").show();
+
+$("#results-count span").html("#{ @answers.total_entries }");

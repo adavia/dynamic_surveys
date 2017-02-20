@@ -7,9 +7,35 @@
         %h1.text-center.m-t-0
           = @question.title
       .modal-body
+        .answer-search.center-block
+          = form_tag(question_answers_path(@question), method: "get",
+            id: "answer-search-form", class: "form-inline", remote: true) do
+            .form-group
+              %label= t("app.submission.index.search_start_date")
+              = text_field_tag :created_after, params[:created_after],
+                placeholder: t("app.submission.index.search_start_date"),
+                class: "form-control", data: { behavior: "date-picker" }
+            .form-group
+              %label= t("app.submission.index.search_end_date")
+              = text_field_tag :created_before, params[:created_before],
+                placeholder: t("app.submission.index.search_end_date"),
+                class: "form-control", data: { behavior: "date-picker" }
+
+            = submit_tag t("app.search"), class: "btn btn-primary btn-sm",
+              data: { disable_with: t("app.loading")}
+
         .answer-items
           = render @answers
       .modal-footer
+        #results-count.pull-left
+          %span
+            = @answers.total_entries
+          = t("app.entries")
+
+        = link_to t("app.survey.show.survey_export"),
+          question_answers_path(@question, format: "csv"),
+          class: "btn btn-xs btn-success", id: "export_results"
+
         - unless @answers.next_page.nil?
           = link_to fa_icon("undo", text: t("app.answer.answer_results_button")),
           question_answers_path(@question, page: @answers.next_page),
@@ -17,4 +43,4 @@
           data: { "disable-with": t("app.loading") },
           class: "btn btn-sm btn-default text-center", id: "show_more"
         %button.btn.btn-sm.btn-primary{"data-dismiss": "modal", type: "button"}
-          = t("app.answer.answer_close_button")
+          = t("app.close_button")

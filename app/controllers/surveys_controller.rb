@@ -3,7 +3,7 @@ class SurveysController < ApplicationController
   before_action :set_customer, only: [:index, :show, :new, :create, :edit,
     :update, :archive]
   before_action :set_survey, only: [:show, :edit, :update, :archive, :preview,
-    :images, :upload]
+    :images, :modal_images, :upload]
 
   def index
     @surveys = policy_scope(@customer.surveys.excluding_archived
@@ -127,14 +127,26 @@ class SurveysController < ApplicationController
     add_breadcrumb t("app.survey.images.title"), images_survey_path(@survey)
   end
 
+  def modal_images
+    @images = @survey.images.paginate(page: params[:page])
+    respond_to do |format|
+      format.html { render layout: !request.xhr? }
+      format.js   {}
+    end
+  end
+
   def upload
     authorize @survey, :upload?
 
-    @image = @survey.images.build(file: params[:file])
-    if @image.save!
-      respond_to do |format|
-        format.json{ render json: { imagePartial: render_to_string("_image",
+    @image = @survey.images.build(file: params[:file], name: params[:name])
+    respond_to do |format|
+      if @image.save
+        format.json { render json: { imagePartial: render_to_string("_image",
           layout: false, locals: { image: @image }) } }
+      else
+        format.json {
+          render plain: "\"#{@image.errors.full_messages.first}\"", status: 422
+        }
       end
     end
   end
@@ -142,7 +154,7 @@ class SurveysController < ApplicationController
   private
 
   def set_survey
-    @survey = Survey.includes(questions: [:choices, :images, :answers]).find(params[:id])
+    @survey = Survey.includes(:images, questions: [:choices, :images, :answers]).find(params[:id])
   end
 
   def set_customer
@@ -155,6 +167,6 @@ class SurveysController < ApplicationController
       :position, :info_image, :info_image_cache, :remove_info_image, :info_body, :_destroy,
       choices_attributes: [:id, :title, :_destroy],
       #options_attributes: [:id, :title, :_destroy],
-      images_attributes: [:id, :file, :file_cache, :_destroy]])
+      images_attributes: [:id, :file, :reference_path, :name, :file_cache, :_destroy]])
   end
 end

@@ -26,5 +26,5 @@ if (!list.length) { $("#{  j render "index" }").modal(); }
   - else
     list.find("#show_more").attr("href", "#{ survey_submissions_path(@survey, page: @submissions.current_page + 1)}").show();
 
-$("#submissions-count span").html("#{ @submissions.total_entries }");
+$("#results-count span").html("#{ @submissions.total_entries }");
 

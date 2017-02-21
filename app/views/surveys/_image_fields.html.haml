@@ -19,6 +19,8 @@
 
       = f.input :name, label: false, placeholder: Image.human_attribute_name(:name),
         input_html: { id: "survey-img-name"}
+      %span= t("app.image.links.file_text")
+
       = f.error :file
   .images-list{style: "display:none"}
 

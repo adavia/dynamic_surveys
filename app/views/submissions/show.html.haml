@@ -50,8 +50,12 @@
                 - if answer.answer_image.present?
                   %p
                     #{t "app.answer.title"}:
-                  = image_tag answer.answer_image.image.file.url(:thumb),
-                    class: "img-responsive", width: 80
+                  - if answer.answer_image.image.reference_path.present?
+                    = image_tag answer.answer_image.image.reference_path,
+                      class: "img-responsive", width: 80
+                  - else
+                    = image_tag answer.answer_image.image.file.url(:thumb),
+                      class: "img-responsive", width: 80
                 - if answer.choice_answer.present?
                   %p
                     #{t "app.answer.title"}:

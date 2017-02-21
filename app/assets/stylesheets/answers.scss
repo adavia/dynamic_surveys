@@ -35,20 +35,25 @@
 }
 
 .radio-images {
-  label > input {
-    /* HIDE RADIO */
-    visibility: hidden;
-    /* Makes input not-clickable */
-    position: absolute;
-    /* Remove input from document flow */
-    + img {
-      /* IMAGE STYLES */
-      cursor: pointer;
-      border: 2px solid transparent;
-    }
-    &:checked + img {
-      /* (RADIO CHECKED) IMAGE STYLES */
-      border: 2px solid #f72969;
+  label {
+    margin-right: 10px;
+    margin-bottom: 0;
+    text-align: center;
+      > input {
+      /* HIDE RADIO */
+      visibility: hidden;
+      /* Makes input not-clickable */
+      position: absolute;
+      /* Remove input from document flow */
+      + img {
+        /* IMAGE STYLES */
+        cursor: pointer;
+        border: 2px solid transparent;
+      }
+      &:checked + img {
+        /* (RADIO CHECKED) IMAGE STYLES */
+        border: 2px solid #f72969;
+      }
     }
   }
 }

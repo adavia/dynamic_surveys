@@ -1,5 +1,5 @@
 = select_tag :image_id,
-  options_for_select(images.collect {|i| [i.file_identifier, i.id]}),
+  options_for_select(images.collect {|i| [i.name, i.id]}),
   prompt: t("app.submission.index.search_image"),
   data: { behavior: "images_select" },
   class: "form-control input-sm"

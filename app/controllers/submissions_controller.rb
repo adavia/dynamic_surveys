@@ -70,7 +70,7 @@ class SubmissionsController < ApplicationController
   def update_choices
     if params[:question_id].present?
       if params[:question_type] == "image"
-        @images = Image.where("question_id = ?", params[:question_id])
+        @images = Image.where("imageable_id = ?", params[:question_id])
       elsif ["single", "list"].include? params[:question_type]
         @choices = Choice.where("question_id = ?", params[:question_id])
       elsif params[:question_type] == "multiple"

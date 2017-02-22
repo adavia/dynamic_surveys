@@ -11,6 +11,10 @@
             [:new, :admin, current_user, :customer]
 
 .container
+  .row
+    .col-md-4.pull-right
+      .panel-search
+        = render "layouts/shared/search_form", path: search_surveys_path
   - @surveys.each_slice(2) do |(b1, b2)|
     .row
       .col-md-6

@@ -11,6 +11,10 @@
         = link_to "#{@customer.surveys_count} #{Survey.human_attribute_name(:class_name).downcase} total",[@customer, :surveys]
 
 .container
+  .row
+    .col-md-4.pull-right
+      .panel-search
+        = render "layouts/shared/search_form", path: search_surveys_path
   - @surveys.each_slice(2) do |(b1, b2)|
     .row
       .col-md-6

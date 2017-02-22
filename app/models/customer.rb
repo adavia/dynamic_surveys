@@ -24,4 +24,8 @@ class Customer < ApplicationRecord
   def archive
     self.update_column :archived_at, Time.now
   end
+
+  def self.search(search)
+    where("name ILIKE ?", "%#{search}%").or(where("description ILIKE ?", "%#{search}%"))
+  end
 end

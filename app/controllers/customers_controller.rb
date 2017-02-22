@@ -26,6 +26,16 @@ class CustomersController < ApplicationController
     render layout: !request.xhr?
   end
 
+  def search
+    @customers = policy_scope(Customer
+      .search(params[:search]).excluding_archived
+      .paginate(page: params[:page]))
+    respond_to do |format|
+      format.html {}
+      format.json { render json: @customers }
+    end
+  end
+
   private
 
   def customer_params

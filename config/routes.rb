@@ -12,6 +12,9 @@ Rails.application.routes.draw do
 
     resources :customers, only: [:index, :show] do
       collection do
+        get :search
+      end
+      collection do
         get :own
       end
       resources :surveys, only: [:index, :show, :new, :create, :edit, :update] do

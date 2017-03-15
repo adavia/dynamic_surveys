@@ -1,8 +1,0 @@
-= t("app.survey.email.text_primary", name: @submission.survey.name)
-__________________________________________________________________________
-
-- @submission.answers.each do |answer|
-  - if answer.answer_raiting.present?
-    = answer.question.title
-    = t("app.answer.title")
-    = answer.answer_raiting.response

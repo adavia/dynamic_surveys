@@ -19,5 +19,6 @@
 #= require jquery.form
 #= require chartkick
 #= require moment
+#= require moment/es.js
 #= require bootstrap-datetimepicker
 #= require_tree .

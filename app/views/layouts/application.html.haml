@@ -20,7 +20,7 @@
       'data-turbolinks-track': 'reload'
     = javascript_include_tag :modernizr
 
-  %body{class: page_class}
+  %body{class: page_class, "data-locale": params[:locale]}
     = render "layouts/shared/alert_messages"
     = render "layouts/shared/app_nav_bar"
     = render "layouts/shared/app_sub_nav"

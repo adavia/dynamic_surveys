@@ -23,6 +23,6 @@ $(document).on "hidden.bs.modal", ".modal", (event) ->
   $(@).remove()
 
 $(document).on "click", "[data-behavior~=date-picker]", (event) ->
-  $(@).datetimepicker({format: 'DD/MM/YYYY'}).datetimepicker("show");
+  $(@).datetimepicker({format: 'DD/MM/YYYY', locale: moment.locale($("body").data("locale"))}).datetimepicker("show");
 
 Dropzone.autoDiscover = false

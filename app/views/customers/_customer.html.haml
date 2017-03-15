@@ -45,5 +45,6 @@
       = link_to fa_icon("list", text: t("app.customer.index.links.show_surveys")),
         [customer, :surveys], class: "btn btn-xs btn-default"
       - if policy(Survey.new(customer: customer)).create?
-        = link_to t("app.customer.index.links.survey_new").upcase, [:new, customer, :survey],
+        = link_to fa_icon("plus", text: t("app.customer.index.links.survey_new").upcase),
+          [:new, customer, :survey],
           class: "btn btn-xs btn-primary"

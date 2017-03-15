@@ -3,7 +3,9 @@ class CustomersController < ApplicationController
   before_action :set_customer, only: :show
 
   def index
-    @customers = policy_scope(Customer.excluding_archived.paginate(page: params[:page]))
+    @customers = policy_scope(Customer
+      .excluding_archived
+      .paginate(page: params[:page]))
     respond_to do |format|
       format.html {}
       format.json { render json: @customers }
@@ -37,10 +39,6 @@ class CustomersController < ApplicationController
   end
 
   private
-
-  def customer_params
-    params.require(:customer).permit(:name, :description)
-  end
 
   def set_customer
     @customer = Customer.includes(:surveys, :user).find(params[:id])

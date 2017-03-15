@@ -1,0 +1,5 @@
+- if @question.errors.any?
+  $("[data-behavior~=submit-question]").html("#{ j render 'form' }");
+- else
+  $("#question-wrapper").append($("#{ j render partial: "questions/question_list", object: @question, as: :question }").fadeIn(1000));
+  $('#question-modal').modal('hide');

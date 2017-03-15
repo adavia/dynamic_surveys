@@ -20,26 +20,23 @@ class AnswersController < ApplicationController
   def check_type_of_request
     if request.format == "csv"
       @answers = policy_scope(@question.answers
-        .includes([:answer_open, :answer_date], submission: :user)
+        .includes(:answer_open, :answer_date, answer_raitings: :raiting,
+          submission: :sender)
         .order(created_at: :desc))
-
-      filtering_params(params).each do |key, value|
-        @answers = @answers.public_send(key, value) if value.present?
-      end
     else
       @answers = policy_scope(@question.answers
-        .includes([:answer_open, :answer_date], submission: :user)
+        .includes(:answer_open, :answer_date, answer_raitings: :raiting,
+          submission: :sender)
         .paginate(page: params[:page])
         .order(created_at: :desc))
-
-      filtering_params(params).each do |key, value|
-        @answers = @answers.public_send(key, value) if value.present?
-      end
+    end
+    filtering_params(params).each do |key, value|
+      @answers = @answers.public_send(key, value) if value.present?
     end
   end
 
   def filtering_params(params)
-    params.slice(:created_before, :created_after)
+    params.slice(:created_before, :created_after, :rating_option, :rating_response)
   end
 
   def set_question

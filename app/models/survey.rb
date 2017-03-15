@@ -1,13 +1,12 @@
 class Survey < ApplicationRecord
   belongs_to :customer, counter_cache: true
   has_many :questions, dependent: :destroy
+  has_many :alerts, dependent: :destroy
   has_many :submissions, dependent: :destroy
   has_many :images, as: :imageable, dependent: :destroy
   has_many :submission_views
 
   validates :name, presence: true, length: { minimum: 4, maximum: 250 }
-  validates :questions,
-    presence: { message: :add_question }
   validates :avatar, file_size: { less_than_or_equal_to: 2.gigabytes },
                      file_content_type: { allow: ['image/jpeg', 'image/png'] }
   validates_associated :questions
@@ -28,6 +27,6 @@ class Survey < ApplicationRecord
 
   # Search survey
   def self.search(search)
-    where("name ILIKE ?", "%#{search}%").or(where("description ILIKE ?", "%#{search}%"))
+    where("surveys.name ILIKE ?", "%#{search}%").or(where("surveys.description ILIKE ?", "%#{search}%"))
   end
 end

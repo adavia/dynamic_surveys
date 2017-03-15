@@ -1,29 +1,29 @@
 class API::SurveysController < API::ApplicationController
   before_action :authenticate_user
-  before_action :set_customer, only: :index
+  before_action :set_customer, only: [:index, :show]
   before_action :set_survey, only: :show
 
   def index
-    @surveys = policy_scope(@customer.surveys)
     render json: {
-      avatar: current_user.image,
-      surveys: @surveys.as_json(except: [:questions, :customer_id])
+      avatar: @customer.avatar,
+      surveys: @customer.surveys.as_json(except: [:questions, :customer_id,
+        :updated_at, :avatar, :archived_at])
     }
   end
 
   def show
-    authorize @survey, :show?
     render json: {
-      avatar: current_user.image,
+      avatar: @customer.avatar,
       survey: @survey.as_json(include: { questions: {
-        include: [:choices, :images ]}}, except: :customer_id)
+        include: [:choices, :images, :raitings]}}, except: [:customer_id, :updated_at,
+          :questions_count, :archived_at])
     }
   end
 
   private
 
   def set_survey
-    @survey = Survey.includes(questions: [:choices, :images]).find(params[:id])
+    @survey = Survey.includes(questions: [:choices, :images, :raitings]).find(params[:id])
   end
 
   def set_customer

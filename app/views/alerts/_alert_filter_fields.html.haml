@@ -1,0 +1,12 @@
+.filter-fields
+  .row
+    .col-xs-6
+      = f.input :title, label: false,
+        placeholder: t("app.survey.notifications.filters.select_title")
+      .form-group
+        = f.select :question_id,
+          options_for_select(@survey.questions.collect {|q| [q.title, q.id, {"data-type": q.question_type}]}, f.object.question_id),
+          { prompt: t("app.survey.notifications.filters.select_question") },
+          { data: { behavior: "alert_question_select" }, class: "form-control" }
+
+      #select-content

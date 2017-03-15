@@ -1,5 +1,6 @@
 class AnswerRaiting < ApplicationRecord
   belongs_to :answer
+  belongs_to :raiting
 
   RATING = {
     "5": "star_5",

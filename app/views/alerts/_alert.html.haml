@@ -1,0 +1,13 @@
+.notification-item
+  %h4
+    = alert.subject
+    %small
+      = t "date.created_at"
+      = I18n.l alert.created_at, format: :custom
+  %p
+    = alert.alert_filter.title
+  %small
+    = alert.to
+  .actions
+    = link_to t("app.edit"), [:edit, @survey, alert], class: "btn btn-xs btn-primary"
+    = link_to t("app.delete"), [@survey, alert], method: :delete, class: "btn btn-xs btn-danger"

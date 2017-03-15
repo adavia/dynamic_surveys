@@ -6,7 +6,8 @@ class SurveysController < ApplicationController
     :images, :modal_images, :upload]
 
   def index
-    @surveys = policy_scope(@customer.surveys.excluding_archived
+    @surveys = policy_scope(@customer.surveys
+      .excluding_archived
       .paginate(page: params[:page]))
     respond_to do |format|
       format.html {}
@@ -108,7 +109,8 @@ class SurveysController < ApplicationController
 
   def search
     @surveys = policy_scope(Survey
-      .search(params[:search]).excluding_archived
+      .search(params[:search])
+      .excluding_archived
       .paginate(page: params[:page]))
     respond_to do |format|
       format.html {}
@@ -154,7 +156,7 @@ class SurveysController < ApplicationController
   private
 
   def set_survey
-    @survey = Survey.includes(:images, questions: [:choices, :images, :answers]).find(params[:id])
+    @survey = Survey.includes(:images, questions: [:choices, :images, :raitings, :answers]).find(params[:id])
   end
 
   def set_customer
@@ -163,10 +165,6 @@ class SurveysController < ApplicationController
 
   def survey_params
     params.require(:survey).permit(:name, :description, :avatar, :avatar_cache,
-      :remove_avatar, questions_attributes: [:id, :title, :question_type,
-      :position, :info_image, :info_image_cache, :remove_info_image, :info_body, :_destroy,
-      choices_attributes: [:id, :title, :_destroy],
-      #options_attributes: [:id, :title, :_destroy],
-      images_attributes: [:id, :file, :reference_path, :name, :file_cache, :_destroy]])
+      :remove_avatar)
   end
 end

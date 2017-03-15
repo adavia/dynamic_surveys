@@ -4,26 +4,14 @@
       .modal-header
         %button.close{"aria-label": "Close", "data-dismiss": "modal", type: "button"}
           %span{"aria-hidden": "true"} ×
-        %h1.text-center.m-t-0
+        %h2.text-center.m-t-0
           = @question.title
       .modal-body
         .answer-search.center-block
-          = form_tag(question_answers_path(@question), method: "get",
-            id: "answer-search-form", class: "form-inline", remote: true) do
-            .form-group
-              %label= t("app.submission.index.search_start_date")
-              = text_field_tag :created_after, params[:created_after],
-                placeholder: t("app.submission.index.search_start_date"),
-                class: "form-control", data: { behavior: "date-picker" }
-            .form-group
-              %label= t("app.submission.index.search_end_date")
-              = text_field_tag :created_before, params[:created_before],
-                placeholder: t("app.submission.index.search_end_date"),
-                class: "form-control", data: { behavior: "date-picker" }
-
-            = submit_tag t("app.search"), class: "btn btn-primary btn-sm",
-              data: { disable_with: t("app.loading")}
-
+          - if @question.question_type == "rating"
+            = render "rating_form", question: @question
+          - else
+            = render "open_form", question: @question
         .answer-items
           = render @answers
       .modal-footer

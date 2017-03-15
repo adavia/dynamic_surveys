@@ -1,0 +1,27 @@
+.image-fields
+  .media
+    .media-left
+      = displayed_image(f.object)
+    .media-body
+      .file-upload.btn.btn-primary.btn-xs
+        %span= t "app.image.links.file_upload"
+        = f.file_field :file, label: false, class: "upload"
+        = f.input :reference_path, as: :hidden, disabled: true,
+          input_html: { class: "gallery-path" }
+        = f.input :file_cache, as: :hidden
+      - if @survey.images.any?
+        = link_to t("app.survey.images.gallery_btn"), [:modal_images, @survey],
+          class: "btn btn-xs btn-default", data: { behavior: "show_gallery" }
+
+      = f.hidden_field :_destroy
+      = link_to fa_icon("trash-o"), "#", data: { behavior: "remove_image_fields" },
+        class: "pull-right", title: t("app.image.links.file_remove")
+
+      = f.input :name, label: false, placeholder: Image.human_attribute_name(:name),
+        input_html: { id: "survey-img-name"}
+      %span= t("app.image.links.file_text")
+
+      = f.error :file
+  .images-list{style: "display:none"}
+
+

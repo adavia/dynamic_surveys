@@ -23,6 +23,10 @@ es:
     close_button: "Cerrar"
     search: "BUSCAR"
     entries: "resultados"
+    by: "por"
+    edit: "Editar"
+    has_selected: "ha seleccionado la siguiente respuesta"
+    created_by: "Enviado por"
     links:
       customer_all: "Listar todos los clientes"
       customer_new: "Crear nuevo cliente"
@@ -52,6 +56,9 @@ es:
           customer_edit: "Editar información del cliente"
           customer_archive: "Archivar cliente"
           survey_new: "Crear nueva encuesta"
+          avatar_upload: "Sube una imágen"
+          avatar_text: "La imágen debe tener un tamaño máximo de 1200x600"
+          avatar_remove: "Elimina esta imágen"
       show:
         subnav: "Detalles del cliente"
         text_chart: "Encuestas creadas por fecha"
@@ -100,8 +107,8 @@ es:
       admin_new:
         subnav: "Crea una nueva cuenta de usuario"
         text_primary: "Completa los siguientes campos para crear una nueva cuenta"
-        customer_roles: "Roles de clientes"
-        customer_roles_prompt: "--- Seleccione rol de cliente ---"
+        customer_roles: "Roles de usuario"
+        customer_roles_prompt: "--- Seleccione rol ---"
         alert: "El usuario ha sido creado exitosamente."
       admin_edit:
         subnav: "Actualiza los siguientes datos"
@@ -126,9 +133,49 @@ es:
         new: "Nuevo"
         update: "Actualizar"
         report: "Reporte"
+        notifications: "Notificaciones"
       report:
         bar: "Detalle de respuestas expresado en cantidad"
         pie: "Porcentaje y cantidad de respuestas por opción seleccionada"
+      notifications:
+        form_button: "Guardar notificación"
+        form_button_load: "Guardando notificación.."
+        breadcrumbs:
+          new: "Nueva notificación"
+          edit: "Editar notificación"
+        subnav: "Notificaciones de encuesta"
+        new:
+          title: "NUEVA NOTIFICACIÓN"
+          subnav: "Nueva notificación"
+          text_primary: "Completa los siguientes campos para crear una nueva notificación"
+        edit:
+          title: "EDITA ESTA NOTIFICACIÓN"
+          subnav: "Edita esta notificación"
+          text_primary: "Edita la siguiente información"
+        destroy:
+          alert: "La notificación ha sido eliminada exitosamente"
+        create:
+          alert: "La notificación ha sido creada exitosamente"
+        update:
+          alert: "La notificación ha sido editada exitosamente"
+        index:
+          title: "NOTIFICACIONES"
+        filters:
+          title: "Filtros"
+          add_new: "Agrega un nuevo filtro"
+          select_title: "Elige un nombre para este filtro"
+          select_question: "-- Seleccione una pregunta --"
+          select_choice: "-- Seleccione una opcion --"
+          select_image: "-- Seleccione una imágen --"
+          select_rate: "-- Calificación --"
+          select_condition: "-- Seleccione una condición --"
+          btn_save: "Guardar filtro"
+          loading: "Guardando.."
+          criteria: "Seleccione filtro"
+          conditions:
+            greater: "Mayor"
+            equal: "Igual"
+            minor: "Menor"
       form_button: "Guardar encuesta"
       form_button_load: "Guardando encuesta.."
       index:
@@ -143,6 +190,7 @@ es:
           survey_submissions: "FILTRO DE ENVÍOS"
           survey_submission: "ENVIAR"
           survey_images: "Ver imágenes"
+          survey_notifications: "Notificaciones"
           avatar_upload: "Sube una imágen para esta encuesta"
           avatar_text: "La imágen debe tener un tamaño máximo de 1200x600"
           avatar_remove: "Elimina esta imágen"
@@ -173,6 +221,11 @@ es:
         upload_text: "Selecciona las imágenes a subir"
         gallery_btn: "Galería"
         form_button: "Cargar imágenes"
+      choices:
+        title: "Opciones"
+        prompt: "-- Seleccione opción --"
+      ratings:
+        title: "Calificaciones"
       new:
         subnav: "Crear nueva encuesta"
         text_primary: "Completa los siguientes campos para crear una nueva encuesta"
@@ -192,6 +245,8 @@ es:
         footer: "La encuesta ha sido calificada por %{user} en - %{date}"
     question:
       question_title: "Pregunta"
+      question_new: "Ingresa una nueva pregunta"
+      form_button: "Guardar pregunta"
       links:
         question_remove: "Eliminar pregunta"
         question_drag: "ARRASTRAR"
@@ -264,6 +319,9 @@ es:
       answer_results_button: "Mostrar más respuestas"
       answered_on: "Contestado el"
       answered_by: "Contestado por"
+    rating:
+      links:
+        rating_add: "Agrega nueva calificación"
   activerecord:
     attributes:
       user:
@@ -293,8 +351,17 @@ es:
       choice:
         class_name: "Opción"
         title: "Agrega una posible respuesta"
+      raiting:
+        class_name: "Calificación"
+        name: "Título de calificación"
       answer_open:
         response: "Ingresa tu respuesta"
+      alert:
+        class_name: "Notificación"
+        from: "De"
+        to: "Para"
+        subject: "Asunto"
+        body: "Texto"
     errors:
       messages:
         add_question: "Debe agregar al menos una pregunta a la encuesta."

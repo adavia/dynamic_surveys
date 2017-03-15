@@ -1,11 +1,11 @@
 var list = $("#answers-list");
 if (!list.length) { $("#{  j render "index" }").modal(); }
 
-- if params[:created_before].present? || params[:created_after].present?
-  list.find("#export_results").attr("href", "#{ question_answers_path(@question, created_before: params[:created_before], created_after: params[:created_after], format: "csv")}");
+- if params[:created_before].present? || params[:created_after].present? || params[:rating_option].present? || params[:rating_response].present?
+  list.find("#export_results").attr("href", "#{ question_answers_path(@question, created_before: params[:created_before], created_after: params[:created_after], rating_option: params[:rating_option], rating_response: params[:rating_response], format: "csv")}");
   list.find("#show_more").hide();
   - unless @answers.next_page.nil?
-    list.find("#show_more").attr("href", "#{ question_answers_path(@question, created_before: params[:created_before], created_after: params[:created_after], page: @answers.next_page) }").show();
+    list.find("#show_more").attr("href", "#{ question_answers_path(@question, created_before: params[:created_before], created_after: params[:created_after], rating_option: params[:rating_option], rating_response: params[:rating_response], page: @answers.next_page) }").show();
   - if params[:page].present?
     list.find(".answer-items").append('#{ j render @answers }');
     - if @answers.total_pages == @answers.current_page

@@ -1,0 +1,36 @@
+= simple_form_for [@survey, @question], data: { behavior: "submit-question" } do |f|
+  .modal-body
+    = f.input :title, label: false, placeholder: Question.human_attribute_name(:title)
+    = f.input :question_type, label: false,
+      input_html: { data: { behavior: "question_type" } },
+      collection: t("app.question.question_types").invert, as: :radio_buttons,
+      item_wrapper_tag: false, boolean_style: :inline
+
+    .form-group
+      %button.btn.btn-sm.btn-primary{"data-behavior": "btn-informative"}
+        = t "app.question.info.button"
+      .informative_fields
+        %h4= t "app.question.info.text_primary"
+        = render "informative_fields", f: f
+    %hr
+
+    = f.fields_for :choices do |builder|
+      = render "choice_fields", f: builder
+
+    = f.fields_for :images do |builder|
+      = render "image_fields", f: builder
+
+    = f.fields_for :raitings do |builder|
+      = render "raiting_fields", f: builder
+
+    .form-group
+      = link_to_add_fields fa_icon("plus", text: t("app.choice.links.choice_add")), f,
+        :choices, "btn btn-success btn-xs #{show_btn_choice(f.object.question_type)}"
+      = link_to_add_fields fa_icon("plus", text: t("app.image.links.image_add")), f,
+        :images, "btn btn-default btn-xs #{show_btn_image(f.object.question_type)}"
+      = link_to_add_fields fa_icon("plus", text: t("app.rating.links.rating_add")), f,
+        :raitings, "btn btn-primary btn-xs #{show_btn_rating(f.object.question_type)}"
+
+  .modal-footer
+    = f.button :submit, t("app.question.form_button"),
+      class: "btn-primary", data: { disable_with: t("app.loading") }

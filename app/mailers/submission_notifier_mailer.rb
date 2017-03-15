@@ -1,7 +1,7 @@
 class SubmissionNotifierMailer < ApplicationMailer
-  def rating_notifier(submission)
-    @submission = submission
-    mail(to: "hugo@socialastronauts.com",
-      subject: "#{I18n.t("app.survey.email.subject")} - #{@submission.survey.name}")
+  def notifier(response, alert)
+    @response = response
+    @alert    = alert
+    mail(from: @alert.from, to: @alert.to, subject: @alert.subject)
   end
 end

@@ -5,28 +5,31 @@
 class Question
   constructor: (el) ->
     @el = $(el)
-
-  add: ->
-    time = new Date().getTime()
-    regexp = new RegExp(@el.data("id"), "g")
-    @el.closest("form").find("#question-wrapper").append(@el.data("fields").replace(regexp, time))
-    $('input.question-position').each (idx) ->
-      $(@).val(idx + 1)
-
-  remove: ->
-    @el.prev("input[type=hidden]").val("1")
-    @el.closest(".question-fields").hide()
+    button = @el.find($('input[name="commit"]'))
+    button.prop("disabled", true)
+    button.val(button.data("disable-with"))
 
   toggle_informative: ->
     @el.next().toggle("slow")
+
+  submit: ->
+    @el.ajaxSubmit
+      url: @el.attr("action")
+      type: "POST"
+      dataType: "script"
+      data: @el.serialize()
+      beforeSend: (jqXHR) =>
+        token = $('meta[name="csrf-token"]').attr("content")
+        jqXHR.setRequestHeader "X-CSRF-Token", token
 
   select_type: ->
     choice_button = $("[data-behavior='add_choice_fields']")
     #option_button = $("[data-behavior='add_option_fields']")
     image_button  = $("[data-behavior='add_image_fields']")
+    rating_button  = $("[data-behavior='add_raiting_fields']")
 
-    if @el.val() not in ["open", "date", "rating", "description", "phone", "email"]
-      @el.closest(".question-fields").find(choice_button).removeClass("hidden")
+    if @el.val() not in ["open", "date", "description", "phone", "email"]
+      @el.closest("#question-modal").find(choice_button).removeClass("hidden")
       #if @el.val() == "7"
         #@el.closest(".question-fields").find(option_button).removeClass("hidden")
       #else
@@ -34,53 +37,70 @@ class Question
         #@el.closest(".question-fields").find(".option-fields").find("input[type=hidden]").val("1")
         #@el.closest(".question-fields").find(".option-fields").hide()
 
+      if @el.val() == "rating"
+        @el.closest("#question-modal").find(rating_button).removeClass("hidden")
+
+        @el.closest("#question-modal").find(choice_button).addClass("hidden")
+        @el.closest("#question-modal").find(".choice-fields").find("input[type=hidden]").val("1")
+        @el.closest("#question-modal").find(".choice-fields").hide()
+
+        @el.closest("#question-modal").find(image_button).addClass("hidden")
+        @el.closest("#question-modal").find(".image-fields:not(#info-img)").find("input[type=hidden]").val("1")
+        @el.closest("#question-modal").find(".image-fields:not(#info-img)").hide()
+      else
+        @el.closest("#question-modal").find(rating_button).addClass("hidden")
+        @el.closest("#question-modal").find(".rating-fields").find("input[type=hidden]").val("1")
+        @el.closest("#question-modal").find(".rating-fields").hide()
+
       if @el.val() == "image"
-        @el.closest(".question-fields").find(image_button).removeClass("hidden")
+        @el.closest("#question-modal").find(image_button).removeClass("hidden")
         #@el.closest(".question-fields").find(option_button).addClass("hidden")
         #@el.closest(".question-fields").find(".option-fields").find("input[type=hidden]").val("1")
         #@el.closest(".question-fields").find(".option-fields").hide()
-        @el.closest(".question-fields").find(choice_button).addClass("hidden")
-        @el.closest(".question-fields").find(".choice-fields").find("input[type=hidden]").val("1")
-        @el.closest(".question-fields").find(".choice-fields").hide()
+        @el.closest("#question-modal").find(choice_button).addClass("hidden")
+        @el.closest("#question-modal").find(".choice-fields").find("input[type=hidden]").val("1")
+        @el.closest("#question-modal").find(".choice-fields").hide()
+
+        @el.closest("#question-modal").find(rating_button).addClass("hidden")
+        @el.closest("#question-modal").find(".rating-fields").find("input[type=hidden]").val("1")
+        @el.closest("#question-modal").find(".rating-fields").hide()
       else
-        @el.closest(".question-fields").find(image_button).addClass("hidden")
-        @el.closest(".question-fields").find(".image-fields:not(#info-img)").find("input[type=hidden]").val("1")
-        @el.closest(".question-fields").find(".image-fields:not(#info-img)").hide()
+        @el.closest("#question-modal").find(image_button).addClass("hidden")
+        @el.closest("#question-modal").find(".image-fields:not(#info-img)").find("input[type=hidden]").val("1")
+        @el.closest("#question-modal").find(".image-fields:not(#info-img)").hide()
     else
-      @el.closest(".question-fields").find(choice_button).addClass("hidden")
-      @el.closest(".question-fields").find(".choice-fields").find("input[type=hidden]").val("1")
-      @el.closest(".question-fields").find(".choice-fields").hide()
+      @el.closest("#question-modal").find(choice_button).addClass("hidden")
+      @el.closest("#question-modal").find(".choice-fields").find("input[type=hidden]").val("1")
+      @el.closest("#question-modal").find(".choice-fields").hide()
       #@el.closest(".question-fields").find(option_button).addClass("hidden")
       #@el.closest(".question-fields").find(".option-fields").find("input[type=hidden]").val("1")
       #@el.closest(".question-fields").find(".option-fields").hide()
-      @el.closest(".question-fields").find(image_button).addClass("hidden")
-      @el.closest(".question-fields").find(".image-fields:not(#info-img)").find("input[type=hidden]").val("1")
-      @el.closest(".question-fields").find(".image-fields:not(#info-img)").hide()
+      @el.closest("#question-modal").find(image_button).addClass("hidden")
+      @el.closest("#question-modal").find(".image-fields:not(#info-img)").find("input[type=hidden]").val("1")
+      @el.closest("#question-modal").find(".image-fields:not(#info-img)").hide()
 
-$(document).on "click", "[data-behavior='add_question_fields']", (event) ->
-  event.preventDefault()
-  question = new Question @
-  question.add()
-
-$(document).on "click", "[data-behavior='remove_question_fields']", (event) ->
-  event.preventDefault()
-  question = new Question @
-  question.remove()
+      @el.closest("#question-modal").find(rating_button).addClass("hidden")
+      @el.closest("#question-modal").find(".rating-fields").find("input[type=hidden]").val("1")
+      @el.closest("#question-modal").find(".rating-fields").hide()
 
 $(document).on "change", "[data-behavior='question_type']", (event) ->
   question = new Question @
   question.select_type()
 
-$(document).on "turbolinks:load", ->
-  return unless $(".surveys.edit").length > 0 || $(".surveys.new").length > 0
-  $("#question-wrapper").sortable
-    axis: "y"
-    handle: ".handle"
-    stop: (event, ui) ->
-      $('input.question-position').each (idx) ->
-        $(@).val(idx + 1)
+$(document).on "submit", "[data-behavior~=submit-question]", (event) ->
+  event.preventDefault()
+  question = new Question @
+  question.submit()
 
 $(document).on "click", "[data-behavior='btn-informative']", (event) ->
   event.preventDefault()
   question = new Question @
   question.toggle_informative()
+
+$(document).on "turbolinks:load", ->
+  return unless $(".surveys.edit").length > 0
+  $("#question-wrapper").sortable
+    axis: "y"
+    handle: ".handle"
+    update: ->
+      $.post($(this).data("sort-url"), $(this).sortable("serialize"))

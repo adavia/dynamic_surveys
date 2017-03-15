@@ -8,7 +8,7 @@
       = submission.survey.name
     .col-md-3
       #{t "app.submission.index.submission_by"}:
-      = submission.user.email
+      = submission.sender
     .col-md-2
       = link_to fa_icon("eye", text: t("app.submission.index.submission_answers_button")),
         [submission.survey, submission],

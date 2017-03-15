@@ -1,6 +1,6 @@
 class Submission < ApplicationRecord
   belongs_to :survey
-  belongs_to :user
+  belongs_to :sender, polymorphic: true
   has_many :questions, through: :survey
   has_many :answers, inverse_of: :submission, dependent: :destroy
 
@@ -8,7 +8,7 @@ class Submission < ApplicationRecord
 
   accepts_nested_attributes_for :answers, reject_if: :reject_answer_type
   validates :survey, presence: true
-  validates :user, presence: true
+  validates :sender, presence: true
 
   self.per_page = 15
 
@@ -20,7 +20,11 @@ class Submission < ApplicationRecord
   scope :incomplete, -> { where(complete: false).size }
 
   def reject_answer_type(attributes)
-    (attributes[:answer_open_attributes] && attributes[:answer_open_attributes][:response].blank?) || (attributes[:answer_date_attributes] && attributes[:answer_date_attributes][:response].blank?) || (attributes[:answer_raiting_attributes] && attributes[:answer_raiting_attributes][:response].blank?) || (attributes[:answer_image_attributes] && attributes[:answer_image_attributes][:image_id].blank?) || (attributes[:choice_answer_attributes] && attributes[:choice_answer_attributes][:choice_id].blank?) || (attributes[:answer_multiple_attributes] && attributes[:answer_multiple_attributes][:choice_ids] == [""])
+    rates = attributes[:answer_raitings_attributes]
+    if !rates.nil?
+      rates.delete_if { |k, v| v["response"].empty? }
+    end
+    (rates && (rates.nil? || rates == {}))  || (attributes[:answer_open_attributes] && attributes[:answer_open_attributes][:response].blank?) || (attributes[:answer_date_attributes] && attributes[:answer_date_attributes][:response].blank?) || (attributes[:answer_image_attributes] && attributes[:answer_image_attributes][:image_id].blank?) || (attributes[:choice_answer_attributes] && attributes[:choice_answer_attributes][:choice_id].blank?) || (attributes[:answer_multiple_attributes] && attributes[:answer_multiple_attributes][:choice_ids] == [""])
   end
 
   def self.created_before(date)

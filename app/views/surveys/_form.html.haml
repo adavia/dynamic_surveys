@@ -1,8 +1,4 @@
 = simple_form_for [@customer, @survey] do |f|
-  - if @survey.errors.any?
-    .alert.alert-danger
-      = @survey.errors[:questions][0] || @survey.errors[:avatar][0] || t("app.errors_default")
-
   = f.input :name, label: false, placeholder: Survey.human_attribute_name(:name)
   = f.input :description, label: false, input_html: { rows: 4 },
     placeholder: Survey.human_attribute_name(:description)
@@ -26,13 +22,15 @@
 
         %p= t "app.survey.index.links.avatar_text"
 
-  #question-wrapper
-    = f.fields_for :questions do |builder|
-      = render "question_fields", f: builder
-
-  .form-group
-    = link_to_add_fields fa_icon("plus", text: t("app.survey.index.links.question_add")),
-      f, :questions, "btn btn-default btn-sm"
+  - if @survey.persisted?
+    .form-group
+      = link_to fa_icon("plus", text: t("app.survey.index.links.question_add")),
+        [:new, @survey, :question], remote: true, class: "btn btn-default btn-sm",
+        data: { disable_with: t("app.loading") }
+    #question-wrapper{ "data-sort-url": sort_questions_url }
+      = render partial: "questions/question_list",
+        collection: @survey.questions, as: :question
 
   = f.button :submit, t("app.survey.form_button"),
-    class: "btn-block btn-primary", data: { disable_with: t("app.survey.form_button_load") }
+    class: "btn-block btn-primary m-t-1",
+    data: { disable_with: t("app.survey.form_button_load") }

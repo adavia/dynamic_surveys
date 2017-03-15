@@ -5,13 +5,16 @@
   = f.input :password, label: false, placeholder: User.human_attribute_name(:password)
   = f.input :admin, label: User.human_attribute_name(:admin)
 
-  %h3= t "app.user.admin_new.customer_roles"
+  - unless user.admin?
+    %h3= t "app.user.admin_new.customer_roles"
 
-  - customers.each do |customer|
-    .form-group
-      = label_tag dom_id(customer), customer.name
-      = select_tag dom_id(customer), options_for_select(t("app.user.roles").invert,
-        user.role_on(customer)), name: "roles[#{customer.id}]",
-        prompt: t("app.user.admin_new.customer_roles_prompt"), class: "form-control"
+    - if customers.any?
+      .user-roles
+        - customers.each do |customer|
+          = label_tag dom_id(customer), customer.name
+          .form-group.role-buttons
+            = collection_radio_buttons "roles",
+              customer.id, t("app.user.roles").invert, :last, :first,
+              checked: user.role_on(customer)
 
   = f.button :submit, t("app.user.index.links.form_button"), class: "btn-block btn-primary"

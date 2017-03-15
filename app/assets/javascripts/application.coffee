@@ -16,6 +16,7 @@
 #= require turbolinks
 #= require bootstrap-sprockets
 #= require dropzone
+#= require jquery.form
 #= require chartkick
 #= require moment
 #= require bootstrap-datetimepicker

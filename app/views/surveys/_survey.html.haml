@@ -7,7 +7,7 @@
         = t "date.created_at"
         = I18n.l survey.created_at, format: :custom
       %p
-        = truncate(survey.description, length: 90)
+        = truncate(survey.description, length: 55)
       - if policy(survey).show?
         = link_to fa_icon("pie-chart", text: t("app.survey.index.links.survey_report")),
           [survey.customer, survey],
@@ -35,8 +35,12 @@
           %li
             = link_to t("app.survey.index.links.survey_submission").downcase.capitalize,
               [:new, survey, :submission]
-          %li
-            = link_to t("app.survey.index.links.survey_images"), [:images, survey]
+          - if policy(survey).update?
+            %li
+              = link_to t("app.survey.index.links.survey_images"), [:images, survey]
+            %li
+              = link_to t("app.survey.index.links.survey_notifications"),
+                [survey, :alerts]
           - if policy(survey).update?
             %li
               = link_to t("app.survey.index.links.survey_edit").downcase.capitalize,

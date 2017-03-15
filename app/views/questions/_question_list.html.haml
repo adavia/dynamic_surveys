@@ -1,0 +1,45 @@
+= content_tag :div, id: "question_#{question.id}", class: "question-item" do
+  %hr
+  .dropdown.pull-right
+    .dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true",
+    "data-toggle": "dropdown", href: "#", role: "button"}
+      = fa_icon "chevron-down"
+    %ul.dropdown-menu
+      %li
+        = link_to fa_icon("edit", text: t("app.edit")),
+          [:edit, @survey, question], remote: true
+      %li
+        = link_to fa_icon("remove", text: t("app.delete")), [@survey,question],
+          remote: true, method: :delete
+  %small.handle.pull-right.m-r-1= t "app.question.links.question_drag"
+
+  %h3
+    = question.title
+    %small
+      _
+      = t "app.question.question_types.#{question.question_type}"
+  - if question.choices.any?
+    %h4= t("app.survey.choices.title")
+    = render question.choices
+
+  - if question.images.any?
+    %h4= t("app.survey.images.title")
+    .row
+      - question.images.each do |image|
+        .col-xs-4.col-sm-4.col-md-2
+          - if image.reference_path.present?
+            = image_tag(image.reference_path, class: "img-responsive img-thumbnail")
+          - else
+            = image_tag(image.file.url(:thumb), class: "img-responsive img-thumbnail")
+
+  - if question.raitings.any?
+    %h4
+      = t("app.survey.ratings.title")
+      %small
+        = fa_icon "star"
+        = fa_icon "star"
+        = fa_icon "star"
+        = fa_icon "star"
+        = fa_icon "star"
+    = render question.raitings
+

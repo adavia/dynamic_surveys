@@ -4,7 +4,7 @@ class API::SubmissionsController < API::ApplicationController
 
   def create
     @submission = @survey.submissions.build(submission_params)
-    authorize @submission, :create?
+    @submission.sender = current_user
     if @submission.save
       rating_notifier(@submission)
       render json: @submission, status: 201
@@ -22,16 +22,16 @@ class API::SubmissionsController < API::ApplicationController
   end
 
   def set_survey
-    @survey = Survey.includes(questions: [:choices, :images]).find(params[:survey_id])
+    @survey = Survey.includes(questions: [:choices, :images, :raitings]).find(params[:survey_id])
   end
 
   def submission_params
-    params.require(:submission).permit(:user_id,
+    params.require(:submission).permit(
       answers_attributes: [:question_id, :submission_id,
       #option_answers_attributes: [:choice_id, :option_id],
       choice_answer_attributes: [:choice_id, :answer_multiple_id],
       answer_date_attributes: :response,
-      answer_raiting_attributes: :response,
+      answer_raitings_attributes: [:raiting_id, :response],
       answer_open_attributes: :response,
       answer_multiple_attributes: { choice_ids:[] },
       answer_image_attributes: :image_id])

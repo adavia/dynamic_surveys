@@ -90,7 +90,7 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def set_customers
-    @customers = Customer.order(:name)
+    @customers = Customer.includes(:surveys).order(:name)
   end
 
   def build_roles_for(user)

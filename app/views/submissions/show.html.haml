@@ -3,7 +3,7 @@
     %h1
       = t "app.submission.show.subnav"
       %small
-        #{@submission.user}
+        #{@submission.sender}
   .col-md-3
     %ul.list-inline
       - if policy(@submission.survey).show?
@@ -43,10 +43,11 @@
                   %p
                     #{t "app.answer.title"}:
                     = answer.answer_date.response
-                - if answer.answer_raiting.present?
-                  %p
-                    #{t "app.answer.title"}:
-                    = answer.answer_raiting.response
+                - if answer.answer_raitings.any?
+                  - answer.answer_raitings.each do |rate|
+                    %p
+                      #{rate.raiting.name}:
+                      = rate.response
                 - if answer.answer_image.present?
                   %p
                     #{t "app.answer.title"}:

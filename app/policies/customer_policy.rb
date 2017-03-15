@@ -4,7 +4,7 @@ class CustomerPolicy < ApplicationPolicy
       return scope.none if user.nil?
       return scope.includes(:user).all if user.admin?
 
-      scope.joins(:roles).where(roles: {user_id: user})
+      return scope.joins(:roles).where(roles: {user_id: user})
     end
   end
 

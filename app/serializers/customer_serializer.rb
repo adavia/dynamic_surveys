@@ -1,3 +1,3 @@
 class CustomerSerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :id, :name, :api_key
 end

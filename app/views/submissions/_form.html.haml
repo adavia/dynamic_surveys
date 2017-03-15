@@ -5,8 +5,11 @@
     = f.simple_fields_for :answers, answer do |a|
       = a.hidden_field :question_id
       = render "answers/fields/answer_#{answer.question.question_type}",
-        f: a, choices: answer.question.choices, images: answer.question.images,
-          answer: answer
+        f: a,
+        choices: (answer.question.choices if answer.question.choices.any?),
+        images: (answer.question.images if answer.question.images.any?),
+        answer: (answer if answer.present?),
+        ratings: (answer.question.raitings if answer.question.raitings.any?)
       - if answer.question.info_image.present? || answer.question.info_body.present?
         .form-group
           - if answer.question.info_image.present?

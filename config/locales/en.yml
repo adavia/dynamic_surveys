@@ -20,9 +20,14 @@ en:
     alert_404: "The page you have requested does not exists."
     alert_admin: "You must be an admin to do that."
     delete: "Delete"
+    edit: "Edit"
     close_button: "Close"
     search: "SEARCH"
     entries: "entries"
+    by: "by"
+    edit: "Edit"
+    has_selected: "has selected the following answer"
+    created_by: "Submitted by"
     links:
       customer_all: "Display all customers"
       customer_new: "Create new customer"
@@ -52,6 +57,9 @@ en:
           customer_edit: "Edit customer information"
           customer_archive: "Archive customer"
           survey_new: "Create new survey"
+          avatar_upload: "Upload an avatar"
+          avatar_text: "Avatar should be around 1200x600 for a better size"
+          avatar_remove: "Remove this avatar"
       show:
         subnav: "Customer details"
         text_chart: "Surveys by date"
@@ -100,8 +108,8 @@ en:
       admin_new:
         subnav: "Create a new user account"
         text_primary: "Complete the following fields to add a new user"
-        customer_roles: "Customer roles"
-        customer_roles_prompt: "--- Select customer role ---"
+        customer_roles: "User roles"
+        customer_roles_prompt: "--- Select role ---"
         alert: "The user has been created successfully."
       admin_edit:
         subnav: "Update de following information"
@@ -126,9 +134,49 @@ en:
         new: "New"
         update: "Update"
         report: "Report"
+        notifications: "Notifications"
       report:
         bar: "Quantity of answers"
         pie: "Percentage and quantity of answers by option selected"
+      notifications:
+        form_button: "Save notification"
+        form_button_load: "Saving notification.."
+        breadcrumbs:
+          new: "New notification"
+          edit: "Update notification"
+        subnav: "Survey notifications"
+        new:
+          title: "NEW NOTIFICATION"
+          subnav: "New notification"
+          text_primary: "Complete the following fields to add a new notification"
+        edit:
+          title: "EDIT NOTIFICATION"
+          subnav: "Edit notification"
+          text_primary: "Edit the following information"
+        destroy:
+          alert: "The notification has been deleted successfully"
+        create:
+          alert: "The notification has been created successfully"
+        update:
+          alert: "The notification has been updated successfully"
+        index:
+          title: "ALL NOTIFICATIONS"
+        filters:
+          title: "Filters"
+          add_new: "Add a new filter"
+          select_title: "Add a name for this filter"
+          select_question: "-- Select a question --"
+          select_choice: "-- Select a choice --"
+          select_image: "-- Select an image --"
+          select_rate: "-- Select a rate --"
+          select_condition: "-- Select a condition --"
+          btn_save: "Save filter"
+          loading: "saving.."
+          criteria: "Select filter"
+          conditions:
+            greater: "Greater"
+            equal: "Equal"
+            minor: "Minor"
       form_button: "Save survey"
       form_button_load: "Saving survey.."
       index:
@@ -142,6 +190,7 @@ en:
           survey_report: "REPORT"
           survey_submissions: "FILTER SUBMISSIONS"
           survey_images: "Display images"
+          survey_notifications: "Notifications"
           survey_submission: "SUBMIT"
           avatar_upload: "Upload an avatar for the survey"
           avatar_text: "Images should be around 1200x600 for a better size"
@@ -155,6 +204,11 @@ en:
         upload_text: "Drop files here to upload"
         gallery_btn: "Gallery"
         form_button: "Upload images"
+      choices:
+        title: "Choices"
+        prompt: "-- Select choice --"
+      ratings:
+        title: "Rating options"
       show:
         links:
           survey_submit: "Submit this survey"
@@ -192,6 +246,8 @@ en:
         footer: "The survey has been rated by %{user} on %{date}"
     question:
       question_title: "Question"
+      question_new: "Create a new question"
+      form_button: "Save question"
       links:
         question_remove: "Remove question"
         question_drag: "DRAG"
@@ -264,6 +320,9 @@ en:
       answer_results_button: "Load more submissions"
       answered_on: "Answered on"
       answered_by: "Answered by"
+    rating:
+      links:
+        rating_add: "Add new rating"
   activerecord:
     attributes:
       user:
@@ -284,8 +343,17 @@ en:
       choice:
         class_name: "Choice"
         title: "Fill in with a possible choice"
+      raiting:
+        class_name: "Rating"
+        name: "Rating name"
       answer_open:
         response: "Fill in with your answer"
+      alert:
+        class_name: "Alert"
+        from: "From"
+        to: "To"
+        subject: "Subject"
+        body: "Body text"
   date:
     created_at: "Created on "
     formats:

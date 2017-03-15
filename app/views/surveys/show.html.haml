@@ -28,9 +28,9 @@
             - if policy(@survey).update?
               %li
                 = link_to t("app.survey.show.links.survey_edit"), [:edit, @customer, @survey]
-            %li
-              = link_to t("app.survey.show.links.survey_pdf"),
-                customer_survey_path(@customer, @survey, format: :pdf)
+            /%li
+            /= link_to t("app.survey.show.links.survey_pdf"),
+            /customer_survey_path(@customer, @survey, format: :pdf)
             - if policy(@survey).archive?
               %li
                 = link_to t("app.survey.index.links.survey_archive"),
@@ -80,7 +80,8 @@
           = t "app.survey.show.results_by_type"
           - @trans_keys = @survey.questions.unscope(:order).group_types.transform_keys do |key|
             - t("app.question.question_types.#{key}").capitalize
-          = pie_chart @trans_keys, library: { pieSliceText: "value-and-percentage" }
+          - if @trans_keys.any?
+            = pie_chart @trans_keys, library: { pieSliceText: "value-and-percentage" }
 
         = render @survey.questions
 

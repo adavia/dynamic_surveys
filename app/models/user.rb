@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :customers, dependent: :destroy
-  has_many :submissions
+  has_many :submissions, as: :sender
   has_many :roles
 
   before_save { self.email = email.downcase }
@@ -20,6 +20,11 @@ class User < ApplicationRecord
   scope :excluding_archived, -> { where(archived_at: nil).order(created_at: :desc) }
 
   self.per_page = 12
+
+  # Assign an API key on create
+  before_create do |user|
+    user.api_key = user.generate_api_key
+  end
 
   mount_uploader :image, ImageUploader
 
@@ -43,11 +48,6 @@ class User < ApplicationRecord
   # Check archived user before log in
   def active_for_authentication?
     archived_at.nil?
-  end
-
-  # Assign an API key on create
-  before_create do |user|
-    user.api_key = user.generate_api_key
   end
 
   # Generate a unique API key

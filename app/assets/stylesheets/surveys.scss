@@ -13,6 +13,7 @@
   margin-top: 20px;
   .thumbnail {
     cursor: pointer;
+    margin-bottom: 0;
   }
   .caption {
     position:absolute;
@@ -23,7 +24,7 @@
   }
 }
 
-.survey_questions_question_type {
+.question_question_type {
   margin-bottom: 10px;
   label {
     @extend .btn;
@@ -43,3 +44,5 @@
     }
   }
 }
+
+

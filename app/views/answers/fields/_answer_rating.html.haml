@@ -1,7 +1,10 @@
-= f.simple_fields_for :answer_raiting do |builder|
+= f.simple_fields_for :answer_raitings do |builder|
+  %h4= ratings[builder.options[:child_index]].name
   .form-group.radio-stars
+    = builder.input :raiting_id, as: :hidden,
+      input_html: { value: ratings[builder.options[:child_index]].id }
     = builder.collection_radio_buttons(:response, AnswerRaiting::RATING, :first, :last,
-    collection_wrapper_tag: false, item_wrapper_tag: false, boolean_style: :inline) do |b|
+      collection_wrapper_tag: false, item_wrapper_tag: false, boolean_style: :inline) do |b|
       = b.radio_button + b.label {""}
 
 

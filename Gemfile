@@ -38,6 +38,8 @@ gem 'squid', '~> 1.2'
 gem 'momentjs-rails', '>= 2.9.0'
 # Datepicker
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.43'
+# Handle ajax File Uploads
+gem 'jquery-form-rails'
 # Dropzone rails
 gem 'dropzonejs-rails'
 # Breadcrumbs

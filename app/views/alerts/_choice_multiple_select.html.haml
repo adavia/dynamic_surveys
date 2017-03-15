@@ -1,0 +1,6 @@
+.form-group
+  - choices.all.each do |choice|
+    .checkbox
+      %label
+        = check_box_tag "alert[alert_filter_attributes][answer][]", choice.id
+        = choice.title

@@ -9,9 +9,18 @@
         = I18n.l answer.answer_date.response, format: :custom
       - if answer.answer_open.present?
         = answer.answer_open.response
+      - if answer.answer_raitings.any?
+        - answer.answer_raitings.each do |rate|
+          %p
+            %span
+              #{rate.raiting.name}:
+              - if !rate.response.nil?
+                - 1.upto(rate.response) do |star|
+                  &#x2605;
+
     .col-md-3
       = t "app.answer.answered_on"
       = I18n.l answer.created_at, format: :long
     .col-md-3
       = t "app.answer.answered_by"
-      = answer.submission.user.email
+      = answer.submission.sender

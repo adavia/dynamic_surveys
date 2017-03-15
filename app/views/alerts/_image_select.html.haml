@@ -1,0 +1,5 @@
+.form-group
+  = select_tag "alert[alert_filter_attributes][answer][]",
+    options_for_select(images.collect {|i| [i.name, i.id]}),
+    prompt: t("app.survey.notifications.filters.select_image"),
+    class: "form-control"

@@ -26,13 +26,20 @@
             = answer[1]
           = answer[0]
     - if question.question_type == "rating"
+      - @rating = question.answers.rating_average.each do |answer|
+        %li.list-group-item
+          %span.counter.pull-right
+            = number_with_precision(answer[1], precision: 2)
+          = answer[0]
       %li.list-group-item
         %span.counter.pull-right
-          - if question.answers.any?
-            = number_with_precision(question.answers.rating_average, precision: 2)
-          - else
-            0
+          = number_with_precision(rating_avg(@rating.values), precision: 2)
         = t "app.survey.show.average_rating"
+      - if current_page?(action: :show) && question.answers.any?
+        %li.list-group-item
+          = link_to t("app.survey.show.answer_show"), [question, :answers],
+            remote: true
+
     - if ["open", "date", "description", "phone", "email"].include? question.question_type
       - if current_page?(action: :show) && question.answers.any?
         %li.list-group-item

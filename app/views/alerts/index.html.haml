@@ -1,0 +1,22 @@
+- content_for :sub_nav do
+  .col-md-5
+    %h1= t "app.survey.notifications.subnav"
+  .col-md-3
+    %ul.list-inline
+      %li
+        = link_to t("app.survey.notifications.new.title"), [:new, @survey, :alert],
+          class: "btn btn-sm btn-primary"
+      %li
+        = link_to "#{@survey.customer.surveys_count} #{Survey.human_attribute_name(:class_name).downcase} total", [@survey.customer, :surveys]
+
+.container
+  .row
+    .col-md-8.col-md-offset-2
+      .panel-piled
+        .notification-list
+          = render @alerts
+
+        .text-center
+          = will_paginate @alerts
+
+

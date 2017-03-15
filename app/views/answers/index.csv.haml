@@ -4,5 +4,7 @@
 
   - answers = answer.answer_date.response.strftime("%m/%d/%Y") if answer.answer_date.present?
   - answers = answer.answer_open.response if answer.answer_open.present?
+  - answers = display_rates(answer.answer_raitings).join(" ") if answer.answer_raitings.any?
+
   = CSV.generate_line [answer.id, answer.created_at.strftime("%m/%d/%Y at %I:%M%p"),
-    answer.submission.user.email, answers], :row_sep => ?\t, :quote_char => ?\
+    answer.submission.sender, answers], :row_sep => ?\t, :quote_char => ?\

@@ -2,4 +2,25 @@
   = f.input :name, label: false, placeholder: Customer.human_attribute_name(:name)
   = f.input :description, label: false, input_html: { rows: 4 },
     placeholder: Customer.human_attribute_name(:description)
+
+  .image-fields
+    .media
+      .media-left
+        - if f.object.avatar.present?
+          .img-preview{style: "background-image: url(#{f.object.avatar.url(:thumb)})"}
+        - else
+          .img-preview{style: "background-image: url(#{asset_path('default_avatar.png')})"}
+      .media-body
+        .file-upload
+          %span= t "app.customer.index.links.avatar_upload"
+          = f.file_field :avatar, label: false, class: "upload"
+          = f.input :avatar_cache, as: :hidden
+
+        - if f.object.avatar?
+          = f.hidden_field :remove_avatar
+          = link_to fa_icon("trash-o"), "#", data: { behavior: "remove_image_fields" },
+            class: "pull-right", title: t("app.customer.index.links.avatar_remove")
+
+        %p= t "app.customer.index.links.avatar_text"
+
   = f.button :submit, t("app.customer.form_button"), class: "btn-block btn-default"

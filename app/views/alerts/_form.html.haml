@@ -1,0 +1,15 @@
+= simple_form_for [@survey, @alert] do |f|
+  = f.input :from, label: false, placeholder: Alert.human_attribute_name(:from)
+  = f.input :to, label: false, placeholder: Alert.human_attribute_name(:to)
+  = f.input :subject, label: false, placeholder: Alert.human_attribute_name(:subject)
+  = f.input :body, label: false, as: :text, input_html: { rows: 6 },
+    placeholder: Alert.human_attribute_name(:body)
+
+  %h4= t("app.survey.notifications.filters.criteria")
+
+  = f.fields_for :alert_filter do |builder|
+    = render "alert_filter_fields", f: builder
+
+  = f.button :submit, t("app.survey.notifications.form_button"),
+    class: "btn-block btn-primary",
+    data: { disable_with: t("app.survey.notifications.form_button_load") }

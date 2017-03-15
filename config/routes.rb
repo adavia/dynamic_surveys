@@ -40,7 +40,16 @@ Rails.application.routes.draw do
       member do
         post :upload
       end
+      resources :questions, only: [:new, :create, :edit, :update, :destroy]
       resources :submissions, only: [:index, :show, :new, :create]
+      resources :alerts, only: [:index, :new, :create, :edit, :update, :destroy] do
+      end
+    end
+
+    resources :alerts, only: [] do
+      collection do
+        get :update_choices
+      end
     end
 
     resources :submissions, only: [] do
@@ -52,6 +61,9 @@ Rails.application.routes.draw do
     resources :images, only: :destroy
 
     resources :questions, only: [] do
+      collection do
+        post :sort
+      end
       resources :answers, only: :index
     end
 

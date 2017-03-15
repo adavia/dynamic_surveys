@@ -1,0 +1,15 @@
+= form_tag(question_answers_path(question), method: "get",
+  id: "answer-search-form", class: "form-inline", remote: true) do
+  .form-group
+    %label= t("app.submission.index.search_start_date")
+    = text_field_tag :created_after, params[:created_after],
+      placeholder: t("app.submission.index.search_start_date"),
+      class: "form-control", data: { behavior: "date-picker" }
+  .form-group
+    %label= t("app.submission.index.search_end_date")
+    = text_field_tag :created_before, params[:created_before],
+      placeholder: t("app.submission.index.search_end_date"),
+      class: "form-control", data: { behavior: "date-picker" }
+
+  = submit_tag t("app.search"), class: "btn btn-primary btn-sm",
+    data: { disable_with: t("app.loading")}

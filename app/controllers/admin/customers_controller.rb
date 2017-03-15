@@ -63,7 +63,7 @@ class Admin::CustomersController < Admin::ApplicationController
   private
 
   def customer_params
-    params.require(:customer).permit(:name, :description)
+    params.require(:customer).permit(:name, :description, :avatar, :avatar_cache)
   end
 
   def set_customer

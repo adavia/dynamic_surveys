@@ -1,10 +1,10 @@
-- headers = ['ID', 'Answered on', 'User', 'Answer response']
-= CSV.generate_line headers, :row_sep => ?\t, :quote_char => ?\
+- headers = ['ID', 'Answered on', 'Submitted by', 'Answer response']
+= CSV.generate_line headers, :row_sep => ?\t
 - @answers.each do |answer|
 
   - answers = answer.answer_date.response.strftime("%m/%d/%Y") if answer.answer_date.present?
   - answers = answer.answer_open.response if answer.answer_open.present?
   - answers = display_rates(answer.answer_raitings).join(" ") if answer.answer_raitings.any?
 
-  = CSV.generate_line [answer.id, answer.created_at.strftime("%m/%d/%Y at %I:%M%p"),
-    answer.submission.sender, answers], :row_sep => ?\t, :quote_char => ?\
+  = raw CSV.generate_line [answer.id, answer.created_at.strftime("%m/%d/%Y at %I:%M%p"),
+    answer.submission.sender, answers], :row_sep => ?\t

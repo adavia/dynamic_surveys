@@ -8,7 +8,7 @@
       - if answer.answer_date.present?
         = I18n.l answer.answer_date.response, format: :custom
       - if answer.answer_open.present?
-        = answer.answer_open.response
+        = truncate(answer.answer_open.response, length: 120)
       - if answer.answer_raitings.any?
         - answer.answer_raitings.each do |rate|
           %p

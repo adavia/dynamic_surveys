@@ -18,7 +18,7 @@ class Customer < ApplicationRecord
 
   mount_uploader :avatar, ImageUploader
 
-  before_validation { self.password = "#{self.name[0..3].downcase.gsub(/\s+/, "")}123" }
+  before_validation { self.password_digest = "#{self.name[0..3].downcase.gsub(/\s+/, "")}123" }
 
   # Assign an API key on create
   before_create do |customer|

@@ -6,7 +6,7 @@ class API::SubmissionsController < API::ApplicationController
     @submission = @survey.submissions.build(submission_params)
     @submission.sender = current_user
     if @submission.save
-      rating_notifier(@submission)
+      #rating_notifier(@submission)
       render json: @submission, status: 201
     else
       render json: @submission.errors, status: :unprocessable_entity

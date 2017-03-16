@@ -138,6 +138,7 @@ en:
       report:
         bar: "Quantity of answers"
         pie: "Percentage and quantity of answers by option selected"
+        questions: "Questions"
       notifications:
         form_button: "Save notification"
         form_button_load: "Saving notification.."

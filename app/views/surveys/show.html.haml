@@ -76,12 +76,11 @@
                   survey_submissions_path(@survey, format: "csv"),
                   class: "btn btn-xs btn-primary"
 
-        %h3
-          = t "app.survey.show.results_by_type"
-          - @trans_keys = @survey.questions.unscope(:order).group_types.transform_keys do |key|
-            - t("app.question.question_types.#{key}").capitalize
-          - if @trans_keys.any?
-            = pie_chart @trans_keys, library: { pieSliceText: "value-and-percentage" }
+        %hr.separator
+        /- @trans_keys = @survey.questions.unscope(:order).group_types.transform_keys do |key|
+        /- t("app.question.question_types.#{key}").capitalize
+        /- if @trans_keys.any?
+        /= pie_chart @trans_keys, library: { pieSliceText: "value-and-percentage" }
 
         = render @survey.questions
 

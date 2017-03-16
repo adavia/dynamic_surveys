@@ -137,6 +137,7 @@ es:
       report:
         bar: "Detalle de respuestas expresado en cantidad"
         pie: "Porcentaje y cantidad de respuestas por opción seleccionada"
+        questions: "Preguntas"
       notifications:
         form_button: "Guardar notificación"
         form_button_load: "Guardando notificación.."

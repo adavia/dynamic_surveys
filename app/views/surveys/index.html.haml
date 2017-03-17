@@ -1,6 +1,6 @@
 - content_for :sub_nav do
   .col-md-5
-    %h1= t("app.survey.index.links.subnav")
+    %h1= @customer
   .col-md-3
     %ul.list-inline
       - if policy(Survey.new(customer: @customer)).create?

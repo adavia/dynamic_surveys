@@ -207,7 +207,7 @@ es:
           survey_pdf: "Genera reporte en PDF"
           survey_preview: "Visualiza este reporte"
           survey_questions: "Preguntas de la encuesta"
-        subnav: "Reporte y datos de la encuesta"
+        subnav: "Reporte"
         survey_submit: "ENVÍA ESTA ENCUESTA"
         text_primary: "Estadísticas"
         survey_submissions: "Envíos de encuesta"

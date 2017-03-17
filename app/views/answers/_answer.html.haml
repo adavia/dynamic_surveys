@@ -1,10 +1,10 @@
 .modal-item
   .row
     .col-md-3
-      = t "app.answer.question"
+      /= t "app.answer.question"
       = answer.question.title
     .col-md-3
-      #{t "app.answer.title"}:
+      /#{t "app.answer.title"}:
       - if answer.answer_date.present?
         = I18n.l answer.answer_date.response, format: :custom
       - if answer.answer_open.present?
@@ -19,8 +19,8 @@
                   &#x2605;
 
     .col-md-3
-      = t "app.answer.answered_on"
+      /= t "app.answer.answered_on"
       = I18n.l answer.created_at, format: :long
     .col-md-3
-      = t "app.answer.answered_by"
+      /= t "app.answer.answered_by"
       = answer.submission.sender

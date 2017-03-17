@@ -7,7 +7,7 @@
         = t "date.created_at"
         = I18n.l survey.created_at, format: :custom
       %p
-        = truncate(survey.description, length: 55)
+        = truncate(survey.description, length: 45)
       - if policy(survey).show?
         = link_to fa_icon("pie-chart", text: t("app.survey.index.links.survey_report")),
           [survey.customer, survey],

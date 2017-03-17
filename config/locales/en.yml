@@ -221,7 +221,7 @@ en:
           survey_pdf: "Generate PDF report"
           survey_preview: "Preview this survey"
           survey_questions: "Survey questions"
-        subnav: "Survey report and statistics"
+        subnav: "Report"
         survey_submit: "SUBMIT THIS SURVEY"
         text_primary: "Statistics"
         survey_submissions: "Submissions"

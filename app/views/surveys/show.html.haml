@@ -1,6 +1,9 @@
 - content_for :sub_nav do
   .col-md-5
-    %h1= t "app.survey.show.subnav"
+    %h1
+      = t("app.survey.show.subnav")
+      %small
+        (#{@survey.name})
   .col-md-3
     %ul.list-inline
       %li
@@ -39,14 +42,8 @@
 
         %h1
           = @survey.name
-          %small
-            = t "date.created_at"
-            = I18n.l @survey.created_at, format: :custom
         %p
           = @survey.description
-
-        %h2
-          = t "app.survey.show.text_primary"
 
         %ul.list-group.m-t-1.m-b-0
           %li.list-group-item
@@ -84,13 +81,12 @@
 
         = render @survey.questions
 
-- if @survey.avatar.present?
-  :css
-    body  { background: url(#{@survey.avatar.url}) no-repeat center center fixed;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-          }
+:css
+  body  { background: url("/assets/bg_survey.png") no-repeat center center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
 
 

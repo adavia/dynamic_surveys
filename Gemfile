@@ -44,6 +44,8 @@ gem 'jquery-form-rails'
 gem 'dropzonejs-rails'
 # Breadcrumbs
 gem 'breadcrumbs_on_rails'
+# Acts as list gem
+gem 'acts_as_list'
 # Use pagination
 gem 'will_paginate'
 # Use background job

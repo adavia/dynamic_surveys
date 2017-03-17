@@ -25,11 +25,11 @@ module ApplicationHelper
     file.to_s.split("/").last
   end
 
-  def display_image(image)
+  def display_image(image, default)
     if !image.blank?
       image_tag(image.url(:thumb), class: "img-responsive center-block img-thumbnail")
     else
-      image_tag("default_user.png", class: "img-responsive center-block", size: "150x150")
+      image_tag(default, class: "img-responsive center-block", size: "150x150")
     end
   end
 

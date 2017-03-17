@@ -25,7 +25,8 @@ es:
     entries: "resultados"
     by: "por"
     edit: "Editar"
-    has_selected: "ha seleccionado la siguiente respuesta"
+    has_selected: "ha seleccionado lo siguiente:"
+    has_answered: "ha respondido:"
     created_by: "Enviado por"
     links:
       customer_all: "Listar todos los clientes"
@@ -53,7 +54,7 @@ es:
           customer_all: "LISTAR CLIENTES"
           customer_new: "NUEVO CLIENTE"
           customer_show: "Mostrar información del cliente"
-          customer_edit: "Editar información del cliente"
+          customer_edit: "Editar informacion"
           customer_archive: "Archivar cliente"
           survey_new: "Nueva encuesta"
           avatar_upload: "Sube una imágen"
@@ -141,6 +142,7 @@ es:
       notifications:
         form_button: "Guardar notificación"
         form_button_load: "Guardando notificación.."
+        email_hint: "Ingrese los correos separados por coma"
         breadcrumbs:
           new: "Nueva notificación"
           edit: "Editar notificación"
@@ -177,6 +179,7 @@ es:
             greater: "Mayor"
             equal: "Igual"
             minor: "Menor"
+          invalid_emails: "es inválido por"
       form_button: "Guardar encuesta"
       form_button_load: "Guardando encuesta.."
       index:
@@ -241,9 +244,8 @@ es:
       archive:
         alert: "La encuesta ha sido archivada exitosamente."
       email:
-        subject: "Notificación de calificación de encuesta"
-        text_primary: "La encuesta %{name} ha sido calificada con las siguientes estrellas:"
-        footer: "La encuesta ha sido calificada por %{user} en - %{date}"
+        text_primary: "La encuesta '%{name}' ha sido enviada con las siguientes respuestas:"
+        footer: "La encuesta ha sido enviada por %{user} en - %{date}"
     question:
       question_title: "Pregunta"
       question_new: "Ingresa una nueva pregunta"
@@ -360,7 +362,7 @@ es:
       alert:
         class_name: "Notificación"
         from: "De"
-        to: "Para"
+        to: "Para (Los correos deben estar separados con coma)"
         subject: "Asunto"
         body: "Texto"
     errors:

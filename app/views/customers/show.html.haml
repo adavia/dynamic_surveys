@@ -18,12 +18,13 @@
           #{@customer.name}
           - if is_admin?
             %span
-              = link_to t("app.customer.index.links.customer_edit"),
+              = link_to t("app.customer.index.links.customer_edit").upcase,
                 [:edit, :admin, @customer.user, @customer], class: "btn btn-xs btn-primary"
+              - if @customer.surveys.any?
+                = link_to fa_icon("list", text: t("app.customer.index.links.show_surveys")),
+                  [@customer, :surveys], class: "btn btn-xs btn-default"
+
         %p.text-center
           = @customer.description
 
-        - if @customer.surveys.any?
-          %h2.text-center
-            = t "app.customer.show.text_chart"
-            = pie_chart @customer.surveys.date_surveys
+        = display_image(@customer.avatar, "default_avatar.png")

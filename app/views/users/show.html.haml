@@ -12,7 +12,7 @@
             = link_to t("app.user.index.links.user_edit"),
               [:edit, current_user], class: "btn btn-xs btn-primary"
 
-        = display_image(current_user.image)
+        = display_image(current_user.image, "default_user.png")
 
         %h4.text-center
           = current_user.email

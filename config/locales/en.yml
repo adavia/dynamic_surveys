@@ -26,7 +26,8 @@ en:
     entries: "entries"
     by: "by"
     edit: "Edit"
-    has_selected: "has selected the following answer"
+    has_selected: "has selected the following:"
+    has_answered: "has answered:"
     created_by: "Submitted by"
     links:
       customer_all: "Display all customers"
@@ -142,6 +143,7 @@ en:
       notifications:
         form_button: "Save notification"
         form_button_load: "Saving notification.."
+        email_hint: "Email addresses should be separated by coma"
         breadcrumbs:
           new: "New notification"
           edit: "Update notification"
@@ -178,6 +180,7 @@ en:
             greater: "Greater"
             equal: "Equal"
             minor: "Minor"
+          invalid_emails: "is invalid due to"
       form_button: "Save survey"
       form_button_load: "Saving survey.."
       index:
@@ -242,8 +245,7 @@ en:
       archive:
         alert: "The survey has been archived successfully."
       email:
-        subject: "Survey rating notification"
-        text_primary: "The survey %{name} has been rated with the following stars:"
+        text_primary: "The survey '%{name}' has been sent with the following answers:"
         footer: "The survey has been rated by %{user} on %{date}"
     question:
       question_title: "Question"
@@ -352,7 +354,7 @@ en:
       alert:
         class_name: "Alert"
         from: "From"
-        to: "To"
+        to: "to (Addresses should be separated by comma)"
         subject: "Subject"
         body: "Body text"
   date:

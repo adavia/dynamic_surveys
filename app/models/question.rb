@@ -21,6 +21,8 @@ class Question < ApplicationRecord
 
   mount_uploader :info_image, ImageUploader
 
+  acts_as_list
+
   #scope :answer_multiple, -> { joins(answers: {answer_multiple: [:choices]}).group("choices.title").count }
 
   after_save :clean_remove_info_image

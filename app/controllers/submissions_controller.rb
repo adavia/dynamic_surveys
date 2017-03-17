@@ -95,7 +95,7 @@ class SubmissionsController < ApplicationController
         responses = filter_notifications(submission, alert)
         if responses.any?
           Rails.logger.debug responses[0]
-          #SubmissionNotifierMailer.notifier(responses[0], alert).deliver_later
+          #SubmissionNotifierMailer.notifier(responses[0], alert).deliver
         end
       end
     end

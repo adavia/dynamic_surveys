@@ -1,7 +1,7 @@
 class SubmissionNotifierMailer < ApplicationMailer
-  def notifier(response, alert)
-    @response = response
+  def notifier(answer, alert)
+    @answer   = answer
     @alert    = alert
-    mail(from: @alert.from, to: @alert.to, subject: @alert.subject)
+    mail(to: @alert.to, subject: @alert.subject)
   end
 end

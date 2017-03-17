@@ -1,6 +1,6 @@
 - if customers.each do |customer|
   %li
-    = link_to customer do
+    = link_to [customer, :surveys] do
       %span.item
         %p= customer.name
         %small

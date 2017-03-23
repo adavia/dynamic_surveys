@@ -136,6 +136,7 @@ es:
         report: "Reporte"
         notifications: "Notificaciones"
       report:
+        filter_data: "Filtro de encuesta"
         bar: "Detalle de respuestas expresado en cantidad"
         pie: "Porcentaje y cantidad de respuestas por opción seleccionada"
         questions: "Preguntas"
@@ -214,7 +215,12 @@ es:
         survey_export: "Exportar CSV"
         type_of_questions: "Tipo de preguntas"
         results_by_type: "Cantidad de preguntas por tipo"
-        answers: "Respuestas"
+        answers: "Respuesta"
+        count: "Cantidad"
+        percentage: "Porcentaje"
+        question: "Pregunta"
+        score: "Resultado"
+        average: "Promedio"
         answer_show: "Mostrar respuestas"
         average_rating: "Calificación promedio"
       search:
@@ -295,6 +301,8 @@ es:
         views: "envíos vistos"
         complete: "envíos completos"
         incomplete: "envíos incompletos"
+        completion_rate: "completados"
+        total_submissions: "total envíos"
       index:
         subnav: "Listado de envíos"
         search_start_date: "Seleccione fecha de inicio"

@@ -20,16 +20,16 @@ class SurveysController < ApplicationController
 
   def show
     authorize @survey, :show?
-    respond_to do |format|
-      format.html {}
-      format.pdf do
-        pdf = SurveyPdf.new(@survey, view_context)
-        send_data pdf.render,
-          filename: "report_#{@survey.created_at.strftime('%m/%d/%Y')}.pdf",
-          type: "application/pdf",
-          disposition: "inline"
-      end
-      format.json { render json: @survey }
+    if request.format == "csv"
+      @submissions = policy_scope(@survey.submissions
+        .includes(:sender))
+    else
+      @submissions = policy_scope(@survey.submissions
+        .includes(:sender))
+    end
+
+    filtering_params(params).each do |key, value|
+      @submissions = @submissions.public_send(key, value) if value.present?
     end
 
     add_breadcrumb t("app.customer.breadcrumbs.list"), :customers_path
@@ -154,6 +154,11 @@ class SurveysController < ApplicationController
   end
 
   private
+
+  def filtering_params(params)
+    params.slice(:created_before, :created_after, :question_id,
+      :choice_id, :image_id, :choice_multiple_ids)
+  end
 
   def set_survey
     @survey = Survey.includes(:images, questions: [:choices, :images, :raitings, :answers]).find(params[:id])

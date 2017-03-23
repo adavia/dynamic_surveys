@@ -36,4 +36,21 @@ module ApplicationHelper
   def is_active(controller)
     "active" if params[:controller] == controller
   end
+
+  def get_percentage(value, total)
+    percentage = (Float(value) / total * 100)
+    if !percentage.nan?
+      "#{percentage.round}%"
+    else
+      "0%"
+    end
+  end
+
+  def get_avg(values)
+    array = []
+    values.each do |value|
+      array << value.avg
+    end
+    number_with_precision(array.inject{ |sum, el| sum + el }.to_f / array.size, precision: 2)
+  end
 end

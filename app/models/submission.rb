@@ -1,5 +1,5 @@
 class Submission < ApplicationRecord
-  belongs_to :survey
+  belongs_to :survey, counter_cache: true
   belongs_to :sender, polymorphic: true
   has_many :questions, through: :survey
   has_many :answers, inverse_of: :submission, dependent: :destroy

@@ -137,6 +137,7 @@ en:
         report: "Report"
         notifications: "Notifications"
       report:
+        filter_data: "Filter data"
         bar: "Quantity of answers"
         pie: "Percentage and quantity of answers by option selected"
         questions: "Questions"
@@ -228,7 +229,12 @@ en:
         survey_export: "Export CSV"
         type_of_questions: "Type of questions"
         results_by_type: "Quantity of questions by type"
-        answers: "Answers"
+        answers: "Answer"
+        count: "Count"
+        percentage: "Percent"
+        question: "Question"
+        score: "Score"
+        average: "Average"
         answer_show: "Show answers"
         average_rating: "Average rating"
       new:
@@ -296,6 +302,8 @@ en:
         views: "submission views"
         complete: "complete submissions"
         incomplete: "incomplete submissions"
+        completion_rate: "completion rate"
+        total_submissions: "total submissions"
       index:
         subnav: "Survey submissions"
         search_start_date: "Select a beginning date"

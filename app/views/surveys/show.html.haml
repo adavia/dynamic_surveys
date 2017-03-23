@@ -14,7 +14,7 @@
 
 .container
   .row
-    .col-md-8.col-md-offset-2
+    .col-md-10.col-md-offset-1
       .panel-piled
         .dropdown.pull-right
           .dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true",
@@ -24,6 +24,9 @@
             %li
               = link_to t("app.survey.show.links.survey_preview"),
                 [:preview, @customer, @survey], target: "_blank"
+            %li
+              = link_to t("app.survey.show.survey_export"),
+                survey_submissions_path(@survey, format: "csv")
             %li
               = link_to t("app.survey.show.links.survey_submit"), [:new, @survey, :submission]
             %li
@@ -45,33 +48,31 @@
         %p
           = @survey.description
 
+        .submission-search
+          %h4= t("app.survey.report.filter_data")
+          = form_tag(customer_survey_path(@customer, @survey), method: "get", remote: true) do
+            .form-group
+              = text_field_tag :created_after, params[:created_after],
+                placeholder: t("app.submission.index.search_start_date"),
+                class: "form-control input-sm", data: { behavior: "date-picker" }
+            .form-group
+              = text_field_tag :created_before, params[:created_before],
+                placeholder: t("app.submission.index.search_end_date"),
+                class: "form-control input-sm", data: { behavior: "date-picker" }
+            .form-group
+              = select_tag :question_id,
+                options_for_select(@survey.questions.collect {|q| [q.title, q.id, {"data-type": q.question_type}]}),
+                prompt: t("app.submission.index.search_question"),
+                data: { behavior: "questions_select" },
+                class: "form-control input-sm"
+
+            .form-group#select-content
+            = submit_tag t("app.search"), class: "btn btn-default btn-block btn-sm",
+              data: { disable_with: t("app.submission.index.search_button_load")}
+
         %ul.list-group.m-t-1.m-b-0
-          %li.list-group-item
-            %span.counter.pull-right
-              = @survey.questions_count
-            = Question.human_attribute_name(:class_name).pluralize
           %li.list-group-item.data-stats
-            %span.counter
-              %strong
-                #{fa_icon("eye", text: @survey.submission_views.size)}
-              = t "app.submission.show.views"
-            %span.counter
-              %strong
-                #{fa_icon("circle", text: @survey.submissions.complete)}
-              = t "app.submission.show.complete"
-              = survey_completion_percentage(@survey)
-            %span.counter
-              %strong
-                #{fa_icon("circle-o", text: @survey.submissions.incomplete)}
-              = t "app.submission.show.incomplete"
-          %li.list-group-item
-            .clearfix
-              = link_to "#{t("app.survey.show.survey_submissions")}",
-                [@survey, :submissions], remote: true, class: "pull-left"
-              .export-links
-                = link_to t("app.survey.show.survey_export"),
-                  survey_submissions_path(@survey, format: "csv"),
-                  class: "btn btn-xs btn-primary"
+            = render "stats"
 
         %hr.separator
         /- @trans_keys = @survey.questions.unscope(:order).group_types.transform_keys do |key|

@@ -1,0 +1,20 @@
+%span.counter
+  %strong
+    #{fa_icon("eye", text: @survey.submission_views.size)}
+  = t "app.submission.show.views"
+%span.counter
+  %strong
+    #{fa_icon("list", text: @submissions.size)}
+  = t "app.submission.show.total_submissions"
+%span.counter
+  %strong
+    #{fa_icon("flag", text: @submissions.complete)}
+  = t "app.submission.show.complete"
+%span.counter
+  %strong
+    #{fa_icon("check-square", text: get_percentage(@submissions.complete, @submissions.size))}
+  = t "app.submission.show.completion_rate"
+%span.counter
+  %strong
+    #{fa_icon("sign-out", text: @submissions.incomplete)}
+  = t "app.submission.show.incomplete"

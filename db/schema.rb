@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170314172348) do
+ActiveRecord::Schema.define(version: 20170322225305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -210,11 +210,12 @@ ActiveRecord::Schema.define(version: 20170314172348) do
     t.string   "name"
     t.text     "description"
     t.integer  "customer_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.integer  "questions_count", default: 0
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "questions_count",   default: 0
     t.string   "avatar"
     t.datetime "archived_at"
+    t.integer  "submissions_count", default: 0
     t.index ["customer_id"], name: "index_surveys_on_customer_id", using: :btree
   end
 
@@ -258,6 +259,5 @@ ActiveRecord::Schema.define(version: 20170314172348) do
   add_foreign_key "submission_views", "surveys"
   add_foreign_key "submission_views", "users"
   add_foreign_key "submissions", "surveys"
-  add_foreign_key "submissions", "users", column: "sender_id"
   add_foreign_key "surveys", "customers"
 end

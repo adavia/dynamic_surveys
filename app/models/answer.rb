@@ -22,7 +22,9 @@ class Answer < ApplicationRecord
   validates :submission, presence: true
 
   scope :rated_answers,           -> { joins(:answer_raitings) }
-  scope :rating_average,          -> { joins(answer_raitings: :raiting).group("raitings.name").average("answer_raitings.response") }
+  scope :open_responses,          -> { includes(:answer_open).order("answer_opens.created_at desc").limit(10) }
+  scope :date_responses,          -> { includes(:answer_date).order("answer_dates.created_at desc").limit(10) }
+  scope :rating_average,          -> { joins(answer_raitings: :raiting).select("raitings.name as rate, count(*) as count, avg(answer_raitings.response) as avg").group("rate").order("count DESC") }
   scope :image_counter,           -> { joins(answer_image: :image).group("images.name").count }
   scope :choice_counter,          -> { joins(choice_answer: :choice).group("choices.title").count }
   scope :multiple_choice_counter, -> { joins(answer_multiple: [:choices]).group("choices.title").count }

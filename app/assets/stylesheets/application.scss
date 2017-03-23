@@ -334,6 +334,12 @@ small.handle {
   &:last-child hr {
     display: none;
   }
+  .progress {
+    margin-bottom: 0;
+    .progress-bar {
+      background-color: #6d26ff;
+    }
+  }
 }
 
 

@@ -5,8 +5,8 @@
   - submission.answers.each do |answer|
     - answers = answer.answer_date.response.strftime("%m/%d/%Y") if answer.answer_date.present?
     - answers = answer.answer_open.response if answer.answer_open.present?
-    - answers = answer.answer_image.image.name if answer.answer_image.present?
-    - answers = answer.choice_answer.choice.title if answer.choice_answer.present?
+    - answers = answer.answer_image.image.try(:name) if answer.answer_image.present?
+    - answers = answer.choice_answer.choice.try(:title) if answer.choice_answer.present?
     - answers = answer.answer_multiple.choices.map(&:title).join(', ') if answer.answer_multiple.present?
     - answers = display_rates(answer.answer_raitings).join(" ") if answer.answer_raitings.any?
 

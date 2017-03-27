@@ -27,9 +27,9 @@
             %li
               = link_to t("app.survey.show.survey_export"),
                 survey_submissions_path(@survey, format: "csv"), id: "export-link"
-            /%li
-            /= link_to t("app.survey.show.links.survey_pdf"),
-            /customer_survey_path(@customer, @survey, format: :pdf)
+            %li
+              = link_to t("app.survey.show.links.survey_pdf"),
+                customer_survey_path(@customer, @survey, format: :pdf)
             %li
               = link_to t("app.survey.show.links.survey_submit"), [:new, @survey, :submission]
             %li

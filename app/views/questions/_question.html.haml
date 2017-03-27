@@ -3,7 +3,8 @@
     = question.title
 
   - if ["single", "list"].include? question.question_type
-    @choice = render "questions/tables/table_choice", answers: question.answers.choice_counter(params), question: question
+    = render "questions/tables/table_choice",
+      answers: question.answers.choice_counter(params), question: question
   - if question.question_type == "image"
     = render "questions/tables/table_image",
       answers: question.answers.image_counter(params), question: question

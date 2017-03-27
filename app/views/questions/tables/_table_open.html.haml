@@ -2,9 +2,9 @@
   %tbody
     - question.answers.open_responses(params).each do |answer|
       %tr
-        %td.col-md-2= answer.answer_open.created_at.strftime("%m/%d/%Y")
-        %td.col-md-1= answer.answer_open.id
-        %td.col-md-9= answer.answer_open.response
+        %td.col-xs-2= answer.answer_open.created_at.strftime("%m/%d/%Y")
+        %td.col-xs-1= answer.answer_open.id
+        %td.col-xs-9= answer.answer_open.response
 
   = will_paginate question.answers.open_responses(params),
     class: "ajax-pag", params: { q: question.id, type: question.question_type }

@@ -28,8 +28,8 @@ class SurveysController < ApplicationController
       format.js
       format.pdf do
         render pdf: "report-#{@survey.id}",
-               viewport_size: '1280x1024',
                layout: false,
+               dpi: "300",
                encoding: "utf-8"
       end
     end

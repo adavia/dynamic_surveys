@@ -26,7 +26,8 @@
         %strong #{total_percentage(answers)}%
       %td
 
-
-- if answers.any?
-  %h4.m-b-0= t("app.survey.report.pie")
-  = pie_chart answers, library: { pieSliceText: "value-and-percentage" }
+- if request.format.html?
+  .question-charts
+    - if answers.any?
+      %h4.m-b-0= t("app.survey.report.pie")
+      = pie_chart answers, library: { pieSliceText: "value-and-percentage" }

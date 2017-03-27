@@ -6,7 +6,7 @@
       %th= t "app.survey.show.percentage"
       %th
   %tbody
-    answers.each do |answer|
+    - answers.each do |answer|
       %tr
         %td.col-md-3= answer[0]
         %td.col-md-1= answer[1]

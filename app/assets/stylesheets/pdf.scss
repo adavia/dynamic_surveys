@@ -6,10 +6,12 @@
 
 // Body
 
-@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
-$font-family-sans-serif: 'Roboto Condensed', sans-serif;
-$font-family-base: $font-family-sans-serif !default;
-$font-size-base: 13px !default;
+@font-face {
+  src: url(asset-path('fonts/roboto-condensed.ttf'));
+  $font-family-sans-serif: 'Roboto Condensed', sans-serif;
+  $font-family-base: $font-family-sans-serif !default;
+  $font-size-base: 13px !default;
+}
 
 // Navbar
 

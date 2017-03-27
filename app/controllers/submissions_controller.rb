@@ -23,7 +23,7 @@ class SubmissionsController < ApplicationController
   end
 
   def new
-    @submission = @survey.submissions.build
+    @submission = @survey.submissions.includes(answers: { question: [:images, :choices, :raitings] }).build
     @survey.questions.each do |q|
       answer = @submission.answers.build(question: q)
       answer.build_answer_date
@@ -41,7 +41,7 @@ class SubmissionsController < ApplicationController
   end
 
   def create
-    @submission = @survey.submissions.build(submission_params)
+    @submission = @survey.submissions.includes(answers: { question: [:images, :choices, :raitings] }).build(submission_params)
     @submission.sender = current_user
 
     authorize @submission, :create?
@@ -75,6 +75,8 @@ class SubmissionsController < ApplicationController
         @choices = Choice.where("question_id = ?", params[:question_id])
       elsif params[:question_type] == "multiple"
         @multiple = Choice.where("question_id = ?", params[:question_id])
+      elsif params[:question_type] == "rating"
+        @ratings = Raiting.where("question_id = ?", params[:question_id])
       end
     end
 
@@ -144,28 +146,33 @@ class SubmissionsController < ApplicationController
 
   def check_type_of_request
     if request.format == "csv"
-      @submissions = policy_scope(@survey.submissions
-        .includes(:sender)
-        .order(created_at: :desc))
+      @submissions = @survey.submissions
+        .includes(:sender, :survey, answers: [:answer_open, :answer_date,
+        { answer_raitings: :raiting }, { answer_multiple: [:choices] },
+        { answer_image: :image },
+        { choice_answer: :choice }, :question])
+        .order(created_at: :desc)
     else
-      @submissions = policy_scope(@survey.submissions
-        .includes(:sender)
+      @submissions = @survey.submissions
+        .includes(:sender, :survey, answers: [:answer_open, :answer_date,
+        { answer_raitings: :raiting }, { answer_multiple: [:choices] },
+        { answer_image: :image },
+        { choice_answer: :choice }, :question])
         .paginate(page: params[:page])
-        .order(created_at: :desc))
-
-      filtering_params(params).each do |key, value|
-        @submissions = @submissions.public_send(key, value) if value.present?
-      end
+        .order(created_at: :desc)
+    end
+    filtering_params(params).each do |key, value|
+      @submissions = @submissions.public_send(key, value) if value.present?
     end
   end
 
   def filtering_params(params)
     params.slice(:created_before, :created_after, :question_id,
-      :choice_id, :image_id, :choice_multiple_ids)
+      :choice_id, :image_id, :choice_multiple_ids, :rating_id, :rate)
   end
 
   def set_survey
-    @survey = Survey.includes(questions: [:choices, :images, :raitings]).find(params[:survey_id])
+    @survey = Survey.includes(alerts: :alert_filter, questions: [:choices, :images, :raitings]).find(params[:survey_id])
   end
 
   def set_submission

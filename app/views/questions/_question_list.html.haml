@@ -16,14 +16,20 @@
   %h3
     = question.title
     %small
-      _
+      *
       = t "app.question.question_types.#{question.question_type}"
   - if question.choices.any?
-    %h4= t("app.survey.choices.title")
+    %h4
+      = t("app.survey.choices.title")
+      %small
+        = fa_icon "list"
     = render question.choices
 
   - if question.images.any?
-    %h4= t("app.survey.images.title")
+    %h4
+      = t("app.survey.images.title")
+      %small
+        = fa_icon "image"
     .row
       - question.images.each do |image|
         .col-xs-4.col-sm-4.col-md-2

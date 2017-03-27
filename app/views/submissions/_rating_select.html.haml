@@ -1,0 +1,12 @@
+.form-group
+  = select_tag :rating_id,
+    options_for_select(ratings.collect {|r| [r.name, r.id]}),
+    prompt: t("app.submission.index.search_rate_option"),
+    data: { behavior: "rating_select" },
+    class: "form-control input-sm"
+
+.form-group
+  = select_tag :rate,
+    options_for_select(1..5),
+    prompt: t("app.submission.index.search_rate"),
+    class: "form-control input-sm"

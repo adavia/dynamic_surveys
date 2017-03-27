@@ -9,6 +9,21 @@ es:
       button: "SUSCRÍBETE"
       placeholder: "Correo electrónico"
       rights: "Social Surveys todos los derechos reservados 2016"
+  will_paginate:
+    next_label: "Siguiente →"
+    page_entries_info:
+      multi_page: "Mostrando %{model} %{from} - %{to} de %{count} en total"
+      multi_page_html: "Mostrando %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b> de <b>%{count}</b> en total"
+      single_page:
+        one: "Mostrando 1 %{model}"
+        other: "Mostrando en total %{count} %{model}"
+        zero: "No se encontraron %{model}"
+      single_page_html:
+        one: "Mostrando <b>1</b> %{model}"
+        other: "Mostrando en <b>total&nbsp;%{count}</b> %{model}"
+        zero: "No se encontraron %{model}"
+    page_gap: "&hellip;"
+    previous_label: "← Atrás"
   app:
     welcome: "Hola"
     loading: "cargando.."
@@ -129,6 +144,13 @@ es:
       destroy:
         alert: "Hasta luego!"
     survey:
+      export:
+        id: "ID"
+        answered_on: "Fecha"
+        survey: "Encuesta"
+        question: "Pregunta"
+        submitted_by: "Enviado por"
+        response: "Respuesta"
       breadcrumbs:
         list: "Encuestas"
         new: "Nuevo"
@@ -310,6 +332,8 @@ es:
         search_question: "-- Pregunta --"
         search_choice: "-- Opción --"
         search_image: "-- Imágen --"
+        search_rate_option: "-- Opción a calificar --"
+        search_rate: "-- Calificación --"
         search_button: "BUSCAR"
         search_button_load: "cargando resultados.."
         submission_date: "Enviado el"

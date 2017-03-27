@@ -4,6 +4,8 @@
   $("#select-content").html("#{  j render("image_select", images: @images) }");
 - elsif @multiple.present? && @multiple.any?
   $("#select-content").html("#{  j render("choice_multiple_select", choices: @multiple) }");
+- elsif @ratings.present? && @ratings.any?
+  $("#select-content").html("#{  j render("rating_select", ratings: @ratings) }");
 - else
   $("#select-content").empty();
 

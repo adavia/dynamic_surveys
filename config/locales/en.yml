@@ -130,6 +130,13 @@ en:
       destroy:
         alert: "See you later!"
     survey:
+      export:
+        id: "ID"
+        answered_on: "Answered on"
+        survey: "Survey"
+        question: "Question"
+        submitted_by: "Submitted by"
+        response: "Answer"
       breadcrumbs:
         list: "Surveys"
         new: "New"
@@ -311,6 +318,8 @@ en:
         search_question: "-- Question --"
         search_choice: "-- Choice --"
         search_image: "-- Image --"
+        search_rate_option: "-- Option Rate --"
+        search_rate: "-- Rate --"
         search_button: "SEARCH"
         search_button_load: "loading results.."
         submission_date: "Submitted on"

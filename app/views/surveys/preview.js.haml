@@ -6,4 +6,3 @@
 - else
   $(".data-stats").html("#{ j render "stats" }");
   $("#survey-question-list").html("#{ j render @survey.questions }");
-  $("#export-link").attr("href", "#{ survey_submissions_path(@survey, created_before: params[:created_before], created_after: params[:created_after], question_id: params[:question_id], choice_id: params[:choice_id], image_id: params[:image_id], choice_multiple_ids: params[:choice_multiple_ids], rating_id: params[:rating_id], rate: params[:rate], format: "csv")}");

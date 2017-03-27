@@ -2,147 +2,22 @@
   %h3
     = question.title
 
-  %table.table.table-striped
-    - if ["single", "list"].include? question.question_type
-      %thead
-        %tr
-          %th= t "app.survey.show.answers"
-          %th= t "app.survey.show.count"
-          %th= t "app.survey.show.percentage"
-          %th
-      %tbody
-        - @choice = question.answers.choice_counter.each do |answer|
-          %tr
-            %td.col-md-3= answer[0]
-            %td.col-md-1= answer[1]
-            %td.col-md-1= get_percentage(answer[1], question.answers_count)
-            %td.col-md-7
-              .progress
-                .progress-bar{"aria-valuemax": "100", "aria-valuemin": "0",
-                  "aria-valuenow": "60", role: "progressbar",
-                  style: "min-width: 2em; width: #{get_percentage(answer[1], question.answers_count)}"}
-                  = get_percentage(answer[1], question.answers_count)
-        %tr
-          %td
-            %strong Total
-          %td
-            %strong= question.answers_count
-          %td
-            %strong= "100%" if @choice.any?
-          %td
-    - if question.question_type == "image"
-      %thead
-        %tr
-          %th= t "app.survey.show.answers"
-          %th= t "app.survey.show.count"
-          %th= t "app.survey.show.percentage"
-          %th
-      %tbody
-        - @image = question.answers.image_counter.each do |answer|
-          %tr
-            %td.col-md-3= answer[0]
-            %td.col-md-1= answer[1]
-            %td.col-md-1= get_percentage(answer[1], question.answers_count)
-            %td.col-md-7
-              .progress
-                .progress-bar{"aria-valuemax": "100", "aria-valuemin": "0",
-                  "aria-valuenow": "60", role: "progressbar",
-                  style: "min-width: 2em; width: #{get_percentage(answer[1], question.answers_count)}"}
-                  = get_percentage(answer[1], question.answers_count)
-        %tr
-          %td
-            %strong Total
-          %td
-            %strong= question.answers_count
-          %td
-            %strong= "100%" if @image.any?
-          %td
-    - if question.question_type == "multiple"
-      %thead
-        %tr
-          %th= t "app.survey.show.answers"
-          %th= t "app.survey.show.count"
-          %th= t "app.survey.show.percentage"
-          %th
-      %tbody
-        - @multiple = question.answers.multiple_choice_counter.each do |answer|
-          %tr
-            %td.col-md-3= answer[0]
-            %td.col-md-1= answer[1]
-            %td.col-md-1= get_percentage(answer[1], question.answers_count)
-            %td.col-md-7
-              .progress
-                .progress-bar{"aria-valuemax": "100", "aria-valuemin": "0",
-                  "aria-valuenow": "60", role: "progressbar",
-                  style: "min-width: 2em; width: #{get_percentage(answer[1], question.answers_count)}"}
-                  = get_percentage(answer[1], question.answers_count)
-        %tr
-          %td
-            %strong Total
-          %td
-            %strong= question.answers_count
-          %td
-            %strong= "100%" if @multiple.any?
-          %td
-    - if question.question_type == "rating"
-      %thead
-        %tr
-          %th= t "app.survey.show.question"
-          %th= t "app.survey.show.count"
-          %th= t "app.survey.show.score"
-          %th
-      %tbody
-        - @rating = question.answers.rating_average.each do |answer|
-          %tr
-            %td.col-md-3= answer.rate
-            %td.col-md-1= answer.count
-            %td.col-md-1= number_with_precision(answer.avg, precision: 2)
-            %td.col-md-7
-              .progress
-                .progress-bar{"aria-valuemax": "100", "aria-valuemin": "0",
-                  "aria-valuenow": "60", role: "progressbar",
-                  style: "min-width: 2em; width: #{get_percentage(answer.avg, 10)}"}
-                  = number_with_precision(answer.avg, precision: 2)
-        %tr
-          %td
-            %strong Total
-          %td
-            %strong= question.answers_count
-          %td
-            = get_avg(@rating)
-          %td
-    - if ["open", "description", "phone", "email"].include? question.question_type
-      %tbody
-        - question.answers.open_responses.each do |answer|
-          %tr
-            %td.col-md-2= answer.answer_open.created_at.strftime("%m/%d/%Y")
-            %td.col-md-1= answer.answer_open.id
-            %td.col-md-9= answer.answer_open.response
-    - if question.question_type == "date"
-      %tbody
-        - question.answers.date_responses.each do |answer|
-          %tr
-            %td.col-md-2= answer.answer_date.created_at.strftime("%m/%d/%Y")
-            %td.col-md-1= answer.answer_date.id
-            %td.col-md-9= answer.answer_date.response
-
-  .question-charts
-    - if ["single", "list"].include? question.question_type
-      - if @choice.any?
-        %h4.m-b-0= t("app.survey.report.pie")
-        = pie_chart @choice, library: { pieSliceText: "value-and-percentage" }
-    - if question.question_type == "multiple"
-      - if @multiple.any?
-        %h4.m-b-0= t("app.survey.report.pie")
-        = pie_chart @multiple, library: { pieSliceText: "value-and-percentage" }
-    - if question.question_type == "rating"
-      - if @rating.any?
-        %h4.m-b-0= t("app.survey.report.pie")
-        = pie_chart @rating.map{|x| [x[:rate], x[:count]]},
-          library: { pieSliceText: "value-and-percentage" }
-    - if question.question_type == "image"
-      - if @image.any?
-        %h4.m-b-0= t("app.survey.report.pie")
-        = pie_chart @image, library: { pieSliceText: "value-and-percentage" }
+  - if ["single", "list"].include? question.question_type
+    @choice = render "questions/tables/table_choice", answers: question.answers.choice_counter(params), question: question
+  - if question.question_type == "image"
+    = render "questions/tables/table_image",
+      answers: question.answers.image_counter(params), question: question
+  - if question.question_type == "multiple"
+    = render "questions/tables/table_multiple",
+      answers: question.answers.multiple_choice_counter(params), question: question
+  - if question.question_type == "rating"
+    = render "questions/tables/table_rating",
+      answers: question.answers.rating_average(params), question: question
+  - if ["open", "description", "phone", "email"].include? question.question_type
+    = content_tag :div, id: "open_question_#{question.id}" do
+      = render "questions/tables/table_open", question: question
+  - if question.question_type == "date"
+    = content_tag :div, id: "date_question_#{question.id}" do
+      = render "questions/tables/table_date", question: question
 
   %hr

@@ -40,17 +40,22 @@ module ApplicationHelper
   def get_percentage(value, total)
     percentage = (Float(value) / total * 100)
     if !percentage.nan?
-      "#{percentage.round}%"
+      percentage.round(1)
     else
-      "0%"
+      0
+    end
+  end
+
+  def total_percentage(arr)
+    if arr.any?
+      "#{arr.map { |a| get_percentage(a[1], arr.values.reduce(:+)) }.reduce(:+).round}"
     end
   end
 
   def get_avg(values)
-    array = []
-    values.each do |value|
-      array << value.avg
+    if values.any?
+      array = values.map { |v| v.avg }
+      number_with_precision(array.inject{ |sum, el| sum + el }.to_f / array.size, precision: 2)
     end
-    number_with_precision(array.inject{ |sum, el| sum + el }.to_f / array.size, precision: 2)
   end
 end

@@ -1,53 +1,21 @@
 .container
   .row.m-t-2.m-b-1
-    .col-md-8.col-md-offset-2
+    .col-md-10.col-md-offset-1
       .panel-piled
         %h1
           = @survey.name
-          %small
-            = t "date.created_at"
-            = I18n.l @survey.created_at, format: :custom
         %p
           = @survey.description
 
-        %h2
-          = t "app.survey.show.text_primary"
-
         %ul.list-group.m-t-1.m-b-0
-          %li.list-group-item
-            %span.counter.pull-right
-              = @survey.questions_count
-            = Question.human_attribute_name(:class_name).pluralize
           %li.list-group-item.data-stats
-            %span.counter
-              %strong
-                #{fa_icon("eye", text: @survey.submission_views.size)}
-              = t "app.submission.show.views"
-            %span.counter
-              %strong
-                #{fa_icon("circle", text: @survey.submissions.complete)}
-              = t "app.submission.show.complete"
-              (#{(Float(@survey.submissions.complete) / @survey.submissions.size * 100).ceil}%)
-            %span.counter
-              %strong
-                #{fa_icon("circle-o", text: @survey.submissions.incomplete)}
-              = t "app.submission.show.incomplete"
+            = render "stats"
 
-        %h3
-          = t "app.survey.show.results_by_type"
-          - @trans_keys = @survey.questions.unscope(:order).group_types.transform_keys do |key|
-            - t("app.question.question_types.#{key}").capitalize
-          = pie_chart @trans_keys, library: { pieSliceText: "value-and-percentage" }
+        %hr.separator
+        /- @trans_keys = @survey.questions.unscope(:order).group_types.transform_keys do |key|
+        /- t("app.question.question_types.#{key}").capitalize
+        /- if @trans_keys.any?
+        /= pie_chart @trans_keys, library: { pieSliceText: "value-and-percentage" }
 
-        = render @survey.questions
-
-- if @survey.avatar.present?
-  :css
-    body  { background: url(#{@survey.avatar.url}) no-repeat center center fixed;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-          }
-
-
+        #survey-question-list
+          = render @survey.questions

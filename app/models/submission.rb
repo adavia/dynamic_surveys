@@ -51,6 +51,14 @@ class Submission < ApplicationRecord
     joins(answers: :answer_image).where("answer_images.image_id": id)
   end
 
+  def self.rating_id(option)
+    joins(answers: {answer_raitings: :raiting}).where("raitings.id": option)
+  end
+
+  def self.rate(response)
+    joins(answers: {answer_raitings: :raiting}).where("answer_raitings.response": response)
+  end
+
   private
 
   def mark_as_completed

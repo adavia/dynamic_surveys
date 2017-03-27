@@ -19,7 +19,7 @@ class AlertsController < ApplicationController
   def new
     @alert = @survey.alerts.build
     @alert.build_alert_filter
-    #authorize @alert, :create?
+    authorize @alert, :create?
 
     add_breadcrumb t("app.survey.breadcrumbs.notifications"), survey_alerts_path(@survey)
     add_breadcrumb t("app.survey.notifications.breadcrumbs.new"), new_survey_alert_path(@survey)
@@ -28,7 +28,7 @@ class AlertsController < ApplicationController
   def create
     @alert = @survey.alerts.build(alert_params)
 
-    #authorize @alert, :create?
+    authorize @alert, :create?
     respond_to do |format|
       if @alert.save
         format.html { redirect_to [@survey, :alerts],
@@ -48,7 +48,7 @@ class AlertsController < ApplicationController
   end
 
   def edit
-    #authorize @alert, :edit?
+    authorize @alert, :edit?
     @alert.build_alert_filter if @alert.alert_filter.nil?
 
     add_breadcrumb t("app.survey.breadcrumbs.notifications"), survey_alerts_path(@survey)
@@ -56,7 +56,7 @@ class AlertsController < ApplicationController
   end
 
   def update
-    #authorize @alert, :update?
+    authorize @alert, :update?
 
     respond_to do |format|
       if @alert.update(alert_params)
@@ -77,7 +77,7 @@ class AlertsController < ApplicationController
   end
 
   def destroy
-    #authorize @alert, :destroy?
+    authorize @alert, :destroy?
     @alert.destroy
     respond_to do |format|
       format.html { redirect_to [@survey, :alerts],
@@ -106,7 +106,7 @@ class AlertsController < ApplicationController
   private
 
   def set_survey
-    @survey = Survey.find(params[:survey_id])
+    @survey = Survey.includes(alerts: :alert_filter).find(params[:survey_id])
   end
 
   def set_alert

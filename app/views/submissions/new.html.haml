@@ -36,11 +36,6 @@
         %p
           = @survey.description
 
-        - if @submission.errors.any?
-          .alert.alert-danger
-            = t "app.submission.create.error"
-        %h2
-          = t "app.submission.links.survey_question_title"
         = render "form"
 
 - if @survey.avatar.present?

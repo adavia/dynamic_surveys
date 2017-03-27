@@ -64,7 +64,6 @@ Rails.application.routes.draw do
       collection do
         post :sort
       end
-      resources :answers, only: :index
     end
 
     namespace :admin do

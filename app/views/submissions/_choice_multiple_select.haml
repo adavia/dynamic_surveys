@@ -1,5 +1,6 @@
-- choices.all.each do |choice|
-  .checkbox
-    %label
-      = check_box_tag "choice_multiple_ids[]", choice.id
-      = choice.title
+.form-group
+  - choices.all.each do |choice|
+    .checkbox
+      %label
+        = check_box_tag "choice_multiple_ids[]", choice.id
+        = choice.title

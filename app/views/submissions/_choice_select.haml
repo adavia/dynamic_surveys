@@ -1,5 +1,6 @@
-= select_tag :choice_id,
-  options_for_select(choices.collect {|c| [c.title, c.id]}),
-  prompt: t("app.submission.index.search_choice"),
-  data: { behavior: "choices_select" },
-  class: "form-control input-sm"
+.form-group
+  = select_tag :choice_id,
+    options_for_select(choices.collect {|c| [c.title, c.id]}),
+    prompt: t("app.submission.index.search_choice"),
+    data: { behavior: "choices_select" },
+    class: "form-control input-sm"

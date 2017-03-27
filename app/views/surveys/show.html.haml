@@ -26,7 +26,10 @@
                 [:preview, @customer, @survey], target: "_blank"
             %li
               = link_to t("app.survey.show.survey_export"),
-                survey_submissions_path(@survey, format: "csv")
+                survey_submissions_path(@survey, format: "csv"), id: "export-link"
+            %li
+              = link_to t("app.survey.show.links.survey_pdf"),
+                customer_survey_path(@customer, @survey, format: :pdf)
             %li
               = link_to t("app.survey.show.links.survey_submit"), [:new, @survey, :submission]
             %li
@@ -34,9 +37,6 @@
             - if policy(@survey).update?
               %li
                 = link_to t("app.survey.show.links.survey_edit"), [:edit, @customer, @survey]
-            /%li
-            /= link_to t("app.survey.show.links.survey_pdf"),
-            /customer_survey_path(@customer, @survey, format: :pdf)
             - if policy(@survey).archive?
               %li
                 = link_to t("app.survey.index.links.survey_archive"),
@@ -66,7 +66,7 @@
                 data: { behavior: "questions_select" },
                 class: "form-control input-sm"
 
-            .form-group#select-content
+            #select-content
             = submit_tag t("app.search"), class: "btn btn-default btn-block btn-sm",
               data: { disable_with: t("app.submission.index.search_button_load")}
 
@@ -80,6 +80,7 @@
         /- if @trans_keys.any?
         /= pie_chart @trans_keys, library: { pieSliceText: "value-and-percentage" }
 
-        = render @survey.questions
+        #survey-question-list
+          = render @survey.questions
 
 

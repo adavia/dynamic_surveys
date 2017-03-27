@@ -1,0 +1,10 @@
+%table.table.table-striped
+  %tbody
+    - question.answers.date_responses(params).each do |answer|
+      %tr
+        %td.col-md-2= answer.answer_date.created_at.strftime("%m/%d/%Y")
+        %td.col-md-1= answer.answer_date.id
+        %td.col-md-9= answer.answer_date.response
+
+  = will_paginate question.answers.date_responses(params),
+    class: "ajax-pag", params: { q: question.id, type: question.question_type }

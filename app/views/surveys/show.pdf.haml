@@ -1,0 +1,50 @@
+= wicked_pdf_stylesheet_link_tag "pdf"
+= javascript_include_tag "https://www.google.com/jsapi"
+= wicked_pdf_javascript_include_tag "chartkick"
+
+.container
+  .row
+    .col-md-10.col-md-offset-1
+      .panel-piled
+        %h1
+          = @survey.name
+        %p
+          = @survey.description
+
+        %ul.list-group.m-t-1.m-b-0
+          %li.list-group-item.data-stats
+            = render "stats.html.haml"
+
+        %hr.separator
+        /- @trans_keys = @survey.questions.unscope(:order).group_types.transform_keys do |key|
+        /- t("app.question.question_types.#{key}").capitalize
+        /- if @trans_keys.any?
+        /= pie_chart @trans_keys, library: { pieSliceText: "value-and-percentage" }
+
+        #survey-question-list
+          - @survey.questions.each do |question|
+            .question-report
+              %h3
+                = question.title
+
+              - if ["single", "list"].include? question.question_type
+                @choice = render "questions/tables/table_choice", answers: question.answers.choice_counter(params), question: question
+              - if question.question_type == "image"
+                = render "questions/tables/table_image.html.haml",
+                  answers: question.answers.image_counter(params), question: question
+              - if question.question_type == "multiple"
+                = render "questions/tables/table_multiple.html.haml",
+                  answers: question.answers.multiple_choice_counter(params), question: question
+              - if question.question_type == "rating"
+                = render "questions/tables/table_rating.html.haml",
+                  answers: question.answers.rating_average(params), question: question
+              - if ["open", "description", "phone", "email"].include? question.question_type
+                = content_tag :div, id: "open_question_#{question.id}" do
+                  = render "questions/tables/table_open.html.haml", question: question
+              - if question.question_type == "date"
+                = content_tag :div, id: "date_question_#{question.id}" do
+                  = render "questions/tables/table_date.html.haml", question: question
+
+              %hr
+
+

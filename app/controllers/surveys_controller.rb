@@ -2,7 +2,7 @@ class SurveysController < ApplicationController
   before_action :authenticate_user, except: :preview
   before_action :set_customer, only: [:index, :show, :new, :create, :edit,
     :update, :archive]
-  before_action :set_survey, only: [:show, :edit, :update, :archive, :preview,
+  before_action :set_survey, only: [:edit, :update, :archive,
     :images, :modal_images, :upload]
 
   def index
@@ -19,13 +19,18 @@ class SurveysController < ApplicationController
   end
 
   def show
+    @survey = Survey.find(params[:id])
     authorize @survey, :show?
-    if request.format == "csv"
-      @submissions = policy_scope(@survey.submissions
-        .includes(:sender))
-    else
-      @submissions = policy_scope(@survey.submissions
-        .includes(:sender))
+    @submissions = @survey.submissions.includes(:sender)
+
+    respond_to do |format|
+      format.html
+      format.js
+      format.pdf do
+        render pdf: "report-#{@survey.id}",
+               viewport_size: '1180x1024',
+               encoding: "utf-8"
+      end
     end
 
     filtering_params(params).each do |key, value|
@@ -119,6 +124,8 @@ class SurveysController < ApplicationController
   end
 
   def preview
+    @survey = Survey.find(params[:id])
+    @submissions = @survey.submissions
     render layout: "report"
   end
 
@@ -157,7 +164,7 @@ class SurveysController < ApplicationController
 
   def filtering_params(params)
     params.slice(:created_before, :created_after, :question_id,
-      :choice_id, :image_id, :choice_multiple_ids)
+      :choice_id, :image_id, :choice_multiple_ids, :rating_id, :rate)
   end
 
   def set_survey

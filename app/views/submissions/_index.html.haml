@@ -27,7 +27,7 @@
                 data: { behavior: "questions_select" },
                 class: "form-control input-sm"
 
-            .form-group#select-content
+            #select-content
             = submit_tag t("app.search"), class: "btn btn-default btn-block btn-sm",
               data: { disable_with: t("app.submission.index.search_button_load")}
 
@@ -39,6 +39,11 @@
           %span
             = @submissions.total_entries
           = t("app.entries")
+
+        = link_to t("app.survey.show.survey_export"),
+          survey_submissions_path(@survey, format: "csv"),
+          class: "btn btn-xs btn-success", id: "export_results"
+
         - unless @submissions.next_page.nil?
           = link_to fa_icon("undo", text: t("app.submission.index.submission_results_button")),
           survey_submissions_path(@survey, page: @submissions.next_page),

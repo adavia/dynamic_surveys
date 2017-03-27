@@ -29,11 +29,11 @@ gem 'mini_magick'
 # User access authorization
 gem 'pundit'
 # Use PDF generator
-gem 'prawn'
-# PDF table generator
-gem 'prawn-table'
-# PDF charts
-gem 'squid', '~> 1.2'
+gem 'wicked_pdf'
+# PDF binary
+gem 'wkhtmltopdf-binary-edge', '~> 0.12.4.0'
+# Heroku pdf
+gem "wkhtmltopdf-heroku"
 # Moment
 gem 'momentjs-rails', '>= 2.9.0'
 # Datepicker

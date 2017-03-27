@@ -28,7 +28,7 @@
                 = question.title
 
               - if ["single", "list"].include? question.question_type
-                = render "questions/tables/table_choice",
+                = render "questions/tables/table_choice.html.haml",
                   answers: question.answers.choice_counter(params), question: question
               - if question.question_type == "image"
                 = render "questions/tables/table_image.html.haml",

@@ -34,10 +34,10 @@ class Answer < ApplicationRecord
   def self.filters(params)
     query = self.all
     if params[:created_before].present?
-      query = query.where("answers.created_at < ?", Date.parse(params[:created_before]))
+      query = query.where("answers.created_at <= ?", Date.parse(params[:created_before]))
     end
     if params[:created_after].present?
-      query = query.where("answers.created_at > ?", Date.parse(params[:created_after]))
+      query = query.where("answers.created_at >= ?", Date.parse(params[:created_after]))
     end
     if params[:question_id].present?
       query = query.joins(:question).where("questions.id": params[:question_id])

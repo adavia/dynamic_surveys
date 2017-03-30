@@ -52,7 +52,7 @@ en:
         links:
           view: "View all"
           subnav: "Manage the following customers"
-          show_surveys: "SHOW ALL CUSTOMER SURVEYS"
+          show_surveys: "DISPLAY SURVEYS"
           customer_all: "ALL CUSTOMERS"
           customer_new: "NEW CUSTOMER"
           customer_show: "Display customer information"
@@ -311,7 +311,7 @@ en:
         complete: "complete submissions"
         incomplete: "incomplete submissions"
         completion_rate: "completion rate"
-        total_submissions: "total submissions"
+        total_submissions: "submissions"
       index:
         subnav: "Survey submissions"
         search_start_date: "Select a beginning date"

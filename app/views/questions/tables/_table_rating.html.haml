@@ -33,7 +33,7 @@
         %td
         %td
 
-- if request.format.html?
+- if request.format.html? || request.format.js?
   .question-charts
     - if answers.any?
       %h4.m-b-0= t("app.survey.report.pie")

@@ -1,15 +1,6 @@
-- headers = [t("app.survey.export.id"), t("app.survey.export.answered_on"), t("app.survey.export.survey"), t("app.survey.export.question"), t("app.survey.export.submitted_by"), t("app.survey.export.response")]
-= CSV.generate_line headers, :row_sep => ?\t
+- headers = [t("app.survey.export.id"), t("app.survey.export.answered_on"), t("app.survey.export.survey"), t("app.survey.export.submitted_by")] + @survey.questions.map { |s| s.title }
+= raw CSV.generate_line headers, :row_sep => ?\t
 
 - @submissions.each do |submission|
-  - submission.answers.each do |answer|
-    - answers = answer.answer_date.response.strftime("%m/%d/%Y") if answer.answer_date.present?
-    - answers = answer.answer_open.response if answer.answer_open.present?
-    - answers = answer.answer_image.image.try(:name) if answer.answer_image.present?
-    - answers = answer.choice_answer.choice.try(:title) if answer.choice_answer.present?
-    - answers = answer.answer_multiple.choices.map(&:title).join(', ') if answer.answer_multiple.present?
-    - answers = display_rates(answer.answer_raitings).join(" ") if answer.answer_raitings.any?
 
-    = raw CSV.generate_line [answer.id, answer.created_at.strftime("%m/%d/%Y at %I:%M%p"),
-      submission.survey.name, answer.question.title, submission.sender, answers],
-      :row_sep => ?\t
+  = raw CSV.generate_line [submission.id, submission.created_at.strftime("%m/%d/%Y at %I:%M%p"), submission.survey.name, submission.sender] + display_answers(submission.answers, @survey.questions), :row_sep => ?\t

@@ -9,7 +9,7 @@ class SubmissionsController < ApplicationController
     respond_to do |format|
       format.html {}
       format.csv do
-        headers['Content-Disposition'] = "attachment; filename=\"submissions-#{@survey.id}.csv\""
+        headers['Content-Disposition'] = "attachment; filename=\"submissions-#{@survey.id}-#{Time.now.strftime('%Y%m%d%H%M')}.csv\""
         headers['Content-Type'] ||= 'text/csv'
       end
       format.js   {}
@@ -19,7 +19,6 @@ class SubmissionsController < ApplicationController
 
   def show
     authorize @submission, :show?
-    render layout: !request.xhr?
   end
 
   def new

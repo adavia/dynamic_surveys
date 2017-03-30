@@ -1,0 +1,41 @@
+.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-label": "Close", "data-dismiss": "modal", type: "button"}
+          %span{"aria-hidden": "true"} ×
+        %h2.text-center.m-t-0
+          = @submission.survey.name
+      .modal-body
+        %p= @submission.survey.description
+        .submitted-answers
+          - @submission.answers.each do |answer|
+            .answer-item
+              %h4
+                = answer.question.title
+              - if answer.answer_open.present?
+                = answer.answer_open.response
+              - if answer.answer_date.present?
+                = answer.answer_date.response
+              - if answer.answer_image.present?
+                - if answer.answer_image.image.reference_path.present?
+                  = image_tag answer.answer_image.image.reference_path,
+                    class: "img-responsive", width: 80
+                - else
+                  = image_tag answer.answer_image.image.file.url(:thumb),
+                    class: "img-responsive", width: 80
+              - if answer.choice_answer.present?
+                = answer.choice_answer.choice.try(:title)
+              - if answer.answer_multiple.present?
+                = answer.answer_multiple.choices.map(&:title).join(', ')
+              - if answer.answer_raitings.any?
+                - answer.answer_raitings.each do |rate|
+                  %p
+                    %span
+                      #{rate.raiting.name}:
+                      - if !rate.response.nil?
+                        - 1.upto(rate.response) do |star|
+                          &#x2605;
+
+
+

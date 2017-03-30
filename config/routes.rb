@@ -52,7 +52,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :submissions, only: [] do
+    resources :submissions, only: [:show] do
       collection do
         get :update_choices
       end

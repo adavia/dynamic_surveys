@@ -27,6 +27,8 @@ class Submission < ApplicationRecord
     (rates && (rates.nil? || rates == {}))  || (attributes[:answer_open_attributes] && attributes[:answer_open_attributes][:response].blank?) || (attributes[:answer_date_attributes] && attributes[:answer_date_attributes][:response].blank?) || (attributes[:answer_image_attributes] && attributes[:answer_image_attributes][:image_id].blank?) || (attributes[:choice_answer_attributes] && attributes[:choice_answer_attributes][:choice_id].blank?) || (attributes[:answer_multiple_attributes] && attributes[:answer_multiple_attributes][:choice_ids] == [""])
   end
 
+  # Filters
+
   def self.created_before(date)
     where("submissions.created_at < ?", Date.parse(date))
   end

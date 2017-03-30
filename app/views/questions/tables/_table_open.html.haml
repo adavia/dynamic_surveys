@@ -1,10 +1,17 @@
 %table.table.table-striped
   %tbody
-    - question.answers.open_responses(params).each do |answer|
+    - if question.answers.open_responses(params).present?
+      - question.answers.open_responses(params).each do |answer|
+        %tr
+          %td.col-xs-2= answer.answer_open.created_at.strftime("%m/%d/%Y")
+          %td.col-xs-1
+            = link_to answer.answer_open.id, answer.submission, remote: true
+          %td.col-xs-9= answer.answer_open.response
+    - else
       %tr
-        %td.col-xs-2= answer.answer_open.created_at.strftime("%m/%d/%Y")
-        %td.col-xs-1= answer.answer_open.id
-        %td.col-xs-9= answer.answer_open.response
+        %td= t "app.no_results"
+        %td
+        %td
 
   = will_paginate question.answers.open_responses(params),
     class: "ajax-pag", params: { q: question.id, type: question.question_type }

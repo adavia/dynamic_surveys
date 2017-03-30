@@ -29,6 +29,7 @@ en:
     has_selected: "has selected the following:"
     has_answered: "has answered:"
     created_by: "Submitted by"
+    no_results: "No results have been found"
     links:
       customer_all: "Display all customers"
       customer_new: "Create new customer"

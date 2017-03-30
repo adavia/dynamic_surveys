@@ -22,8 +22,8 @@ class Answer < ApplicationRecord
   validates :submission, presence: true
 
   scope :rated_answers,           -> { joins(:answer_raitings) }
-  scope :open_responses,          -> (params) { includes(:answer_open).merge(filters(params)).order("answer_opens.created_at desc").paginate(page: params[:page]) }
-  scope :date_responses,          -> (params) { includes(:answer_date).merge(filters(params)).order("answer_dates.created_at desc").paginate(page: params[:page]) }
+  scope :open_responses,          -> (params) { includes(:submission, :answer_open).merge(filters(params)).order("answer_opens.created_at desc").paginate(page: params[:page]) }
+  scope :date_responses,          -> (params) { includes(:submission, :answer_date).merge(filters(params)).order("answer_dates.created_at desc").paginate(page: params[:page]) }
   scope :rating_average,          -> (params) { joins(answer_raitings: :raiting).merge(filters(params)).select("raitings.name as rate, count(*) as count, avg(answer_raitings.response) as avg").group("rate").order("count DESC") }
   scope :image_counter,           -> (params) { joins(answer_image: :image).merge(filters(params)).group("images.name").count }
   scope :choice_counter,          -> (params) { joins(choice_answer: :choice).merge(filters(params)).group("choices.title").count }

@@ -43,6 +43,7 @@ es:
     has_selected: "ha seleccionado lo siguiente:"
     has_answered: "ha respondido:"
     created_by: "Enviado por"
+    no_results: "No se encontraron resultados"
     links:
       customer_all: "Listar todos los clientes"
       customer_new: "Crear nuevo cliente"

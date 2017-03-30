@@ -328,6 +328,8 @@ en:
         submission_by: "Submitted by"
         submission_answers_button: "Show answers"
         submission_results_button: "Load more submissions"
+        complete: "Complete submission"
+        incomplete: "Incomplete submission"
       create:
         alert: "The survey has been submitted successfully!"
         error: "Something went wrong during this submission. Check the errors below."

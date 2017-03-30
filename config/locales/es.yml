@@ -342,6 +342,8 @@ es:
         submission_by: "Enviado por"
         submission_answers_button: "Mostrar respuestas"
         submission_results_button: "Mostrar más envíos"
+        complete: "Envío completo"
+        incomplete: "Envío incompleto"
       create:
         alert: "La encuesta ha sido enviada exitosamente!"
         error: "Revisa los siguientes errores."

@@ -39,9 +39,6 @@ class Answer < ApplicationRecord
     if params[:created_after].present?
       query = query.where("answers.created_at >= ?", Date.parse(params[:created_after]))
     end
-    if params[:question_id].present?
-      query = query.joins(:question).where("questions.id": params[:question_id])
-    end
     if params[:choice_id].present?
       query = query.joins(:choice_answer).where("choice_answers.choice_id": params[:choice_id])
     end

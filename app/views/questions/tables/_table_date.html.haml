@@ -1,7 +1,8 @@
 %table.table.table-striped
+  - @question = question.answers.date_responses(params)
   %tbody
-    - if question.answers.date_responses(params).present?
-      - question.answers.date_responses(params).each do |answer|
+    - if @question.present?
+      - @question.each do |answer|
         %tr
           %td.col-xs-2= answer.answer_date.created_at.strftime("%m/%d/%Y")
           %td.col-xs-1
@@ -13,5 +14,5 @@
         %td
         %td
 
-  = will_paginate question.answers.date_responses(params),
+  = will_paginate @question,
     class: "ajax-pag", params: { q: question.id, type: question.question_type }

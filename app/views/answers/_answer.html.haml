@@ -1,0 +1,27 @@
+- questions.each do |question|
+  .question-report
+    %h3
+      = question.title
+
+    - if ["single", "list"].include? question.question_type
+      = render "questions/tables/table_choice",
+        answers: answers.choice_responses(question), question: question
+    - if question.question_type == "image"
+      = render "questions/tables/table_image",
+        answers: answers.image_responses(question), question: question
+    - if question.question_type == "multiple"
+      = render "questions/tables/table_multiple",
+        answers: answers.multiple_responses(question), question: question
+    - if question.question_type == "rating"
+      = render "questions/tables/table_rating",
+        answers: answers.rated_responses(question), question: question
+    - if ["open", "description", "phone", "email"].include? question.question_type
+      = content_tag :div, id: "open_question_#{question.id}" do
+        = render "questions/tables/table_open",
+          answers: answers.open_responses(question, params[:page]), question: question
+    - if question.question_type == "date"
+      = content_tag :div, id: "date_question_#{question.id}" do
+        = render "questions/tables/table_date",
+          answers: answers.date_responses(question, params[:page]), question: question
+    %hr
+

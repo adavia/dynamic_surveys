@@ -4,6 +4,7 @@
       = answer.question.title
     = f.simple_fields_for :answers, answer do |a|
       = a.hidden_field :question_id
+      = a.hidden_field :survey_id, value: @survey.id
       = render "answers/fields/answer_#{answer.question.question_type}",
         f: a,
         choices: (answer.question.choices if answer.question.choices.any?),

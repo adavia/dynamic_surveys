@@ -1,6 +1,7 @@
 class Answer < ApplicationRecord
   belongs_to :submission
   belongs_to :question, counter_cache: true
+  belongs_to :survey
 
   has_one :answer_date, dependent: :destroy
   has_one :answer_open, dependent: :destroy
@@ -21,39 +22,45 @@ class Answer < ApplicationRecord
   validates :question, presence: true
   validates :submission, presence: true
 
-  scope :rated_answers,           -> { joins(:answer_raitings) }
-  scope :open_responses,          -> (params) { includes(:submission, :answer_open).merge(filters(params)).order("answer_opens.created_at desc").paginate(page: params[:page]) }
-  scope :date_responses,          -> (params) { includes(:submission, :answer_date).merge(filters(params)).order("answer_dates.created_at desc").paginate(page: params[:page]) }
-  scope :rating_average,          -> (params) { joins(answer_raitings: :raiting).merge(filters(params)).select("raitings.name as rate, count(*) as count, avg(answer_raitings.response) as avg").group("rate").order("count DESC") }
-  scope :image_counter,           -> (params) { joins(answer_image: :image).merge(filters(params)).group("images.name").count }
-  scope :choice_counter,          -> (params) { joins(choice_answer: :choice).merge(filters(params)).group("choices.title").count }
-  scope :multiple_choice_counter, -> (params) { joins(answer_multiple: [:choices]).merge(filters(params)).group("choices.title").count }
+  #scope :rated_answers,          -> (question) { joins(:answer_raitings).where(question_id: question) }
+  scope :open_responses,          -> (question, page) { includes(:submission, :answer_open).where(question_id: question).order("answer_opens.created_at desc").paginate(page: page) }
+  scope :date_responses,          -> (question, page) { includes(:submission, :answer_date).where(question_id: question).order("answer_dates.created_at desc").paginate(page: page) }
+  scope :rated_responses,         -> (question) { joins(answer_raitings: :raiting).where(question_id: question).select("raitings.name as rate, count(*) as count, avg(answer_raitings.response) as avg").group("rate").order("count DESC") }
+  scope :image_responses,         -> (question) { joins(answer_image: :image).where(question_id: question).group("images.name").count }
+  scope :choice_responses,        -> (question) { joins(choice_answer: :choice).where(question_id: question).group("choices.title").count }
+  scope :multiple_responses,      -> (question) { joins(answer_multiple: [:choices]).where(question_id: question).group("choices.title").count }
 
   self.per_page = 10
 
-  def self.filters(params)
-    query = self.all
-    if params[:created_before].present?
-      query = query.where("answers.created_at <= ?", Date.parse(params[:created_before]))
-    end
-    if params[:created_after].present?
-      query = query.where("answers.created_at >= ?", Date.parse(params[:created_after]))
-    end
-    if params[:choice_id].present?
-      query = query.joins(:choice_answer).where("choice_answers.choice_id": params[:choice_id])
-    end
-    if params[:image_id].present?
-      query = query.joins(:answer_image).where("answer_images.image_id": params[:image_id])
-    end
-    if params[:choice_multiple_ids].present?
-      query = query.joins(answer_multiple: :choice_answers).where("choice_answers.choice_id": params[:choice_multiple_ids]).distinct
-    end
-    if params[:rating_id].present?
-      query = query.joins(answer_raitings: :raiting).where("raitings.id": params[:rating_id])
-    end
-    if params[:rate].present?
-      query = query.joins(answer_raitings: :raiting).where("answer_raitings.response": params[:rate])
-    end
-    query
+  def self.created_before(date)
+    where("answers.created_at <= ?", Date.parse(date))
+  end
+
+  def self.created_after(date)
+    where("answers.created_at >= ?", Date.parse(date))
+  end
+
+  def self.question_id(id)
+    joins(:question).where("questions.id": id)
+  end
+
+  def self.choice_id(id)
+    joins(:choice_answer).where("choice_answers.choice_id": id)
+  end
+
+  def self.choice_multiple_ids(ids)
+    joins(answer_multiple: :choice_answers).where("choice_answers.choice_id": ids).distinct
+  end
+
+  def self.image_id(id)
+    joins(:answer_image).where("answer_images.image_id": id)
+  end
+
+  def self.rating_id(option)
+    joins(answer_raitings: :raiting).where("raitings.id": option)
+  end
+
+  def self.rate(response)
+    joins(answer_raitings: :raiting).where("answer_raitings.response": response)
   end
 end

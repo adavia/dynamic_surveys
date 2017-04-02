@@ -9,8 +9,7 @@
         [:new, @survey, :question], remote: true, class: "btn btn-default btn-sm",
         data: { disable_with: t("app.loading") }
     #question-wrapper{ "data-sort-url": sort_questions_url }
-      = render partial: "questions/question_list",
-        collection: @survey.questions, as: :question
+      = render @survey.questions
 
   = f.button :submit, t("app.survey.form_button"),
     class: "btn-block btn-primary m-t-1",

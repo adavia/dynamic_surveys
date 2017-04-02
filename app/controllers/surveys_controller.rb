@@ -22,6 +22,8 @@ class SurveysController < ApplicationController
     @survey = Survey.find(params[:id])
     authorize @survey, :show?
     @submissions = @survey.submissions.includes(:sender)
+    @answers = @survey.answers
+    @questions = @survey.questions
 
     respond_to do |format|
       format.html
@@ -36,6 +38,7 @@ class SurveysController < ApplicationController
 
     filtering_params(params).each do |key, value|
       @submissions = @submissions.public_send(key, value) if value.present?
+      @answers = @answers.public_send(key, value) if value.present?
     end
 
     add_breadcrumb t("app.customer.breadcrumbs.list"), :customers_path

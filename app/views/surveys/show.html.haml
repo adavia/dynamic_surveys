@@ -79,7 +79,13 @@
         /- t("app.question.question_types.#{key}").capitalize
         /- if @trans_keys.any?
         /= pie_chart @trans_keys, library: { pieSliceText: "value-and-percentage" }
-        #survey-question-list
-          = render @survey.questions
 
+        /- sql = 'SELECT "answers"."id", "answer_opens"."response" FROM "answers" INNER JOIN "choice_answers" ON "choice_answers"."answer_id" = "answers"."id" LEFT OUTER JOIN "questions" ON "questions"."id" = "answers"."question_id" LEFT OUTER JOIN "submissions" ON "submissions"."id" = "answers"."submission_id" LEFT OUTER JOIN "answer_opens" ON "answer_opens"."answer_id" = "answers"."id" WHERE "answers"."survey_id" = 8 AND "choice_answers"."choice_id" = 20 AND "answers"."question_id" = 36'
+
+        /= @answers.joins(:question).includes(:answer_date).joins(:choice_answer).where("choice_answers.choice_id": 21).group_by { |a| a.question.id }
+        /= ActiveRecord::Base.connection.execute(sql, :skip_logging).inspect
+
+        #survey-question-list
+          /= render @survey.questions
+          = render partial: "answers/answer", locals: { questions: @questions, answers: @answers }
 

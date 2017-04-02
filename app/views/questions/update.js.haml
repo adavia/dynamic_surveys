@@ -1,5 +1,5 @@
 - if @question.errors.any?
   $("[data-behavior~=submit-question]").html("#{ j render 'form' }");
 - else
-  $("#question_#{@question.id}").html("#{ j render partial: "questions/question_list", object: @question, as: :question }")
+  $("#question_#{@question.id}").html("#{ j render @question }")
   $('#question-modal').modal('hide');

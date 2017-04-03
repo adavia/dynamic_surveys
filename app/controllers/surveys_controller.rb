@@ -127,7 +127,9 @@ class SurveysController < ApplicationController
 
   def preview
     @survey = Survey.find(params[:id])
-    @submissions = @survey.submissions
+    @submissions = @survey.submissions.includes(:sender)
+    @answers = @survey.answers
+    @questions = @survey.questions
     render layout: "report"
   end
 

@@ -18,4 +18,4 @@
         /= pie_chart @trans_keys, library: { pieSliceText: "value-and-percentage" }
 
         #survey-question-list
-          = render @survey.questions
+          = render partial: "answers/answer", locals: { questions: @questions, answers: @answers }

@@ -40,11 +40,11 @@ class Answer < ApplicationRecord
 
   def self.filter_answers(answers, params)
     if params[:created_before].present?
-      answers = answers.where("submissions.created_at <= ?", Date.parse(params[:created_before]))
+      answers = answers.where("answers.created_at <= ?", Date.parse(params[:created_before]))
       answers = self.collect_submissions(answers)
     end
     if params[:created_after].present?
-      answers = answers.where("submissions.created_at >= ?", Date.parse(params[:created_after]))
+      answers = answers.where("answers.created_at >= ?", Date.parse(params[:created_after]))
       answers = self.collect_submissions(answers)
     end
     if params[:question_id].present?

@@ -39,6 +39,8 @@ class SurveysController < ApplicationController
     filtering_params(params).each do |key, value|
       @submissions = @submissions.public_send(key, value) if value.present?
       @answers = @answers.public_send(key, value) if value.present?
+      @answers = Answer.joins(:submission).where("submissions.id": @answers.map(&:submission_id).uniq)
+      #@grouped_answers = answers_submission.group(:question_id)
     end
 
     add_breadcrumb t("app.customer.breadcrumbs.list"), :customers_path

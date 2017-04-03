@@ -4,12 +4,12 @@ class Question < ApplicationRecord
   has_many :answers, dependent: :destroy
   has_many :choices, dependent: :destroy
   has_many :raitings, dependent: :destroy
-  has_many :options, dependent: :destroy
+  #has_many :options, dependent: :destroy
   has_many :images, as: :imageable, dependent: :destroy
 
   accepts_nested_attributes_for :choices, allow_destroy: true
   accepts_nested_attributes_for :raitings, allow_destroy: true
-  accepts_nested_attributes_for :options, allow_destroy: true
+  #accepts_nested_attributes_for :options, allow_destroy: true
   accepts_nested_attributes_for :images, allow_destroy: true
 
   validates :question_type, presence: true

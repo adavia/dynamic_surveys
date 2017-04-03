@@ -189,11 +189,6 @@ class SubmissionsController < ApplicationController
     submissions
   end
 
-  def filtering_params(params)
-    params.slice(:created_before, :created_after, :question_id,
-      :choice_id, :image_id, :choice_multiple_ids, :rating_id, :rate)
-  end
-
   def set_survey
     @survey = Survey.includes(alerts: :alert_filter, questions: [:choices, :images, :raitings]).find(params[:survey_id])
   end

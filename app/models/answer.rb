@@ -32,6 +32,12 @@ class Answer < ApplicationRecord
 
   self.per_page = 10
 
+  def self.collect_submissions(answers)
+    joins(:submission).where("submissions.id": answers.map(&:submission_id).uniq)
+  end
+
+  # Filters
+
   def self.created_before(date)
     where("answers.created_at <= ?", Date.parse(date))
   end
@@ -56,11 +62,7 @@ class Answer < ApplicationRecord
     joins(:answer_image).where("answer_images.image_id": id)
   end
 
-  def self.rating_id(option)
-    joins(answer_raitings: :raiting).where("raitings.id": option)
-  end
-
-  def self.rate(response)
-    joins(answer_raitings: :raiting).where("answer_raitings.response": response)
+  def self.rate(option, response)
+    joins(:answer_raitings).where("answer_raitings.raiting_id": option).where("answer_raitings.response": response)
   end
 end

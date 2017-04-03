@@ -25,6 +25,9 @@ class SurveysController < ApplicationController
     @answers = @survey.answers
     @questions = @survey.questions
 
+    @submissions = filter_submissions(@submissions, params)
+    @answers = filter_answers(@answers, params)
+
     respond_to do |format|
       format.html
       format.js
@@ -34,13 +37,6 @@ class SurveysController < ApplicationController
                dpi: "300",
                encoding: "utf-8"
       end
-    end
-
-    filtering_params(params).each do |key, value|
-      @submissions = @submissions.public_send(key, value) if value.present?
-      @answers = @answers.public_send(key, value) if value.present?
-      @answers = Answer.joins(:submission).where("submissions.id": @answers.map(&:submission_id).uniq)
-      #@grouped_answers = answers_submission.group(:question_id)
     end
 
     add_breadcrumb t("app.customer.breadcrumbs.list"), :customers_path
@@ -168,9 +164,61 @@ class SurveysController < ApplicationController
 
   private
 
-  def filtering_params(params)
-    params.slice(:created_before, :created_after, :question_id,
-      :choice_id, :image_id, :choice_multiple_ids, :rating_id, :rate)
+  def filter_submissions(submissions, params)
+    if params[:created_before].present?
+      submissions = submissions.created_before(params[:created_before])
+    end
+    if params[:created_after].present?
+      submissions = submissions.created_after(params[:created_after])
+    end
+    if params[:question_id].present?
+      submissions = submissions.question_id(params[:question_id])
+    end
+    if params[:choice_id].present?
+      submissions = submissions.choice_id(params[:choice_id])
+    end
+    if params[:choice_multiple_ids].present?
+      submissions = submissions.choice_multiple_ids(params[:choice_multiple_ids])
+    end
+    if params[:image_id].present?
+      submissions = submissions.image_id(params[:image_id])
+    end
+    if params[:rating_id].present? && params[:rate].present?
+      submissions = submissions.rate(params[:rating_id], params[:rate])
+    end
+    submissions
+  end
+
+  def filter_answers(answers, params)
+    if params[:created_before].present?
+      answers = answers.created_before(params[:created_before])
+      answers = Answer.collect_submissions(answers)
+    end
+    if params[:created_after].present?
+      answers = answers.created_after(params[:created_after])
+      answers = Answer.collect_submissions(answers)
+    end
+    if params[:question_id].present?
+      answers = answers.question_id(params[:question_id])
+      answers = Answer.collect_submissions(answers)
+    end
+    if params[:choice_id].present?
+      answers = answers.choice_id(params[:choice_id])
+      answers = Answer.collect_submissions(answers)
+    end
+    if params[:choice_multiple_ids].present?
+      answers = answers.choice_multiple_ids(params[:choice_multiple_ids])
+      answers = Answer.collect_submissions(answers)
+    end
+    if params[:image_id].present?
+      answers = answers.image_id(params[:image_id])
+      answers = Answer.collect_submissions(answers)
+    end
+    if params[:rating_id].present? && params[:rate].present?
+      answers = answers.rate(params[:rating_id], params[:rate])
+      answers = Answer.collect_submissions(answers)
+    end
+    answers
   end
 
   def set_survey

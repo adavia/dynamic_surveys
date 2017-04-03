@@ -38,31 +38,35 @@ class Answer < ApplicationRecord
 
   # Filters
 
-  def self.created_before(date)
-    where("answers.created_at <= ?", Date.parse(date))
-  end
-
-  def self.created_after(date)
-    where("answers.created_at >= ?", Date.parse(date))
-  end
-
-  def self.question_id(id)
-    joins(:question).where("questions.id": id)
-  end
-
-  def self.choice_id(id)
-    joins(:choice_answer).where("choice_answers.choice_id": id)
-  end
-
-  def self.choice_multiple_ids(ids)
-    joins(answer_multiple: :choice_answers).where("choice_answers.choice_id": ids).distinct
-  end
-
-  def self.image_id(id)
-    joins(:answer_image).where("answer_images.image_id": id)
-  end
-
-  def self.rate(option, response)
-    joins(:answer_raitings).where("answer_raitings.raiting_id": option).where("answer_raitings.response": response)
+  def self.filter_answers(answers, params)
+    if params[:created_before].present?
+      answers = answers.where("submissions.created_at <= ?", Date.parse(params[:created_before]))
+      answers = self.collect_submissions(answers)
+    end
+    if params[:created_after].present?
+      answers = answers.where("submissions.created_at >= ?", Date.parse(params[:created_after]))
+      answers = self.collect_submissions(answers)
+    end
+    if params[:question_id].present?
+      answers = answers.joins(:question).where("questions.id": params[:question_id])
+      answers = self.collect_submissions(answers)
+    end
+    if params[:choice_id].present?
+      answers = answers.joins(:choice_answer).where("choice_answers.choice_id": params[:choice_id])
+      answers = self.collect_submissions(answers)
+    end
+    if params[:choice_multiple_ids].present?
+      answers = answers.joins(answer_multiple: :choice_answers).where("choice_answers.choice_id": params[:choice_multiple_ids]).distinct
+      answers = self.collect_submissions(answers)
+    end
+    if params[:image_id].present?
+      answers = answers.joins(:answer_image).where("answer_images.image_id": params[:image_id])
+      answers = self.collect_submissions(answers)
+    end
+    if params[:rating_id].present? && params[:rate].present?
+      answers = answers.joins(:answer_raitings).where("answer_raitings.raiting_id": params[:rating_id]).where("answer_raitings.response": params[:rate])
+      answers = self.collect_submissions(answers)
+    end
+    answers
   end
 end

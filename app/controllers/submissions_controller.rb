@@ -161,7 +161,7 @@ class SubmissionsController < ApplicationController
         .order(created_at: :desc)
     end
 
-    @submissions = filter_submissions(@submissions, params)
+    @submissions = @submissions.filter_submissions(@submissions, params)
   end
 
   def filter_submissions(submissions, params)

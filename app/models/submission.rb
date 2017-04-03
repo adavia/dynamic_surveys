@@ -29,32 +29,29 @@ class Submission < ApplicationRecord
 
   # Filters
 
-  def self.created_before(date)
-    where("submissions.created_at <= ?", Date.parse(date))
-  end
-
-  def self.created_after(date)
-    where("submissions.created_at >= ?", Date.parse(date))
-  end
-
-  def self.question_id(id)
-    joins(:questions).where("questions.id": id)
-  end
-
-  def self.choice_id(id)
-    joins(answers: :choice_answer).where("choice_answers.choice_id": id)
-  end
-
-  def self.choice_multiple_ids(ids)
-    joins(answers: {answer_multiple: :choice_answers}).where("choice_answers.choice_id": ids).distinct
-  end
-
-  def self.image_id(id)
-    joins(answers: :answer_image).where("answer_images.image_id": id)
-  end
-
-  def self.rate(option, response)
-    joins(answers: :answer_raitings).where("answer_raitings.raiting_id": option).where("answer_raitings.response": response)
+  def self.filter_submissions(submissions, params)
+    if params[:created_before].present?
+      submissions = submissions.where("submissions.created_at <= ?", Date.parse(params[:created_before]))
+    end
+    if params[:created_after].present?
+      submissions = submissions.where("submissions.created_at >= ?", Date.parse(params[:created_after]))
+    end
+    if params[:question_id].present?
+      submissions = submissions.joins(:questions).where("questions.id": params[:question_id])
+    end
+    if params[:choice_id].present?
+      submissions = submissions.joins(answers: :choice_answer).where("choice_answers.choice_id": params[:choice_id])
+    end
+    if params[:choice_multiple_ids].present?
+      submissions = submissions.joins(answers: {answer_multiple: :choice_answers}).where("choice_answers.choice_id": params[:choice_multiple_ids]).distinct
+    end
+    if params[:image_id].present?
+      submissions = submissions.joins(answers: :answer_image).where("answer_images.image_id": params[:image_id])
+    end
+    if params[:rating_id].present? && params[:rate].present?
+      submissions = submissions.joins(answers: :answer_raitings).where("answer_raitings.raiting_id": params[:rating_id]).where("answer_raitings.response": params[:rate])
+    end
+    submissions
   end
 
   private

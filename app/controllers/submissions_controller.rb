@@ -160,9 +160,33 @@ class SubmissionsController < ApplicationController
         .paginate(page: params[:page])
         .order(created_at: :desc)
     end
-    filtering_params(params).each do |key, value|
-      @submissions = @submissions.public_send(key, value) if value.present?
+
+    @submissions = filter_submissions(@submissions, params)
+  end
+
+  def filter_submissions(submissions, params)
+    if params[:created_before].present?
+      submissions = submissions.created_before(params[:created_before])
     end
+    if params[:created_after].present?
+      submissions = submissions.created_after(params[:created_after])
+    end
+    if params[:question_id].present?
+      submissions = submissions.question_id(params[:question_id])
+    end
+    if params[:choice_id].present?
+      submissions = submissions.choice_id(params[:choice_id])
+    end
+    if params[:choice_multiple_ids].present?
+      submissions = submissions.choice_multiple_ids(params[:choice_multiple_ids])
+    end
+    if params[:image_id].present?
+      submissions = submissions.image_id(params[:image_id])
+    end
+    if params[:rating_id].present? && params[:rate].present?
+      submissions = submissions.rate(params[:rating_id], params[:rate])
+    end
+    submissions
   end
 
   def filtering_params(params)

@@ -1,0 +1,11 @@
+.form-group
+  = select_tag "alert_filter[raiting_id]",
+    options_for_select(ratings.collect {|r| [r.name, r.id]}, f.present? ? f.raiting_id : nil),
+    prompt: t("app.survey.notifications.filters.select_option"),
+    class: "form-control"
+
+.form-group
+  - (1..5).each do |i|
+    %label.checkbox-inline
+      = check_box_tag "alert_filter[answer][]", i, (f.answer.split(",").map(&:to_i).include?(i) if f.present?)
+      = i

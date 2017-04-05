@@ -14,3 +14,16 @@
   }
 }
 
+.filter-item {
+  padding: 15px;
+  margin-bottom: 15px;
+  border-left: 6px solid #6d26ff;
+  background-color: #F1F1F1;
+  span {
+    @extend .label;
+    @extend .label-success;
+    font-size: 90%;
+    font-weight: normal;
+  }
+}
+

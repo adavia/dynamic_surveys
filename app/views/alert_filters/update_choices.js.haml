@@ -1,0 +1,10 @@
+- if @choices.present? && @choices.any?
+  $("#select-content").html("#{  j render("choice_select", choices: @choices, f: nil) }");
+- elsif @images.present? && @images.any?
+  $("#select-content").html("#{  j render("image_select", images: @images, f:nil) }");
+- elsif @multiple.present? && @multiple.any?
+  $("#select-content").html("#{  j render("choice_multiple_select", choices: @multiple, f:nil) }");
+- elsif @ratings.present? && @ratings.any?
+  $("#select-content").html("#{  j render("rate_select", ratings: @ratings, f:nil) }");
+- else
+  $("#select-content").empty();

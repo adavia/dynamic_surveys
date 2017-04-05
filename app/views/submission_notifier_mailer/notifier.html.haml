@@ -2,7 +2,7 @@
 %html
   %head
     %meta{content: "text/html; charset=UTF-8", "http-equiv": "Content-Type"}
-    %title #{@alert.subject}
+    %title #{@alert.keys[0].subject}
     %link{href: "https://fonts.googleapis.com/css?family=Roboto+Condensed", rel: "stylesheet"}
     :css
       body  {
@@ -16,6 +16,12 @@
         width: 50%;
         margin-bottom: 10px;
       }
+      .separator {
+        margin-top: 25px;
+        margin-bottom: 25px;
+        border: 0;
+        border-top: 3px solid #6d26ff;
+      }
       .wrapper p {
         color: #f72969;
       }
@@ -24,47 +30,38 @@
     = image_tag "logo.png", width: 200
 
     %h3
-      = @alert.survey.name
+      = @alert.keys[0].survey.name
 
     %p
-      = @alert.body
+      = @alert.keys[0].body
 
-    %h4
-      = @answer.question.title
+    - @alert.values[0].each do |answer|
+      %h4
+        = answer.question.title
 
-    - if @answer.question.question_type == "image"
-      #{@answer.submission.sender} #{t("app.has_selected")} #{@answer.answer_image.image.name}
-    - elsif @answer.question.question_type == "rating"
-      .wrapper
-        - @answer.answer_raitings.each do |rate|
-          - unless rate.response.nil?
-            - if @alert.alert_filter.condition == "greater"
-              - if rate.response > @alert.alert_filter.answer.to_i
-                %p
-                  #{rate.raiting.name}:
-                  - 1.upto(rate.response) do |star|
-                    &#x2605;
-            - elsif @alert.alert_filter.condition == "equal"
-              - if rate.response == @alert.alert_filter.answer.to_i
-                %p
-                  #{rate.raiting.name}:
-                  - 1.upto(rate.response) do |star|
-                    &#x2605;
-            - elsif @alert.alert_filter.condition == "minor"
-              - if rate.response < @alert.alert_filter.answer.to_i
-                %p
-                  #{rate.raiting.name}:
-                  - 1.upto(rate.response) do |star|
-                    &#x2605;
-    - elsif @answer.question.question_type == "single"
-      #{@answer.submission.sender} #{t("app.has_selected")}
-      #{@answer.choice_answer.choice.title}
-    - elsif @answer.question.question_type == "list"
-      #{@answer.submission.sender} #{t("app.has_selected")}
-      #{@answer.choice_answer.choice.title}
-    - elsif @answer.question.question_type == "multiple"
-      #{@answer.submission.sender} #{t("app.has_selected")}
-      #{@answer.answer_multiple.choices.map(&:title).join(', ')}
-    - else
-      #{@answer.submission.sender} #{t("app.has_answered")}
-      #{@answer.answer_open.response}
+      - if answer.question.question_type == "image"
+        #{answer.submission.sender} #{t("app.has_selected")} #{answer.answer_image.image.name}
+      - elsif answer.question.question_type == "rating"
+        .wrapper
+          - answer.answer_raitings.each do |rate|
+            - unless rate.response.nil?
+              - @alert.keys[0].alert_filters.each do |f|
+                - if rate.raiting == f.raiting && f.answer.split(",").map(&:to_i).include?(rate.response)
+                  %p
+                    #{rate.raiting.name}:
+                    - 1.upto(rate.response) do |star|
+                      &#x2605;
+      - elsif answer.question.question_type == "single"
+        #{answer.submission.sender} #{t("app.has_selected")}
+        #{answer.choice_answer.choice.title}
+      - elsif answer.question.question_type == "list"
+        #{answer.submission.sender} #{t("app.has_selected")}
+        #{answer.choice_answer.choice.title}
+      - elsif answer.question.question_type == "multiple"
+        #{answer.submission.sender} #{t("app.has_selected")}
+        #{answer.answer_multiple.choices.map(&:title).join(', ')}
+      - else
+        #{answer.submission.sender} #{t("app.has_answered")}
+        #{answer.answer_open.response}
+
+      %hr.separator

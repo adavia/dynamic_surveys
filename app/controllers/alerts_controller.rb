@@ -18,7 +18,6 @@ class AlertsController < ApplicationController
 
   def new
     @alert = @survey.alerts.build
-    @alert.build_alert_filter
     authorize @alert, :create?
 
     add_breadcrumb t("app.survey.breadcrumbs.notifications"), survey_alerts_path(@survey)
@@ -31,7 +30,7 @@ class AlertsController < ApplicationController
     authorize @alert, :create?
     respond_to do |format|
       if @alert.save
-        format.html { redirect_to [@survey, :alerts],
+        format.html { redirect_to [:edit, @survey, @alert],
           flash: { success: t("app.survey.notifications.create.alert")}}
         format.js   {}
         format.json {
@@ -49,7 +48,6 @@ class AlertsController < ApplicationController
 
   def edit
     authorize @alert, :edit?
-    @alert.build_alert_filter if @alert.alert_filter.nil?
 
     add_breadcrumb t("app.survey.breadcrumbs.notifications"), survey_alerts_path(@survey)
     add_breadcrumb t("app.survey.notifications.breadcrumbs.edit"), edit_survey_alert_path(@survey, @alert)
@@ -86,36 +84,17 @@ class AlertsController < ApplicationController
     end
   end
 
-  def update_choices
-    if params[:question_id].present?
-      if params[:question_type] == "image"
-        @images = Image.where("imageable_id = ?", params[:question_id])
-      elsif ["single", "list"].include? params[:question_type]
-        @choices = Choice.where("question_id = ?", params[:question_id])
-      elsif params[:question_type] == "multiple"
-        @multiple = Choice.where("question_id = ?", params[:question_id])
-      elsif params[:question_type] == "rating"
-        @rating = Raiting.where("question_id = ?", params[:question_id])
-      end
-    end
-    respond_to do |format|
-      format.js
-    end
-  end
-
   private
 
   def set_survey
-    @survey = Survey.includes(alerts: :alert_filter).find(params[:survey_id])
+    @survey = Survey.find(params[:survey_id])
   end
 
   def set_alert
-    @alert = Alert.includes(:alert_filter).find(params[:id])
+    @alert = Alert.includes(alert_filters: [:question, :raiting]).find(params[:id])
   end
 
   def alert_params
-    params.require(:alert).permit(:from, :subject, :body, :to,
-      alert_filter_attributes: [:id, :title, :question_id, :condition,
-        { answer:[] }, :alert_id])
+    params.require(:alert).permit(:from, :subject, :body, :to)
   end
 end

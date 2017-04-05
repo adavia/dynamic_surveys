@@ -1,0 +1,22 @@
+= content_tag :div, id: "filter_#{alert_filter.id}" do
+  .filter-item
+    .row
+      .col-md-4
+        = alert_filter.question.title
+      .col-md-5
+        = t("app.survey.notifications.filters.selected")
+        = alert_filter.raiting.name if alert_filter.raiting.present?
+        = alert_filter.try(:answer)
+      .col-md-3
+        .dropdown.pull-right
+          .dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true",
+          "data-toggle": "dropdown", href: "#", role: "button"}
+            = fa_icon "chevron-down", text: t("app.actions")
+          %ul.dropdown-menu
+            %li
+              = link_to fa_icon("edit", text: t("app.edit")),
+                [:edit, @alert, alert_filter], remote: true
+            %li
+              = link_to fa_icon("remove", text: t("app.delete")), [@alert, alert_filter],
+                remote: true, method: :delete
+

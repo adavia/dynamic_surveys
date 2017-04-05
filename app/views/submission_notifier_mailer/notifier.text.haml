@@ -1,39 +1,31 @@
-= @alert.survey.name
-__________________________________________________________________________
+= @alert.keys[0].survey.name
+___________________________________________________________________________________
 
-= @alert.body
 
-= @answer.question.title
+= @alert.keys[0].body
 
-- if @answer.question.question_type == "image"
-  #{@answer.submission.sender} #{t("app.has_selected")} #{@answer.answer_image.image.name}
-- elsif @answer.question.question_type == "rating"
-  - @answer.answer_raitings.each do |rate|
-    - unless rate.response.nil?
-      - if @alert.alert_filter.condition == "greater"
-        - if rate.response > @alert.alert_filter.answer.to_i
-          #{rate.raiting.name}:
-          - 1.upto(rate.response) do |star|
-            &#x2605;
-      - elsif @alert.alert_filter.condition == "equal"
-        - if rate.response == @alert.alert_filter.answer.to_i
-          #{rate.raiting.name}:
-          - 1.upto(rate.response) do |star|
-            &#x2605;
-      - elsif @alert.alert_filter.condition == "minor"
-        - if rate.response < @alert.alert_filter.answer.to_i
-          #{rate.raiting.name}:
-          - 1.upto(rate.response) do |star|
-            &#x2605;
-- elsif @answer.question.question_type == "single"
-  #{@answer.submission.sender} #{t("app.has_selected")}
-  #{@answer.choice_answer.choice.title}
-- elsif @answer.question.question_type == "list"
-  #{@answer.submission.sender} #{t("app.has_selected")}
-  #{@answer.choice_answer.choice.title}
-- elsif @answer.question.question_type == "multiple"
-  #{@answer.submission.sender} #{t("app.has_selected")}
-  #{@answer.answer_multiple.choices.map(&:title).join(', ')}
-- else
-  #{@answer.submission.sender} #{t("app.has_answered")}
-  #{@answer.answer_open.response}
+- @alert.values[0].each do |answer|
+  = answer.question.title
+
+  - if answer.question.question_type == "image"
+    #{answer.submission.sender} #{t("app.has_selected")} #{answer.answer_image.image.name}
+  - elsif answer.question.question_type == "rating"
+    - answer.answer_raitings.each do |rate|
+      - unless rate.response.nil?
+        #{rate.raiting.name}:
+        - 1.upto(rate.response) do |star|
+          &#x2605;
+  - elsif answer.question.question_type == "single"
+    #{answer.submission.sender} #{t("app.has_selected")}
+    #{answer.choice_answer.choice.title}
+  - elsif answer.question.question_type == "list"
+    #{answer.submission.sender} #{t("app.has_selected")}
+    #{answer.choice_answer.choice.title}
+  - elsif answer.question.question_type == "multiple"
+    #{answer.submission.sender} #{t("app.has_selected")}
+    #{answer.answer_multiple.choices.map(&:title).join(', ')}
+  - else
+    #{answer.submission.sender} #{t("app.has_answered")}
+    #{answer.answer_open.response}
+
+  %hr

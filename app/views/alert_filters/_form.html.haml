@@ -1,0 +1,29 @@
+= simple_form_for [@alert, @alert_filter], data: { behavior: "submit-filter" }, remote: true do |f|
+  .modal-body
+    %p= fa_icon "exclamation", text: t("app.survey.notifications.filters.text")
+
+    .form-group
+      = f.select :question_id,
+        options_for_select(@alert.survey.questions.collect {|q| [q.title, q.id, {"data-type": q.question_type}]}, f.object.question_id),
+        { prompt: t("app.survey.notifications.filters.select_question") },
+        { data: { behavior: "alert_question_select" }, class: "form-control" }
+
+    - if @alert_filter.persisted?
+      - if ["single", "list"].include? @alert_filter.question.question_type
+        #select-content
+          = render "choice_select", choices: @alert_filter.question.choices, f: f.object
+      - elsif @alert_filter.question.question_type == "image"
+        #select-content
+          = render "image_select", images: @alert_filter.question.images, f: f.object
+      - elsif @alert_filter.question.question_type == "multiple"
+        #select-content
+          = render "choice_multiple_select", choices: @alert_filter.question.choices, f: f.object
+      - elsif @alert_filter.question.question_type == "rating"
+        #select-content
+          = render "rate_select", ratings: @alert_filter.question.raitings, f: f.object
+    - else
+      #select-content
+
+  .modal-footer
+    = f.button :submit, t("app.survey.notifications.filters.btn_save"),
+      class: "btn-primary", data: { disable_with: t("app.loading") }

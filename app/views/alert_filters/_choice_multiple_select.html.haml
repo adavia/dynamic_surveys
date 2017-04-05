@@ -1,0 +1,6 @@
+.form-group
+  - choices.all.each do |choice|
+    .checkbox
+      %label
+        = check_box_tag "alert_filter[answer][]", choice.id, (f.answer.split(",").map(&:to_i).include?(choice.id) if f.present?)
+        = choice.title

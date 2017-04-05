@@ -47,6 +47,11 @@ Rails.application.routes.draw do
     end
 
     resources :alerts, only: [] do
+      resources :alert_filters, only: [:new, :create, :edit, :update, :destroy] do
+      end
+    end
+
+    resources :alert_filters, only: [] do
       collection do
         get :update_choices
       end

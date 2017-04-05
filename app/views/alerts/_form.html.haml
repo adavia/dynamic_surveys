@@ -5,10 +5,16 @@
   = f.input :body, label: false, as: :text, input_html: { rows: 6 },
     placeholder: Alert.human_attribute_name(:body)
 
-  %h4= t("app.survey.notifications.filters.criteria")
+  - if @alert.persisted?
+    .form-group
+      = link_to fa_icon("plus", text: t("app.survey.notifications.filters.add_filter")),
+        [:new, @alert, :alert_filter], remote: true, class: "btn btn-default btn-sm",
+        data: { disable_with: t("app.loading") }
 
-  = f.fields_for :alert_filter do |builder|
-    = render "alert_filter_fields", f: builder
+    %hr.separator
+
+    #filter-wrapper
+      = render @alert.alert_filters
 
   = f.button :submit, t("app.survey.notifications.form_button"),
     class: "btn-block btn-primary",

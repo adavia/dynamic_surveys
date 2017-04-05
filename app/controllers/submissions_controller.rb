@@ -91,54 +91,13 @@ class SubmissionsController < ApplicationController
   end
 
   def notifier(survey, submission)
-    if survey.alerts.any? && submission.answers.any?
+    if survey.alerts.present? && submission.answers.present?
       survey.alerts.each do |alert|
-        responses = filter_notifications(submission, alert)
-        if responses.any?
-          Rails.logger.debug responses[0]
-          #SubmissionNotifierMailer.notifier(responses[0], alert).deliver
+        notifications = submission.notifications_lookup(alert.alert_filters, submission.answers)
+        if notifications.any?
+          hash = {alert => notifications}
+          #SubmissionNotifierMailer.notifier(hash).deliver
         end
-      end
-    end
-  end
-
-  def filter_notifications(submission, alert)
-    submission.answers.select do |a|
-      case a.question.question_type
-      when "image"
-        a.question == alert.alert_filter.question && a.answer_image.image_id == alert.alert_filter.answer.to_i
-      when "single"
-        a.question == alert.alert_filter.question && a.choice_answer.choice_id == alert.alert_filter.answer.to_i
-      when "list"
-        a.question == alert.alert_filter.question && a.choice_answer.choice_id == alert.alert_filter.answer.to_i
-      when "multiple"
-        a.question == alert.alert_filter.question && !(to_array(alert) & a.answer_multiple.choices.map(&:id)).empty?
-      when "rating"
-        results = verify_condition(alert, a)
-        a.question == alert.alert_filter.question && results.any?
-      else
-        a.question == alert.alert_filter.question
-      end
-    end
-  end
-
-  def to_array(alert)
-    alert.alert_filter.answer.split(",").map(&:to_i)
-  end
-
-  def verify_condition(alert, a)
-    case alert.alert_filter.condition
-    when "greater"
-      a.answer_raitings.map(&:response).select do |r|
-        r > alert.alert_filter.answer.to_i
-      end
-    when "equal"
-      a.answer_raitings.map(&:response).select do |r|
-        r == alert.alert_filter.answer.to_i
-      end
-    else
-      a.answer_raitings.map(&:response).select do |r|
-        r < alert.alert_filter.answer.to_i
       end
     end
   end
@@ -164,33 +123,8 @@ class SubmissionsController < ApplicationController
     @submissions = @submissions.filter_submissions(@submissions, params)
   end
 
-  def filter_submissions(submissions, params)
-    if params[:created_before].present?
-      submissions = submissions.created_before(params[:created_before])
-    end
-    if params[:created_after].present?
-      submissions = submissions.created_after(params[:created_after])
-    end
-    if params[:question_id].present?
-      submissions = submissions.question_id(params[:question_id])
-    end
-    if params[:choice_id].present?
-      submissions = submissions.choice_id(params[:choice_id])
-    end
-    if params[:choice_multiple_ids].present?
-      submissions = submissions.choice_multiple_ids(params[:choice_multiple_ids])
-    end
-    if params[:image_id].present?
-      submissions = submissions.image_id(params[:image_id])
-    end
-    if params[:rating_id].present? && params[:rate].present?
-      submissions = submissions.rate(params[:rating_id], params[:rate])
-    end
-    submissions
-  end
-
   def set_survey
-    @survey = Survey.includes(alerts: :alert_filter, questions: [:choices, :images, :raitings]).find(params[:survey_id])
+    @survey = Survey.includes(alerts: :alert_filters, questions: [:choices, :images, :raitings]).find(params[:survey_id])
   end
 
   def set_submission

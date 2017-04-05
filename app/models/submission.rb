@@ -54,6 +54,33 @@ class Submission < ApplicationRecord
     submissions
   end
 
+  def notifications_lookup(filters, answers)
+    filters.flat_map do |f|
+      answers.select do |a|
+        a.question == f.question
+      end.select do |a|
+        case a.question.question_type
+        when "image"
+          a.answer_image.image_id == f.answer.to_i
+        when "single", "list"
+          a.choice_answer.choice_id == f.answer.to_i
+        when "multiple"
+          !(f.answer.split(",").map(&:to_i) & a.answer_multiple.choices.map(&:id)).empty?
+        when "rating"
+          verify_condition(f, a).any?
+        else
+          true
+        end
+      end
+    end
+  end
+
+  def verify_condition(filter, a)
+    a.answer_raitings.map do |r|
+      r.raiting == filter.raiting && filter.answer.split(",").map(&:to_i).include?(r.response)
+    end
+  end
+
   private
 
   def mark_as_completed

@@ -1,0 +1,5 @@
+- if @alert_filter.errors.any?
+  $("[data-behavior~=submit-filter]").html("#{ j render 'form' }");
+- else
+  $("#filter_#{@alert_filter.id}").html("#{ j render @alert_filter }")
+  $('#filter-modal').modal('hide');

@@ -10,21 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170401180800) do
+ActiveRecord::Schema.define(version: 20170403230755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "alert_filters", force: :cascade do |t|
-    t.string   "title"
     t.integer  "question_id"
     t.string   "answer"
     t.integer  "alert_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.string   "condition"
+    t.integer  "raiting_id"
     t.index ["alert_id"], name: "index_alert_filters_on_alert_id", using: :btree
     t.index ["question_id"], name: "index_alert_filters_on_question_id", using: :btree
+    t.index ["raiting_id"], name: "index_alert_filters_on_raiting_id", using: :btree
   end
 
   create_table "alerts", force: :cascade do |t|
@@ -236,6 +236,7 @@ ActiveRecord::Schema.define(version: 20170401180800) do
 
   add_foreign_key "alert_filters", "alerts"
   add_foreign_key "alert_filters", "questions"
+  add_foreign_key "alert_filters", "raitings"
   add_foreign_key "alerts", "surveys"
   add_foreign_key "answer_dates", "answers"
   add_foreign_key "answer_images", "answers"

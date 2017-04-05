@@ -1,5 +1,0 @@
-.form-group
-  = select_tag "alert[alert_filter_attributes][answer][]",
-    options_for_select(choices.collect {|c| [c.title, c.id]}),
-    prompt: t("app.survey.notifications.filters.select_choice"),
-    class: "form-control"

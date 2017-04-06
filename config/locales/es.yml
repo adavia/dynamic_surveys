@@ -403,7 +403,7 @@ es:
         response: "Ingresa tu respuesta"
       alert:
         class_name: "Notificación"
-        from: "De"
+        from: "De (Correo electrónico)"
         to: "Para (Los correos deben estar separados con coma)"
         subject: "Asunto"
         body: "Texto"

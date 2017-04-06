@@ -25,43 +25,54 @@
       .wrapper p {
         color: #f72969;
       }
+      .panel-piled {
+        position: relative;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        left: 10%;
+        width: 50%;
+        background: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        padding: 24px;
+      }
 
   %body
-    = image_tag "logo.png", width: 200
+    .panel-piled
+      = image_tag "logo.png", width: 200
 
-    %h3
-      = @alert.keys[0].survey.name
+      %h3
+        = @alert.keys[0].survey.name
 
-    %p
-      = @alert.keys[0].body
+      %p
+        = @alert.keys[0].body
 
-    - @alert.values[0].each do |answer|
-      %h4
-        = answer.question.title
+      - @alert.values[0].each do |answer|
+        %h4
+          = answer.question.title
 
-      - if answer.question.question_type == "image"
-        #{answer.submission.sender} #{t("app.has_selected")} #{answer.answer_image.image.name}
-      - elsif answer.question.question_type == "rating"
-        .wrapper
-          - answer.answer_raitings.each do |rate|
-            - unless rate.response.nil?
-              - @alert.keys[0].alert_filters.each do |f|
-                - if rate.raiting == f.raiting && f.answer.split(",").map(&:to_i).include?(rate.response)
-                  %p
-                    #{rate.raiting.name}:
-                    - 1.upto(rate.response) do |star|
-                      &#x2605;
-      - elsif answer.question.question_type == "single"
-        #{answer.submission.sender} #{t("app.has_selected")}
-        #{answer.choice_answer.choice.title}
-      - elsif answer.question.question_type == "list"
-        #{answer.submission.sender} #{t("app.has_selected")}
-        #{answer.choice_answer.choice.title}
-      - elsif answer.question.question_type == "multiple"
-        #{answer.submission.sender} #{t("app.has_selected")}
-        #{answer.answer_multiple.choices.map(&:title).join(', ')}
-      - else
-        #{answer.submission.sender} #{t("app.has_answered")}
-        #{answer.answer_open.response}
+        - if answer.question.question_type == "image"
+          #{answer.submission.sender} #{t("app.has_selected")} #{answer.answer_image.image.name}
+        - elsif answer.question.question_type == "rating"
+          .wrapper
+            - answer.answer_raitings.each do |rate|
+              - unless rate.response.nil?
+                - @alert.keys[0].alert_filters.each do |f|
+                  - if rate.raiting == f.raiting && f.answer.split(",").map(&:to_i).include?(rate.response)
+                    %p
+                      #{rate.raiting.name}:
+                      - 1.upto(rate.response) do |star|
+                        &#x2605;
+        - elsif answer.question.question_type == "single"
+          #{answer.submission.sender} #{t("app.has_selected")}
+          #{answer.choice_answer.choice.title}
+        - elsif answer.question.question_type == "list"
+          #{answer.submission.sender} #{t("app.has_selected")}
+          #{answer.choice_answer.choice.title}
+        - elsif answer.question.question_type == "multiple"
+          #{answer.submission.sender} #{t("app.has_selected")}
+          #{answer.answer_multiple.choices.map(&:title).join(', ')}
+        - else
+          #{answer.submission.sender} #{t("app.has_answered")}
+          #{answer.answer_open.response}
 
-      %hr.separator
+        %hr.separator

@@ -3,6 +3,8 @@ class AlertFilter < ApplicationRecord
   belongs_to :alert
   belongs_to :raiting
 
+  validates :question_id, presence: true
+
   default_scope  { order(id: :asc) }
 
   before_save do

@@ -96,7 +96,7 @@ class SubmissionsController < ApplicationController
         notifications = submission.notifications_lookup(alert.alert_filters, submission.answers)
         if notifications.any?
           hash = {alert => notifications}
-          #SubmissionNotifierMailer.notifier(hash).deliver
+          SubmissionNotifierMailer.notifier(hash).deliver_later
         end
       end
     end

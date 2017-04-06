@@ -380,8 +380,8 @@ en:
         response: "Fill in with your answer"
       alert:
         class_name: "Alert"
-        from: "From"
-        to: "to (Addresses should be separated by comma)"
+        from: "From (Email address)"
+        to: "To (Addresses should be separated by comma)"
         subject: "Subject"
         body: "Body text"
   date:

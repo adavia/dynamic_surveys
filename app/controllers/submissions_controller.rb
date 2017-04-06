@@ -95,8 +95,7 @@ class SubmissionsController < ApplicationController
       survey.alerts.each do |alert|
         notifications = submission.notifications_lookup(alert.alert_filters, submission.answers)
         if notifications.any?
-          hash = {alert => notifications}
-          SubmissionNotifierMailer.notifier(hash).deliver_later
+          SubmissionNotifierMailer.notifier(alert, notifications).deliver_later
         end
       end
     end

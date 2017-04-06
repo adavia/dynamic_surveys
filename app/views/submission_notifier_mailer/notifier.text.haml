@@ -1,10 +1,10 @@
-= @alert.keys[0].survey.name
+= @alert.survey.name
 ___________________________________________________________________________________
 
 
-= @alert.keys[0].body
+= @alert.body
 
-- @alert.values[0].each do |answer|
+- @notifications.each do |answer|
   = answer.question.title
 
   - if answer.question.question_type == "image"
@@ -12,9 +12,11 @@ ________________________________________________________________________________
   - elsif answer.question.question_type == "rating"
     - answer.answer_raitings.each do |rate|
       - unless rate.response.nil?
-        #{rate.raiting.name}:
-        - 1.upto(rate.response) do |star|
-          &#x2605;
+        - @alert.alert_filters.each do |f|
+          - if rate.raiting == f.raiting && f.answer.split(",").map(&:to_i).include?(rate.response)
+            #{rate.raiting.name}:
+            - 1.upto(rate.response) do |star|
+              &#x2605;
   - elsif answer.question.question_type == "single"
     #{answer.submission.sender} #{t("app.has_selected")}
     #{answer.choice_answer.choice.title}

@@ -6,7 +6,7 @@ class API::SubmissionsController < API::ApplicationController
     @submission = @survey.submissions.build(submission_params)
     @submission.sender = current_user
     if @submission.save
-      #rating_notifier(@submission)
+      notifier(@survey, @submission)
       render json: @submission, status: 201
     else
       render json: @submission.errors, status: :unprocessable_entity
@@ -15,9 +15,14 @@ class API::SubmissionsController < API::ApplicationController
 
   private
 
-  def rating_notifier(submission)
-    if submission.answers.rated_answers.any?
-      SubmissionNotifierMailer.rating_notifier(submission).deliver_later
+  def notifier(survey, submission)
+    if survey.alerts.present? && submission.answers.present?
+      survey.alerts.each do |alert|
+        notifications = submission.notifications_lookup(alert.alert_filters, submission.answers)
+        if notifications.any?
+          SubmissionNotifierMailer.notifier(alert, notifications).deliver_later
+        end
+      end
     end
   end
 

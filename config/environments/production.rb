@@ -92,7 +92,7 @@ Rails.application.configure do
 
   # Mailgun setup
   ActionMailer::Base.delivery_method = :smtp
-  host = "https://sleepy-ravine-58079.herokuapp.com"
+  host = "http://socialsurveys.net"
 
   config.action_mailer.asset_host = host
 

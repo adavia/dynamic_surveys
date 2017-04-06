@@ -46,9 +46,9 @@ es:
     created_by: "Enviado por"
     no_results: "No se encontraron resultados"
     links:
-      customer_all: "Listar todos los clientes"
+      customer_all: "Ver lista de clientes"
       customer_new: "Crear nuevo cliente"
-      user_all: "Listar todos los usuarios"
+      user_all: "Ver lista de usuarios"
       user_new: "Crear nuevo usuario"
       sign_out: "Salir"
     search_form:
@@ -68,7 +68,7 @@ es:
           view: "Ver todos"
           subnav: "Administra los siguientes clientes"
           show_surveys: "VER ENCUESTAS"
-          customer_all: "LISTAR CLIENTES"
+          customer_all: "VER CLIENTES"
           customer_new: "NUEVO CLIENTE"
           customer_show: "Mostrar información del cliente"
           customer_edit: "Editar informacion"
@@ -101,7 +101,7 @@ es:
       index:
         links:
           subnav: "Administra los siguientes usuarios"
-          user_all: "LISTAR USUARIOS"
+          user_all: "VER USUARIOS"
           user_new: "NUEVO USUARIO"
           user_edit: "Editar información del usuario"
           user_archive: "Archivar usuario"
@@ -216,7 +216,7 @@ es:
       index:
         links:
           subnav: "Encuestas del cliente"
-          survey_all: "LISTAR ENCUESTAS"
+          survey_all: "VER ENCUESTAS"
           survey_new: "CREAR NUEVA ENCUESTA"
           survey_edit: "EDICION"
           survey_archive: "Archivar encuesta"

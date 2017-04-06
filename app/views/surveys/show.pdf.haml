@@ -22,30 +22,31 @@
         /= pie_chart @trans_keys, library: { pieSliceText: "value-and-percentage" }
 
         #survey-question-list
-          - @survey.questions.each do |question|
+          - @questions.each do |question|
             .question-report
               %h3
                 = question.title
 
               - if ["single", "list"].include? question.question_type
                 = render "questions/tables/table_choice.html.haml",
-                  answers: question.answers.choice_counter(params), question: question
+                  answers: @answers.choice_responses(question), question: question
               - if question.question_type == "image"
                 = render "questions/tables/table_image.html.haml",
-                  answers: question.answers.image_counter(params), question: question
+                  answers: @answers.image_responses(question), question: question
               - if question.question_type == "multiple"
                 = render "questions/tables/table_multiple.html.haml",
-                  answers: question.answers.multiple_choice_counter(params), question: question
+                  answers: @answers.multiple_responses(question), question: question
               - if question.question_type == "rating"
                 = render "questions/tables/table_rating.html.haml",
-                  answers: question.answers.rating_average(params), question: question
+                  answers: @answers.rated_responses(question), question: question
               - if ["open", "description", "phone", "email"].include? question.question_type
                 = content_tag :div, id: "open_question_#{question.id}" do
-                  = render "questions/tables/table_open.html.haml", question: question
+                  = render "questions/tables/table_open.html.haml",
+                    answers: @answers.open_responses(question, params[:page]), question: question
               - if question.question_type == "date"
                 = content_tag :div, id: "date_question_#{question.id}" do
-                  = render "questions/tables/table_date.html.haml", question: question
-
+                  = render "questions/tables/table_date.html.haml",
+                    answers: @answers.date_responses(question, params[:page]), question: question
               %hr
 
 

@@ -20,8 +20,7 @@ class API::SubmissionsController < API::ApplicationController
       survey.alerts.each do |alert|
         notifications = submission.notifications_lookup(alert.alert_filters, submission.answers)
         if notifications.any?
-          Rails.logger.debug notifications.inspect
-          SubmissionNotifierMailer.notifier(alert, notifications).deliver
+          SubmissionNotifierMailer.notifier(alert, notifications).deliver_later
         end
       end
     end
@@ -33,7 +32,7 @@ class API::SubmissionsController < API::ApplicationController
 
   def submission_params
     params.require(:submission).permit(
-      answers_attributes: [:question_id, :submission_id, :survey_id,
+      answers_attributes: [:question_id, :survey_id,
       #option_answers_attributes: [:choice_id, :option_id],
       choice_answer_attributes: [:choice_id, :answer_multiple_id],
       answer_date_attributes: :response,

@@ -13,20 +13,18 @@ class API::SubmissionsController < API::ApplicationController
     end
   end
 
-  private
-
   def notifier(survey, submission)
     if survey.alerts.present? && submission.answers.present?
       survey.alerts.each do |alert|
         notifications = submission.notifications_lookup(alert.alert_filters, submission.answers)
         if notifications.any?
-          Rails.logger.debug alert.inspect
-          Rails.logger.debug notifications.inspect
           SubmissionNotifierMailer.notifier(alert, notifications).deliver_later
         end
       end
     end
   end
+
+  private
 
   def set_survey
     @survey = Survey.includes(questions: [:choices, :images, :raitings]).find(params[:survey_id])

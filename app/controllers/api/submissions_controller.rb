@@ -20,6 +20,8 @@ class API::SubmissionsController < API::ApplicationController
       survey.alerts.each do |alert|
         notifications = submission.notifications_lookup(alert.alert_filters, submission.answers)
         if notifications.any?
+          Rails.logger.debug alert.inspect
+          Rails.logger.debug notifications.inspect
           SubmissionNotifierMailer.notifier(alert, notifications).deliver_later
         end
       end

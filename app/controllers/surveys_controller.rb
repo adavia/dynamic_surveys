@@ -32,7 +32,7 @@ class SurveysController < ApplicationController
       format.html
       format.js
       format.pdf do
-        render pdf: "report-#{@survey.id}",
+        render pdf: "survey-#{@survey.id}-#{Time.now.strftime('%Y%m%d%H%M')}",
                layout: false,
                dpi: "300",
                encoding: "utf-8"
@@ -130,6 +130,10 @@ class SurveysController < ApplicationController
     @submissions = @survey.submissions.includes(:sender)
     @answers = @survey.answers
     @questions = @survey.questions
+
+    @submissions = @submissions.filter_submissions(@submissions, params)
+    @answers = @answers.filter_answers(@answers, params)
+
     render layout: "report"
   end
 

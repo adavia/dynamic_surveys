@@ -133,9 +133,10 @@ en:
         alert: "See you later!"
     survey:
       export:
+        date: "Data export generated on"
         id: "ID"
         answered_on: "Answered on"
-        survey: "Survey"
+        survey: "Survey ID"
         question: "Question"
         submitted_by: "Submitted by"
         response: "Answer"

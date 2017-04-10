@@ -18,10 +18,12 @@
     - if ["open", "description", "phone", "email"].include? question.question_type
       = content_tag :div, id: "open_question_#{question.id}" do
         = render "questions/tables/table_open",
-          answers: answers.open_responses(question, params[:page]), question: question
+          answers: answers.open_responses(question).paginate(page: params[:page]),
+          question: question
     - if question.question_type == "date"
       = content_tag :div, id: "date_question_#{question.id}" do
         = render "questions/tables/table_date",
-          answers: answers.date_responses(question, params[:page]), question: question
+          answers: answers.date_responses(question).paginate(page: params[:page]),
+          question: question
     %hr
 

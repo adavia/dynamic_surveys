@@ -1,9 +1,15 @@
 - if params[:page].present?
   - if ["open", "description", "phone", "email"].include? params[:type]
-    $("#open_question_#{params[:q]}").html('#{ j render "questions/tables/table_open", answers: @answers.open_responses(params[:q], params[:page]), question: Question.find(params[:q]) }');
+    $("#open_question_#{params[:q]}").html('#{ j render "questions/tables/table_open", answers: @answers.open_responses(params[:q]).paginate(page: params[:page]), question: Question.find(params[:q]) }');
   - elsif params[:type] == "date"
-    $("#date_question_#{params[:q]}").html('#{ j render "questions/tables/table_date", answers: @answers.date_responses(params[:q], params[:page]), question: Question.find(params[:q]) }');
+    $("#date_question_#{params[:q]}").html('#{ j render "questions/tables/table_date", answers: @answers.date_responses(params[:q]).paginate(page: params[:page]), question: Question.find(params[:q]) }');
 - else
   $(".data-stats").html("#{ j render "stats" }");
+
   $("#survey-question-list").html("#{ j render partial: "answers/answer", locals: { questions: @questions, answers: @answers } }");
+
   $("#export-link").attr("href", "#{ survey_submissions_path(@survey, created_before: params[:created_before], created_after: params[:created_after], question_id: params[:question_id], choice_id: params[:choice_id], image_id: params[:image_id], choice_multiple_ids: params[:choice_multiple_ids], rating_id: params[:rating_id], rate: params[:rate], format: "csv")}");
+
+  $("#pdf-link").attr("href", "#{ customer_survey_path(@customer, @survey, created_before: params[:created_before], created_after: params[:created_after], question_id: params[:question_id], choice_id: params[:choice_id], image_id: params[:image_id], choice_multiple_ids: params[:choice_multiple_ids], rating_id: params[:rating_id], rate: params[:rate], format: "pdf")}");
+
+  $("#preview-link").attr("href", "#{ preview_customer_survey_path(@customer, @survey, created_before: params[:created_before], created_after: params[:created_after], question_id: params[:question_id], choice_id: params[:choice_id], image_id: params[:image_id], choice_multiple_ids: params[:choice_multiple_ids], rating_id: params[:rating_id], rate: params[:rate])}");

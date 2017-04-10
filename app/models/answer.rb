@@ -23,8 +23,8 @@ class Answer < ApplicationRecord
   validates :submission, presence: true
 
   #scope :rated_answers,          -> (question) { joins(:answer_raitings).where(question_id: question) }
-  scope :open_responses,          -> (question, page) { includes(:submission, :answer_open).where(question_id: question).order("answer_opens.created_at desc").paginate(page: page) }
-  scope :date_responses,          -> (question, page) { includes(:submission, :answer_date).where(question_id: question).order("answer_dates.created_at desc").paginate(page: page) }
+  scope :open_responses,          -> (question) { includes(:submission, :answer_open).where(question_id: question).order("answer_opens.created_at desc") }
+  scope :date_responses,          -> (question) { includes(:submission, :answer_date).where(question_id: question).order("answer_dates.created_at desc") }
   scope :rated_responses,         -> (question) { joins(answer_raitings: :raiting).where(question_id: question).select("raitings.name as rate, count(*) as count, avg(answer_raitings.response) as avg").group("rate").order("count DESC") }
   scope :image_responses,         -> (question) { joins(answer_image: :image).where(question_id: question).group("images.name").count }
   scope :choice_responses,        -> (question) { joins(choice_answer: :choice).where(question_id: question).group("choices.title").count }

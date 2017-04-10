@@ -104,7 +104,7 @@ class SubmissionsController < ApplicationController
   def check_type_of_request
     if request.format == "csv"
       @submissions = @survey.submissions
-        .includes(:sender, :survey, answers: [:answer_open, :answer_date,
+        .includes(answers: [:answer_open, :answer_date,
         { answer_raitings: :raiting }, { answer_multiple: [:choices] },
         { answer_image: :image },
         { choice_answer: :choice }, :question])

@@ -42,11 +42,11 @@
               - if ["open", "description", "phone", "email"].include? question.question_type
                 = content_tag :div, id: "open_question_#{question.id}" do
                   = render "questions/tables/table_open.html.haml",
-                    answers: @answers.open_responses(question, params[:page]), question: question
+                    answers: @answers.open_responses(question), question: question
               - if question.question_type == "date"
                 = content_tag :div, id: "date_question_#{question.id}" do
                   = render "questions/tables/table_date.html.haml",
-                    answers: @answers.date_responses(question, params[:page]), question: question
+                    answers: @answers.date_responses(question), question: question
               %hr
 
 

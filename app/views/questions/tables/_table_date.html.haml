@@ -5,7 +5,10 @@
         %tr
           %td.col-xs-2= answer.answer_date.created_at.strftime("%m/%d/%Y")
           %td.col-xs-1
-            = link_to answer.answer_date.id, answer.submission, remote: true
+            - if !request.format.pdf?
+              = link_to answer.answer_date.id, answer.submission, remote: true
+            - else
+              = answer.answer_date.id
           %td.col-xs-9= answer.answer_date.response
     - else
       %tr
@@ -13,5 +16,6 @@
         %td
         %td
 
-  = will_paginate answers,
-    class: "ajax-pag", params: { q: question.id, type: question.question_type }
+  - if !request.format.pdf?
+    = will_paginate answers,
+      class: "ajax-pag", params: { q: question.id, type: question.question_type }

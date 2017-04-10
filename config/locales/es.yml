@@ -147,9 +147,10 @@ es:
         alert: "Hasta luego!"
     survey:
       export:
+        date: "Reporte generado el"
         id: "ID"
         answered_on: "Fecha"
-        survey: "Encuesta"
+        survey: "ID encuesta"
         question: "Pregunta"
         submitted_by: "Enviado por"
         response: "Respuesta"

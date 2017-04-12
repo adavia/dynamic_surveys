@@ -3,7 +3,7 @@ ruby '2.2.4'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
+gem 'rails', '~> 4.0.0', '>= 4.0.0.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
@@ -12,44 +12,7 @@ gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
 # Use bootstrap css framework
 gem 'bootstrap-sass', '~> 3.3.6'
-# Use haml templating
-gem 'haml-rails'
-# Add fontawesome icons
-gem 'font-awesome-rails', '~> 4.3'
-# Use simple form
-gem 'simple_form'
-# Use File Uploading
-gem 'carrierwave', '~> 0.10.0'
-# File validation
-gem 'file_validators'
-# Use fog for S3 storage
-gem 'fog'
-# Image manipulation
-gem 'mini_magick'
-# User access authorization
-gem 'pundit'
-# Use PDF generator
-gem 'wicked_pdf'
-# PDF binary
-gem 'wkhtmltopdf-binary-edge', '~> 0.12.4.0'
-# Heroku pdf
-gem "wkhtmltopdf-heroku"
-# Moment
-gem 'momentjs-rails', '>= 2.9.0'
-# Datepicker
-gem 'bootstrap3-datetimepicker-rails', '~> 4.17.43'
-# Handle ajax File Uploads
-gem 'jquery-form-rails'
-# Dropzone rails
-gem 'dropzonejs-rails'
-# Breadcrumbs
-gem 'breadcrumbs_on_rails'
-# Acts as list gem
-gem 'acts_as_list'
-# Use pagination
-gem 'will_paginate'
-# Use background job
-gem 'sidekiq'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views

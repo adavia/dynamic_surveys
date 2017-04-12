@@ -11,14 +11,7 @@ class API::SurveysController < API::ApplicationController
     }
   end
 
-  def show
-    render json: {
-      avatar: @customer.avatar,
-      survey: @survey.as_json(include: { questions: {
-        include: [:choices, :images, :raitings]}}, except: [:customer_id, :updated_at,
-          :questions_count, :archived_at])
-    }
-  end
+
 
   private
 

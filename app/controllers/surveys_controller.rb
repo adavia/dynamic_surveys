@@ -125,32 +125,7 @@ class SurveysController < ApplicationController
     end
   end
 
-  def preview
-    @survey = Survey.find(params[:id])
-    @submissions = @survey.submissions.includes(:sender)
-    @answers = @survey.answers
-    @questions = @survey.questions
 
-    @submissions = @submissions.filter_submissions(@submissions, params)
-    @answers = @answers.filter_answers(@answers, params)
-
-    render layout: "report"
-  end
-
-  def images
-    @images = @survey.images.paginate(page: params[:page])
-    add_breadcrumb t("app.customer.breadcrumbs.list"), :customers_path
-    add_breadcrumb "#{@survey.customer.name} - #{t("app.survey.breadcrumbs.list").downcase}", customer_surveys_path(@survey.customer)
-    add_breadcrumb t("app.survey.images.title"), images_survey_path(@survey)
-  end
-
-  def modal_images
-    @images = @survey.images.paginate(page: params[:page])
-    respond_to do |format|
-      format.html { render layout: !request.xhr? }
-      format.js   {}
-    end
-  end
 
   def upload
     authorize @survey, :upload?

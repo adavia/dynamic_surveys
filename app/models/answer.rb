@@ -36,37 +36,5 @@ class Answer < ApplicationRecord
     joins(:submission).where("submissions.id": answers.map(&:submission_id).uniq)
   end
 
-  # Filters
 
-  def self.filter_answers(answers, params)
-    if params[:created_before].present?
-      answers = answers.where("answers.created_at <= ?", Date.parse(params[:created_before]))
-      answers = self.collect_submissions(answers)
-    end
-    if params[:created_after].present?
-      answers = answers.where("answers.created_at >= ?", Date.parse(params[:created_after]))
-      answers = self.collect_submissions(answers)
-    end
-    if params[:question_id].present?
-      answers = answers.joins(:question).where("questions.id": params[:question_id])
-      answers = self.collect_submissions(answers)
-    end
-    if params[:choice_id].present?
-      answers = answers.joins(:choice_answer).where("choice_answers.choice_id": params[:choice_id])
-      answers = self.collect_submissions(answers)
-    end
-    if params[:choice_multiple_ids].present?
-      answers = answers.joins(answer_multiple: :choice_answers).where("choice_answers.choice_id": params[:choice_multiple_ids]).distinct
-      answers = self.collect_submissions(answers)
-    end
-    if params[:image_id].present?
-      answers = answers.joins(:answer_image).where("answer_images.image_id": params[:image_id])
-      answers = self.collect_submissions(answers)
-    end
-    if params[:rating_id].present? && params[:rate].present?
-      answers = answers.joins(:answer_raitings).where("answer_raitings.raiting_id": params[:rating_id]).where("answer_raitings.response": params[:rate])
-      answers = self.collect_submissions(answers)
-    end
-    answers
-  end
 end

@@ -13,22 +13,7 @@ class API::SubmissionsController < API::ApplicationController
     end
   end
 
-  private
 
-  def notifier(survey, submission)
-    if survey.alerts.present? && submission.answers.present?
-      survey.alerts.each do |alert|
-        notifications = submission.notifications_lookup(alert.alert_filters, submission.answers)
-        if notifications.any?
-          SubmissionNotifierMailer.notifier(alert, notifications).deliver_later
-        end
-      end
-    end
-  end
-
-  def set_survey
-    @survey = Survey.includes(questions: [:choices, :images, :raitings]).find(params[:survey_id])
-  end
 
   def submission_params
     params.require(:submission).permit(

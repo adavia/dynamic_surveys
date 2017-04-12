@@ -91,51 +91,6 @@ ActiveRecord::Schema.define(version: 20170403230755) do
     t.index ["survey_id"], name: "index_answers_on_survey_id", using: :btree
   end
 
-  create_table "choice_answers", force: :cascade do |t|
-    t.integer  "answer_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.integer  "answer_multiple_id"
-    t.integer  "choice_id"
-    t.index ["answer_id"], name: "index_choice_answers_on_answer_id", using: :btree
-    t.index ["answer_multiple_id"], name: "index_choice_answers_on_answer_multiple_id", using: :btree
-    t.index ["choice_id"], name: "index_choice_answers_on_choice_id", using: :btree
-  end
-
-  create_table "choices", force: :cascade do |t|
-    t.string   "title"
-    t.integer  "question_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["question_id"], name: "index_choices_on_question_id", using: :btree
-  end
-
-  create_table "customers", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "user_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.integer  "surveys_count",   default: 0
-    t.datetime "archived_at"
-    t.string   "username"
-    t.string   "password_digest"
-    t.string   "api_key"
-    t.string   "avatar"
-    t.index ["user_id"], name: "index_customers_on_user_id", using: :btree
-  end
-
-  create_table "images", force: :cascade do |t|
-    t.string   "file"
-    t.integer  "imageable_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.string   "imageable_type"
-    t.string   "reference_path"
-    t.string   "name"
-    t.index ["imageable_id"], name: "index_images_on_imageable_id", using: :btree
-  end
-
   create_table "option_answers", force: :cascade do |t|
     t.integer  "answer_id"
     t.integer  "option_id"
@@ -166,15 +121,6 @@ ActiveRecord::Schema.define(version: 20170403230755) do
     t.string   "info_image"
     t.text     "info_body"
     t.index ["survey_id"], name: "index_questions_on_survey_id", using: :btree
-  end
-
-  create_table "raitings", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "range"
-    t.integer  "question_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["question_id"], name: "index_raitings_on_question_id", using: :btree
   end
 
   create_table "roles", force: :cascade do |t|

@@ -90,16 +90,7 @@ class SubmissionsController < ApplicationController
     @survey.submission_views.where(ip_address: request.remote_ip, user_id: current_user.id).first_or_create
   end
 
-  def notifier(survey, submission)
-    if survey.alerts.present? && submission.answers.present?
-      survey.alerts.each do |alert|
-        notifications = submission.notifications_lookup(alert.alert_filters, submission.answers)
-        if notifications.any?
-          SubmissionNotifierMailer.notifier(alert, notifications).deliver_later
-        end
-      end
-    end
-  end
+
 
   def check_type_of_request
     if request.format == "csv"
